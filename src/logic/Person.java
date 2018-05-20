@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Person {
-    final int person_id = 1;
+    int person_id; 
+    private int type; 
     private String firstname;
     private String lastname;
     private String street;
@@ -17,7 +18,8 @@ public class Person {
     private double costsForComponents;
     ArrayList<Component> shoppingCart = new ArrayList();
 	
-    Person(String firstname, String lastname, String street, int housenumber, int plz, String email,String username, String password){
+    public Person(int type,String firstname, String lastname, String street, int housenumber, int plz, String email,String username, String password){
+	this.type = type; 
 	this.firstname = firstname; 
 	this.lastname = lastname; 
 	this.street = street; 
@@ -28,7 +30,16 @@ public class Person {
 	this.username = username; 
 	this.password = password; 	    
     }
-
+        
+    public Person(){    
+    }
+    
+    public int getType() {
+	return type; 
+    }    
+    public void setType(int type) {
+	this.type = type; 
+    }
     public String getFirstname() {
         return firstname;
     }

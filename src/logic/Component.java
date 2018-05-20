@@ -9,7 +9,7 @@ public class Component {
     private int orderedAmount;
     private String storageLocation;
     
-    Component(int no, String name, String link, double price, int stock, int plannendAmount, int orderedAmount,String location){
+    public Component(int no, String name, String link, double price, int stock, int plannendAmount, int orderedAmount,String location){
 	this.articlenumber = no; 
 	this.name = name; 
 	this.productLink = link;
