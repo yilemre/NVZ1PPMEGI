@@ -1,6 +1,7 @@
 package logic; 
 public class Component {
-    private int articlenumber;
+    private final int component_id;
+    private static int count_id =0; 
     private String name;
     private String productLink;    
     private double price;
@@ -9,8 +10,9 @@ public class Component {
     private int orderedAmount;
     private String storageLocation;
     
-    public Component(int no, String name, String link, double price, int stock, int plannendAmount, int orderedAmount,String location){
-	this.articlenumber = no; 
+    public Component(String name, String link, double price, int stock, int plannendAmount, int orderedAmount,String location){
+	this.component_id = count_id; 
+	count_id++; 
 	this.name = name; 
 	this.productLink = link;
 	this.price = price; 
@@ -19,15 +21,10 @@ public class Component {
 	this.orderedAmount = orderedAmount; 
 	this.storageLocation = location; 
     }
-
-    public int getArticlenumber() {
-        return articlenumber;
+    public int getComponentID() {
+	return component_id; 
     }
-
-    public void setArticlenumber(int articlenumber) {
-        this.articlenumber = articlenumber;
-    }
-
+    
     public String getName() {
         return name;
     }
