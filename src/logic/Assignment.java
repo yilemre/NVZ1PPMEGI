@@ -3,8 +3,8 @@ package logic;
 import java.sql.Timestamp;
 
 public abstract class Assignment {
-    private final int assignment_id; 
-    private static int count_id =0; 
+    //private final int assignment_id; 
+    //private static int count_id =0; 
     private String titel;
     private String type; 
     private double forecastedCosts;
@@ -13,14 +13,14 @@ public abstract class Assignment {
     private final Timestamp date;
     
     public Assignment(){
-	this.assignment_id = count_id; 
-	count_id++; 
+	//this.assignment_id = count_id; 
+	//count_id++; 
 	date = new Timestamp(System.currentTimeMillis()); 
     }
     
     public Assignment(String titel,String type, double forecastedCosts,int assignmentStatus){
-	this.assignment_id = count_id; 
-	count_id++; 
+	//this.assignment_id = count_id; 
+	//count_id++; 
 	this.titel = titel; 
 	this.type = type;
 	this.forecastedCosts = forecastedCosts; 
@@ -28,9 +28,9 @@ public abstract class Assignment {
 	this.date = new Timestamp(System.currentTimeMillis()); 
     }
 
-    public static int getCount_id() {
+    /*public static int getCount_id() {
         return count_id;
-    }
+    }*/
 
     public String getTitel() {
         return titel;
@@ -72,9 +72,9 @@ public abstract class Assignment {
         this.assignmentStatus = assignmentStatus;
     }
 
-    public int getAssignment_id() {
+    /*public int getAssignment_id() {
         return assignment_id;
-    }
+    }*/
 
     public Timestamp getDate() {
         return date;
