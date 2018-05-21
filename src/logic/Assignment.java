@@ -18,13 +18,12 @@ public abstract class Assignment {
 	date = new Timestamp(System.currentTimeMillis()); 
     }
     
-    public Assignment(String titel,String type, double forecastedCosts, double realCosts,int assignmentStatus){
+    public Assignment(String titel,String type, double forecastedCosts,int assignmentStatus){
 	this.assignment_id = count_id; 
 	count_id++; 
 	this.titel = titel; 
 	this.type = type;
 	this.forecastedCosts = forecastedCosts; 
-	this.realCosts = realCosts; 
 	this.assignmentStatus = assignmentStatus; 
 	this.date = new Timestamp(System.currentTimeMillis()); 
     }
