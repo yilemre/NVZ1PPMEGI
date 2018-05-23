@@ -1,4 +1,6 @@
-package userInterface;
+
+
+package src.userInterface;
 
 
 
@@ -60,6 +62,8 @@ public class GUIPersonalmanagement {
 	private JTextField textFieldeMailModify;
 	private JTextField textFielduserNameModify;
 	private JPasswordField passwordFieldModify;
+	private JTextField textFieldsearchModifyPerson;
+	private JTextField textFieldsearchDeletePerson;
 
 	/**
 	 * Launch the application.
@@ -310,10 +314,10 @@ public class GUIPersonalmanagement {
 		JPanel panelmodifyPerson = new JPanel();
 		tabbedPane.addTab("Person bearbeiten", null, panelmodifyPerson, null);
 		GridBagLayout gbl_panelmodifyPerson = new GridBagLayout();
-		gbl_panelmodifyPerson.columnWidths = new int[]{0, 0, 0};
-		gbl_panelmodifyPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panelmodifyPerson.columnWidths = new int[]{164, 0, 0};
+		gbl_panelmodifyPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panelmodifyPerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelmodifyPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panelmodifyPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelmodifyPerson.setLayout(gbl_panelmodifyPerson);
 		
 		JLabel lblnameModify = new JLabel("Vorname");
@@ -480,6 +484,7 @@ public class GUIPersonalmanagement {
 		scrollPanemodifyPerson.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPanemodifyPerson.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPanemodifyPerson = new GridBagConstraints();
+		gbc_scrollPanemodifyPerson.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPanemodifyPerson.gridwidth = 2;
 		gbc_scrollPanemodifyPerson.fill = GridBagConstraints.BOTH;
 		gbc_scrollPanemodifyPerson.gridx = 0;
@@ -498,19 +503,45 @@ public class GUIPersonalmanagement {
 		});
 		scrollPanemodifyPerson.setViewportView(listPerson);
 		
+		JComboBox comboBoxsearchModifyPerson = new JComboBox();
+		comboBoxsearchModifyPerson.setModel(new DefaultComboBoxModel(new String[] {"Vorname", "Nachname"}));
+		GridBagConstraints gbc_comboBoxsearchModifyPerson = new GridBagConstraints();
+		gbc_comboBoxsearchModifyPerson.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxsearchModifyPerson.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxsearchModifyPerson.gridx = 0;
+		gbc_comboBoxsearchModifyPerson.gridy = 11;
+		panelmodifyPerson.add(comboBoxsearchModifyPerson, gbc_comboBoxsearchModifyPerson);
+		
+		textFieldsearchModifyPerson = new JTextField();
+		GridBagConstraints gbc_textFieldsearchModifyPerson = new GridBagConstraints();
+		gbc_textFieldsearchModifyPerson.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldsearchModifyPerson.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldsearchModifyPerson.gridx = 1;
+		gbc_textFieldsearchModifyPerson.gridy = 11;
+		panelmodifyPerson.add(textFieldsearchModifyPerson, gbc_textFieldsearchModifyPerson);
+		textFieldsearchModifyPerson.setColumns(10);
+		
+		JButton btnsearchModifyPerson = new JButton("Suchen");
+		GridBagConstraints gbc_btnsearchModifyPerson = new GridBagConstraints();
+		gbc_btnsearchModifyPerson.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnsearchModifyPerson.gridx = 1;
+		gbc_btnsearchModifyPerson.gridy = 12;
+		panelmodifyPerson.add(btnsearchModifyPerson, gbc_btnsearchModifyPerson);
+		
 		JPanel paneldeletePerson = new JPanel();
 		tabbedPane.addTab("Personen l\u00F6schen", null, paneldeletePerson, null);
 		GridBagLayout gbl_paneldeletePerson = new GridBagLayout();
-		gbl_paneldeletePerson.columnWidths = new int[]{0, 0};
-		gbl_paneldeletePerson.rowHeights = new int[]{0, 0, 0};
-		gbl_paneldeletePerson.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_paneldeletePerson.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gbl_paneldeletePerson.columnWidths = new int[]{168, 0, 0};
+		gbl_paneldeletePerson.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_paneldeletePerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_paneldeletePerson.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		paneldeletePerson.setLayout(gbl_paneldeletePerson);
 		
 		JScrollPane scrollPanedeletePerson = new JScrollPane();
 		scrollPanedeletePerson.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPanedeletePerson.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPanedeletePerson = new GridBagConstraints();
+		gbc_scrollPanedeletePerson.gridwidth = 2;
 		gbc_scrollPanedeletePerson.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPanedeletePerson.fill = GridBagConstraints.BOTH;
 		gbc_scrollPanedeletePerson.gridx = 0;
@@ -520,11 +551,37 @@ public class GUIPersonalmanagement {
 		JList listdeletePerson = new JList();
 		scrollPanedeletePerson.setViewportView(listdeletePerson);
 		
+		JComboBox comboBoxsearchDeletePerson = new JComboBox();
+		comboBoxsearchDeletePerson.setModel(new DefaultComboBoxModel(new String[] {"Vorname", "Nachname"}));
+		GridBagConstraints gbc_comboBoxsearchDeletePerson = new GridBagConstraints();
+		gbc_comboBoxsearchDeletePerson.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxsearchDeletePerson.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxsearchDeletePerson.gridx = 0;
+		gbc_comboBoxsearchDeletePerson.gridy = 1;
+		paneldeletePerson.add(comboBoxsearchDeletePerson, gbc_comboBoxsearchDeletePerson);
+		
+		textFieldsearchDeletePerson = new JTextField();
+		GridBagConstraints gbc_textFieldsearchDeletePerson = new GridBagConstraints();
+		gbc_textFieldsearchDeletePerson.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldsearchDeletePerson.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldsearchDeletePerson.gridx = 1;
+		gbc_textFieldsearchDeletePerson.gridy = 1;
+		paneldeletePerson.add(textFieldsearchDeletePerson, gbc_textFieldsearchDeletePerson);
+		textFieldsearchDeletePerson.setColumns(10);
+		
+		JButton btnsearchDeletePerson = new JButton("Suchen");
+		GridBagConstraints gbc_btnsearchDeletePerson = new GridBagConstraints();
+		gbc_btnsearchDeletePerson.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnsearchDeletePerson.insets = new Insets(0, 0, 5, 0);
+		gbc_btnsearchDeletePerson.gridx = 1;
+		gbc_btnsearchDeletePerson.gridy = 2;
+		paneldeletePerson.add(btnsearchDeletePerson, gbc_btnsearchDeletePerson);
+		
 		JButton btndeletePerson = new JButton("Person/en l\u00F6schen");
 		GridBagConstraints gbc_btndeletePerson = new GridBagConstraints();
 		gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btndeletePerson.gridx = 0;
-		gbc_btndeletePerson.gridy = 1;
+		gbc_btndeletePerson.gridx = 1;
+		gbc_btndeletePerson.gridy = 3;
 		paneldeletePerson.add(btndeletePerson, gbc_btndeletePerson);
 		
 		JMenuBar menuBar = new JMenuBar();
