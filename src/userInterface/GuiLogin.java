@@ -1,4 +1,4 @@
-package userInterface;
+package src.userInterface;
 
 
 
@@ -11,10 +11,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.GridLayout;
-//import com.jgoodies.forms.layout.FormLayout;
-//import com.jgoodies.forms.layout.ColumnSpec;
-//import com.jgoodies.forms.layout.RowSpec;
-//import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextArea;
@@ -34,11 +34,12 @@ import javax.swing.ImageIcon;
 public class GuiLogin {
 
 	private JFrame frmElabVerwaltungsprogramm;
-	private JTextField usernameField;
+	private JTextField textFielduserName;
 	private JLabel lblUsername;
 	private JLabel lblPassword;
 	private JPasswordField passwordField;
 	private JLabel lblNewLabel;
+	private JButton btnregister;
 
 	/**
 	 * Launch the application.
@@ -69,13 +70,13 @@ public class GuiLogin {
 	private void initialize() {
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
-		frmElabVerwaltungsprogramm.setBounds(100, 100, 622, 480);
+		frmElabVerwaltungsprogramm.setBounds(100, 100, 836, 649);
 		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		frmElabVerwaltungsprogramm.getContentPane().setLayout(gridBagLayout);
 		
 		lblUsername = new JLabel("Username");
@@ -86,14 +87,14 @@ public class GuiLogin {
 		gbc_lblUsername.gridy = 0;
 		frmElabVerwaltungsprogramm.getContentPane().add(lblUsername, gbc_lblUsername);
 		
-		usernameField = new JTextField();
-		GridBagConstraints gbc_usernameField = new GridBagConstraints();
-		gbc_usernameField.insets = new Insets(0, 0, 5, 0);
-		gbc_usernameField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_usernameField.gridx = 1;
-		gbc_usernameField.gridy = 0;
-		frmElabVerwaltungsprogramm.getContentPane().add(usernameField, gbc_usernameField);
-		usernameField.setColumns(10);
+		textFielduserName = new JTextField();
+		GridBagConstraints gbc_textFielduserName = new GridBagConstraints();
+		gbc_textFielduserName.insets = new Insets(0, 0, 5, 0);
+		gbc_textFielduserName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFielduserName.gridx = 1;
+		gbc_textFielduserName.gridy = 0;
+		frmElabVerwaltungsprogramm.getContentPane().add(textFielduserName, gbc_textFielduserName);
+		textFielduserName.setColumns(10);
 		
 		lblPassword = new JLabel("Passwort");
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
@@ -111,23 +112,32 @@ public class GuiLogin {
 		gbc_passwordField.gridy = 1;
 		frmElabVerwaltungsprogramm.getContentPane().add(passwordField, gbc_passwordField);
 		
-		JButton Login = new JButton("Login");
-		Login.addActionListener(new ActionListener() {
+		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		GridBagConstraints gbc_Login = new GridBagConstraints();
-		gbc_Login.fill = GridBagConstraints.HORIZONTAL;
-		gbc_Login.insets = new Insets(0, 0, 5, 0);
-		gbc_Login.gridx = 1;
-		gbc_Login.gridy = 2;
-		frmElabVerwaltungsprogramm.getContentPane().add(Login, gbc_Login);
+		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
+		gbc_btnLogin.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnLogin.insets = new Insets(0, 0, 5, 0);
+		gbc_btnLogin.gridx = 1;
+		gbc_btnLogin.gridy = 2;
+		frmElabVerwaltungsprogramm.getContentPane().add(btnLogin, gbc_btnLogin);
+		
+		btnregister = new JButton("Registrieren");
+		btnregister.setToolTipText("Als neuer Kunde hier registrieren");
+		GridBagConstraints gbc_btnregister = new GridBagConstraints();
+		gbc_btnregister.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnregister.insets = new Insets(0, 0, 5, 0);
+		gbc_btnregister.gridx = 1;
+		gbc_btnregister.gridy = 3;
+		frmElabVerwaltungsprogramm.getContentPane().add(btnregister, gbc_btnregister);
 		
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Nils\\git\\ProPraElab\\ProPraElab\\pictures\\elab.png"));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.gridx = 1;
-		gbc_lblNewLabel.gridy = 3;
+		gbc_lblNewLabel.gridy = 4;
 		frmElabVerwaltungsprogramm.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 	}
 }
