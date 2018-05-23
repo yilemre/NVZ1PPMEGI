@@ -16,7 +16,7 @@ public class Person {
     private Timestamp timestamp;
     private final String username; 
     private  String password;
-    private double costsForComponents;
+    private double costsForComponents ;
     ArrayList<Component> shoppingCart = new ArrayList();
 	
     public Person(int type,String firstname, String lastname, String street, int housenumber, int plz, String email,String username, String password){
