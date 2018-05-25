@@ -1,6 +1,6 @@
 package logic;
 
-public enum AttributeTypes {
+public enum AttributeTypesPerson {
 	
 	firstname, surname, street, housenumber, zipcode, email, timestamp, username, password
 }
