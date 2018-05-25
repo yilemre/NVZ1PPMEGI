@@ -223,7 +223,7 @@ public class SQLManager {
 		stmt.close();
 	}
 	
-	public void deltePartFromShoppingCard(int idPart, int idPerson) throws SQLException{
+	public void deletePartFromShoppingCard(int idPart, int idPerson) throws SQLException{
 		Statement stmt = c.createStatement();
 		String sql="DELETE FROM ShoppingCardParts WHERE idPart="+idPart+" AND idPerson="+idPerson+";";
 		stmt.executeUpdate(sql);
