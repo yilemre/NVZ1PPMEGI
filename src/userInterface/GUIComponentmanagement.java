@@ -57,6 +57,11 @@ public class GUIComponentmanagement implements ActionListener {
 	private JTextField textFieldstorageLocation;
 	private JTextField textFieldstorageLocationModify;
 	private JTextField textFieldpartNumberSearch;
+	private JTextField textFieldcategoryNameNew;
+	private JTextField textFieldcategoryIDModify;
+	private JTextField textFieldcategoryNameModify;
+	private JTextField textFieldcategoryNameSearch;
+	private JTextField textFieldsearchModifyPart;
 
 	/**
 	 * Launch the application.
@@ -131,13 +136,13 @@ public class GUIComponentmanagement implements ActionListener {
 		paneladdPart.add(textFieldpartName, gbc_textFieldpartName);
 		textFieldpartName.setColumns(10);
 
-		JLabel lblcategoryName = new JLabel("Kategorie");
-		GridBagConstraints gbc_lblcategoryName = new GridBagConstraints();
-		gbc_lblcategoryName.anchor = GridBagConstraints.EAST;
-		gbc_lblcategoryName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblcategoryName.gridx = 0;
-		gbc_lblcategoryName.gridy = 2;
-		paneladdPart.add(lblcategoryName, gbc_lblcategoryName);
+		JLabel lblcategory = new JLabel("Kategorie");
+		GridBagConstraints gbc_lblcategory = new GridBagConstraints();
+		gbc_lblcategory.anchor = GridBagConstraints.EAST;
+		gbc_lblcategory.insets = new Insets(0, 0, 5, 5);
+		gbc_lblcategory.gridx = 0;
+		gbc_lblcategory.gridy = 2;
+		paneladdPart.add(lblcategory, gbc_lblcategory);
 
 		JComboBox comboBoxcategory = new JComboBox();
 		GridBagConstraints gbc_comboBoxcategory = new GridBagConstraints();
@@ -259,7 +264,7 @@ public class GUIComponentmanagement implements ActionListener {
 		gbc_btnaddPart.gridy = 9;
 		paneladdPart.add(btnaddPart, gbc_btnaddPart);
 
-		JButton btndeleteallInputs = new JButton("Eingaben l\u00F6schen");
+		JButton btndeleteallInputs = new JButton("Eingabe l\u00F6schen");
 		btndeleteallInputs.addActionListener(this);
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
@@ -279,10 +284,10 @@ public class GUIComponentmanagement implements ActionListener {
 		JPanel panelmodify = new JPanel();
 		tabbedPane.addTab("Bauteil bearbeiten", null, panelmodify, null);
 		GridBagLayout gbl_panelmodify = new GridBagLayout();
-		gbl_panelmodify.columnWidths = new int[] { 0, 0, 0 };
-		gbl_panelmodify.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panelmodify.columnWidths = new int[] { 152, 0, 0 };
+		gbl_panelmodify.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_panelmodify.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		gbl_panelmodify.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
+		gbl_panelmodify.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		panelmodify.setLayout(gbl_panelmodify);
 
@@ -431,6 +436,7 @@ public class GUIComponentmanagement implements ActionListener {
 		scrollPanemodifyPart.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPanemodifyPart.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPanemodifyPart = new GridBagConstraints();
+		gbc_scrollPanemodifyPart.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPanemodifyPart.gridwidth = 2;
 		gbc_scrollPanemodifyPart.fill = GridBagConstraints.BOTH;
 		gbc_scrollPanemodifyPart.gridx = 0;
@@ -452,10 +458,36 @@ public class GUIComponentmanagement implements ActionListener {
 		});
 		scrollPanemodifyPart.setViewportView(listPart);
 
+		JComboBox comboBoxsearchModifyPart = new JComboBox();
+		comboBoxsearchModifyPart.setModel(new DefaultComboBoxModel(new String[] { "Artikelnummer", "Name" }));
+		GridBagConstraints gbc_comboBoxsearchModifyPart = new GridBagConstraints();
+		gbc_comboBoxsearchModifyPart.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxsearchModifyPart.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxsearchModifyPart.gridx = 0;
+		gbc_comboBoxsearchModifyPart.gridy = 10;
+		panelmodify.add(comboBoxsearchModifyPart, gbc_comboBoxsearchModifyPart);
+
+		textFieldsearchModifyPart = new JTextField();
+		GridBagConstraints gbc_textFieldsearchModifyPart = new GridBagConstraints();
+		gbc_textFieldsearchModifyPart.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldsearchModifyPart.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldsearchModifyPart.gridx = 1;
+		gbc_textFieldsearchModifyPart.gridy = 10;
+		panelmodify.add(textFieldsearchModifyPart, gbc_textFieldsearchModifyPart);
+		textFieldsearchModifyPart.setColumns(10);
+
+		JButton btnsearchModifyPart = new JButton("Suchen");
+		btnsearchModifyPart.addActionListener(this);
+		GridBagConstraints gbc_btnsearchModifyPart = new GridBagConstraints();
+		gbc_btnsearchModifyPart.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnsearchModifyPart.gridx = 1;
+		gbc_btnsearchModifyPart.gridy = 11;
+		panelmodify.add(btnsearchModifyPart, gbc_btnsearchModifyPart);
+
 		JPanel paneldeletePart = new JPanel();
 		tabbedPane.addTab("Bauteil entfernen", null, paneldeletePart, null);
 		GridBagLayout gbl_paneldeletePart = new GridBagLayout();
-		gbl_paneldeletePart.columnWidths = new int[] { 0, 0, 0 };
+		gbl_paneldeletePart.columnWidths = new int[] { 155, 0, 0 };
 		gbl_paneldeletePart.rowHeights = new int[] { 0, 0, 0, 0, 0 };
 		gbl_paneldeletePart.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
 		gbl_paneldeletePart.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
@@ -475,13 +507,14 @@ public class GUIComponentmanagement implements ActionListener {
 		JList listdeleteParts = new JList();
 		scrollPanedeletePerson.setViewportView(listdeleteParts);
 
-		JLabel lblpartNumberSearch = new JLabel("Artikelnummer");
-		GridBagConstraints gbc_lblpartNumberSearch = new GridBagConstraints();
-		gbc_lblpartNumberSearch.insets = new Insets(0, 0, 5, 5);
-		gbc_lblpartNumberSearch.anchor = GridBagConstraints.EAST;
-		gbc_lblpartNumberSearch.gridx = 0;
-		gbc_lblpartNumberSearch.gridy = 1;
-		paneldeletePart.add(lblpartNumberSearch, gbc_lblpartNumberSearch);
+		JComboBox comboBoxdeletePart = new JComboBox();
+		comboBoxdeletePart.setModel(new DefaultComboBoxModel(new String[] { "Artikelnummer", "Name" }));
+		GridBagConstraints gbc_comboBoxdeletePart = new GridBagConstraints();
+		gbc_comboBoxdeletePart.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxdeletePart.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxdeletePart.gridx = 0;
+		gbc_comboBoxdeletePart.gridy = 1;
+		paneldeletePart.add(comboBoxdeletePart, gbc_comboBoxdeletePart);
 
 		textFieldpartNumberSearch = new JTextField();
 		GridBagConstraints gbc_textFieldpartNumberSearch = new GridBagConstraints();
@@ -492,7 +525,7 @@ public class GUIComponentmanagement implements ActionListener {
 		paneldeletePart.add(textFieldpartNumberSearch, gbc_textFieldpartNumberSearch);
 		textFieldpartNumberSearch.setColumns(10);
 
-		JButton btnpartSearch = new JButton("Nach Artikelnummer suchen");
+		JButton btnpartSearch = new JButton("Nach Bauteil suchen");
 		btnpartSearch.addActionListener(this);
 		GridBagConstraints gbc_btnpartSearch = new GridBagConstraints();
 		gbc_btnpartSearch.fill = GridBagConstraints.HORIZONTAL;
@@ -512,25 +545,154 @@ public class GUIComponentmanagement implements ActionListener {
 		JPanel panelcategoryManagement = new JPanel();
 		tabbedPane.addTab("Kategorienverwaltung", null, panelcategoryManagement, null);
 		GridBagLayout gbl_panelcategoryManagement = new GridBagLayout();
-		gbl_panelcategoryManagement.columnWidths = new int[] { 128, 466, 0, 0 };
-		gbl_panelcategoryManagement.rowHeights = new int[] { 418, 418, 0, 0, 0, 0 };
-		gbl_panelcategoryManagement.columnWeights = new double[] { 0.0, 1.0, 1.0, Double.MIN_VALUE };
-		gbl_panelcategoryManagement.rowWeights = new double[] { 1.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panelcategoryManagement.columnWidths = new int[] { 128, 128, 171, 326, 0, 0 };
+		gbl_panelcategoryManagement.rowHeights = new int[] { 0, 0, 0, 0, 418, 418, 0, 0, 0, 0 };
+		gbl_panelcategoryManagement.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panelcategoryManagement.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
 		panelcategoryManagement.setLayout(gbl_panelcategoryManagement);
+
+		JLabel lblcategoryIDModify = new JLabel("ID");
+		GridBagConstraints gbc_lblcategoryIDModify = new GridBagConstraints();
+		gbc_lblcategoryIDModify.anchor = GridBagConstraints.EAST;
+		gbc_lblcategoryIDModify.insets = new Insets(0, 0, 5, 5);
+		gbc_lblcategoryIDModify.gridx = 2;
+		gbc_lblcategoryIDModify.gridy = 0;
+		panelcategoryManagement.add(lblcategoryIDModify, gbc_lblcategoryIDModify);
+
+		textFieldcategoryIDModify = new JTextField();
+		textFieldcategoryIDModify.setEditable(false);
+		GridBagConstraints gbc_textFieldcategoryIDModify = new GridBagConstraints();
+		gbc_textFieldcategoryIDModify.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldcategoryIDModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldcategoryIDModify.gridx = 3;
+		gbc_textFieldcategoryIDModify.gridy = 0;
+		panelcategoryManagement.add(textFieldcategoryIDModify, gbc_textFieldcategoryIDModify);
+		textFieldcategoryIDModify.setColumns(10);
+
+		JLabel lblcategoryNameNew = new JLabel("Kategorie");
+		GridBagConstraints gbc_lblcategoryNameNew = new GridBagConstraints();
+		gbc_lblcategoryNameNew.anchor = GridBagConstraints.EAST;
+		gbc_lblcategoryNameNew.insets = new Insets(0, 0, 5, 5);
+		gbc_lblcategoryNameNew.gridx = 0;
+		gbc_lblcategoryNameNew.gridy = 1;
+		panelcategoryManagement.add(lblcategoryNameNew, gbc_lblcategoryNameNew);
+
+		textFieldcategoryNameNew = new JTextField();
+		GridBagConstraints gbc_textFieldcategoryNameNew = new GridBagConstraints();
+		gbc_textFieldcategoryNameNew.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldcategoryNameNew.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldcategoryNameNew.gridx = 1;
+		gbc_textFieldcategoryNameNew.gridy = 1;
+		panelcategoryManagement.add(textFieldcategoryNameNew, gbc_textFieldcategoryNameNew);
+		textFieldcategoryNameNew.setColumns(10);
+
+		JLabel lblcategoryNameModify = new JLabel("Kategorie");
+		GridBagConstraints gbc_lblcategoryNameModify = new GridBagConstraints();
+		gbc_lblcategoryNameModify.anchor = GridBagConstraints.EAST;
+		gbc_lblcategoryNameModify.insets = new Insets(0, 0, 5, 5);
+		gbc_lblcategoryNameModify.gridx = 2;
+		gbc_lblcategoryNameModify.gridy = 1;
+		panelcategoryManagement.add(lblcategoryNameModify, gbc_lblcategoryNameModify);
+
+		textFieldcategoryNameModify = new JTextField();
+		GridBagConstraints gbc_textFieldcategoryNameModify = new GridBagConstraints();
+		gbc_textFieldcategoryNameModify.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldcategoryNameModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldcategoryNameModify.gridx = 3;
+		gbc_textFieldcategoryNameModify.gridy = 1;
+		panelcategoryManagement.add(textFieldcategoryNameModify, gbc_textFieldcategoryNameModify);
+		textFieldcategoryNameModify.setColumns(10);
+
+		JButton btncategoryNew = new JButton("Kategorie hinzufügen");
+		btncategoryNew.addActionListener(this);
+		GridBagConstraints gbc_btncategoryNew = new GridBagConstraints();
+		gbc_btncategoryNew.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btncategoryNew.insets = new Insets(0, 0, 5, 5);
+		gbc_btncategoryNew.gridx = 1;
+		gbc_btncategoryNew.gridy = 2;
+		panelcategoryManagement.add(btncategoryNew, gbc_btncategoryNew);
+
+		JButton btncategoryModify = new JButton("Änderungen an Kategorie speichern");
+		btncategoryModify.addActionListener(this);
+		GridBagConstraints gbc_btncategoryModify = new GridBagConstraints();
+		gbc_btncategoryModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btncategoryModify.insets = new Insets(0, 0, 5, 5);
+		gbc_btncategoryModify.gridx = 3;
+		gbc_btncategoryModify.gridy = 2;
+		panelcategoryManagement.add(btncategoryModify, gbc_btncategoryModify);
+
+		JButton btncategoryDeleteInputs = new JButton("Eingaben löschen");
+		btncategoryDeleteInputs.addActionListener(this);
+		GridBagConstraints gbc_btncategoryDeleteInputs = new GridBagConstraints();
+		gbc_btncategoryDeleteInputs.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btncategoryDeleteInputs.insets = new Insets(0, 0, 5, 5);
+		gbc_btncategoryDeleteInputs.gridx = 1;
+		gbc_btncategoryDeleteInputs.gridy = 3;
+		panelcategoryManagement.add(btncategoryDeleteInputs, gbc_btncategoryDeleteInputs);
+
+		JButton btncategoryModifyDeleteInputs = new JButton("Änderungen löschen");
+		btncategoryModifyDeleteInputs.addActionListener(this);
+		GridBagConstraints gbc_btncategoryModifyDeleteInputs = new GridBagConstraints();
+		gbc_btncategoryModifyDeleteInputs.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btncategoryModifyDeleteInputs.insets = new Insets(0, 0, 5, 5);
+		gbc_btncategoryModifyDeleteInputs.gridx = 3;
+		gbc_btncategoryModifyDeleteInputs.gridy = 3;
+		panelcategoryManagement.add(btncategoryModifyDeleteInputs, gbc_btncategoryModifyDeleteInputs);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridwidth = 3;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.gridheight = 2;
+		gbc_scrollPane.gridwidth = 6;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 0;
+		gbc_scrollPane.gridy = 4;
 		panelcategoryManagement.add(scrollPane, gbc_scrollPane);
 
 		JList list = new JList();
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(list);
+
+		JLabel lblcategoryNameSearch = new JLabel("Kategorie");
+		GridBagConstraints gbc_lblcategoryNameSearch = new GridBagConstraints();
+		gbc_lblcategoryNameSearch.anchor = GridBagConstraints.EAST;
+		gbc_lblcategoryNameSearch.insets = new Insets(0, 0, 5, 5);
+		gbc_lblcategoryNameSearch.gridx = 0;
+		gbc_lblcategoryNameSearch.gridy = 6;
+		panelcategoryManagement.add(lblcategoryNameSearch, gbc_lblcategoryNameSearch);
+
+		textFieldcategoryNameSearch = new JTextField();
+		GridBagConstraints gbc_textFieldcategoryNameSearch = new GridBagConstraints();
+		gbc_textFieldcategoryNameSearch.gridwidth = 5;
+		gbc_textFieldcategoryNameSearch.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldcategoryNameSearch.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldcategoryNameSearch.gridx = 1;
+		gbc_textFieldcategoryNameSearch.gridy = 6;
+		panelcategoryManagement.add(textFieldcategoryNameSearch, gbc_textFieldcategoryNameSearch);
+		textFieldcategoryNameSearch.setColumns(10);
+
+		JButton btncategorySearch = new JButton("Nach Kategorie suchen");
+		btncategorySearch.addActionListener(this);
+		GridBagConstraints gbc_btncategorySearch = new GridBagConstraints();
+		gbc_btncategorySearch.gridwidth = 5;
+		gbc_btncategorySearch.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btncategorySearch.insets = new Insets(0, 0, 5, 5);
+		gbc_btncategorySearch.gridx = 1;
+		gbc_btncategorySearch.gridy = 7;
+		panelcategoryManagement.add(btncategorySearch, gbc_btncategorySearch);
+
+		JButton btncategoryDelete = new JButton("Kategorie löschen");
+		btncategoryDelete.addActionListener(this);
+		GridBagConstraints gbc_btncategoryDelete = new GridBagConstraints();
+		gbc_btncategoryDelete.gridwidth = 5;
+		gbc_btncategoryDelete.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btncategoryDelete.insets = new Insets(0, 0, 0, 5);
+		gbc_btncategoryDelete.gridx = 1;
+		gbc_btncategoryDelete.gridy = 8;
+		panelcategoryManagement.add(btncategoryDelete, gbc_btncategoryDelete);
 
 		JMenuBar menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
@@ -565,40 +727,69 @@ public class GUIComponentmanagement implements ActionListener {
 		if (command == "Bauteil hinzufügen") {
 
 		}
-		if (command == "Eingaben l\u00F6schen") {
+		if (command == "Eingabe l\u00F6schen") {
 
+			textFieldpartName.setText("");
+			textFieldpartLink.setText("");
+			textFieldpartPrize.setText("");
+			textFieldquantityStoring.setText("");
+			textFieldquantityPlanned.setText("");
+			textFieldquantityOrdered.setText("");
+			textFieldstorageLocation.setText("");
 		}
 		if (command == "\u00C4nderungen speichern") {
 
 		}
-		if (command == "Nach Artikelnummer suchen") {
+		if (command == "Suchen") {
+
+		}
+		if (command == "Nach Bauteil suchen") {
 
 		}
 		if (command == "Bauteil löschen") {
 
 		}
+		if (command == "Kategorie hinzufügen") {
+
+		}
+		if (command == "Änderungen an Kategorie speichern") {
+
+		}
+		if (command == "Eingaben löschen") {
+
+			textFieldcategoryNameNew.setText("");
+
+		}
+
+		if (command == "Änderungen löschen") {
+			textFieldcategoryNameModify.setText("");
+		}
+		if (command == "Nach Kategorie suchen") {
+
+		}
+		if (command == "Kategorie löschen") {
+
+		}
+
 		if (command == "Hauptmen\u00FC") {
 
-		GuiMenue mainMenu = new GuiMenue();
-		frmElabVerwaltungsprogramm.dispose();
-			
+			GuiMenue mainMenu = new GuiMenue();
+			frmElabVerwaltungsprogramm.dispose();
+
 		}
 		if (command == "Ausloggen") {
-		GuiLogin logout = new GuiLogin();
-		frmElabVerwaltungsprogramm.dispose();
-			
+			GuiLogin logout = new GuiLogin();
+			frmElabVerwaltungsprogramm.dispose();
+
 		}
 		if (command == "Anwendung verlassen") {
 
 			System.exit(0);
-			
+
 		}
 		if (command == "Anleitung anzeigen") {
 
 		}
 
-		
-		
-		
 	}
 }
