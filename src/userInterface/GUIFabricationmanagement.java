@@ -49,6 +49,8 @@ public class GUIFabricationmanagement implements ActionListener {
 	private JTextField textFieldactualCostsModify;
 	private JTextField textFieldorderSearchModify;
 	private JTextField textFieldorderSearchDelete;
+	private JTextField textFieldfilePath;
+	private JTextField textFieldfilePathModify;
 
 	/**
 	 * Initialize the contents of the frame.
@@ -84,9 +86,9 @@ public class GUIFabricationmanagement implements ActionListener {
 		tabbedPane.addTab("Auftrag hinzuf\u00FCgen", null, paneladdOrder, null);
 		GridBagLayout gbl_paneladdOrder = new GridBagLayout();
 		gbl_paneladdOrder.columnWidths = new int[] { 0, 0, 0 };
-		gbl_paneladdOrder.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_paneladdOrder.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_paneladdOrder.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		gbl_paneladdOrder.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
+		gbl_paneladdOrder.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		paneladdOrder.setLayout(gbl_paneladdOrder);
 
@@ -148,13 +150,30 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_textFieldnoteOther.gridy = 3;
 		paneladdOrder.add(textFieldnoteOther, gbc_textFieldnoteOther);
 		textFieldnoteOther.setColumns(10);
+		
+		JLabel lblfilePath = new JLabel("Dateipfad");
+		GridBagConstraints gbc_lblfilePath = new GridBagConstraints();
+		gbc_lblfilePath.anchor = GridBagConstraints.EAST;
+		gbc_lblfilePath.insets = new Insets(0, 0, 5, 5);
+		gbc_lblfilePath.gridx = 0;
+		gbc_lblfilePath.gridy = 4;
+		paneladdOrder.add(lblfilePath, gbc_lblfilePath);
+		
+		textFieldfilePath = new JTextField();
+		GridBagConstraints gbc_textFieldfilePath = new GridBagConstraints();
+		gbc_textFieldfilePath.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldfilePath.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldfilePath.gridx = 1;
+		gbc_textFieldfilePath.gridy = 4;
+		paneladdOrder.add(textFieldfilePath, gbc_textFieldfilePath);
+		textFieldfilePath.setColumns(10);
 
 		JLabel lblpredictedCost = new JLabel("prognostizierte Kosten");
 		GridBagConstraints gbc_lblpredictedCost = new GridBagConstraints();
 		gbc_lblpredictedCost.anchor = GridBagConstraints.EAST;
 		gbc_lblpredictedCost.insets = new Insets(0, 0, 5, 5);
 		gbc_lblpredictedCost.gridx = 0;
-		gbc_lblpredictedCost.gridy = 4;
+		gbc_lblpredictedCost.gridy = 5;
 		paneladdOrder.add(lblpredictedCost, gbc_lblpredictedCost);
 
 		textFieldpredictedCosts = new JTextField();
@@ -162,7 +181,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_textFieldpredictedCosts.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldpredictedCosts.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldpredictedCosts.gridx = 1;
-		gbc_textFieldpredictedCosts.gridy = 4;
+		gbc_textFieldpredictedCosts.gridy = 5;
 		paneladdOrder.add(textFieldpredictedCosts, gbc_textFieldpredictedCosts);
 		textFieldpredictedCosts.setColumns(10);
 
@@ -171,7 +190,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_lblactualCosts.anchor = GridBagConstraints.EAST;
 		gbc_lblactualCosts.insets = new Insets(0, 0, 5, 5);
 		gbc_lblactualCosts.gridx = 0;
-		gbc_lblactualCosts.gridy = 5;
+		gbc_lblactualCosts.gridy = 6;
 		paneladdOrder.add(lblactualCosts, gbc_lblactualCosts);
 
 		textFieldactualCosts = new JTextField();
@@ -180,7 +199,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_textFieldactualCosts.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldactualCosts.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldactualCosts.gridx = 1;
-		gbc_textFieldactualCosts.gridy = 5;
+		gbc_textFieldactualCosts.gridy = 6;
 		paneladdOrder.add(textFieldactualCosts, gbc_textFieldactualCosts);
 		textFieldactualCosts.setColumns(10);
 
@@ -190,7 +209,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_lblresponsiblePerson.anchor = GridBagConstraints.EAST;
 		gbc_lblresponsiblePerson.insets = new Insets(0, 0, 5, 5);
 		gbc_lblresponsiblePerson.gridx = 0;
-		gbc_lblresponsiblePerson.gridy = 6;
+		gbc_lblresponsiblePerson.gridy = 7;
 		paneladdOrder.add(lblresponsiblePerson, gbc_lblresponsiblePerson);
 
 		JComboBox comboBoxresponsible = new JComboBox();
@@ -198,7 +217,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_comboBoxresponsible.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxresponsible.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxresponsible.gridx = 1;
-		gbc_comboBoxresponsible.gridy = 6;
+		gbc_comboBoxresponsible.gridy = 7;
 		paneladdOrder.add(comboBoxresponsible, gbc_comboBoxresponsible);
 
 		JLabel lblstandinResponsible = new JLabel("Vertretung");
@@ -206,7 +225,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_lblstandinResponsible.anchor = GridBagConstraints.EAST;
 		gbc_lblstandinResponsible.insets = new Insets(0, 0, 5, 5);
 		gbc_lblstandinResponsible.gridx = 0;
-		gbc_lblstandinResponsible.gridy = 7;
+		gbc_lblstandinResponsible.gridy = 8;
 		paneladdOrder.add(lblstandinResponsible, gbc_lblstandinResponsible);
 
 		JComboBox comboBoxstandinResponsible = new JComboBox();
@@ -214,7 +233,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_comboBoxstandinResponsible.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxstandinResponsible.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxstandinResponsible.gridx = 1;
-		gbc_comboBoxstandinResponsible.gridy = 7;
+		gbc_comboBoxstandinResponsible.gridy = 8;
 		paneladdOrder.add(comboBoxstandinResponsible, gbc_comboBoxstandinResponsible);
 
 		JLabel lblorderStatus = new JLabel("Auftragsstatus");
@@ -222,7 +241,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_lblorderStatus.anchor = GridBagConstraints.EAST;
 		gbc_lblorderStatus.insets = new Insets(0, 0, 5, 5);
 		gbc_lblorderStatus.gridx = 0;
-		gbc_lblorderStatus.gridy = 8;
+		gbc_lblorderStatus.gridy = 9;
 		paneladdOrder.add(lblorderStatus, gbc_lblorderStatus);
 
 		JComboBox comboBoxorderStatus = new JComboBox();
@@ -233,7 +252,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_comboBoxorderStatus.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxorderStatus.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxorderStatus.gridx = 1;
-		gbc_comboBoxorderStatus.gridy = 8;
+		gbc_comboBoxorderStatus.gridy = 9;
 		paneladdOrder.add(comboBoxorderStatus, gbc_comboBoxorderStatus);
 
 		JButton btnaddOrder = new JButton("Auftrag hinzuf\u00FCgen");
@@ -242,7 +261,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_btnaddOrder.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddOrder.insets = new Insets(0, 0, 5, 0);
 		gbc_btnaddOrder.gridx = 1;
-		gbc_btnaddOrder.gridy = 9;
+		gbc_btnaddOrder.gridy = 10;
 		paneladdOrder.add(btnaddOrder, gbc_btnaddOrder);
 
 		JButton btndeleteallInputs = new JButton("Eingaben l\u00F6schen");
@@ -251,7 +270,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteallInputs.insets = new Insets(0, 0, 5, 0);
 		gbc_btndeleteallInputs.gridx = 1;
-		gbc_btndeleteallInputs.gridy = 10;
+		gbc_btndeleteallInputs.gridy = 11;
 		paneladdOrder.add(btndeleteallInputs, gbc_btndeleteallInputs);
 
 		JLabel lbleLabpicture = new JLabel("");
@@ -259,16 +278,16 @@ public class GUIFabricationmanagement implements ActionListener {
 		GridBagConstraints gbc_lbleLabpicture = new GridBagConstraints();
 		gbc_lbleLabpicture.gridwidth = 2;
 		gbc_lbleLabpicture.gridx = 0;
-		gbc_lbleLabpicture.gridy = 11;
+		gbc_lbleLabpicture.gridy = 12;
 		paneladdOrder.add(lbleLabpicture, gbc_lbleLabpicture);
 
 		JPanel panelmodify = new JPanel();
 		tabbedPane.addTab("Auftrag bearbeiten", null, panelmodify, null);
 		GridBagLayout gbl_panelmodify = new GridBagLayout();
 		gbl_panelmodify.columnWidths = new int[] { 0, 0, 0, 0 };
-		gbl_panelmodify.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panelmodify.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_panelmodify.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_panelmodify.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
+		gbl_panelmodify.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		panelmodify.setLayout(gbl_panelmodify);
 
@@ -325,6 +344,25 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_textFieldnoteOtherModify.gridy = 2;
 		panelmodify.add(textFieldnoteOtherModify, gbc_textFieldnoteOtherModify);
 		textFieldnoteOtherModify.setColumns(10);
+		
+		JLabel lblfilePathModify = new JLabel("Dateipfad");
+		GridBagConstraints gbc_lblfilePathModify = new GridBagConstraints();
+		gbc_lblfilePathModify.anchor = GridBagConstraints.EAST;
+		gbc_lblfilePathModify.gridwidth = 2;
+		gbc_lblfilePathModify.insets = new Insets(0, 0, 5, 5);
+		gbc_lblfilePathModify.gridx = 0;
+		gbc_lblfilePathModify.gridy = 3;
+		panelmodify.add(lblfilePathModify, gbc_lblfilePathModify);
+		
+		textFieldfilePathModify = new JTextField();
+		textFieldfilePathModify.setText("");
+		GridBagConstraints gbc_textFieldfilePathModify = new GridBagConstraints();
+		gbc_textFieldfilePathModify.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldfilePathModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldfilePathModify.gridx = 2;
+		gbc_textFieldfilePathModify.gridy = 3;
+		panelmodify.add(textFieldfilePathModify, gbc_textFieldfilePathModify);
+		textFieldfilePathModify.setColumns(10);
 
 		JLabel lblpredictedCostsModify = new JLabel("prognostizierte Kosten");
 		GridBagConstraints gbc_lblpredictedCostsModify = new GridBagConstraints();
@@ -332,7 +370,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_lblpredictedCostsModify.anchor = GridBagConstraints.EAST;
 		gbc_lblpredictedCostsModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblpredictedCostsModify.gridx = 0;
-		gbc_lblpredictedCostsModify.gridy = 3;
+		gbc_lblpredictedCostsModify.gridy = 4;
 		panelmodify.add(lblpredictedCostsModify, gbc_lblpredictedCostsModify);
 
 		textFieldpredictedCostsModify = new JTextField();
@@ -340,7 +378,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_textFieldpredictedCostsModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldpredictedCostsModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldpredictedCostsModify.gridx = 2;
-		gbc_textFieldpredictedCostsModify.gridy = 3;
+		gbc_textFieldpredictedCostsModify.gridy = 4;
 		panelmodify.add(textFieldpredictedCostsModify, gbc_textFieldpredictedCostsModify);
 		textFieldpredictedCostsModify.setColumns(10);
 
@@ -350,7 +388,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_lblactualCostsModify.anchor = GridBagConstraints.EAST;
 		gbc_lblactualCostsModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblactualCostsModify.gridx = 0;
-		gbc_lblactualCostsModify.gridy = 4;
+		gbc_lblactualCostsModify.gridy = 5;
 		panelmodify.add(lblactualCostsModify, gbc_lblactualCostsModify);
 
 		textFieldactualCostsModify = new JTextField();
@@ -359,7 +397,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_textFieldactualCostsModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldactualCostsModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldactualCostsModify.gridx = 2;
-		gbc_textFieldactualCostsModify.gridy = 4;
+		gbc_textFieldactualCostsModify.gridy = 5;
 		panelmodify.add(textFieldactualCostsModify, gbc_textFieldactualCostsModify);
 		textFieldactualCostsModify.setColumns(10);
 
@@ -369,7 +407,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_lblresponsiblePersonModify.anchor = GridBagConstraints.EAST;
 		gbc_lblresponsiblePersonModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblresponsiblePersonModify.gridx = 0;
-		gbc_lblresponsiblePersonModify.gridy = 5;
+		gbc_lblresponsiblePersonModify.gridy = 6;
 		panelmodify.add(lblresponsiblePersonModify, gbc_lblresponsiblePersonModify);
 
 		JComboBox comboBoxresponsiblePersonModify = new JComboBox();
@@ -377,7 +415,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_comboBoxresponsiblePersonModify.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxresponsiblePersonModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxresponsiblePersonModify.gridx = 2;
-		gbc_comboBoxresponsiblePersonModify.gridy = 5;
+		gbc_comboBoxresponsiblePersonModify.gridy = 6;
 		panelmodify.add(comboBoxresponsiblePersonModify, gbc_comboBoxresponsiblePersonModify);
 
 		JLabel lblstandinresponsiblePersonModify = new JLabel("Vertretung");
@@ -386,7 +424,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_lblstandinresponsiblePersonModify.anchor = GridBagConstraints.EAST;
 		gbc_lblstandinresponsiblePersonModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblstandinresponsiblePersonModify.gridx = 0;
-		gbc_lblstandinresponsiblePersonModify.gridy = 6;
+		gbc_lblstandinresponsiblePersonModify.gridy = 7;
 		panelmodify.add(lblstandinresponsiblePersonModify, gbc_lblstandinresponsiblePersonModify);
 
 		JComboBox comboBoxstandinresponsiblePersonModify = new JComboBox();
@@ -394,7 +432,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_comboBoxstandinresponsiblePersonModify.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxstandinresponsiblePersonModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxstandinresponsiblePersonModify.gridx = 2;
-		gbc_comboBoxstandinresponsiblePersonModify.gridy = 6;
+		gbc_comboBoxstandinresponsiblePersonModify.gridy = 7;
 		panelmodify.add(comboBoxstandinresponsiblePersonModify, gbc_comboBoxstandinresponsiblePersonModify);
 
 		JLabel lblmodifyOrderStatus = new JLabel("Auftragsstatus");
@@ -403,7 +441,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_lblmodifyOrderStatus.anchor = GridBagConstraints.EAST;
 		gbc_lblmodifyOrderStatus.insets = new Insets(0, 0, 5, 5);
 		gbc_lblmodifyOrderStatus.gridx = 0;
-		gbc_lblmodifyOrderStatus.gridy = 7;
+		gbc_lblmodifyOrderStatus.gridy = 8;
 		panelmodify.add(lblmodifyOrderStatus, gbc_lblmodifyOrderStatus);
 
 		JComboBox comboBox = new JComboBox();
@@ -414,7 +452,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.gridx = 2;
-		gbc_comboBox.gridy = 7;
+		gbc_comboBox.gridy = 8;
 		panelmodify.add(comboBox, gbc_comboBox);
 
 		JButton btnsaveModifiedValues = new JButton("\u00C4nderungen speichern");
@@ -423,7 +461,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsaveModifiedValues.insets = new Insets(0, 0, 5, 0);
 		gbc_btnsaveModifiedValues.gridx = 2;
-		gbc_btnsaveModifiedValues.gridy = 8;
+		gbc_btnsaveModifiedValues.gridy = 9;
 		panelmodify.add(btnsaveModifiedValues, gbc_btnsaveModifiedValues);
 
 		JScrollPane scrollPanemodifyPerson = new JScrollPane();
@@ -434,7 +472,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_scrollPanemodifyPerson.gridwidth = 3;
 		gbc_scrollPanemodifyPerson.fill = GridBagConstraints.BOTH;
 		gbc_scrollPanemodifyPerson.gridx = 0;
-		gbc_scrollPanemodifyPerson.gridy = 9;
+		gbc_scrollPanemodifyPerson.gridy = 10;
 		panelmodify.add(scrollPanemodifyPerson, gbc_scrollPanemodifyPerson);
 
 		JList listPerson = new JList();
@@ -460,7 +498,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_comboBoxorderSearchModify.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxorderSearchModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxorderSearchModify.gridx = 0;
-		gbc_comboBoxorderSearchModify.gridy = 10;
+		gbc_comboBoxorderSearchModify.gridy = 11;
 		panelmodify.add(comboBoxorderSearchModify, gbc_comboBoxorderSearchModify);
 
 		textFieldorderSearchModify = new JTextField();
@@ -468,7 +506,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_textFieldorderSearchModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldorderSearchModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldorderSearchModify.gridx = 2;
-		gbc_textFieldorderSearchModify.gridy = 10;
+		gbc_textFieldorderSearchModify.gridy = 11;
 		panelmodify.add(textFieldorderSearchModify, gbc_textFieldorderSearchModify);
 		textFieldorderSearchModify.setColumns(10);
 
@@ -477,7 +515,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		GridBagConstraints gbc_btnorderSearchModify = new GridBagConstraints();
 		gbc_btnorderSearchModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnorderSearchModify.gridx = 2;
-		gbc_btnorderSearchModify.gridy = 11;
+		gbc_btnorderSearchModify.gridy = 12;
 		panelmodify.add(btnorderSearchModify, gbc_btnorderSearchModify);
 
 		JPanel paneldeleteOrder = new JPanel();
