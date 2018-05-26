@@ -52,6 +52,19 @@ public class SQLManager {
 		return id;
 	}
 	
+	//Emre begin
+	public void modifyPerson1(int id, String firstname, String surname, String street, String housenumber,
+		String zipcode,String email, Timestamp t, String username, String password) throws SQLException {
+	    	Statement stmt = c.createStatement(); 
+	    	String sql = "UPDATE Persons "
+	    		+ "SET firstname='"+firstname+"',surname='"+surname+"',street ='"+street+"', housenumber='"+housenumber+"', zipcode='"+zipcode+"', email='"+email+"',timestamp='"+t+"', username='"+username+"', password='"+password+"'"
+		    	+ " WHERE idPerson="+id+";";
+	    	stmt.executeUpdate(sql); 
+	    	stmt.close();
+		    
+	}
+	//Emre end
+	
 	
 	//If you call this method you can give it a AttributeTypes.xxxx attribute to say which attribute should be changed
 	

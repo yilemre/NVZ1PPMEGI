@@ -1,7 +1,7 @@
 
 
 package userInterface;
-
+import logic.PersonManagement;
 
 
 import java.awt.EventQueue;
@@ -604,11 +604,28 @@ frmElabVerwaltungsprogramm.setVisible(true);
 		
 		
 		if (command=="Person hinzuf\u00FCgen") {
-			
+		    //Emre begin
+		    try { 
+			PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
+			Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()));
+		    } 
+		    catch (Exception a) {
+			a.getMessage();
+		    }
+		    //Emre end
 		}
 
 		if (command=="Eingaben l\u00F6schen") {
-			
+		    //Emre begin
+		    textFieldname.setText("");
+		    textFieldlastName.setText("");
+		    textFieldStreet.setText("");
+		    textFieldhouseNumber.setText("");
+		    textFieldzipCode.setText("");
+		    textFieldeMail.setText("");
+		    textFielduserName.setText("");
+		    passwordField.setText("");
+		    //Emre end
 		}
 
 		if (command=="\u00C4nderungen speichern") {
