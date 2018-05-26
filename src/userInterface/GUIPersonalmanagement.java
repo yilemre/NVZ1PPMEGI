@@ -39,7 +39,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-public class GUIPersonalmanagement {
+public class GUIPersonalmanagement implements ActionListener{
 
 	private JFrame frmElabVerwaltungsprogramm;
 	private JTextField textFieldname;
@@ -64,30 +64,16 @@ public class GUIPersonalmanagement {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUIPersonalmanagement window = new GUIPersonalmanagement();
-					window.frmElabVerwaltungsprogramm.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
 	 */
-	public GUIPersonalmanagement() {
-		initialize();
-	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public GUIPersonalmanagement() {
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
@@ -284,6 +270,7 @@ public class GUIPersonalmanagement {
 		paneladdPerson.add(passwordField, gbc_passwordField);
 		
 		JButton btnaddPerson = new JButton("Person hinzuf\u00FCgen");
+		btnaddPerson.addActionListener(this);
 		GridBagConstraints gbc_btnaddPerson = new GridBagConstraints();
 		gbc_btnaddPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddPerson.insets = new Insets(0, 0, 5, 0);
@@ -292,6 +279,7 @@ public class GUIPersonalmanagement {
 		paneladdPerson.add(btnaddPerson, gbc_btnaddPerson);
 		
 		JButton btndeleteallInputs = new JButton("Eingaben l\u00F6schen");
+		btndeleteallInputs.addActionListener(this);
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteallInputs.insets = new Insets(0, 0, 5, 0);
@@ -469,6 +457,7 @@ public class GUIPersonalmanagement {
 		panelmodifyPerson.add(passwordFieldModify, gbc_passwordFieldModify);
 		
 		JButton btnsaveModifiedValues = new JButton("\u00C4nderungen speichern");
+		btnsaveModifiedValues.addActionListener(this);
 		GridBagConstraints gbc_btnsaveModifiedValues = new GridBagConstraints();
 		gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsaveModifiedValues.insets = new Insets(0, 0, 5, 0);
@@ -518,6 +507,7 @@ public class GUIPersonalmanagement {
 		textFieldsearchModifyPerson.setColumns(10);
 		
 		JButton btnsearchModifyPerson = new JButton("Suchen");
+		btnsearchModifyPerson.addActionListener(this);
 		GridBagConstraints gbc_btnsearchModifyPerson = new GridBagConstraints();
 		gbc_btnsearchModifyPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsearchModifyPerson.gridx = 1;
@@ -565,7 +555,8 @@ public class GUIPersonalmanagement {
 		paneldeletePerson.add(textFieldsearchDeletePerson, gbc_textFieldsearchDeletePerson);
 		textFieldsearchDeletePerson.setColumns(10);
 		
-		JButton btnsearchDeletePerson = new JButton("Suchen");
+		JButton btnsearchDeletePerson = new JButton("Person Suchen");
+		btnsearchDeletePerson.addActionListener(this);
 		GridBagConstraints gbc_btnsearchDeletePerson = new GridBagConstraints();
 		gbc_btnsearchDeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsearchDeletePerson.insets = new Insets(0, 0, 5, 0);
@@ -574,6 +565,7 @@ public class GUIPersonalmanagement {
 		paneldeletePerson.add(btnsearchDeletePerson, gbc_btnsearchDeletePerson);
 		
 		JButton btndeletePerson = new JButton("Person/en l\u00F6schen");
+		btndeletePerson.addActionListener(this);
 		GridBagConstraints gbc_btndeletePerson = new GridBagConstraints();
 		gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeletePerson.gridx = 1;
@@ -588,18 +580,74 @@ public class GUIPersonalmanagement {
 		
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmen\u00FC");
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
-		
+		mntmNewMenuItembacktoMain.addActionListener(this);
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
-		
+		mntmNewMenuItemlogOut.addActionListener(this);
 		JMenuItem mntmNewMenuItemcloseapplication = new JMenuItem("Anwendung verlassen");
 		mnNewMenuOptions.add(mntmNewMenuItemcloseapplication);
-		
+		mntmNewMenuItemcloseapplication.addActionListener(this);
 		JMenu mnNewMenuhelpWindow = new JMenu("?");
 		menuBar.add(mnNewMenuhelpWindow);
 		
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
+		mntmNewMenuItemshowManual.addActionListener(this);
+frmElabVerwaltungsprogramm.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
+		String command = e.getActionCommand();
+		
+		
+		if (command=="Person hinzuf\u00FCgen") {
+			
+		}
+
+		if (command=="Eingaben l\u00F6schen") {
+			
+		}
+
+		if (command=="\u00C4nderungen speichern") {
+			
+		}
+
+		if (command=="Suchen") {
+			
+		}
+
+		if (command=="Person suchen") {
+			
+		}
+		
+		
+		if (command=="Person/en l\u00F6schen") {
+			
+		}
+	
+		if (command =="Hauptmen\u00FC") {
+			
+		GuiMenue gui = new GuiMenue();	
+		frmElabVerwaltungsprogramm.dispose();
+		
+		}
+		
+		if (command=="Ausloggen") {
+		
+		GuiLogin gui = new GuiLogin();	
+		frmElabVerwaltungsprogramm.dispose();	
+		}
+		if (command=="Anwendung verlassen") {
+			
+			System.exit(0);
+			
+		}
+		if (command=="Anleitung anzeigen") {
+			
+			
+		}
 	}
 }

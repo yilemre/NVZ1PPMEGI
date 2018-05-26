@@ -71,6 +71,7 @@ public class GUIComponentUserInterface {
 	 */
 	public GUIComponentUserInterface() {
 		initialize();
+		frmElabVerwaltungsprogramm.setVisible(true);
 	}
 
 	/**
@@ -108,9 +109,9 @@ public class GUIComponentUserInterface {
 		tabbedPane.addTab("Bauteil kaufen", null, panelshoppingCart, null);
 		GridBagLayout gbl_panelshoppingCart = new GridBagLayout();
 		gbl_panelshoppingCart.columnWidths = new int[]{268, 570, 570, 0};
-		gbl_panelshoppingCart.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gbl_panelshoppingCart.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_panelshoppingCart.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_panelshoppingCart.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelshoppingCart.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelshoppingCart.setLayout(gbl_panelshoppingCart);
 		
 		JScrollPane scrollPanedeletePerson = new JScrollPane();
@@ -195,7 +196,7 @@ public class GUIComponentUserInterface {
 		btndekrementParts.setToolTipText("Das entnommene Bauteil wird ihrer Rechnung hinzugefügt");
 		GridBagConstraints gbc_btndekrementParts = new GridBagConstraints();
 		gbc_btndekrementParts.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btndekrementParts.insets = new Insets(0, 0, 5, 5);
+		gbc_btndekrementParts.insets = new Insets(0, 0, 0, 5);
 		gbc_btndekrementParts.gridx = 1;
 		gbc_btndekrementParts.gridy = 4;
 		panelshoppingCart.add(btndekrementParts, gbc_btndekrementParts);
@@ -203,19 +204,10 @@ public class GUIComponentUserInterface {
 		JButton btnincrementParts = new JButton("Aus Warenkorb entfernen");
 		btnincrementParts.setToolTipText("Das Bauteil wird in der angegebenen Menge \r\naus ihrem Warenkorb entfernt.");
 		GridBagConstraints gbc_btnincrementParts = new GridBagConstraints();
-		gbc_btnincrementParts.insets = new Insets(0, 0, 5, 0);
 		gbc_btnincrementParts.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnincrementParts.gridx = 2;
 		gbc_btnincrementParts.gridy = 4;
 		panelshoppingCart.add(btnincrementParts, gbc_btnincrementParts);
-		
-		JButton btnplaceOrder = new JButton("Bestellung abschließen");
-		GridBagConstraints gbc_btnplaceOrder = new GridBagConstraints();
-		gbc_btnplaceOrder.gridwidth = 2;
-		gbc_btnplaceOrder.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnplaceOrder.gridx = 1;
-		gbc_btnplaceOrder.gridy = 5;
-		panelshoppingCart.add(btnplaceOrder, gbc_btnplaceOrder);
 		
 		JPanel panelChangePassword = new JPanel();
 		tabbedPane.addTab("Passwort ändern", null, panelChangePassword, null);
