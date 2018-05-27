@@ -1,7 +1,9 @@
 //Author: Emre
 package logic;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import DataAccess.SQLManager;
 
@@ -22,7 +24,10 @@ public class PersonManagement {
 	Timestamp t = new Timestamp(System.currentTimeMillis());  
 	SQLManager.getInstance().modifyPerson1(id, firstname, surname,street,housenumber,zipcode,email,t,username,password);
     }
-
+    //public static ArrayList<String> getAllPerson() throws SQLException {
+	//return SQLManager.getInstance().getAllPersons(); 
+	
+    //}
     public static void modifyPersonsFirstname(int id, String newValue) throws SQLException {
 	SQLManager.getInstance().modifyPerson(id, AttributeTypesPerson.firstname, newValue);
     }

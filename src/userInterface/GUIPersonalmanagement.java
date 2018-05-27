@@ -18,6 +18,7 @@ import java.awt.BorderLayout;
 import javax.swing.JTextArea;
 import javax.swing.JInternalFrame;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
@@ -33,6 +34,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.AbstractListModel;
 import java.awt.Font;
 import javax.swing.JMenuBar;
@@ -476,16 +478,16 @@ public class GUIPersonalmanagement implements ActionListener{
 		gbc_scrollPanemodifyPerson.gridy = 10;
 		panelmodifyPerson.add(scrollPanemodifyPerson, gbc_scrollPanemodifyPerson);
 		
+				
+		
 		JList listPerson = new JList();
-		listPerson.setModel(new AbstractListModel() {
-			String[] values = new String[] {};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		DefaultListModel Jlista = new DefaultListModel();
+		
+		
+		
+		
+		
+						
 		scrollPanemodifyPerson.setViewportView(listPerson);
 		
 		JComboBox comboBoxsearchModifyPerson = new JComboBox();

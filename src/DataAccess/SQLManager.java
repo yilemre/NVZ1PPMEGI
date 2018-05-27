@@ -62,7 +62,7 @@ public class SQLManager {
 	    	stmt.executeUpdate(sql); 
 	    	stmt.close();
 		    
-	}
+	}		
 	//Emre end
 	
 	
