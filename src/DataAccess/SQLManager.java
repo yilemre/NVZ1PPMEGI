@@ -7,6 +7,7 @@ import java.util.Date;
 
 import logic.*;
 import Exceptions.*;
+import logic.Person;
 
 
 public class SQLManager {
@@ -31,10 +32,10 @@ public class SQLManager {
 		}
 	}
 	
-	public int insertPersonIntoDB (String firstname, String surname, String street, int housenumber, int zipcode, String email, Date timestamp, String username, String password) throws SQLException{
+	public int insertPersonIntoDB (String firstname, String surname, String street, int housenumber, int zipcode, String email, String datetime, String username, String password, int rights) throws SQLException{
 		int result=0;
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO Persons (firstname, surname, street, housenumber, zipcode, email, timestamp, username, password) VALUES ('"+firstname+"','"+surname+"','"+street+"',"+housenumber+","+zipcode+",'"+email+"','"+timestamp+"','"+username+"','"+password+"');";
+		String sql ="INSERT INTO Persons (firstname, surname, street, housenumber, zipcode, email, timestamp, username, password) VALUES ('"+firstname+"','"+surname+"','"+street+"',"+housenumber+","+zipcode+",'"+email+"','"+datetime+"','"+username+"','"+password+"',"+rights+");";
 		stmt.executeUpdate(sql);
 		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Person");
 		rs.next();
@@ -54,10 +55,10 @@ public class SQLManager {
 	
 	//Emre begin 
 	public void modifyPerson1(int id, String firstname, String surname, String street, String housenumber,
-		String zipcode,String email, Timestamp t, String username, String password) throws SQLException {
+		String zipcode,String email, Timestamp t, String username, String password, int rights) throws SQLException {
 	    	Statement stmt = c.createStatement(); 
 	    	String sql = "UPDATE Persons "
-	    		+ "SET firstname='"+firstname+"',surname='"+surname+"',street ='"+street+"', housenumber='"+housenumber+"', zipcode='"+zipcode+"', email='"+email+"',timestamp='"+t+"', username='"+username+"', password='"+password+"'"
+	    		+ "SET firstname='"+firstname+"',surname='"+surname+"',street ='"+street+"', housenumber="+housenumber+", zipcode="+zipcode+", email='"+email+"',timestamp='"+t+"', username='"+username+"', password='"+password+"', rights="+rights+""
 		    	+ " WHERE idPerson="+id+";";
 	    	stmt.executeUpdate(sql); 
 	    	stmt.close();
@@ -65,6 +66,20 @@ public class SQLManager {
 	}		
 	//Emre end
 	
+	public List<Person> getPersons() throws SQLException {
+		List<Person> result = new ArrayList<Person>();
+		
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Persons";
+		ResultSet rs = stmt.executeQuery(sql);
+		while (rs.next()){
+			Person temp = new Person (rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getDate("timestamp"),rs.getString("username"),rs.getString("password"));
+			
+			result.add(temp);			
+		}
+
+		return result;
+	}
 	
 	//If you call this method you can give it a AttributeTypes.xxxx attribute to say which attribute should be changed
 	
@@ -116,6 +131,11 @@ public class SQLManager {
 			stmt.executeUpdate(sql8);
 			stmt.close();
 			break;
+		case rights:
+			String sql9 ="ALTER Parts SET rights="+Integer.parseInt(newValue)+"WHERE idPart="+id+";";
+			stmt.executeUpdate(sql9);
+			stmt.close();
+			break;
 		}
 	}
 		
@@ -156,10 +176,10 @@ public class SQLManager {
 		}
 	}
 	
-	public int addPartIntoDB(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int category) throws SQLException {
+	public int addPartIntoDB(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int category, int rights) throws SQLException {
 		int result=0;
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO Parts (articlenumber, productlink, name, price, storing, plannedAmount, orderedAmount, storageLocation, category) VALUES ('"+articlenumber+"','"+productlink+"','"+name+"',"+price+","+storing+","+plannedAmount+","+orderedAmount+",'"+storageLocation+"',(SELECT idCategory FROM Categorys WHERE idCategory="+category+"'));";
+		String sql ="INSERT INTO Parts (articlenumber, productlink, name, price, storing, plannedAmount, orderedAmount, storageLocation, category, rights) VALUES ('"+articlenumber+"','"+productlink+"','"+name+"',"+price+","+storing+","+plannedAmount+","+orderedAmount+",'"+storageLocation+"',(SELECT idCategory FROM Categorys WHERE idCategory="+category+"'), "+rights+");";
 		stmt.executeUpdate(sql);
 		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Person");
 		rs.next();

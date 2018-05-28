@@ -2,6 +2,7 @@ package logic;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Person {
     
@@ -12,13 +13,13 @@ public class Person {
     private int housenumber;
     private int plz;
     private String email;
-    private Timestamp timestamp;
+    private Date timestamp;
     private  String username; 
     private  String password;
     private double costsForComponents ;
     ArrayList<Component> shoppingCart = new ArrayList();
 	
-    public Person(int id,String firstname, String lastname, String street, int housenumber, int plz, String email,String username, String password){
+    public Person(int id,String firstname, String lastname, String street, int housenumber, int plz, String email, Date timestamp, String username, String password){
 	this.id = id; 
 	this.firstname = firstname; 
 	this.lastname = lastname; 
@@ -26,8 +27,9 @@ public class Person {
 	this.housenumber = housenumber; 
 	this.plz = plz; 
 	this.email = email; 
+	this.timestamp = timestamp;
 	this.username = username; 
-	this.password = password; 	    
+	this.password = password; 	   
     }
             
     public Person(){    
@@ -84,7 +86,7 @@ public class Person {
         this.email = email;
     }
 
-    public Timestamp getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
