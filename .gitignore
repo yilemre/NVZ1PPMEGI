@@ -25,3 +25,4 @@ hs_err_pid*
 
 #SQLite Database
 *.db
+sqlite-jdbc-3.21.0.jar

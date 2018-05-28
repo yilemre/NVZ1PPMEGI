@@ -66,6 +66,8 @@ public class GUIPersonalmanagement implements ActionListener{
 	private JTextField textFieldsearchDeletePerson;
 	private JTextField textFieldID;
 	private JTextField textFieldIDModify;
+	private JComboBox comboBoxType = new JComboBox();
+	
 
 	/**
 	 * Launch the application.
@@ -250,8 +252,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		gbc_lblTyp.gridx = 0;
 		gbc_lblTyp.gridy = 8;
 		paneladdPerson.add(lblTyp, gbc_lblTyp);
-		
-		JComboBox comboBoxType = new JComboBox();
+	
 		comboBoxType.setModel(new DefaultComboBoxModel(new String[] {"Kunde", "Mitglieder", "Lehrstuhl bezogene Personen"}));
 		GridBagConstraints gbc_comboBoxType = new GridBagConstraints();
 		gbc_comboBoxType.insets = new Insets(0, 0, 5, 0);
@@ -638,21 +639,22 @@ public class GUIPersonalmanagement implements ActionListener{
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
 		mntmNewMenuItemshowManual.addActionListener(this);
+		
+		
 frmElabVerwaltungsprogramm.setVisible(true);
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
-		String command = e.getActionCommand();
-		
+		String command = e.getActionCommand(); 
 		
 		if (command=="Person hinzuf\u00FCgen") {
 		    //Emre begin
 		    try { 
 			PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
-			Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()));
+			Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
 		    } 
 		    catch (Exception a) {
 			a.getMessage();
