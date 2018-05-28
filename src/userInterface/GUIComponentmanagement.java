@@ -62,6 +62,8 @@ public class GUIComponentmanagement implements ActionListener {
 	private JTextField textFieldcategoryNameModify;
 	private JTextField textFieldcategoryNameSearch;
 	private JTextField textFieldsearchModifyPart;
+	private JTextField textFieldcategoryNoteNew;
+	private JTextField textFieldcategoryNoteModify;
 
 	/**
 	 * Launch the application.
@@ -280,6 +282,191 @@ public class GUIComponentmanagement implements ActionListener {
 		gbc_lbleLabpicture.gridx = 0;
 		gbc_lbleLabpicture.gridy = 11;
 		paneladdPart.add(lbleLabpicture, gbc_lbleLabpicture);
+		
+				JPanel panelcategoryManagement = new JPanel();
+				tabbedPane.addTab("Kategorienverwaltung", null, panelcategoryManagement, null);
+				GridBagLayout gbl_panelcategoryManagement = new GridBagLayout();
+				gbl_panelcategoryManagement.columnWidths = new int[] { 128, 128, 171, 326, 0, 0 };
+				gbl_panelcategoryManagement.rowHeights = new int[] { 0, 0, 0, 0, 0, 418, 418, 0, 0, 0, 0 };
+				gbl_panelcategoryManagement.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 1.0, Double.MIN_VALUE };
+				gbl_panelcategoryManagement.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0,
+						Double.MIN_VALUE };
+				panelcategoryManagement.setLayout(gbl_panelcategoryManagement);
+				
+						JLabel lblcategoryIDModify = new JLabel("ID");
+						GridBagConstraints gbc_lblcategoryIDModify = new GridBagConstraints();
+						gbc_lblcategoryIDModify.anchor = GridBagConstraints.EAST;
+						gbc_lblcategoryIDModify.insets = new Insets(0, 0, 5, 5);
+						gbc_lblcategoryIDModify.gridx = 2;
+						gbc_lblcategoryIDModify.gridy = 0;
+						panelcategoryManagement.add(lblcategoryIDModify, gbc_lblcategoryIDModify);
+						
+								textFieldcategoryIDModify = new JTextField();
+								textFieldcategoryIDModify.setEditable(false);
+								GridBagConstraints gbc_textFieldcategoryIDModify = new GridBagConstraints();
+								gbc_textFieldcategoryIDModify.insets = new Insets(0, 0, 5, 5);
+								gbc_textFieldcategoryIDModify.fill = GridBagConstraints.HORIZONTAL;
+								gbc_textFieldcategoryIDModify.gridx = 3;
+								gbc_textFieldcategoryIDModify.gridy = 0;
+								panelcategoryManagement.add(textFieldcategoryIDModify, gbc_textFieldcategoryIDModify);
+								textFieldcategoryIDModify.setColumns(10);
+								
+										JLabel lblcategoryNameNew = new JLabel("Kategorie");
+										GridBagConstraints gbc_lblcategoryNameNew = new GridBagConstraints();
+										gbc_lblcategoryNameNew.anchor = GridBagConstraints.EAST;
+										gbc_lblcategoryNameNew.insets = new Insets(0, 0, 5, 5);
+										gbc_lblcategoryNameNew.gridx = 0;
+										gbc_lblcategoryNameNew.gridy = 1;
+										panelcategoryManagement.add(lblcategoryNameNew, gbc_lblcategoryNameNew);
+										
+												textFieldcategoryNameNew = new JTextField();
+												GridBagConstraints gbc_textFieldcategoryNameNew = new GridBagConstraints();
+												gbc_textFieldcategoryNameNew.insets = new Insets(0, 0, 5, 5);
+												gbc_textFieldcategoryNameNew.fill = GridBagConstraints.HORIZONTAL;
+												gbc_textFieldcategoryNameNew.gridx = 1;
+												gbc_textFieldcategoryNameNew.gridy = 1;
+												panelcategoryManagement.add(textFieldcategoryNameNew, gbc_textFieldcategoryNameNew);
+												textFieldcategoryNameNew.setColumns(10);
+												
+														JLabel lblcategoryNameModify = new JLabel("Kategorie");
+														GridBagConstraints gbc_lblcategoryNameModify = new GridBagConstraints();
+														gbc_lblcategoryNameModify.anchor = GridBagConstraints.EAST;
+														gbc_lblcategoryNameModify.insets = new Insets(0, 0, 5, 5);
+														gbc_lblcategoryNameModify.gridx = 2;
+														gbc_lblcategoryNameModify.gridy = 1;
+														panelcategoryManagement.add(lblcategoryNameModify, gbc_lblcategoryNameModify);
+														
+																textFieldcategoryNameModify = new JTextField();
+																GridBagConstraints gbc_textFieldcategoryNameModify = new GridBagConstraints();
+																gbc_textFieldcategoryNameModify.insets = new Insets(0, 0, 5, 5);
+																gbc_textFieldcategoryNameModify.fill = GridBagConstraints.HORIZONTAL;
+																gbc_textFieldcategoryNameModify.gridx = 3;
+																gbc_textFieldcategoryNameModify.gridy = 1;
+																panelcategoryManagement.add(textFieldcategoryNameModify, gbc_textFieldcategoryNameModify);
+																textFieldcategoryNameModify.setColumns(10);
+																
+																		JButton btncategoryNew = new JButton("Kategorie hinzufügen");
+																		btncategoryNew.addActionListener(this);
+																		
+																		JLabel lblcategoryNoteNew = new JLabel("Notiz");
+																		GridBagConstraints gbc_lblcategoryNoteNew = new GridBagConstraints();
+																		gbc_lblcategoryNoteNew.anchor = GridBagConstraints.EAST;
+																		gbc_lblcategoryNoteNew.insets = new Insets(0, 0, 5, 5);
+																		gbc_lblcategoryNoteNew.gridx = 0;
+																		gbc_lblcategoryNoteNew.gridy = 2;
+																		panelcategoryManagement.add(lblcategoryNoteNew, gbc_lblcategoryNoteNew);
+																		
+																		textFieldcategoryNoteNew = new JTextField();
+																		GridBagConstraints gbc_textFieldcategoryNoteNew = new GridBagConstraints();
+																		gbc_textFieldcategoryNoteNew.insets = new Insets(0, 0, 5, 5);
+																		gbc_textFieldcategoryNoteNew.fill = GridBagConstraints.HORIZONTAL;
+																		gbc_textFieldcategoryNoteNew.gridx = 1;
+																		gbc_textFieldcategoryNoteNew.gridy = 2;
+																		panelcategoryManagement.add(textFieldcategoryNoteNew, gbc_textFieldcategoryNoteNew);
+																		textFieldcategoryNoteNew.setColumns(10);
+																		
+																		JLabel lblcategoryNoteModify = new JLabel("Notiz");
+																		GridBagConstraints gbc_lblcategoryNoteModify = new GridBagConstraints();
+																		gbc_lblcategoryNoteModify.anchor = GridBagConstraints.EAST;
+																		gbc_lblcategoryNoteModify.insets = new Insets(0, 0, 5, 5);
+																		gbc_lblcategoryNoteModify.gridx = 2;
+																		gbc_lblcategoryNoteModify.gridy = 2;
+																		panelcategoryManagement.add(lblcategoryNoteModify, gbc_lblcategoryNoteModify);
+																		
+																		textFieldcategoryNoteModify = new JTextField();
+																		GridBagConstraints gbc_textFieldcategoryNoteModify = new GridBagConstraints();
+																		gbc_textFieldcategoryNoteModify.insets = new Insets(0, 0, 5, 5);
+																		gbc_textFieldcategoryNoteModify.fill = GridBagConstraints.HORIZONTAL;
+																		gbc_textFieldcategoryNoteModify.gridx = 3;
+																		gbc_textFieldcategoryNoteModify.gridy = 2;
+																		panelcategoryManagement.add(textFieldcategoryNoteModify, gbc_textFieldcategoryNoteModify);
+																		textFieldcategoryNoteModify.setColumns(10);
+																		GridBagConstraints gbc_btncategoryNew = new GridBagConstraints();
+																		gbc_btncategoryNew.fill = GridBagConstraints.HORIZONTAL;
+																		gbc_btncategoryNew.insets = new Insets(0, 0, 5, 5);
+																		gbc_btncategoryNew.gridx = 1;
+																		gbc_btncategoryNew.gridy = 3;
+																		panelcategoryManagement.add(btncategoryNew, gbc_btncategoryNew);
+																		
+																				JButton btncategoryModify = new JButton("Änderungen an Kategorie speichern");
+																				btncategoryModify.addActionListener(this);
+																				GridBagConstraints gbc_btncategoryModify = new GridBagConstraints();
+																				gbc_btncategoryModify.fill = GridBagConstraints.HORIZONTAL;
+																				gbc_btncategoryModify.insets = new Insets(0, 0, 5, 5);
+																				gbc_btncategoryModify.gridx = 3;
+																				gbc_btncategoryModify.gridy = 3;
+																				panelcategoryManagement.add(btncategoryModify, gbc_btncategoryModify);
+																				
+																						JButton btncategoryDeleteInputs = new JButton("Eingaben löschen");
+																						btncategoryDeleteInputs.addActionListener(this);
+																						GridBagConstraints gbc_btncategoryDeleteInputs = new GridBagConstraints();
+																						gbc_btncategoryDeleteInputs.fill = GridBagConstraints.HORIZONTAL;
+																						gbc_btncategoryDeleteInputs.insets = new Insets(0, 0, 5, 5);
+																						gbc_btncategoryDeleteInputs.gridx = 1;
+																						gbc_btncategoryDeleteInputs.gridy = 4;
+																						panelcategoryManagement.add(btncategoryDeleteInputs, gbc_btncategoryDeleteInputs);
+																						
+																								JButton btncategoryModifyDeleteInputs = new JButton("Änderungen löschen");
+																								btncategoryModifyDeleteInputs.addActionListener(this);
+																								GridBagConstraints gbc_btncategoryModifyDeleteInputs = new GridBagConstraints();
+																								gbc_btncategoryModifyDeleteInputs.fill = GridBagConstraints.HORIZONTAL;
+																								gbc_btncategoryModifyDeleteInputs.insets = new Insets(0, 0, 5, 5);
+																								gbc_btncategoryModifyDeleteInputs.gridx = 3;
+																								gbc_btncategoryModifyDeleteInputs.gridy = 4;
+																								panelcategoryManagement.add(btncategoryModifyDeleteInputs, gbc_btncategoryModifyDeleteInputs);
+																								
+																										JScrollPane scrollPane = new JScrollPane();
+																										scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+																										scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+																										GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+																										gbc_scrollPane.gridheight = 2;
+																										gbc_scrollPane.gridwidth = 6;
+																										gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+																										gbc_scrollPane.fill = GridBagConstraints.BOTH;
+																										gbc_scrollPane.gridx = 0;
+																										gbc_scrollPane.gridy = 5;
+																										panelcategoryManagement.add(scrollPane, gbc_scrollPane);
+																										
+																												JList list = new JList();
+																												list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+																												scrollPane.setViewportView(list);
+																												
+																														JLabel lblcategoryNameSearch = new JLabel("Kategorie");
+																														GridBagConstraints gbc_lblcategoryNameSearch = new GridBagConstraints();
+																														gbc_lblcategoryNameSearch.anchor = GridBagConstraints.EAST;
+																														gbc_lblcategoryNameSearch.insets = new Insets(0, 0, 5, 5);
+																														gbc_lblcategoryNameSearch.gridx = 0;
+																														gbc_lblcategoryNameSearch.gridy = 7;
+																														panelcategoryManagement.add(lblcategoryNameSearch, gbc_lblcategoryNameSearch);
+																														
+																																textFieldcategoryNameSearch = new JTextField();
+																																GridBagConstraints gbc_textFieldcategoryNameSearch = new GridBagConstraints();
+																																gbc_textFieldcategoryNameSearch.gridwidth = 5;
+																																gbc_textFieldcategoryNameSearch.insets = new Insets(0, 0, 5, 0);
+																																gbc_textFieldcategoryNameSearch.fill = GridBagConstraints.HORIZONTAL;
+																																gbc_textFieldcategoryNameSearch.gridx = 1;
+																																gbc_textFieldcategoryNameSearch.gridy = 7;
+																																panelcategoryManagement.add(textFieldcategoryNameSearch, gbc_textFieldcategoryNameSearch);
+																																textFieldcategoryNameSearch.setColumns(10);
+																																
+																																		JButton btncategorySearch = new JButton("Nach Kategorie suchen");
+																																		btncategorySearch.addActionListener(this);
+																																		GridBagConstraints gbc_btncategorySearch = new GridBagConstraints();
+																																		gbc_btncategorySearch.gridwidth = 5;
+																																		gbc_btncategorySearch.fill = GridBagConstraints.HORIZONTAL;
+																																		gbc_btncategorySearch.insets = new Insets(0, 0, 5, 0);
+																																		gbc_btncategorySearch.gridx = 1;
+																																		gbc_btncategorySearch.gridy = 8;
+																																		panelcategoryManagement.add(btncategorySearch, gbc_btncategorySearch);
+																																		
+																																				JButton btncategoryDelete = new JButton("Kategorie löschen");
+																																				btncategoryDelete.addActionListener(this);
+																																				GridBagConstraints gbc_btncategoryDelete = new GridBagConstraints();
+																																				gbc_btncategoryDelete.gridwidth = 5;
+																																				gbc_btncategoryDelete.fill = GridBagConstraints.HORIZONTAL;
+																																				gbc_btncategoryDelete.gridx = 1;
+																																				gbc_btncategoryDelete.gridy = 9;
+																																				panelcategoryManagement.add(btncategoryDelete, gbc_btncategoryDelete);
 
 		JPanel panelmodify = new JPanel();
 		tabbedPane.addTab("Bauteil bearbeiten", null, panelmodify, null);
@@ -542,162 +729,10 @@ public class GUIComponentmanagement implements ActionListener {
 		gbc_btndeletePart.gridy = 3;
 		paneldeletePart.add(btndeletePart, gbc_btndeletePart);
 
-		JPanel panelcategoryManagement = new JPanel();
-		tabbedPane.addTab("Kategorienverwaltung", null, panelcategoryManagement, null);
-		GridBagLayout gbl_panelcategoryManagement = new GridBagLayout();
-		gbl_panelcategoryManagement.columnWidths = new int[] { 128, 128, 171, 326, 0, 0 };
-		gbl_panelcategoryManagement.rowHeights = new int[] { 0, 0, 0, 0, 418, 418, 0, 0, 0, 0 };
-		gbl_panelcategoryManagement.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_panelcategoryManagement.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0,
-				Double.MIN_VALUE };
-		panelcategoryManagement.setLayout(gbl_panelcategoryManagement);
-
-		JLabel lblcategoryIDModify = new JLabel("ID");
-		GridBagConstraints gbc_lblcategoryIDModify = new GridBagConstraints();
-		gbc_lblcategoryIDModify.anchor = GridBagConstraints.EAST;
-		gbc_lblcategoryIDModify.insets = new Insets(0, 0, 5, 5);
-		gbc_lblcategoryIDModify.gridx = 2;
-		gbc_lblcategoryIDModify.gridy = 0;
-		panelcategoryManagement.add(lblcategoryIDModify, gbc_lblcategoryIDModify);
-
-		textFieldcategoryIDModify = new JTextField();
-		textFieldcategoryIDModify.setEditable(false);
-		GridBagConstraints gbc_textFieldcategoryIDModify = new GridBagConstraints();
-		gbc_textFieldcategoryIDModify.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldcategoryIDModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldcategoryIDModify.gridx = 3;
-		gbc_textFieldcategoryIDModify.gridy = 0;
-		panelcategoryManagement.add(textFieldcategoryIDModify, gbc_textFieldcategoryIDModify);
-		textFieldcategoryIDModify.setColumns(10);
-
-		JLabel lblcategoryNameNew = new JLabel("Kategorie");
-		GridBagConstraints gbc_lblcategoryNameNew = new GridBagConstraints();
-		gbc_lblcategoryNameNew.anchor = GridBagConstraints.EAST;
-		gbc_lblcategoryNameNew.insets = new Insets(0, 0, 5, 5);
-		gbc_lblcategoryNameNew.gridx = 0;
-		gbc_lblcategoryNameNew.gridy = 1;
-		panelcategoryManagement.add(lblcategoryNameNew, gbc_lblcategoryNameNew);
-
-		textFieldcategoryNameNew = new JTextField();
-		GridBagConstraints gbc_textFieldcategoryNameNew = new GridBagConstraints();
-		gbc_textFieldcategoryNameNew.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldcategoryNameNew.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldcategoryNameNew.gridx = 1;
-		gbc_textFieldcategoryNameNew.gridy = 1;
-		panelcategoryManagement.add(textFieldcategoryNameNew, gbc_textFieldcategoryNameNew);
-		textFieldcategoryNameNew.setColumns(10);
-
-		JLabel lblcategoryNameModify = new JLabel("Kategorie");
-		GridBagConstraints gbc_lblcategoryNameModify = new GridBagConstraints();
-		gbc_lblcategoryNameModify.anchor = GridBagConstraints.EAST;
-		gbc_lblcategoryNameModify.insets = new Insets(0, 0, 5, 5);
-		gbc_lblcategoryNameModify.gridx = 2;
-		gbc_lblcategoryNameModify.gridy = 1;
-		panelcategoryManagement.add(lblcategoryNameModify, gbc_lblcategoryNameModify);
-
-		textFieldcategoryNameModify = new JTextField();
-		GridBagConstraints gbc_textFieldcategoryNameModify = new GridBagConstraints();
-		gbc_textFieldcategoryNameModify.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldcategoryNameModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldcategoryNameModify.gridx = 3;
-		gbc_textFieldcategoryNameModify.gridy = 1;
-		panelcategoryManagement.add(textFieldcategoryNameModify, gbc_textFieldcategoryNameModify);
-		textFieldcategoryNameModify.setColumns(10);
-
-		JButton btncategoryNew = new JButton("Kategorie hinzufügen");
-		btncategoryNew.addActionListener(this);
-		GridBagConstraints gbc_btncategoryNew = new GridBagConstraints();
-		gbc_btncategoryNew.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btncategoryNew.insets = new Insets(0, 0, 5, 5);
-		gbc_btncategoryNew.gridx = 1;
-		gbc_btncategoryNew.gridy = 2;
-		panelcategoryManagement.add(btncategoryNew, gbc_btncategoryNew);
-
-		JButton btncategoryModify = new JButton("Änderungen an Kategorie speichern");
-		btncategoryModify.addActionListener(this);
-		GridBagConstraints gbc_btncategoryModify = new GridBagConstraints();
-		gbc_btncategoryModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btncategoryModify.insets = new Insets(0, 0, 5, 5);
-		gbc_btncategoryModify.gridx = 3;
-		gbc_btncategoryModify.gridy = 2;
-		panelcategoryManagement.add(btncategoryModify, gbc_btncategoryModify);
-
-		JButton btncategoryDeleteInputs = new JButton("Eingaben löschen");
-		btncategoryDeleteInputs.addActionListener(this);
-		GridBagConstraints gbc_btncategoryDeleteInputs = new GridBagConstraints();
-		gbc_btncategoryDeleteInputs.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btncategoryDeleteInputs.insets = new Insets(0, 0, 5, 5);
-		gbc_btncategoryDeleteInputs.gridx = 1;
-		gbc_btncategoryDeleteInputs.gridy = 3;
-		panelcategoryManagement.add(btncategoryDeleteInputs, gbc_btncategoryDeleteInputs);
-
-		JButton btncategoryModifyDeleteInputs = new JButton("Änderungen löschen");
-		btncategoryModifyDeleteInputs.addActionListener(this);
-		GridBagConstraints gbc_btncategoryModifyDeleteInputs = new GridBagConstraints();
-		gbc_btncategoryModifyDeleteInputs.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btncategoryModifyDeleteInputs.insets = new Insets(0, 0, 5, 5);
-		gbc_btncategoryModifyDeleteInputs.gridx = 3;
-		gbc_btncategoryModifyDeleteInputs.gridy = 3;
-		panelcategoryManagement.add(btncategoryModifyDeleteInputs, gbc_btncategoryModifyDeleteInputs);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridheight = 2;
-		gbc_scrollPane.gridwidth = 6;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 4;
-		panelcategoryManagement.add(scrollPane, gbc_scrollPane);
-
-		JList list = new JList();
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(list);
-
-		JLabel lblcategoryNameSearch = new JLabel("Kategorie");
-		GridBagConstraints gbc_lblcategoryNameSearch = new GridBagConstraints();
-		gbc_lblcategoryNameSearch.anchor = GridBagConstraints.EAST;
-		gbc_lblcategoryNameSearch.insets = new Insets(0, 0, 5, 5);
-		gbc_lblcategoryNameSearch.gridx = 0;
-		gbc_lblcategoryNameSearch.gridy = 6;
-		panelcategoryManagement.add(lblcategoryNameSearch, gbc_lblcategoryNameSearch);
-
-		textFieldcategoryNameSearch = new JTextField();
-		GridBagConstraints gbc_textFieldcategoryNameSearch = new GridBagConstraints();
-		gbc_textFieldcategoryNameSearch.gridwidth = 5;
-		gbc_textFieldcategoryNameSearch.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldcategoryNameSearch.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldcategoryNameSearch.gridx = 1;
-		gbc_textFieldcategoryNameSearch.gridy = 6;
-		panelcategoryManagement.add(textFieldcategoryNameSearch, gbc_textFieldcategoryNameSearch);
-		textFieldcategoryNameSearch.setColumns(10);
-
-		JButton btncategorySearch = new JButton("Nach Kategorie suchen");
-		btncategorySearch.addActionListener(this);
-		GridBagConstraints gbc_btncategorySearch = new GridBagConstraints();
-		gbc_btncategorySearch.gridwidth = 5;
-		gbc_btncategorySearch.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btncategorySearch.insets = new Insets(0, 0, 5, 5);
-		gbc_btncategorySearch.gridx = 1;
-		gbc_btncategorySearch.gridy = 7;
-		panelcategoryManagement.add(btncategorySearch, gbc_btncategorySearch);
-
-		JButton btncategoryDelete = new JButton("Kategorie löschen");
-		btncategoryDelete.addActionListener(this);
-		GridBagConstraints gbc_btncategoryDelete = new GridBagConstraints();
-		gbc_btncategoryDelete.gridwidth = 5;
-		gbc_btncategoryDelete.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btncategoryDelete.insets = new Insets(0, 0, 0, 5);
-		gbc_btncategoryDelete.gridx = 1;
-		gbc_btncategoryDelete.gridy = 8;
-		panelcategoryManagement.add(btncategoryDelete, gbc_btncategoryDelete);
-
 		JMenuBar menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
 
-		JMenu mnNewMenuOptions = new JMenu("Men�");
+		JMenu mnNewMenuOptions = new JMenu("Menü");
 		menuBar.add(mnNewMenuOptions);
 
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmen\u00FC");
