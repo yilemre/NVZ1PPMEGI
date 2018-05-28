@@ -69,6 +69,7 @@ public class GUIFinanceManagement implements ActionListener {
 	private JTextField textFieldrelatedPersonModify;
 	private JTextField textFieldrelatedJarModify;
 	private JTextField textField_7;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -96,7 +97,7 @@ public class GUIFinanceManagement implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblFinanceManagement = new JLabel("Finanzverwaltung");
-		lblFinanceManagement.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblFinanceManagement.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_lblFinanceManagement = new GridBagConstraints();
 		gbc_lblFinanceManagement.insets = new Insets(0, 0, 5, 0);
 		gbc_lblFinanceManagement.gridx = 0;
@@ -104,6 +105,7 @@ public class GUIFinanceManagement implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(lblFinanceManagement, gbc_lblFinanceManagement);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
 		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
 		gbc_tabbedPane.gridx = 0;
@@ -128,6 +130,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(lblNewLabel, gbc_lblNewLabel);
 		
 		JLabel lblbillName = new JLabel("Rechnungsname");
+		lblbillName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblbillName = new GridBagConstraints();
 		gbc_lblbillName.anchor = GridBagConstraints.EAST;
 		gbc_lblbillName.insets = new Insets(0, 0, 5, 5);
@@ -136,6 +139,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(lblbillName, gbc_lblbillName);
 		
 		textFieldbillName = new JTextField();
+		textFieldbillName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldbillName = new GridBagConstraints();
 		gbc_textFieldbillName.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldbillName.fill = GridBagConstraints.HORIZONTAL;
@@ -145,6 +149,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldbillName.setColumns(10);
 		
 		JLabel lblrelatedOrder = new JLabel("dazugehöriger Auftrag");
+		lblrelatedOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblrelatedOrder = new GridBagConstraints();
 		gbc_lblrelatedOrder.anchor = GridBagConstraints.EAST;
 		gbc_lblrelatedOrder.insets = new Insets(0, 0, 5, 5);
@@ -153,6 +158,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(lblrelatedOrder, gbc_lblrelatedOrder);
 		
 		textFieldrelatedOrder = new JTextField();
+		textFieldrelatedOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldrelatedOrder = new GridBagConstraints();
 		gbc_textFieldrelatedOrder.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldrelatedOrder.fill = GridBagConstraints.HORIZONTAL;
@@ -162,6 +168,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldrelatedOrder.setColumns(10);
 		
 		JLabel lblpaymentTyp = new JLabel("Bezahlart");
+		lblpaymentTyp.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblpaymentTyp = new GridBagConstraints();
 		gbc_lblpaymentTyp.anchor = GridBagConstraints.EAST;
 		gbc_lblpaymentTyp.insets = new Insets(0, 0, 5, 5);
@@ -170,6 +177,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(lblpaymentTyp, gbc_lblpaymentTyp);
 		
 		JComboBox comboBoxpaymentTyp = new JComboBox();
+		comboBoxpaymentTyp.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxpaymentTyp = new GridBagConstraints();
 		gbc_comboBoxpaymentTyp.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxpaymentTyp.fill = GridBagConstraints.HORIZONTAL;
@@ -178,6 +186,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(comboBoxpaymentTyp, gbc_comboBoxpaymentTyp);
 		
 		JLabel lblsumBill = new JLabel("Endbetrag");
+		lblsumBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblsumBill = new GridBagConstraints();
 		gbc_lblsumBill.anchor = GridBagConstraints.EAST;
 		gbc_lblsumBill.insets = new Insets(0, 0, 5, 5);
@@ -186,6 +195,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(lblsumBill, gbc_lblsumBill);
 		
 		textFieldhouseNumber = new JTextField();
+		textFieldhouseNumber.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldhouseNumber = new GridBagConstraints();
 		gbc_textFieldhouseNumber.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldhouseNumber.fill = GridBagConstraints.HORIZONTAL;
@@ -195,6 +205,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldhouseNumber.setColumns(10);
 		
 		JLabel lblcustomerID = new JLabel("Kundennummer");
+		lblcustomerID.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblcustomerID = new GridBagConstraints();
 		gbc_lblcustomerID.anchor = GridBagConstraints.EAST;
 		gbc_lblcustomerID.insets = new Insets(0, 0, 5, 5);
@@ -203,6 +214,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(lblcustomerID, gbc_lblcustomerID);
 		
 		textFieldcustomerID = new JTextField();
+		textFieldcustomerID.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldcustomerID.setEditable(false);
 		GridBagConstraints gbc_textFieldcustomerID = new GridBagConstraints();
 		gbc_textFieldcustomerID.insets = new Insets(0, 0, 5, 0);
@@ -213,6 +225,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldcustomerID.setColumns(10);
 		
 		JLabel lblresponsiblePerson = new JLabel("Verantwortlicher");
+		lblresponsiblePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblresponsiblePerson = new GridBagConstraints();
 		gbc_lblresponsiblePerson.anchor = GridBagConstraints.EAST;
 		gbc_lblresponsiblePerson.insets = new Insets(0, 0, 5, 5);
@@ -221,6 +234,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(lblresponsiblePerson, gbc_lblresponsiblePerson);
 		
 		textresponsiblePerson = new JTextField();
+		textresponsiblePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textresponsiblePerson = new GridBagConstraints();
 		gbc_textresponsiblePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textresponsiblePerson.insets = new Insets(0, 0, 5, 0);
@@ -230,6 +244,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textresponsiblePerson.setColumns(10);
 		
 		JLabel lblTyp = new JLabel("Personenart");
+		lblTyp.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblTyp = new GridBagConstraints();
 		gbc_lblTyp.anchor = GridBagConstraints.EAST;
 		gbc_lblTyp.insets = new Insets(0, 0, 5, 5);
@@ -238,6 +253,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(lblTyp, gbc_lblTyp);
 		
 		JComboBox comboBoxType = new JComboBox();
+		comboBoxType.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxType.setModel(new DefaultComboBoxModel(new String[] {"Kunde", "Mitglieder", "Lehrstuhl bezogene Personen"}));
 		GridBagConstraints gbc_comboBoxType = new GridBagConstraints();
 		gbc_comboBoxType.insets = new Insets(0, 0, 5, 0);
@@ -247,6 +263,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(comboBoxType, gbc_comboBoxType);
 		
 		JLabel lblrelatedJar = new JLabel("zugehöriger Topf");
+		lblrelatedJar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblrelatedJar = new GridBagConstraints();
 		gbc_lblrelatedJar.anchor = GridBagConstraints.EAST;
 		gbc_lblrelatedJar.insets = new Insets(0, 0, 5, 5);
@@ -255,6 +272,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(lblrelatedJar, gbc_lblrelatedJar);
 		
 		textFieldrelatedJar = new JTextField();
+		textFieldrelatedJar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldrelatedJar = new GridBagConstraints();
 		gbc_textFieldrelatedJar.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldrelatedJar.fill = GridBagConstraints.HORIZONTAL;
@@ -264,6 +282,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldrelatedJar.setColumns(10);
 		
 		JButton btnaddBill = new JButton("Rechnung hinzufügen");
+		btnaddBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnaddBill = new GridBagConstraints();
 		gbc_btnaddBill.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddBill.insets = new Insets(0, 0, 5, 0);
@@ -272,6 +291,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(btnaddBill, gbc_btnaddBill);
 		
 		JButton btndeleteallInputs = new JButton("Eingaben l\u00F6schen");
+		btndeleteallInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteallInputs.insets = new Insets(0, 0, 5, 0);
@@ -291,9 +311,11 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(scrollPane_1, gbc_scrollPane_1);
 		
 		JList listbillNew = new JList();
+		listbillNew.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		scrollPane_1.setViewportView(listbillNew);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -302,6 +324,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(comboBox, gbc_comboBox);
 		
 		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
@@ -311,6 +334,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textField.setColumns(10);
 		
 		JButton btnnewbillOrderSearch = new JButton("Auftrag suchen");
+		btnnewbillOrderSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnnewbillOrderSearch = new GridBagConstraints();
 		gbc_btnnewbillOrderSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnnewbillOrderSearch.gridx = 1;
@@ -334,6 +358,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(label, gbc_label);
 		
 		JLabel lblbillNameModify = new JLabel("Rechnungsname");
+		lblbillNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblbillNameModify = new GridBagConstraints();
 		gbc_lblbillNameModify.anchor = GridBagConstraints.EAST;
 		gbc_lblbillNameModify.insets = new Insets(0, 0, 5, 5);
@@ -342,6 +367,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(lblbillNameModify, gbc_lblbillNameModify);
 		
 		textFieldbillNameModify = new JTextField();
+		textFieldbillNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldbillNameModify.setColumns(10);
 		GridBagConstraints gbc_textFieldbillNameModify = new GridBagConstraints();
 		gbc_textFieldbillNameModify.fill = GridBagConstraints.HORIZONTAL;
@@ -351,6 +377,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(textFieldbillNameModify, gbc_textFieldbillNameModify);
 		
 		JLabel lblrelatedOrderModify = new JLabel("dazugehöriger Auftrag");
+		lblrelatedOrderModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblrelatedOrderModify = new GridBagConstraints();
 		gbc_lblrelatedOrderModify.anchor = GridBagConstraints.EAST;
 		gbc_lblrelatedOrderModify.insets = new Insets(0, 0, 5, 5);
@@ -359,6 +386,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(lblrelatedOrderModify, gbc_lblrelatedOrderModify);
 		
 		textFieldrelatedOrderModify = new JTextField();
+		textFieldrelatedOrderModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldrelatedOrderModify.setColumns(10);
 		GridBagConstraints gbc_textFieldrelatedOrderModify = new GridBagConstraints();
 		gbc_textFieldrelatedOrderModify.fill = GridBagConstraints.HORIZONTAL;
@@ -368,6 +396,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(textFieldrelatedOrderModify, gbc_textFieldrelatedOrderModify);
 		
 		JLabel lblpaymentTypModify = new JLabel("Bezahlart");
+		lblpaymentTypModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblpaymentTypModify = new GridBagConstraints();
 		gbc_lblpaymentTypModify.anchor = GridBagConstraints.EAST;
 		gbc_lblpaymentTypModify.insets = new Insets(0, 0, 5, 5);
@@ -376,6 +405,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(lblpaymentTypModify, gbc_lblpaymentTypModify);
 		
 		JComboBox comboBoxpaymentTypModify = new JComboBox();
+		comboBoxpaymentTypModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxpaymentTypModify = new GridBagConstraints();
 		gbc_comboBoxpaymentTypModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxpaymentTypModify.insets = new Insets(0, 0, 5, 0);
@@ -384,6 +414,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(comboBoxpaymentTypModify, gbc_comboBoxpaymentTypModify);
 		
 		JLabel lblsumBillModify = new JLabel("Endbetrag");
+		lblsumBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblsumBillModify = new GridBagConstraints();
 		gbc_lblsumBillModify.anchor = GridBagConstraints.EAST;
 		gbc_lblsumBillModify.insets = new Insets(0, 0, 5, 5);
@@ -392,6 +423,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(lblsumBillModify, gbc_lblsumBillModify);
 		
 		textFieldsumBillModify = new JTextField();
+		textFieldsumBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldsumBillModify.setColumns(10);
 		GridBagConstraints gbc_textFieldsumBillModify = new GridBagConstraints();
 		gbc_textFieldsumBillModify.fill = GridBagConstraints.HORIZONTAL;
@@ -401,6 +433,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(textFieldsumBillModify, gbc_textFieldsumBillModify);
 		
 		JLabel lblcustomerIDModify = new JLabel("Kundennummer");
+		lblcustomerIDModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblcustomerIDModify = new GridBagConstraints();
 		gbc_lblcustomerIDModify.anchor = GridBagConstraints.EAST;
 		gbc_lblcustomerIDModify.insets = new Insets(0, 0, 5, 5);
@@ -409,6 +442,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(lblcustomerIDModify, gbc_lblcustomerIDModify);
 		
 		textFieldcustomerIDModify = new JTextField();
+		textFieldcustomerIDModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldcustomerIDModify.setEditable(false);
 		textFieldcustomerIDModify.setColumns(10);
 		GridBagConstraints gbc_textFieldcustomerIDModify = new GridBagConstraints();
@@ -419,6 +453,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(textFieldcustomerIDModify, gbc_textFieldcustomerIDModify);
 		
 		JLabel lblrelatedPersonModify = new JLabel("Verantwortlicher");
+		lblrelatedPersonModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblrelatedPersonModify = new GridBagConstraints();
 		gbc_lblrelatedPersonModify.anchor = GridBagConstraints.EAST;
 		gbc_lblrelatedPersonModify.insets = new Insets(0, 0, 5, 5);
@@ -427,6 +462,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(lblrelatedPersonModify, gbc_lblrelatedPersonModify);
 		
 		textFieldrelatedPersonModify = new JTextField();
+		textFieldrelatedPersonModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldrelatedPersonModify.setColumns(10);
 		GridBagConstraints gbc_textFieldrelatedPersonModify = new GridBagConstraints();
 		gbc_textFieldrelatedPersonModify.fill = GridBagConstraints.HORIZONTAL;
@@ -436,6 +472,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(textFieldrelatedPersonModify, gbc_textFieldrelatedPersonModify);
 		
 		JLabel lblTypModify = new JLabel("Personenart");
+		lblTypModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblTypModify = new GridBagConstraints();
 		gbc_lblTypModify.anchor = GridBagConstraints.EAST;
 		gbc_lblTypModify.insets = new Insets(0, 0, 5, 5);
@@ -444,6 +481,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(lblTypModify, gbc_lblTypModify);
 		
 		JComboBox comboBoxTypModify = new JComboBox();
+		comboBoxTypModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxTypModify = new GridBagConstraints();
 		gbc_comboBoxTypModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxTypModify.insets = new Insets(0, 0, 5, 0);
@@ -452,6 +490,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(comboBoxTypModify, gbc_comboBoxTypModify);
 		
 		JLabel lblrelatedJarModify = new JLabel("zugehöriger Topf");
+		lblrelatedJarModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblrelatedJarModify = new GridBagConstraints();
 		gbc_lblrelatedJarModify.anchor = GridBagConstraints.EAST;
 		gbc_lblrelatedJarModify.insets = new Insets(0, 0, 5, 5);
@@ -460,6 +499,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(lblrelatedJarModify, gbc_lblrelatedJarModify);
 		
 		textFieldrelatedJarModify = new JTextField();
+		textFieldrelatedJarModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldrelatedJarModify.setColumns(10);
 		GridBagConstraints gbc_textFieldrelatedJarModify = new GridBagConstraints();
 		gbc_textFieldrelatedJarModify.fill = GridBagConstraints.HORIZONTAL;
@@ -469,6 +509,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(textFieldrelatedJarModify, gbc_textFieldrelatedJarModify);
 		
 		JButton btnsaveBillModify = new JButton("Rechnung ändern");
+		btnsaveBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnsaveBillModify = new GridBagConstraints();
 		gbc_btnsaveBillModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsaveBillModify.insets = new Insets(0, 0, 5, 0);
@@ -477,6 +518,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(btnsaveBillModify, gbc_btnsaveBillModify);
 		
 		JButton btndeleteallInputsModify = new JButton("Felder leeren");
+		btndeleteallInputsModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteallInputsModify = new GridBagConstraints();
 		gbc_btndeleteallInputsModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteallInputsModify.insets = new Insets(0, 0, 5, 0);
@@ -499,6 +541,7 @@ public class GUIFinanceManagement implements ActionListener {
 		scrollPane_2.setViewportView(listbillModify);
 		
 		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBox_3 = new GridBagConstraints();
 		gbc_comboBox_3.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_3.insets = new Insets(0, 0, 5, 5);
@@ -507,6 +550,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(comboBox_3, gbc_comboBox_3);
 		
 		textField_7 = new JTextField();
+		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_7.setColumns(10);
 		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
 		gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
@@ -516,6 +560,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(textField_7, gbc_textField_7);
 		
 		JButton btnSearchBillModify = new JButton("Rechnung suchen");
+		btnSearchBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnSearchBillModify = new GridBagConstraints();
 		gbc_btnSearchBillModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnSearchBillModify.gridx = 1;
@@ -543,9 +588,11 @@ public class GUIFinanceManagement implements ActionListener {
 		paneldeleteBill.add(scrollPanedeletePerson, gbc_scrollPanedeletePerson);
 		
 		JList listbillDelete = new JList();
+		listbillDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		scrollPanedeletePerson.setViewportView(listbillDelete);
 		
 		JComboBox comboBoxdeleteBillSearch = new JComboBox();
+		comboBoxdeleteBillSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxdeleteBillSearch.setModel(new DefaultComboBoxModel(new String[] {"Name", "Datum", "Status"}));
 		GridBagConstraints gbc_comboBoxdeleteBillSearch = new GridBagConstraints();
 		gbc_comboBoxdeleteBillSearch.insets = new Insets(0, 0, 5, 5);
@@ -555,6 +602,7 @@ public class GUIFinanceManagement implements ActionListener {
 		paneldeleteBill.add(comboBoxdeleteBillSearch, gbc_comboBoxdeleteBillSearch);
 		
 		textFielddeleteBillSearch = new JTextField();
+		textFielddeleteBillSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFielddeleteBillSearch = new GridBagConstraints();
 		gbc_textFielddeleteBillSearch.gridwidth = 2;
 		gbc_textFielddeleteBillSearch.insets = new Insets(0, 0, 5, 0);
@@ -565,6 +613,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textFielddeleteBillSearch.setColumns(10);
 		
 		JButton btndeleteBillSearch = new JButton("Suchen");
+		btndeleteBillSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteBillSearch = new GridBagConstraints();
 		gbc_btndeleteBillSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteBillSearch.gridwidth = 2;
@@ -574,6 +623,7 @@ public class GUIFinanceManagement implements ActionListener {
 		paneldeleteBill.add(btndeleteBillSearch, gbc_btndeleteBillSearch);
 		
 		JButton btndeleteBill = new JButton("Rechnung löschen");
+		btndeleteBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteBill = new GridBagConstraints();
 		gbc_btndeleteBill.gridwidth = 2;
 		gbc_btndeleteBill.fill = GridBagConstraints.HORIZONTAL;
@@ -607,6 +657,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelJarManagement.setLayout(gbl_panelJarManagement);
 		
 		JLabel lbljarName = new JLabel("Topfname");
+		lbljarName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbljarName = new GridBagConstraints();
 		gbc_lbljarName.gridwidth = 2;
 		gbc_lbljarName.fill = GridBagConstraints.HORIZONTAL;
@@ -616,6 +667,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelJarManagement.add(lbljarName, gbc_lbljarName);
 		
 		textFieldjarName = new JTextField();
+		textFieldjarName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldjarName = new GridBagConstraints();
 		gbc_textFieldjarName.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldjarName.fill = GridBagConstraints.HORIZONTAL;
@@ -625,6 +677,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldjarName.setColumns(10);
 		
 		JLabel lbljarNameModify = new JLabel("Topfname");
+		lbljarNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbljarNameModify = new GridBagConstraints();
 		gbc_lbljarNameModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lbljarNameModify.gridx = 3;
@@ -632,6 +685,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelJarManagement.add(lbljarNameModify, gbc_lbljarNameModify);
 		
 		textFieldjarNameModify = new JTextField();
+		textFieldjarNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldjarNameModify = new GridBagConstraints();
 		gbc_textFieldjarNameModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldjarNameModify.fill = GridBagConstraints.HORIZONTAL;
@@ -641,6 +695,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldjarNameModify.setColumns(10);
 		
 		JLabel lbljarActualStock = new JLabel("Ist-Bestand");
+		lbljarActualStock.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbljarActualStock = new GridBagConstraints();
 		gbc_lbljarActualStock.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lbljarActualStock.gridwidth = 2;
@@ -650,6 +705,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelJarManagement.add(lbljarActualStock, gbc_lbljarActualStock);
 		
 		textFieldjarActualStock = new JTextField();
+		textFieldjarActualStock.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldjarActualStock = new GridBagConstraints();
 		gbc_textFieldjarActualStock.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldjarActualStock.fill = GridBagConstraints.HORIZONTAL;
@@ -659,6 +715,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldjarActualStock.setColumns(10);
 		
 		JLabel lbljarActualStockModify = new JLabel("Ist-Bestand");
+		lbljarActualStockModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbljarActualStockModify = new GridBagConstraints();
 		gbc_lbljarActualStockModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lbljarActualStockModify.gridx = 3;
@@ -666,6 +723,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelJarManagement.add(lbljarActualStockModify, gbc_lbljarActualStockModify);
 		
 		textFieldjarActualStockModify = new JTextField();
+		textFieldjarActualStockModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldjarActualStockModify = new GridBagConstraints();
 		gbc_textFieldjarActualStockModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldjarActualStockModify.fill = GridBagConstraints.HORIZONTAL;
@@ -675,6 +733,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldjarActualStockModify.setColumns(10);
 		
 		JLabel lbljarEstimatedStock = new JLabel("Soll-Bestand");
+		lbljarEstimatedStock.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbljarEstimatedStock = new GridBagConstraints();
 		gbc_lbljarEstimatedStock.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lbljarEstimatedStock.insets = new Insets(0, 0, 5, 5);
@@ -683,6 +742,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelJarManagement.add(lbljarEstimatedStock, gbc_lbljarEstimatedStock);
 		
 		textFieldjarEstimatedStock = new JTextField();
+		textFieldjarEstimatedStock.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldjarEstimatedStock = new GridBagConstraints();
 		gbc_textFieldjarEstimatedStock.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldjarEstimatedStock.fill = GridBagConstraints.HORIZONTAL;
@@ -692,6 +752,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldjarEstimatedStock.setColumns(10);
 		
 		JLabel lbljarEstimatedStockModify = new JLabel("Soll-Bestand");
+		lbljarEstimatedStockModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbljarEstimatedStockModify = new GridBagConstraints();
 		gbc_lbljarEstimatedStockModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lbljarEstimatedStockModify.gridx = 3;
@@ -699,6 +760,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelJarManagement.add(lbljarEstimatedStockModify, gbc_lbljarEstimatedStockModify);
 		
 		textFieldjarEstimatedStockModify = new JTextField();
+		textFieldjarEstimatedStockModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldjarEstimatedStockModify = new GridBagConstraints();
 		gbc_textFieldjarEstimatedStockModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldjarEstimatedStockModify.fill = GridBagConstraints.HORIZONTAL;
@@ -708,6 +770,7 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldjarEstimatedStockModify.setColumns(10);
 		
 		JButton btnaddJar = new JButton("Topf hinzufügen");
+		btnaddJar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnaddJar = new GridBagConstraints();
 		gbc_btnaddJar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnaddJar.fill = GridBagConstraints.HORIZONTAL;
@@ -716,6 +779,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelJarManagement.add(btnaddJar, gbc_btnaddJar);
 		
 		JButton btnjarSaveChanges = new JButton("Änderungen speichern");
+		btnjarSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnjarSaveChanges = new GridBagConstraints();
 		gbc_btnjarSaveChanges.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnjarSaveChanges.insets = new Insets(0, 0, 5, 0);
@@ -724,6 +788,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelJarManagement.add(btnjarSaveChanges, gbc_btnjarSaveChanges);
 		
 		JButton btnjarClearInputs = new JButton("Eingabe löschen");
+		btnjarClearInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnjarClearInputs = new GridBagConstraints();
 		gbc_btnjarClearInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnjarClearInputs.insets = new Insets(0, 0, 5, 5);
@@ -743,9 +808,11 @@ public class GUIFinanceManagement implements ActionListener {
 		panelJarManagement.add(scrollPanejar, gbc_scrollPanejar);
 		
 		JList listjar = new JList();
+		listjar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		scrollPanejar.setViewportView(listjar);
 		
 		JButton btnjarDelete = new JButton("Topf löschen");
+		btnjarDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnjarDelete = new GridBagConstraints();
 		gbc_btnjarDelete.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnjarDelete.gridwidth = 6;
@@ -763,6 +830,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.setLayout(gbl_panelcashRegisterManagement);
 		
 		JLabel lblcashRegisterName = new JLabel("Kassenname");
+		lblcashRegisterName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblcashRegisterName = new GridBagConstraints();
 		gbc_lblcashRegisterName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblcashRegisterName.gridwidth = 2;
@@ -772,6 +840,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(lblcashRegisterName, gbc_lblcashRegisterName);
 		
 		textFieldcashRegisterName = new JTextField();
+		textFieldcashRegisterName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldcashRegisterName.setColumns(10);
 		GridBagConstraints gbc_textFieldcashRegisterName = new GridBagConstraints();
 		gbc_textFieldcashRegisterName.fill = GridBagConstraints.HORIZONTAL;
@@ -781,6 +850,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(textFieldcashRegisterName, gbc_textFieldcashRegisterName);
 		
 		JLabel lblcashRegisterNameModify = new JLabel("Kassenname");
+		lblcashRegisterNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblcashRegisterNameModify = new GridBagConstraints();
 		gbc_lblcashRegisterNameModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblcashRegisterNameModify.gridx = 3;
@@ -788,6 +858,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(lblcashRegisterNameModify, gbc_lblcashRegisterNameModify);
 		
 		textFieldCashRegisterNameModify = new JTextField();
+		textFieldCashRegisterNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldCashRegisterNameModify.setColumns(10);
 		GridBagConstraints gbc_textFieldCashRegisterNameModify = new GridBagConstraints();
 		gbc_textFieldCashRegisterNameModify.fill = GridBagConstraints.HORIZONTAL;
@@ -797,6 +868,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(textFieldCashRegisterNameModify, gbc_textFieldCashRegisterNameModify);
 		
 		JLabel lblcashRegisterActualStock = new JLabel("Ist-Bestand");
+		lblcashRegisterActualStock.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblcashRegisterActualStock = new GridBagConstraints();
 		gbc_lblcashRegisterActualStock.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblcashRegisterActualStock.gridwidth = 2;
@@ -806,6 +878,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(lblcashRegisterActualStock, gbc_lblcashRegisterActualStock);
 		
 		textFieldcashRegisterActualStock = new JTextField();
+		textFieldcashRegisterActualStock.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldcashRegisterActualStock.setColumns(10);
 		GridBagConstraints gbc_textFieldcashRegisterActualStock = new GridBagConstraints();
 		gbc_textFieldcashRegisterActualStock.fill = GridBagConstraints.HORIZONTAL;
@@ -815,6 +888,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(textFieldcashRegisterActualStock, gbc_textFieldcashRegisterActualStock);
 		
 		JLabel lblcashRegisterActualStockModify = new JLabel("Ist-Bestand");
+		lblcashRegisterActualStockModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblcashRegisterActualStockModify = new GridBagConstraints();
 		gbc_lblcashRegisterActualStockModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblcashRegisterActualStockModify.gridx = 3;
@@ -822,6 +896,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(lblcashRegisterActualStockModify, gbc_lblcashRegisterActualStockModify);
 		
 		textFieldcashRegisterActualStockModify = new JTextField();
+		textFieldcashRegisterActualStockModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldcashRegisterActualStockModify.setColumns(10);
 		GridBagConstraints gbc_textFieldcashRegisterActualStockModify = new GridBagConstraints();
 		gbc_textFieldcashRegisterActualStockModify.fill = GridBagConstraints.HORIZONTAL;
@@ -831,6 +906,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(textFieldcashRegisterActualStockModify, gbc_textFieldcashRegisterActualStockModify);
 		
 		JLabel lblcashRegisterEstimatedStock = new JLabel("Soll-Bestand");
+		lblcashRegisterEstimatedStock.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblcashRegisterEstimatedStock = new GridBagConstraints();
 		gbc_lblcashRegisterEstimatedStock.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblcashRegisterEstimatedStock.insets = new Insets(0, 0, 5, 5);
@@ -839,6 +915,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(lblcashRegisterEstimatedStock, gbc_lblcashRegisterEstimatedStock);
 		
 		textFieldcashRegisterEstimatedStock = new JTextField();
+		textFieldcashRegisterEstimatedStock.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldcashRegisterEstimatedStock.setColumns(10);
 		GridBagConstraints gbc_textFieldcashRegisterEstimatedStock = new GridBagConstraints();
 		gbc_textFieldcashRegisterEstimatedStock.fill = GridBagConstraints.HORIZONTAL;
@@ -848,6 +925,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(textFieldcashRegisterEstimatedStock, gbc_textFieldcashRegisterEstimatedStock);
 		
 		JLabel lblcashRegisterEstimatedStockModify = new JLabel("Soll-Bestand");
+		lblcashRegisterEstimatedStockModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblcashRegisterEstimatedStockModify = new GridBagConstraints();
 		gbc_lblcashRegisterEstimatedStockModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblcashRegisterEstimatedStockModify.gridx = 3;
@@ -855,6 +933,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(lblcashRegisterEstimatedStockModify, gbc_lblcashRegisterEstimatedStockModify);
 		
 		textFieldcashRegisterEstimatedStockModify = new JTextField();
+		textFieldcashRegisterEstimatedStockModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldcashRegisterEstimatedStockModify.setColumns(10);
 		GridBagConstraints gbc_textFieldcashRegisterEstimatedStockModify = new GridBagConstraints();
 		gbc_textFieldcashRegisterEstimatedStockModify.fill = GridBagConstraints.HORIZONTAL;
@@ -864,6 +943,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(textFieldcashRegisterEstimatedStockModify, gbc_textFieldcashRegisterEstimatedStockModify);
 		
 		JButton btnaddcashRegister = new JButton("Kasse hinzufügen");
+		btnaddcashRegister.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnaddcashRegister = new GridBagConstraints();
 		gbc_btnaddcashRegister.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddcashRegister.insets = new Insets(0, 0, 5, 5);
@@ -872,6 +952,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(btnaddcashRegister, gbc_btnaddcashRegister);
 		
 		JButton btncashRegisterSaveChanges = new JButton("Änderungen speichern");
+		btncashRegisterSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btncashRegisterSaveChanges = new GridBagConstraints();
 		gbc_btncashRegisterSaveChanges.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btncashRegisterSaveChanges.insets = new Insets(0, 0, 5, 0);
@@ -880,6 +961,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(btncashRegisterSaveChanges, gbc_btncashRegisterSaveChanges);
 		
 		JButton btncashRegisterClearInputs = new JButton("Felder zurücksetzen");
+		btncashRegisterClearInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btncashRegisterClearInputs = new GridBagConstraints();
 		gbc_btncashRegisterClearInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btncashRegisterClearInputs.insets = new Insets(0, 0, 5, 5);
@@ -898,24 +980,28 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_scrollPane.gridy = 6;
 		panelcashRegisterManagement.add(scrollPane, gbc_scrollPane);
 		
-		JLabel lblcashRegisterTypSearch = new JLabel("Typ");
-		GridBagConstraints gbc_lblcashRegisterTypSearch = new GridBagConstraints();
-		gbc_lblcashRegisterTypSearch.insets = new Insets(0, 0, 5, 5);
-		gbc_lblcashRegisterTypSearch.gridx = 0;
-		gbc_lblcashRegisterTypSearch.gridy = 7;
-		panelcashRegisterManagement.add(lblcashRegisterTypSearch, gbc_lblcashRegisterTypSearch);
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
+		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox_1.gridx = 0;
+		gbc_comboBox_1.gridy = 7;
+		panelcashRegisterManagement.add(comboBox_1, gbc_comboBox_1);
 		
-		JComboBox comboBoxcashRegisterTypSearch = new JComboBox();
-		comboBoxcashRegisterTypSearch.setModel(new DefaultComboBoxModel(new String[] {"Barkasse", "Konto", "Kostenstelle"}));
-		GridBagConstraints gbc_comboBoxcashRegisterTypSearch = new GridBagConstraints();
-		gbc_comboBoxcashRegisterTypSearch.gridwidth = 4;
-		gbc_comboBoxcashRegisterTypSearch.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBoxcashRegisterTypSearch.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxcashRegisterTypSearch.gridx = 2;
-		gbc_comboBoxcashRegisterTypSearch.gridy = 7;
-		panelcashRegisterManagement.add(comboBoxcashRegisterTypSearch, gbc_comboBoxcashRegisterTypSearch);
+		textField_1 = new JTextField();
+		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+		gbc_textField_1.gridwidth = 4;
+		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_1.gridx = 2;
+		gbc_textField_1.gridy = 7;
+		panelcashRegisterManagement.add(textField_1, gbc_textField_1);
+		textField_1.setColumns(10);
 		
 		JButton btncashRegisterDeleteSearch = new JButton("Suchen");
+		btncashRegisterDeleteSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btncashRegisterDeleteSearch = new GridBagConstraints();
 		gbc_btncashRegisterDeleteSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btncashRegisterDeleteSearch.gridwidth = 4;
@@ -925,6 +1011,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(btncashRegisterDeleteSearch, gbc_btncashRegisterDeleteSearch);
 		
 		JButton btncashRegisterDelete = new JButton("Kasse löschen");
+		btncashRegisterDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btncashRegisterDelete = new GridBagConstraints();
 		gbc_btncashRegisterDelete.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btncashRegisterDelete.gridwidth = 4;
@@ -936,24 +1023,30 @@ public class GUIFinanceManagement implements ActionListener {
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
 		
 		JMenu mnNewMenuOptions = new JMenu("Menü");
+		mnNewMenuOptions.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		menuBar.add(mnNewMenuOptions);
 		
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmen\u00FC");
+		mntmNewMenuItembacktoMain.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
 		mntmNewMenuItembacktoMain.addActionListener(this);
 		
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
+		mntmNewMenuItemlogOut.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
 		mntmNewMenuItemlogOut.addActionListener(this);
 		
 		JMenuItem mntmNewMenuItemcloseapplication = new JMenuItem("Anwendung verlassen");
+		mntmNewMenuItemcloseapplication.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemcloseapplication);
 		mntmNewMenuItembacktoMain.addActionListener(this);
 		
 		JMenu mnNewMenuhelpWindow = new JMenu("?");
+		mnNewMenuhelpWindow.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		menuBar.add(mnNewMenuhelpWindow);
 		
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
 		mntmNewMenuItemshowManual.addActionListener(this);
 		frmElabVerwaltungsprogramm.setVisible(true);
