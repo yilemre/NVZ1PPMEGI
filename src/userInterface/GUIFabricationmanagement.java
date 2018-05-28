@@ -68,7 +68,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().setLayout(gridBagLayout);
 
 		JLabel lblorderManagement = new JLabel("Auftragsverwaltung");
-		lblorderManagement.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblorderManagement.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_lblorderManagement = new GridBagConstraints();
 		gbc_lblorderManagement.insets = new Insets(0, 0, 5, 0);
 		gbc_lblorderManagement.gridx = 0;
@@ -76,6 +76,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(lblorderManagement, gbc_lblorderManagement);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
 		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
 		gbc_tabbedPane.gridx = 0;
@@ -101,6 +102,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(lblNewLabel, gbc_lblNewLabel);
 
 		JLabel lblorderTitel = new JLabel("Titel");
+		lblorderTitel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblorderTitel = new GridBagConstraints();
 		gbc_lblorderTitel.anchor = GridBagConstraints.EAST;
 		gbc_lblorderTitel.insets = new Insets(0, 0, 5, 5);
@@ -109,6 +111,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(lblorderTitel, gbc_lblorderTitel);
 
 		textFieldorderTitel = new JTextField();
+		textFieldorderTitel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldorderTitel = new GridBagConstraints();
 		gbc_textFieldorderTitel.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldorderTitel.fill = GridBagConstraints.HORIZONTAL;
@@ -118,6 +121,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		textFieldorderTitel.setColumns(10);
 
 		JLabel lblorderTyp = new JLabel("Auftragsart");
+		lblorderTyp.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblorderTyp = new GridBagConstraints();
 		gbc_lblorderTyp.anchor = GridBagConstraints.EAST;
 		gbc_lblorderTyp.insets = new Insets(0, 0, 5, 5);
@@ -126,6 +130,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(lblorderTyp, gbc_lblorderTyp);
 
 		JComboBox comboBoxorderTyp = new JComboBox();
+		comboBoxorderTyp.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxorderTyp.setModel(new DefaultComboBoxModel(new String[] { "Leiterplatte", "3D-Druck", "Sonstiges" }));
 		GridBagConstraints gbc_comboBoxorderTyp = new GridBagConstraints();
 		gbc_comboBoxorderTyp.insets = new Insets(0, 0, 5, 0);
@@ -135,6 +140,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(comboBoxorderTyp, gbc_comboBoxorderTyp);
 
 		JLabel lblnoteOther = new JLabel("Notiz zu sonstiges");
+		lblnoteOther.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblnoteOther = new GridBagConstraints();
 		gbc_lblnoteOther.anchor = GridBagConstraints.EAST;
 		gbc_lblnoteOther.insets = new Insets(0, 0, 5, 5);
@@ -143,6 +149,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(lblnoteOther, gbc_lblnoteOther);
 
 		textFieldnoteOther = new JTextField();
+		textFieldnoteOther.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldnoteOther = new GridBagConstraints();
 		gbc_textFieldnoteOther.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldnoteOther.fill = GridBagConstraints.HORIZONTAL;
@@ -152,6 +159,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		textFieldnoteOther.setColumns(10);
 		
 		JLabel lblfilePath = new JLabel("Dateipfad");
+		lblfilePath.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblfilePath = new GridBagConstraints();
 		gbc_lblfilePath.anchor = GridBagConstraints.EAST;
 		gbc_lblfilePath.insets = new Insets(0, 0, 5, 5);
@@ -160,6 +168,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(lblfilePath, gbc_lblfilePath);
 		
 		textFieldfilePath = new JTextField();
+		textFieldfilePath.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldfilePath = new GridBagConstraints();
 		gbc_textFieldfilePath.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldfilePath.fill = GridBagConstraints.HORIZONTAL;
@@ -169,6 +178,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		textFieldfilePath.setColumns(10);
 
 		JLabel lblpredictedCost = new JLabel("prognostizierte Kosten");
+		lblpredictedCost.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblpredictedCost = new GridBagConstraints();
 		gbc_lblpredictedCost.anchor = GridBagConstraints.EAST;
 		gbc_lblpredictedCost.insets = new Insets(0, 0, 5, 5);
@@ -177,6 +187,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(lblpredictedCost, gbc_lblpredictedCost);
 
 		textFieldpredictedCosts = new JTextField();
+		textFieldpredictedCosts.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldpredictedCosts = new GridBagConstraints();
 		gbc_textFieldpredictedCosts.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldpredictedCosts.fill = GridBagConstraints.HORIZONTAL;
@@ -186,6 +197,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		textFieldpredictedCosts.setColumns(10);
 
 		JLabel lblactualCosts = new JLabel("reele Kosten");
+		lblactualCosts.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblactualCosts = new GridBagConstraints();
 		gbc_lblactualCosts.anchor = GridBagConstraints.EAST;
 		gbc_lblactualCosts.insets = new Insets(0, 0, 5, 5);
@@ -194,6 +206,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(lblactualCosts, gbc_lblactualCosts);
 
 		textFieldactualCosts = new JTextField();
+		textFieldactualCosts.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldactualCosts.setEditable(false);
 		GridBagConstraints gbc_textFieldactualCosts = new GridBagConstraints();
 		gbc_textFieldactualCosts.insets = new Insets(0, 0, 5, 0);
@@ -204,6 +217,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		textFieldactualCosts.setColumns(10);
 
 		JLabel lblresponsiblePerson = new JLabel("Verantwortlicher");
+		lblresponsiblePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblresponsiblePerson.setToolTipText("");
 		GridBagConstraints gbc_lblresponsiblePerson = new GridBagConstraints();
 		gbc_lblresponsiblePerson.anchor = GridBagConstraints.EAST;
@@ -213,6 +227,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(lblresponsiblePerson, gbc_lblresponsiblePerson);
 
 		JComboBox comboBoxresponsible = new JComboBox();
+		comboBoxresponsible.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxresponsible = new GridBagConstraints();
 		gbc_comboBoxresponsible.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxresponsible.fill = GridBagConstraints.HORIZONTAL;
@@ -221,6 +236,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(comboBoxresponsible, gbc_comboBoxresponsible);
 
 		JLabel lblstandinResponsible = new JLabel("Vertretung");
+		lblstandinResponsible.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblstandinResponsible = new GridBagConstraints();
 		gbc_lblstandinResponsible.anchor = GridBagConstraints.EAST;
 		gbc_lblstandinResponsible.insets = new Insets(0, 0, 5, 5);
@@ -229,6 +245,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(lblstandinResponsible, gbc_lblstandinResponsible);
 
 		JComboBox comboBoxstandinResponsible = new JComboBox();
+		comboBoxstandinResponsible.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxstandinResponsible = new GridBagConstraints();
 		gbc_comboBoxstandinResponsible.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxstandinResponsible.fill = GridBagConstraints.HORIZONTAL;
@@ -237,6 +254,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(comboBoxstandinResponsible, gbc_comboBoxstandinResponsible);
 
 		JLabel lblorderStatus = new JLabel("Auftragsstatus");
+		lblorderStatus.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblorderStatus = new GridBagConstraints();
 		gbc_lblorderStatus.anchor = GridBagConstraints.EAST;
 		gbc_lblorderStatus.insets = new Insets(0, 0, 5, 5);
@@ -245,6 +263,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(lblorderStatus, gbc_lblorderStatus);
 
 		JComboBox comboBoxorderStatus = new JComboBox();
+		comboBoxorderStatus.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxorderStatus.setModel(
 				new DefaultComboBoxModel(new String[] { "Angenommen", "Gefertigt", "Kosten kalkuliert", "Abgeholt",
 						"Abgerechnet", "Warten auf Material", "Fertigung unterbrochen/defekt", "Rechnung erzeugt" }));
@@ -256,6 +275,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(comboBoxorderStatus, gbc_comboBoxorderStatus);
 
 		JButton btnaddOrder = new JButton("Auftrag hinzuf\u00FCgen");
+		btnaddOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnaddOrder.addActionListener(this);
 		GridBagConstraints gbc_btnaddOrder = new GridBagConstraints();
 		gbc_btnaddOrder.fill = GridBagConstraints.HORIZONTAL;
@@ -265,6 +285,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(btnaddOrder, gbc_btnaddOrder);
 
 		JButton btndeleteallInputs = new JButton("Eingaben l\u00F6schen");
+		btndeleteallInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btndeleteallInputs.addActionListener(this);
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
@@ -292,6 +313,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.setLayout(gbl_panelmodify);
 
 		JLabel lblorderTitelModify = new JLabel("Titel");
+		lblorderTitelModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblorderTitelModify = new GridBagConstraints();
 		gbc_lblorderTitelModify.gridwidth = 2;
 		gbc_lblorderTitelModify.anchor = GridBagConstraints.EAST;
@@ -301,6 +323,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(lblorderTitelModify, gbc_lblorderTitelModify);
 
 		textFieldorderTitelModify = new JTextField();
+		textFieldorderTitelModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldorderTitelModify = new GridBagConstraints();
 		gbc_textFieldorderTitelModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldorderTitelModify.fill = GridBagConstraints.HORIZONTAL;
@@ -310,6 +333,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		textFieldorderTitelModify.setColumns(10);
 
 		JLabel lblorderTypModify = new JLabel("Auftragsart");
+		lblorderTypModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblorderTypModify = new GridBagConstraints();
 		gbc_lblorderTypModify.gridwidth = 2;
 		gbc_lblorderTypModify.anchor = GridBagConstraints.EAST;
@@ -319,6 +343,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(lblorderTypModify, gbc_lblorderTypModify);
 
 		JComboBox comboBoxtypModify = new JComboBox();
+		comboBoxtypModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxtypModify.setModel(new DefaultComboBoxModel(new String[] { "Leiterplatte", "3D-Druck", "Sonstiges" }));
 		GridBagConstraints gbc_comboBoxtypModify = new GridBagConstraints();
 		gbc_comboBoxtypModify.insets = new Insets(0, 0, 5, 0);
@@ -328,6 +353,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(comboBoxtypModify, gbc_comboBoxtypModify);
 
 		JLabel lblnoteOtherModify = new JLabel("Notiz zu sonstiges");
+		lblnoteOtherModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblnoteOtherModify = new GridBagConstraints();
 		gbc_lblnoteOtherModify.gridwidth = 2;
 		gbc_lblnoteOtherModify.anchor = GridBagConstraints.EAST;
@@ -337,6 +363,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(lblnoteOtherModify, gbc_lblnoteOtherModify);
 
 		textFieldnoteOtherModify = new JTextField();
+		textFieldnoteOtherModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldnoteOtherModify = new GridBagConstraints();
 		gbc_textFieldnoteOtherModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldnoteOtherModify.fill = GridBagConstraints.HORIZONTAL;
@@ -346,6 +373,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		textFieldnoteOtherModify.setColumns(10);
 		
 		JLabel lblfilePathModify = new JLabel("Dateipfad");
+		lblfilePathModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblfilePathModify = new GridBagConstraints();
 		gbc_lblfilePathModify.anchor = GridBagConstraints.EAST;
 		gbc_lblfilePathModify.gridwidth = 2;
@@ -355,6 +383,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(lblfilePathModify, gbc_lblfilePathModify);
 		
 		textFieldfilePathModify = new JTextField();
+		textFieldfilePathModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldfilePathModify.setText("");
 		GridBagConstraints gbc_textFieldfilePathModify = new GridBagConstraints();
 		gbc_textFieldfilePathModify.insets = new Insets(0, 0, 5, 0);
@@ -365,6 +394,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		textFieldfilePathModify.setColumns(10);
 
 		JLabel lblpredictedCostsModify = new JLabel("prognostizierte Kosten");
+		lblpredictedCostsModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblpredictedCostsModify = new GridBagConstraints();
 		gbc_lblpredictedCostsModify.gridwidth = 2;
 		gbc_lblpredictedCostsModify.anchor = GridBagConstraints.EAST;
@@ -374,6 +404,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(lblpredictedCostsModify, gbc_lblpredictedCostsModify);
 
 		textFieldpredictedCostsModify = new JTextField();
+		textFieldpredictedCostsModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldpredictedCostsModify = new GridBagConstraints();
 		gbc_textFieldpredictedCostsModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldpredictedCostsModify.fill = GridBagConstraints.HORIZONTAL;
@@ -383,6 +414,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		textFieldpredictedCostsModify.setColumns(10);
 
 		JLabel lblactualCostsModify = new JLabel("reelle Kosten");
+		lblactualCostsModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblactualCostsModify = new GridBagConstraints();
 		gbc_lblactualCostsModify.gridwidth = 2;
 		gbc_lblactualCostsModify.anchor = GridBagConstraints.EAST;
@@ -402,6 +434,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		textFieldactualCostsModify.setColumns(10);
 
 		JLabel lblresponsiblePersonModify = new JLabel("Verantwortlicher");
+		lblresponsiblePersonModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblresponsiblePersonModify = new GridBagConstraints();
 		gbc_lblresponsiblePersonModify.gridwidth = 2;
 		gbc_lblresponsiblePersonModify.anchor = GridBagConstraints.EAST;
@@ -411,6 +444,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(lblresponsiblePersonModify, gbc_lblresponsiblePersonModify);
 
 		JComboBox comboBoxresponsiblePersonModify = new JComboBox();
+		comboBoxresponsiblePersonModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxresponsiblePersonModify = new GridBagConstraints();
 		gbc_comboBoxresponsiblePersonModify.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxresponsiblePersonModify.fill = GridBagConstraints.HORIZONTAL;
@@ -419,6 +453,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(comboBoxresponsiblePersonModify, gbc_comboBoxresponsiblePersonModify);
 
 		JLabel lblstandinresponsiblePersonModify = new JLabel("Vertretung");
+		lblstandinresponsiblePersonModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblstandinresponsiblePersonModify = new GridBagConstraints();
 		gbc_lblstandinresponsiblePersonModify.gridwidth = 2;
 		gbc_lblstandinresponsiblePersonModify.anchor = GridBagConstraints.EAST;
@@ -428,6 +463,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(lblstandinresponsiblePersonModify, gbc_lblstandinresponsiblePersonModify);
 
 		JComboBox comboBoxstandinresponsiblePersonModify = new JComboBox();
+		comboBoxstandinresponsiblePersonModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxstandinresponsiblePersonModify = new GridBagConstraints();
 		gbc_comboBoxstandinresponsiblePersonModify.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxstandinresponsiblePersonModify.fill = GridBagConstraints.HORIZONTAL;
@@ -436,6 +472,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(comboBoxstandinresponsiblePersonModify, gbc_comboBoxstandinresponsiblePersonModify);
 
 		JLabel lblmodifyOrderStatus = new JLabel("Auftragsstatus");
+		lblmodifyOrderStatus.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblmodifyOrderStatus = new GridBagConstraints();
 		gbc_lblmodifyOrderStatus.gridwidth = 2;
 		gbc_lblmodifyOrderStatus.anchor = GridBagConstraints.EAST;
@@ -445,6 +482,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(lblmodifyOrderStatus, gbc_lblmodifyOrderStatus);
 
 		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBox.setModel(
 				new DefaultComboBoxModel(new String[] { "Angenommen", "Gefertigt", "Kosten kalkuliert", "Abgeholt",
 						"Abgerechnet", "Warten auf Material", "Fertigung unterbrochen/defekt", "Rechnung erzeugt" }));
@@ -456,6 +494,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(comboBox, gbc_comboBox);
 
 		JButton btnsaveModifiedValues = new JButton("\u00C4nderungen speichern");
+		btnsaveModifiedValues.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnsaveModifiedValues.addActionListener(this);
 		GridBagConstraints gbc_btnsaveModifiedValues = new GridBagConstraints();
 		gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
@@ -491,6 +530,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		scrollPanemodifyPerson.setViewportView(listPerson);
 
 		JComboBox comboBoxorderSearchModify = new JComboBox();
+		comboBoxorderSearchModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxorderSearchModify.setToolTipText("Bitte Suchkategorie auswählen");
 		comboBoxorderSearchModify.setModel(new DefaultComboBoxModel(new String[] { "Titel", "Auftragsart", "Status" }));
 		GridBagConstraints gbc_comboBoxorderSearchModify = new GridBagConstraints();
@@ -502,6 +542,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(comboBoxorderSearchModify, gbc_comboBoxorderSearchModify);
 
 		textFieldorderSearchModify = new JTextField();
+		textFieldorderSearchModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldorderSearchModify = new GridBagConstraints();
 		gbc_textFieldorderSearchModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldorderSearchModify.fill = GridBagConstraints.HORIZONTAL;
@@ -511,6 +552,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		textFieldorderSearchModify.setColumns(10);
 
 		JButton btnorderSearchModify = new JButton("Auftrag suchen");
+		btnorderSearchModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnorderSearchModify.addActionListener(this);
 		GridBagConstraints gbc_btnorderSearchModify = new GridBagConstraints();
 		gbc_btnorderSearchModify.fill = GridBagConstraints.HORIZONTAL;
@@ -543,6 +585,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		scrollPanedeletePerson.setViewportView(listdeletePerson);
 
 		JComboBox comboBoxorderSearchDelete = new JComboBox();
+		comboBoxorderSearchDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxorderSearchDelete.setModel(new DefaultComboBoxModel(new String[] { "Titel", "Auftragsart", "Status" }));
 		GridBagConstraints gbc_comboBoxorderSearchDelete = new GridBagConstraints();
 		gbc_comboBoxorderSearchDelete.gridwidth = 2;
@@ -553,6 +596,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneldeleteOrder.add(comboBoxorderSearchDelete, gbc_comboBoxorderSearchDelete);
 
 		textFieldorderSearchDelete = new JTextField();
+		textFieldorderSearchDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldorderSearchDelete = new GridBagConstraints();
 		gbc_textFieldorderSearchDelete.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldorderSearchDelete.fill = GridBagConstraints.HORIZONTAL;
@@ -562,6 +606,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		textFieldorderSearchDelete.setColumns(10);
 
 		JButton btnorderSearchDelete = new JButton("Suchen");
+		btnorderSearchDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnorderSearchDelete.addActionListener(this);
 		GridBagConstraints gbc_btnorderSearchDelete = new GridBagConstraints();
 		gbc_btnorderSearchDelete.fill = GridBagConstraints.HORIZONTAL;
@@ -571,6 +616,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneldeleteOrder.add(btnorderSearchDelete, gbc_btnorderSearchDelete);
 
 		JButton btndeleteOrder = new JButton("Auftrag l\u00F6schen");
+		btndeleteOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btndeleteOrder.addActionListener(this);
 		GridBagConstraints gbc_btndeleteOrder = new GridBagConstraints();
 		gbc_btndeleteOrder.fill = GridBagConstraints.HORIZONTAL;
@@ -581,22 +627,27 @@ public class GUIFabricationmanagement implements ActionListener {
 		JMenuBar menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
 
-		JMenu mnNewMenuOptions = new JMenu("Men�");
+		JMenu mnNewMenuOptions = new JMenu("Menü");
+		mnNewMenuOptions.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		menuBar.add(mnNewMenuOptions);
 
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmen\u00FC");
+		mntmNewMenuItembacktoMain.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
 		mntmNewMenuItembacktoMain.addActionListener(this);
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
+		mntmNewMenuItemlogOut.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
 		mntmNewMenuItemlogOut.addActionListener(this);
 		JMenuItem mntmNewMenuItemcloseapplication = new JMenuItem("Anwendung verlassen");
+		mntmNewMenuItemcloseapplication.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemcloseapplication);
 		mntmNewMenuItemcloseapplication.addActionListener(this);
 		JMenu mnNewMenuhelpWindow = new JMenu("?");
 		menuBar.add(mnNewMenuhelpWindow);
 
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
 		mntmNewMenuItemshowManual.addActionListener(this);
 		frmElabVerwaltungsprogramm.setVisible(true);
