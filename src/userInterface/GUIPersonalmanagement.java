@@ -652,11 +652,13 @@ frmElabVerwaltungsprogramm.setVisible(true);
 		
 		if (command=="Person hinzuf\u00FCgen") {
 		    //Emre begin
+		    
 		    try { 
+			System.out.println("test");
 			PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
-			Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
+				Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
 		    } 
-		    catch (Exception a) {
+		    catch (Exception a) {			
 			a.getMessage();
 		    }
 		    //Emre end
