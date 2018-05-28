@@ -36,28 +36,18 @@ import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.ListSelectionModel;
+import javax.swing.JFormattedTextField;
 
 public class GUIFinanceManagement implements ActionListener {
 
 	private JFrame frmElabVerwaltungsprogramm;
-	private JTextField textFieldname;
-	private JTextField textFieldlastName;
-	private JTextField textFieldStreet;
+	private JTextField textFieldbillName;
+	private JTextField textFieldrelatedOrder;
 	private JTextField textFieldhouseNumber;
-	private JTextField textFieldzipCode;
-	private JTextField textFieldeMail;
-	private JTextField textFielduserName;
-	private JPasswordField passwordField;
-	private JTextField textFieldnameModify;
-	private JTextField textFieldlastNameModify;
-	private JTextField textFieldstreetModify;
-	private JTextField textFieldhouseNumberModify;
-	private JTextField textFieldzipCodeModify;
-	private JTextField textFieldeMailModify;
-	private JTextField textFielduserNameModify;
-	private JPasswordField passwordFieldModify;
+	private JTextField textFieldcustomerID;
+	private JTextField textresponsiblePerson;
 	private JTextField textFielddeleteBillSearch;
-	private JTextField textFieldsearchBillModify;
 	private JTextField textFieldjarName;
 	private JTextField textFieldjarActualStock;
 	private JTextField textFieldjarEstimatedStock;
@@ -70,6 +60,15 @@ public class GUIFinanceManagement implements ActionListener {
 	private JTextField textFieldcashRegisterActualStockModify;
 	private JTextField textFieldcashRegisterEstimatedStock;
 	private JTextField textFieldcashRegisterEstimatedStockModify;
+	private JTextField textField;
+	private JTextField textFieldrelatedJar;
+	private JTextField textFieldbillNameModify;
+	private JTextField textFieldrelatedOrderModify;
+	private JTextField textFieldsumBillModify;
+	private JTextField textFieldcustomerIDModify;
+	private JTextField textFieldrelatedPersonModify;
+	private JTextField textFieldrelatedJarModify;
+	private JTextField textField_7;
 
 	/**
 	 * Launch the application.
@@ -115,9 +114,9 @@ public class GUIFinanceManagement implements ActionListener {
 		tabbedPane.addTab("Rechnung erstellen", null, panelcreateBill, null);
 		GridBagLayout gbl_panelcreateBill = new GridBagLayout();
 		gbl_panelcreateBill.columnWidths = new int[]{0, 0, 0};
-		gbl_panelcreateBill.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panelcreateBill.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panelcreateBill.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelcreateBill.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panelcreateBill.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelcreateBill.setLayout(gbl_panelcreateBill);
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -128,64 +127,63 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_lblNewLabel.gridy = 0;
 		panelcreateBill.add(lblNewLabel, gbc_lblNewLabel);
 		
-		JLabel lblname = new JLabel("Vorname");
-		GridBagConstraints gbc_lblname = new GridBagConstraints();
-		gbc_lblname.anchor = GridBagConstraints.EAST;
-		gbc_lblname.insets = new Insets(0, 0, 5, 5);
-		gbc_lblname.gridx = 0;
-		gbc_lblname.gridy = 1;
-		panelcreateBill.add(lblname, gbc_lblname);
+		JLabel lblbillName = new JLabel("Rechnungsname");
+		GridBagConstraints gbc_lblbillName = new GridBagConstraints();
+		gbc_lblbillName.anchor = GridBagConstraints.EAST;
+		gbc_lblbillName.insets = new Insets(0, 0, 5, 5);
+		gbc_lblbillName.gridx = 0;
+		gbc_lblbillName.gridy = 1;
+		panelcreateBill.add(lblbillName, gbc_lblbillName);
 		
-		textFieldname = new JTextField();
-		GridBagConstraints gbc_textFieldname = new GridBagConstraints();
-		gbc_textFieldname.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldname.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldname.gridx = 1;
-		gbc_textFieldname.gridy = 1;
-		panelcreateBill.add(textFieldname, gbc_textFieldname);
-		textFieldname.setColumns(10);
+		textFieldbillName = new JTextField();
+		GridBagConstraints gbc_textFieldbillName = new GridBagConstraints();
+		gbc_textFieldbillName.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldbillName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldbillName.gridx = 1;
+		gbc_textFieldbillName.gridy = 1;
+		panelcreateBill.add(textFieldbillName, gbc_textFieldbillName);
+		textFieldbillName.setColumns(10);
 		
-		JLabel lbllastName = new JLabel("Nachname");
-		GridBagConstraints gbc_lbllastName = new GridBagConstraints();
-		gbc_lbllastName.anchor = GridBagConstraints.EAST;
-		gbc_lbllastName.insets = new Insets(0, 0, 5, 5);
-		gbc_lbllastName.gridx = 0;
-		gbc_lbllastName.gridy = 2;
-		panelcreateBill.add(lbllastName, gbc_lbllastName);
+		JLabel lblrelatedOrder = new JLabel("dazugehöriger Auftrag");
+		GridBagConstraints gbc_lblrelatedOrder = new GridBagConstraints();
+		gbc_lblrelatedOrder.anchor = GridBagConstraints.EAST;
+		gbc_lblrelatedOrder.insets = new Insets(0, 0, 5, 5);
+		gbc_lblrelatedOrder.gridx = 0;
+		gbc_lblrelatedOrder.gridy = 2;
+		panelcreateBill.add(lblrelatedOrder, gbc_lblrelatedOrder);
 		
-		textFieldlastName = new JTextField();
-		GridBagConstraints gbc_textFieldlastName = new GridBagConstraints();
-		gbc_textFieldlastName.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldlastName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldlastName.gridx = 1;
-		gbc_textFieldlastName.gridy = 2;
-		panelcreateBill.add(textFieldlastName, gbc_textFieldlastName);
-		textFieldlastName.setColumns(10);
+		textFieldrelatedOrder = new JTextField();
+		GridBagConstraints gbc_textFieldrelatedOrder = new GridBagConstraints();
+		gbc_textFieldrelatedOrder.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldrelatedOrder.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldrelatedOrder.gridx = 1;
+		gbc_textFieldrelatedOrder.gridy = 2;
+		panelcreateBill.add(textFieldrelatedOrder, gbc_textFieldrelatedOrder);
+		textFieldrelatedOrder.setColumns(10);
 		
-		JLabel lblStreet = new JLabel("Stra\u00DFe");
-		GridBagConstraints gbc_lblStreet = new GridBagConstraints();
-		gbc_lblStreet.anchor = GridBagConstraints.EAST;
-		gbc_lblStreet.insets = new Insets(0, 0, 5, 5);
-		gbc_lblStreet.gridx = 0;
-		gbc_lblStreet.gridy = 3;
-		panelcreateBill.add(lblStreet, gbc_lblStreet);
+		JLabel lblpaymentTyp = new JLabel("Bezahlart");
+		GridBagConstraints gbc_lblpaymentTyp = new GridBagConstraints();
+		gbc_lblpaymentTyp.anchor = GridBagConstraints.EAST;
+		gbc_lblpaymentTyp.insets = new Insets(0, 0, 5, 5);
+		gbc_lblpaymentTyp.gridx = 0;
+		gbc_lblpaymentTyp.gridy = 3;
+		panelcreateBill.add(lblpaymentTyp, gbc_lblpaymentTyp);
 		
-		textFieldStreet = new JTextField();
-		GridBagConstraints gbc_textFieldStreet = new GridBagConstraints();
-		gbc_textFieldStreet.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldStreet.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldStreet.gridx = 1;
-		gbc_textFieldStreet.gridy = 3;
-		panelcreateBill.add(textFieldStreet, gbc_textFieldStreet);
-		textFieldStreet.setColumns(10);
+		JComboBox comboBoxpaymentTyp = new JComboBox();
+		GridBagConstraints gbc_comboBoxpaymentTyp = new GridBagConstraints();
+		gbc_comboBoxpaymentTyp.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxpaymentTyp.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxpaymentTyp.gridx = 1;
+		gbc_comboBoxpaymentTyp.gridy = 3;
+		panelcreateBill.add(comboBoxpaymentTyp, gbc_comboBoxpaymentTyp);
 		
-		JLabel lblhouseNumber = new JLabel("Hausnummer");
-		GridBagConstraints gbc_lblhouseNumber = new GridBagConstraints();
-		gbc_lblhouseNumber.anchor = GridBagConstraints.EAST;
-		gbc_lblhouseNumber.insets = new Insets(0, 0, 5, 5);
-		gbc_lblhouseNumber.gridx = 0;
-		gbc_lblhouseNumber.gridy = 4;
-		panelcreateBill.add(lblhouseNumber, gbc_lblhouseNumber);
+		JLabel lblsumBill = new JLabel("Endbetrag");
+		GridBagConstraints gbc_lblsumBill = new GridBagConstraints();
+		gbc_lblsumBill.anchor = GridBagConstraints.EAST;
+		gbc_lblsumBill.insets = new Insets(0, 0, 5, 5);
+		gbc_lblsumBill.gridx = 0;
+		gbc_lblsumBill.gridy = 4;
+		panelcreateBill.add(lblsumBill, gbc_lblsumBill);
 		
 		textFieldhouseNumber = new JTextField();
 		GridBagConstraints gbc_textFieldhouseNumber = new GridBagConstraints();
@@ -196,39 +194,40 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(textFieldhouseNumber, gbc_textFieldhouseNumber);
 		textFieldhouseNumber.setColumns(10);
 		
-		JLabel lblzipCode = new JLabel("PLZ");
-		GridBagConstraints gbc_lblzipCode = new GridBagConstraints();
-		gbc_lblzipCode.anchor = GridBagConstraints.EAST;
-		gbc_lblzipCode.insets = new Insets(0, 0, 5, 5);
-		gbc_lblzipCode.gridx = 0;
-		gbc_lblzipCode.gridy = 5;
-		panelcreateBill.add(lblzipCode, gbc_lblzipCode);
+		JLabel lblcustomerID = new JLabel("Kundennummer");
+		GridBagConstraints gbc_lblcustomerID = new GridBagConstraints();
+		gbc_lblcustomerID.anchor = GridBagConstraints.EAST;
+		gbc_lblcustomerID.insets = new Insets(0, 0, 5, 5);
+		gbc_lblcustomerID.gridx = 0;
+		gbc_lblcustomerID.gridy = 5;
+		panelcreateBill.add(lblcustomerID, gbc_lblcustomerID);
 		
-		textFieldzipCode = new JTextField();
-		GridBagConstraints gbc_textFieldzipCode = new GridBagConstraints();
-		gbc_textFieldzipCode.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldzipCode.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldzipCode.gridx = 1;
-		gbc_textFieldzipCode.gridy = 5;
-		panelcreateBill.add(textFieldzipCode, gbc_textFieldzipCode);
-		textFieldzipCode.setColumns(10);
+		textFieldcustomerID = new JTextField();
+		textFieldcustomerID.setEditable(false);
+		GridBagConstraints gbc_textFieldcustomerID = new GridBagConstraints();
+		gbc_textFieldcustomerID.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldcustomerID.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldcustomerID.gridx = 1;
+		gbc_textFieldcustomerID.gridy = 5;
+		panelcreateBill.add(textFieldcustomerID, gbc_textFieldcustomerID);
+		textFieldcustomerID.setColumns(10);
 		
-		JLabel lbleMail = new JLabel("E-Mail Adresse");
-		GridBagConstraints gbc_lbleMail = new GridBagConstraints();
-		gbc_lbleMail.anchor = GridBagConstraints.EAST;
-		gbc_lbleMail.insets = new Insets(0, 0, 5, 5);
-		gbc_lbleMail.gridx = 0;
-		gbc_lbleMail.gridy = 6;
-		panelcreateBill.add(lbleMail, gbc_lbleMail);
+		JLabel lblresponsiblePerson = new JLabel("Verantwortlicher");
+		GridBagConstraints gbc_lblresponsiblePerson = new GridBagConstraints();
+		gbc_lblresponsiblePerson.anchor = GridBagConstraints.EAST;
+		gbc_lblresponsiblePerson.insets = new Insets(0, 0, 5, 5);
+		gbc_lblresponsiblePerson.gridx = 0;
+		gbc_lblresponsiblePerson.gridy = 6;
+		panelcreateBill.add(lblresponsiblePerson, gbc_lblresponsiblePerson);
 		
-		textFieldeMail = new JTextField();
-		GridBagConstraints gbc_textFieldeMail = new GridBagConstraints();
-		gbc_textFieldeMail.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldeMail.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldeMail.gridx = 1;
-		gbc_textFieldeMail.gridy = 6;
-		panelcreateBill.add(textFieldeMail, gbc_textFieldeMail);
-		textFieldeMail.setColumns(10);
+		textresponsiblePerson = new JTextField();
+		GridBagConstraints gbc_textresponsiblePerson = new GridBagConstraints();
+		gbc_textresponsiblePerson.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textresponsiblePerson.insets = new Insets(0, 0, 5, 0);
+		gbc_textresponsiblePerson.gridx = 1;
+		gbc_textresponsiblePerson.gridy = 6;
+		panelcreateBill.add(textresponsiblePerson, gbc_textresponsiblePerson);
+		textresponsiblePerson.setColumns(10);
 		
 		JLabel lblTyp = new JLabel("Personenart");
 		GridBagConstraints gbc_lblTyp = new GridBagConstraints();
@@ -247,284 +246,288 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_comboBoxType.gridy = 7;
 		panelcreateBill.add(comboBoxType, gbc_comboBoxType);
 		
-		JLabel lbluserName = new JLabel("Username");
-		GridBagConstraints gbc_lbluserName = new GridBagConstraints();
-		gbc_lbluserName.anchor = GridBagConstraints.EAST;
-		gbc_lbluserName.insets = new Insets(0, 0, 5, 5);
-		gbc_lbluserName.gridx = 0;
-		gbc_lbluserName.gridy = 8;
-		panelcreateBill.add(lbluserName, gbc_lbluserName);
+		JLabel lblrelatedJar = new JLabel("zugehöriger Topf");
+		GridBagConstraints gbc_lblrelatedJar = new GridBagConstraints();
+		gbc_lblrelatedJar.anchor = GridBagConstraints.EAST;
+		gbc_lblrelatedJar.insets = new Insets(0, 0, 5, 5);
+		gbc_lblrelatedJar.gridx = 0;
+		gbc_lblrelatedJar.gridy = 8;
+		panelcreateBill.add(lblrelatedJar, gbc_lblrelatedJar);
 		
-		textFielduserName = new JTextField();
-		GridBagConstraints gbc_textFielduserName = new GridBagConstraints();
-		gbc_textFielduserName.insets = new Insets(0, 0, 5, 0);
-		gbc_textFielduserName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFielduserName.gridx = 1;
-		gbc_textFielduserName.gridy = 8;
-		panelcreateBill.add(textFielduserName, gbc_textFielduserName);
-		textFielduserName.setColumns(10);
+		textFieldrelatedJar = new JTextField();
+		GridBagConstraints gbc_textFieldrelatedJar = new GridBagConstraints();
+		gbc_textFieldrelatedJar.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldrelatedJar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldrelatedJar.gridx = 1;
+		gbc_textFieldrelatedJar.gridy = 8;
+		panelcreateBill.add(textFieldrelatedJar, gbc_textFieldrelatedJar);
+		textFieldrelatedJar.setColumns(10);
 		
-		JLabel lblPassword = new JLabel("Passwort");
-		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
-		gbc_lblPassword.anchor = GridBagConstraints.EAST;
-		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPassword.gridx = 0;
-		gbc_lblPassword.gridy = 9;
-		panelcreateBill.add(lblPassword, gbc_lblPassword);
-		
-		passwordField = new JPasswordField();
-		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.insets = new Insets(0, 0, 5, 0);
-		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_passwordField.gridx = 1;
-		gbc_passwordField.gridy = 9;
-		panelcreateBill.add(passwordField, gbc_passwordField);
-		
-		JButton btnaddPerson = new JButton("Person hinzuf\u00FCgen");
-		GridBagConstraints gbc_btnaddPerson = new GridBagConstraints();
-		gbc_btnaddPerson.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnaddPerson.insets = new Insets(0, 0, 5, 0);
-		gbc_btnaddPerson.gridx = 1;
-		gbc_btnaddPerson.gridy = 10;
-		panelcreateBill.add(btnaddPerson, gbc_btnaddPerson);
+		JButton btnaddBill = new JButton("Rechnung hinzufügen");
+		GridBagConstraints gbc_btnaddBill = new GridBagConstraints();
+		gbc_btnaddBill.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnaddBill.insets = new Insets(0, 0, 5, 0);
+		gbc_btnaddBill.gridx = 1;
+		gbc_btnaddBill.gridy = 9;
+		panelcreateBill.add(btnaddBill, gbc_btnaddBill);
 		
 		JButton btndeleteallInputs = new JButton("Eingaben l\u00F6schen");
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteallInputs.insets = new Insets(0, 0, 5, 0);
 		gbc_btndeleteallInputs.gridx = 1;
-		gbc_btndeleteallInputs.gridy = 11;
+		gbc_btndeleteallInputs.gridy = 10;
 		panelcreateBill.add(btndeleteallInputs, gbc_btndeleteallInputs);
 		
-		JLabel lbleLabpicture = new JLabel("");
-		GridBagConstraints gbc_lbleLabpicture = new GridBagConstraints();
-		gbc_lbleLabpicture.gridwidth = 2;
-		gbc_lbleLabpicture.gridx = 0;
-		gbc_lbleLabpicture.gridy = 12;
-		panelcreateBill.add(lbleLabpicture, gbc_lbleLabpicture);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane_1.gridwidth = 2;
+		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_1.gridx = 0;
+		gbc_scrollPane_1.gridy = 11;
+		panelcreateBill.add(scrollPane_1, gbc_scrollPane_1);
 		
-		JPanel panelmodifyBill = new JPanel();
-		tabbedPane.addTab("Rechnung bearbeiten", null, panelmodifyBill, null);
-		GridBagLayout gbl_panelmodifyBill = new GridBagLayout();
-		gbl_panelmodifyBill.columnWidths = new int[]{148, 0, 0};
-		gbl_panelmodifyBill.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panelmodifyBill.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelmodifyBill.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		panelmodifyBill.setLayout(gbl_panelmodifyBill);
+		JList listbillNew = new JList();
+		scrollPane_1.setViewportView(listbillNew);
 		
-		JLabel lblnameModify = new JLabel("Vorname");
-		GridBagConstraints gbc_lblnameModify = new GridBagConstraints();
-		gbc_lblnameModify.anchor = GridBagConstraints.EAST;
-		gbc_lblnameModify.insets = new Insets(0, 0, 5, 5);
-		gbc_lblnameModify.gridx = 0;
-		gbc_lblnameModify.gridy = 0;
-		panelmodifyBill.add(lblnameModify, gbc_lblnameModify);
+		JComboBox comboBox = new JComboBox();
+		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox.gridx = 0;
+		gbc_comboBox.gridy = 12;
+		panelcreateBill.add(comboBox, gbc_comboBox);
 		
-		textFieldnameModify = new JTextField();
-		GridBagConstraints gbc_textFieldnameModify = new GridBagConstraints();
-		gbc_textFieldnameModify.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldnameModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldnameModify.gridx = 1;
-		gbc_textFieldnameModify.gridy = 0;
-		panelmodifyBill.add(textFieldnameModify, gbc_textFieldnameModify);
-		textFieldnameModify.setColumns(10);
+		textField = new JTextField();
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 5, 0);
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 1;
+		gbc_textField.gridy = 12;
+		panelcreateBill.add(textField, gbc_textField);
+		textField.setColumns(10);
 		
-		JLabel lbllastNameModify = new JLabel("Nachname");
-		GridBagConstraints gbc_lbllastNameModify = new GridBagConstraints();
-		gbc_lbllastNameModify.anchor = GridBagConstraints.EAST;
-		gbc_lbllastNameModify.insets = new Insets(0, 0, 5, 5);
-		gbc_lbllastNameModify.gridx = 0;
-		gbc_lbllastNameModify.gridy = 1;
-		panelmodifyBill.add(lbllastNameModify, gbc_lbllastNameModify);
+		JButton btnnewbillOrderSearch = new JButton("Auftrag suchen");
+		GridBagConstraints gbc_btnnewbillOrderSearch = new GridBagConstraints();
+		gbc_btnnewbillOrderSearch.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnnewbillOrderSearch.gridx = 1;
+		gbc_btnnewbillOrderSearch.gridy = 13;
+		panelcreateBill.add(btnnewbillOrderSearch, gbc_btnnewbillOrderSearch);
 		
-		textFieldlastNameModify = new JTextField();
-		GridBagConstraints gbc_textFieldlastNameModify = new GridBagConstraints();
-		gbc_textFieldlastNameModify.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldlastNameModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldlastNameModify.gridx = 1;
-		gbc_textFieldlastNameModify.gridy = 1;
-		panelmodifyBill.add(textFieldlastNameModify, gbc_textFieldlastNameModify);
-		textFieldlastNameModify.setColumns(10);
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("Rechnung ändern", null, panel, null);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
 		
-		JLabel lblstreetModify = new JLabel("Stra\u00DFe");
-		GridBagConstraints gbc_lblstreetModify = new GridBagConstraints();
-		gbc_lblstreetModify.anchor = GridBagConstraints.EAST;
-		gbc_lblstreetModify.insets = new Insets(0, 0, 5, 5);
-		gbc_lblstreetModify.gridx = 0;
-		gbc_lblstreetModify.gridy = 2;
-		panelmodifyBill.add(lblstreetModify, gbc_lblstreetModify);
+		JLabel label = new JLabel("");
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.insets = new Insets(0, 0, 5, 0);
+		gbc_label.gridx = 1;
+		gbc_label.gridy = 0;
+		panel.add(label, gbc_label);
 		
-		textFieldstreetModify = new JTextField();
-		GridBagConstraints gbc_textFieldstreetModify = new GridBagConstraints();
-		gbc_textFieldstreetModify.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldstreetModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldstreetModify.gridx = 1;
-		gbc_textFieldstreetModify.gridy = 2;
-		panelmodifyBill.add(textFieldstreetModify, gbc_textFieldstreetModify);
-		textFieldstreetModify.setColumns(10);
+		JLabel lblbillNameModify = new JLabel("Rechnungsname");
+		GridBagConstraints gbc_lblbillNameModify = new GridBagConstraints();
+		gbc_lblbillNameModify.anchor = GridBagConstraints.EAST;
+		gbc_lblbillNameModify.insets = new Insets(0, 0, 5, 5);
+		gbc_lblbillNameModify.gridx = 0;
+		gbc_lblbillNameModify.gridy = 1;
+		panel.add(lblbillNameModify, gbc_lblbillNameModify);
 		
-		JLabel lblhouseNumberModify = new JLabel("Hausnummer");
-		GridBagConstraints gbc_lblhouseNumberModify = new GridBagConstraints();
-		gbc_lblhouseNumberModify.anchor = GridBagConstraints.EAST;
-		gbc_lblhouseNumberModify.insets = new Insets(0, 0, 5, 5);
-		gbc_lblhouseNumberModify.gridx = 0;
-		gbc_lblhouseNumberModify.gridy = 3;
-		panelmodifyBill.add(lblhouseNumberModify, gbc_lblhouseNumberModify);
+		textFieldbillNameModify = new JTextField();
+		textFieldbillNameModify.setColumns(10);
+		GridBagConstraints gbc_textFieldbillNameModify = new GridBagConstraints();
+		gbc_textFieldbillNameModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldbillNameModify.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldbillNameModify.gridx = 1;
+		gbc_textFieldbillNameModify.gridy = 1;
+		panel.add(textFieldbillNameModify, gbc_textFieldbillNameModify);
 		
-		textFieldhouseNumberModify = new JTextField();
-		GridBagConstraints gbc_textFieldhouseNumberModify = new GridBagConstraints();
-		gbc_textFieldhouseNumberModify.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldhouseNumberModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldhouseNumberModify.gridx = 1;
-		gbc_textFieldhouseNumberModify.gridy = 3;
-		panelmodifyBill.add(textFieldhouseNumberModify, gbc_textFieldhouseNumberModify);
-		textFieldhouseNumberModify.setColumns(10);
+		JLabel lblrelatedOrderModify = new JLabel("dazugehöriger Auftrag");
+		GridBagConstraints gbc_lblrelatedOrderModify = new GridBagConstraints();
+		gbc_lblrelatedOrderModify.anchor = GridBagConstraints.EAST;
+		gbc_lblrelatedOrderModify.insets = new Insets(0, 0, 5, 5);
+		gbc_lblrelatedOrderModify.gridx = 0;
+		gbc_lblrelatedOrderModify.gridy = 2;
+		panel.add(lblrelatedOrderModify, gbc_lblrelatedOrderModify);
 		
-		JLabel lblzipCodeModify = new JLabel("PLZ");
-		GridBagConstraints gbc_lblzipCodeModify = new GridBagConstraints();
-		gbc_lblzipCodeModify.anchor = GridBagConstraints.EAST;
-		gbc_lblzipCodeModify.insets = new Insets(0, 0, 5, 5);
-		gbc_lblzipCodeModify.gridx = 0;
-		gbc_lblzipCodeModify.gridy = 4;
-		panelmodifyBill.add(lblzipCodeModify, gbc_lblzipCodeModify);
+		textFieldrelatedOrderModify = new JTextField();
+		textFieldrelatedOrderModify.setColumns(10);
+		GridBagConstraints gbc_textFieldrelatedOrderModify = new GridBagConstraints();
+		gbc_textFieldrelatedOrderModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldrelatedOrderModify.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldrelatedOrderModify.gridx = 1;
+		gbc_textFieldrelatedOrderModify.gridy = 2;
+		panel.add(textFieldrelatedOrderModify, gbc_textFieldrelatedOrderModify);
 		
-		textFieldzipCodeModify = new JTextField();
-		GridBagConstraints gbc_textFieldzipCodeModify = new GridBagConstraints();
-		gbc_textFieldzipCodeModify.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldzipCodeModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldzipCodeModify.gridx = 1;
-		gbc_textFieldzipCodeModify.gridy = 4;
-		panelmodifyBill.add(textFieldzipCodeModify, gbc_textFieldzipCodeModify);
-		textFieldzipCodeModify.setColumns(10);
+		JLabel lblpaymentTypModify = new JLabel("Bezahlart");
+		GridBagConstraints gbc_lblpaymentTypModify = new GridBagConstraints();
+		gbc_lblpaymentTypModify.anchor = GridBagConstraints.EAST;
+		gbc_lblpaymentTypModify.insets = new Insets(0, 0, 5, 5);
+		gbc_lblpaymentTypModify.gridx = 0;
+		gbc_lblpaymentTypModify.gridy = 3;
+		panel.add(lblpaymentTypModify, gbc_lblpaymentTypModify);
 		
-		JLabel lbleMailModify = new JLabel("E-Mail Adresse");
-		GridBagConstraints gbc_lbleMailModify = new GridBagConstraints();
-		gbc_lbleMailModify.anchor = GridBagConstraints.EAST;
-		gbc_lbleMailModify.insets = new Insets(0, 0, 5, 5);
-		gbc_lbleMailModify.gridx = 0;
-		gbc_lbleMailModify.gridy = 5;
-		panelmodifyBill.add(lbleMailModify, gbc_lbleMailModify);
+		JComboBox comboBoxpaymentTypModify = new JComboBox();
+		GridBagConstraints gbc_comboBoxpaymentTypModify = new GridBagConstraints();
+		gbc_comboBoxpaymentTypModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxpaymentTypModify.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxpaymentTypModify.gridx = 1;
+		gbc_comboBoxpaymentTypModify.gridy = 3;
+		panel.add(comboBoxpaymentTypModify, gbc_comboBoxpaymentTypModify);
 		
-		textFieldeMailModify = new JTextField();
-		GridBagConstraints gbc_textFieldeMailModify = new GridBagConstraints();
-		gbc_textFieldeMailModify.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldeMailModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldeMailModify.gridx = 1;
-		gbc_textFieldeMailModify.gridy = 5;
-		panelmodifyBill.add(textFieldeMailModify, gbc_textFieldeMailModify);
-		textFieldeMailModify.setColumns(10);
+		JLabel lblsumBillModify = new JLabel("Endbetrag");
+		GridBagConstraints gbc_lblsumBillModify = new GridBagConstraints();
+		gbc_lblsumBillModify.anchor = GridBagConstraints.EAST;
+		gbc_lblsumBillModify.insets = new Insets(0, 0, 5, 5);
+		gbc_lblsumBillModify.gridx = 0;
+		gbc_lblsumBillModify.gridy = 4;
+		panel.add(lblsumBillModify, gbc_lblsumBillModify);
 		
-		JLabel lbltypModify = new JLabel("Personenart");
-		GridBagConstraints gbc_lbltypModify = new GridBagConstraints();
-		gbc_lbltypModify.anchor = GridBagConstraints.EAST;
-		gbc_lbltypModify.insets = new Insets(0, 0, 5, 5);
-		gbc_lbltypModify.gridx = 0;
-		gbc_lbltypModify.gridy = 6;
-		panelmodifyBill.add(lbltypModify, gbc_lbltypModify);
+		textFieldsumBillModify = new JTextField();
+		textFieldsumBillModify.setColumns(10);
+		GridBagConstraints gbc_textFieldsumBillModify = new GridBagConstraints();
+		gbc_textFieldsumBillModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldsumBillModify.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldsumBillModify.gridx = 1;
+		gbc_textFieldsumBillModify.gridy = 4;
+		panel.add(textFieldsumBillModify, gbc_textFieldsumBillModify);
 		
-		JComboBox comboBoxTypeModify = new JComboBox();
-		comboBoxTypeModify.setModel(new DefaultComboBoxModel(new String[] {"Kunde", "Mitglieder", "Lehrstuhl bezogene Personen"}));
-		GridBagConstraints gbc_comboBoxTypeModify = new GridBagConstraints();
-		gbc_comboBoxTypeModify.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBoxTypeModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxTypeModify.gridx = 1;
-		gbc_comboBoxTypeModify.gridy = 6;
-		panelmodifyBill.add(comboBoxTypeModify, gbc_comboBoxTypeModify);
+		JLabel lblcustomerIDModify = new JLabel("Kundennummer");
+		GridBagConstraints gbc_lblcustomerIDModify = new GridBagConstraints();
+		gbc_lblcustomerIDModify.anchor = GridBagConstraints.EAST;
+		gbc_lblcustomerIDModify.insets = new Insets(0, 0, 5, 5);
+		gbc_lblcustomerIDModify.gridx = 0;
+		gbc_lblcustomerIDModify.gridy = 5;
+		panel.add(lblcustomerIDModify, gbc_lblcustomerIDModify);
 		
-		JLabel lbluserNameModify = new JLabel("Username");
-		GridBagConstraints gbc_lbluserNameModify = new GridBagConstraints();
-		gbc_lbluserNameModify.anchor = GridBagConstraints.EAST;
-		gbc_lbluserNameModify.insets = new Insets(0, 0, 5, 5);
-		gbc_lbluserNameModify.gridx = 0;
-		gbc_lbluserNameModify.gridy = 7;
-		panelmodifyBill.add(lbluserNameModify, gbc_lbluserNameModify);
+		textFieldcustomerIDModify = new JTextField();
+		textFieldcustomerIDModify.setEditable(false);
+		textFieldcustomerIDModify.setColumns(10);
+		GridBagConstraints gbc_textFieldcustomerIDModify = new GridBagConstraints();
+		gbc_textFieldcustomerIDModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldcustomerIDModify.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldcustomerIDModify.gridx = 1;
+		gbc_textFieldcustomerIDModify.gridy = 5;
+		panel.add(textFieldcustomerIDModify, gbc_textFieldcustomerIDModify);
 		
-		textFielduserNameModify = new JTextField();
-		GridBagConstraints gbc_textFielduserNameModify = new GridBagConstraints();
-		gbc_textFielduserNameModify.insets = new Insets(0, 0, 5, 0);
-		gbc_textFielduserNameModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFielduserNameModify.gridx = 1;
-		gbc_textFielduserNameModify.gridy = 7;
-		panelmodifyBill.add(textFielduserNameModify, gbc_textFielduserNameModify);
-		textFielduserNameModify.setColumns(10);
+		JLabel lblrelatedPersonModify = new JLabel("Verantwortlicher");
+		GridBagConstraints gbc_lblrelatedPersonModify = new GridBagConstraints();
+		gbc_lblrelatedPersonModify.anchor = GridBagConstraints.EAST;
+		gbc_lblrelatedPersonModify.insets = new Insets(0, 0, 5, 5);
+		gbc_lblrelatedPersonModify.gridx = 0;
+		gbc_lblrelatedPersonModify.gridy = 6;
+		panel.add(lblrelatedPersonModify, gbc_lblrelatedPersonModify);
 		
-		JLabel lblpasswordModify = new JLabel("Passwort");
-		GridBagConstraints gbc_lblpasswordModify = new GridBagConstraints();
-		gbc_lblpasswordModify.anchor = GridBagConstraints.EAST;
-		gbc_lblpasswordModify.insets = new Insets(0, 0, 5, 5);
-		gbc_lblpasswordModify.gridx = 0;
-		gbc_lblpasswordModify.gridy = 8;
-		panelmodifyBill.add(lblpasswordModify, gbc_lblpasswordModify);
+		textFieldrelatedPersonModify = new JTextField();
+		textFieldrelatedPersonModify.setColumns(10);
+		GridBagConstraints gbc_textFieldrelatedPersonModify = new GridBagConstraints();
+		gbc_textFieldrelatedPersonModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldrelatedPersonModify.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldrelatedPersonModify.gridx = 1;
+		gbc_textFieldrelatedPersonModify.gridy = 6;
+		panel.add(textFieldrelatedPersonModify, gbc_textFieldrelatedPersonModify);
 		
-		passwordFieldModify = new JPasswordField();
-		GridBagConstraints gbc_passwordFieldModify = new GridBagConstraints();
-		gbc_passwordFieldModify.insets = new Insets(0, 0, 5, 0);
-		gbc_passwordFieldModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_passwordFieldModify.gridx = 1;
-		gbc_passwordFieldModify.gridy = 8;
-		panelmodifyBill.add(passwordFieldModify, gbc_passwordFieldModify);
+		JLabel lblTypModify = new JLabel("Personenart");
+		GridBagConstraints gbc_lblTypModify = new GridBagConstraints();
+		gbc_lblTypModify.anchor = GridBagConstraints.EAST;
+		gbc_lblTypModify.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTypModify.gridx = 0;
+		gbc_lblTypModify.gridy = 7;
+		panel.add(lblTypModify, gbc_lblTypModify);
 		
-		JButton btnsaveModifiedValues = new JButton("\u00C4nderungen speichern");
-		GridBagConstraints gbc_btnsaveModifiedValues = new GridBagConstraints();
-		gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnsaveModifiedValues.insets = new Insets(0, 0, 5, 0);
-		gbc_btnsaveModifiedValues.gridx = 1;
-		gbc_btnsaveModifiedValues.gridy = 9;
-		panelmodifyBill.add(btnsaveModifiedValues, gbc_btnsaveModifiedValues);
+		JComboBox comboBoxTypModify = new JComboBox();
+		GridBagConstraints gbc_comboBoxTypModify = new GridBagConstraints();
+		gbc_comboBoxTypModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxTypModify.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxTypModify.gridx = 1;
+		gbc_comboBoxTypModify.gridy = 7;
+		panel.add(comboBoxTypModify, gbc_comboBoxTypModify);
 		
-		JScrollPane scrollPanemodifyPerson = new JScrollPane();
-		scrollPanemodifyPerson.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPanemodifyPerson.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		GridBagConstraints gbc_scrollPanemodifyPerson = new GridBagConstraints();
-		gbc_scrollPanemodifyPerson.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPanemodifyPerson.gridwidth = 2;
-		gbc_scrollPanemodifyPerson.fill = GridBagConstraints.BOTH;
-		gbc_scrollPanemodifyPerson.gridx = 0;
-		gbc_scrollPanemodifyPerson.gridy = 10;
-		panelmodifyBill.add(scrollPanemodifyPerson, gbc_scrollPanemodifyPerson);
+		JLabel lblrelatedJarModify = new JLabel("zugehöriger Topf");
+		GridBagConstraints gbc_lblrelatedJarModify = new GridBagConstraints();
+		gbc_lblrelatedJarModify.anchor = GridBagConstraints.EAST;
+		gbc_lblrelatedJarModify.insets = new Insets(0, 0, 5, 5);
+		gbc_lblrelatedJarModify.gridx = 0;
+		gbc_lblrelatedJarModify.gridy = 8;
+		panel.add(lblrelatedJarModify, gbc_lblrelatedJarModify);
 		
-		JList listPerson = new JList();
-		listPerson.setModel(new AbstractListModel() {
-			String[] values = new String[] {};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		scrollPanemodifyPerson.setViewportView(listPerson);
+		textFieldrelatedJarModify = new JTextField();
+		textFieldrelatedJarModify.setColumns(10);
+		GridBagConstraints gbc_textFieldrelatedJarModify = new GridBagConstraints();
+		gbc_textFieldrelatedJarModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldrelatedJarModify.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldrelatedJarModify.gridx = 1;
+		gbc_textFieldrelatedJarModify.gridy = 8;
+		panel.add(textFieldrelatedJarModify, gbc_textFieldrelatedJarModify);
 		
-		JComboBox comboBoxsearchBillModify = new JComboBox();
-		GridBagConstraints gbc_comboBoxsearchBillModify = new GridBagConstraints();
-		gbc_comboBoxsearchBillModify.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxsearchBillModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxsearchBillModify.gridx = 0;
-		gbc_comboBoxsearchBillModify.gridy = 11;
-		panelmodifyBill.add(comboBoxsearchBillModify, gbc_comboBoxsearchBillModify);
+		JButton btnsaveBillModify = new JButton("Rechnung ändern");
+		GridBagConstraints gbc_btnsaveBillModify = new GridBagConstraints();
+		gbc_btnsaveBillModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnsaveBillModify.insets = new Insets(0, 0, 5, 0);
+		gbc_btnsaveBillModify.gridx = 1;
+		gbc_btnsaveBillModify.gridy = 9;
+		panel.add(btnsaveBillModify, gbc_btnsaveBillModify);
 		
-		textFieldsearchBillModify = new JTextField();
-		GridBagConstraints gbc_textFieldsearchBillModify = new GridBagConstraints();
-		gbc_textFieldsearchBillModify.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldsearchBillModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldsearchBillModify.gridx = 1;
-		gbc_textFieldsearchBillModify.gridy = 11;
-		panelmodifyBill.add(textFieldsearchBillModify, gbc_textFieldsearchBillModify);
-		textFieldsearchBillModify.setColumns(10);
+		JButton btndeleteallInputsModify = new JButton("Felder leeren");
+		GridBagConstraints gbc_btndeleteallInputsModify = new GridBagConstraints();
+		gbc_btndeleteallInputsModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btndeleteallInputsModify.insets = new Insets(0, 0, 5, 0);
+		gbc_btndeleteallInputsModify.gridx = 1;
+		gbc_btndeleteallInputsModify.gridy = 10;
+		panel.add(btndeleteallInputsModify, gbc_btndeleteallInputsModify);
 		
-		JButton btnNewButton = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.gridx = 1;
-		gbc_btnNewButton.gridy = 12;
-		panelmodifyBill.add(btnNewButton, gbc_btnNewButton);
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane_2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
+		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_2.gridwidth = 2;
+		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane_2.gridx = 0;
+		gbc_scrollPane_2.gridy = 11;
+		panel.add(scrollPane_2, gbc_scrollPane_2);
+		
+		JList listbillModify = new JList();
+		scrollPane_2.setViewportView(listbillModify);
+		
+		JComboBox comboBox_3 = new JComboBox();
+		GridBagConstraints gbc_comboBox_3 = new GridBagConstraints();
+		gbc_comboBox_3.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox_3.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox_3.gridx = 0;
+		gbc_comboBox_3.gridy = 12;
+		panel.add(comboBox_3, gbc_comboBox_3);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
+		gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_7.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_7.gridx = 1;
+		gbc_textField_7.gridy = 12;
+		panel.add(textField_7, gbc_textField_7);
+		
+		JButton btnSearchBillModify = new JButton("Rechnung suchen");
+		GridBagConstraints gbc_btnSearchBillModify = new GridBagConstraints();
+		gbc_btnSearchBillModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnSearchBillModify.gridx = 1;
+		gbc_btnSearchBillModify.gridy = 13;
+		panel.add(btnSearchBillModify, gbc_btnSearchBillModify);
 		
 		JPanel paneldeleteBill = new JPanel();
 		tabbedPane.addTab("Rechnungen löschen", null, paneldeleteBill, null);
 		GridBagLayout gbl_paneldeleteBill = new GridBagLayout();
 		gbl_paneldeleteBill.columnWidths = new int[]{0, 0, 0, 0};
 		gbl_paneldeleteBill.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_paneldeleteBill.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_paneldeleteBill.columnWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
 		gbl_paneldeleteBill.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		paneldeleteBill.setLayout(gbl_paneldeleteBill);
 		
@@ -539,8 +542,8 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_scrollPanedeletePerson.gridy = 0;
 		paneldeleteBill.add(scrollPanedeletePerson, gbc_scrollPanedeletePerson);
 		
-		JList listdeletePerson = new JList();
-		scrollPanedeletePerson.setViewportView(listdeletePerson);
+		JList listbillDelete = new JList();
+		scrollPanedeletePerson.setViewportView(listbillDelete);
 		
 		JComboBox comboBoxdeleteBillSearch = new JComboBox();
 		comboBoxdeleteBillSearch.setModel(new DefaultComboBoxModel(new String[] {"Name", "Datum", "Status"}));
@@ -570,7 +573,7 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_btndeleteBillSearch.gridy = 2;
 		paneldeleteBill.add(btndeleteBillSearch, gbc_btndeleteBillSearch);
 		
-		JButton btndeleteBill = new JButton("Rechnung/en löschen");
+		JButton btndeleteBill = new JButton("Rechnung löschen");
 		GridBagConstraints gbc_btndeleteBill = new GridBagConstraints();
 		gbc_btndeleteBill.gridwidth = 2;
 		gbc_btndeleteBill.fill = GridBagConstraints.HORIZONTAL;
@@ -720,7 +723,7 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_btnjarSaveChanges.gridy = 3;
 		panelJarManagement.add(btnjarSaveChanges, gbc_btnjarSaveChanges);
 		
-		JButton btnjarClearInputs = new JButton("Eingaben löschen");
+		JButton btnjarClearInputs = new JButton("Eingabe löschen");
 		GridBagConstraints gbc_btnjarClearInputs = new GridBagConstraints();
 		gbc_btnjarClearInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnjarClearInputs.insets = new Insets(0, 0, 5, 5);
@@ -754,9 +757,9 @@ public class GUIFinanceManagement implements ActionListener {
 		tabbedPanecashRegister_JarManagement.addTab("Kassen verwalten", null, panelcashRegisterManagement, null);
 		GridBagLayout gbl_panelcashRegisterManagement = new GridBagLayout();
 		gbl_panelcashRegisterManagement.columnWidths = new int[]{0, 0, 0, 87, 0, 0, 0};
-		gbl_panelcashRegisterManagement.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panelcashRegisterManagement.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panelcashRegisterManagement.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelcashRegisterManagement.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelcashRegisterManagement.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelcashRegisterManagement.setLayout(gbl_panelcashRegisterManagement);
 		
 		JLabel lblcashRegisterName = new JLabel("Kassenname");
@@ -785,7 +788,6 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(lblcashRegisterNameModify, gbc_lblcashRegisterNameModify);
 		
 		textFieldCashRegisterNameModify = new JTextField();
-		textFieldCashRegisterNameModify.setEditable(false);
 		textFieldCashRegisterNameModify.setColumns(10);
 		GridBagConstraints gbc_textFieldCashRegisterNameModify = new GridBagConstraints();
 		gbc_textFieldCashRegisterNameModify.fill = GridBagConstraints.HORIZONTAL;
@@ -794,44 +796,13 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_textFieldCashRegisterNameModify.gridy = 0;
 		panelcashRegisterManagement.add(textFieldCashRegisterNameModify, gbc_textFieldCashRegisterNameModify);
 		
-		JLabel lblcashRegisterTyp = new JLabel("Typ");
-		GridBagConstraints gbc_lblcashRegisterTyp = new GridBagConstraints();
-		gbc_lblcashRegisterTyp.insets = new Insets(0, 0, 5, 5);
-		gbc_lblcashRegisterTyp.gridx = 0;
-		gbc_lblcashRegisterTyp.gridy = 1;
-		panelcashRegisterManagement.add(lblcashRegisterTyp, gbc_lblcashRegisterTyp);
-		
-		JComboBox comboBoxcashRegisterTyp = new JComboBox();
-		comboBoxcashRegisterTyp.setModel(new DefaultComboBoxModel(new String[] {"Barkasse", "Konto", "Kostenstelle"}));
-		GridBagConstraints gbc_comboBoxcashRegisterTyp = new GridBagConstraints();
-		gbc_comboBoxcashRegisterTyp.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxcashRegisterTyp.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxcashRegisterTyp.gridx = 2;
-		gbc_comboBoxcashRegisterTyp.gridy = 1;
-		panelcashRegisterManagement.add(comboBoxcashRegisterTyp, gbc_comboBoxcashRegisterTyp);
-		
-		JLabel lblcashRegisterTypModify = new JLabel("Typ");
-		GridBagConstraints gbc_lblcashRegisterTypModify = new GridBagConstraints();
-		gbc_lblcashRegisterTypModify.insets = new Insets(0, 0, 5, 5);
-		gbc_lblcashRegisterTypModify.gridx = 3;
-		gbc_lblcashRegisterTypModify.gridy = 1;
-		panelcashRegisterManagement.add(lblcashRegisterTypModify, gbc_lblcashRegisterTypModify);
-		
-		JComboBox comboBoxcashRegisterTypModify = new JComboBox();
-		GridBagConstraints gbc_comboBoxcashRegisterTypModify = new GridBagConstraints();
-		gbc_comboBoxcashRegisterTypModify.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBoxcashRegisterTypModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxcashRegisterTypModify.gridx = 5;
-		gbc_comboBoxcashRegisterTypModify.gridy = 1;
-		panelcashRegisterManagement.add(comboBoxcashRegisterTypModify, gbc_comboBoxcashRegisterTypModify);
-		
 		JLabel lblcashRegisterActualStock = new JLabel("Ist-Bestand");
 		GridBagConstraints gbc_lblcashRegisterActualStock = new GridBagConstraints();
 		gbc_lblcashRegisterActualStock.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblcashRegisterActualStock.gridwidth = 2;
 		gbc_lblcashRegisterActualStock.insets = new Insets(0, 0, 5, 5);
 		gbc_lblcashRegisterActualStock.gridx = 0;
-		gbc_lblcashRegisterActualStock.gridy = 2;
+		gbc_lblcashRegisterActualStock.gridy = 1;
 		panelcashRegisterManagement.add(lblcashRegisterActualStock, gbc_lblcashRegisterActualStock);
 		
 		textFieldcashRegisterActualStock = new JTextField();
@@ -840,14 +811,14 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_textFieldcashRegisterActualStock.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldcashRegisterActualStock.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldcashRegisterActualStock.gridx = 2;
-		gbc_textFieldcashRegisterActualStock.gridy = 2;
+		gbc_textFieldcashRegisterActualStock.gridy = 1;
 		panelcashRegisterManagement.add(textFieldcashRegisterActualStock, gbc_textFieldcashRegisterActualStock);
 		
 		JLabel lblcashRegisterActualStockModify = new JLabel("Ist-Bestand");
 		GridBagConstraints gbc_lblcashRegisterActualStockModify = new GridBagConstraints();
 		gbc_lblcashRegisterActualStockModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblcashRegisterActualStockModify.gridx = 3;
-		gbc_lblcashRegisterActualStockModify.gridy = 2;
+		gbc_lblcashRegisterActualStockModify.gridy = 1;
 		panelcashRegisterManagement.add(lblcashRegisterActualStockModify, gbc_lblcashRegisterActualStockModify);
 		
 		textFieldcashRegisterActualStockModify = new JTextField();
@@ -856,7 +827,7 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_textFieldcashRegisterActualStockModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldcashRegisterActualStockModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldcashRegisterActualStockModify.gridx = 5;
-		gbc_textFieldcashRegisterActualStockModify.gridy = 2;
+		gbc_textFieldcashRegisterActualStockModify.gridy = 1;
 		panelcashRegisterManagement.add(textFieldcashRegisterActualStockModify, gbc_textFieldcashRegisterActualStockModify);
 		
 		JLabel lblcashRegisterEstimatedStock = new JLabel("Soll-Bestand");
@@ -864,7 +835,7 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_lblcashRegisterEstimatedStock.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblcashRegisterEstimatedStock.insets = new Insets(0, 0, 5, 5);
 		gbc_lblcashRegisterEstimatedStock.gridx = 0;
-		gbc_lblcashRegisterEstimatedStock.gridy = 3;
+		gbc_lblcashRegisterEstimatedStock.gridy = 2;
 		panelcashRegisterManagement.add(lblcashRegisterEstimatedStock, gbc_lblcashRegisterEstimatedStock);
 		
 		textFieldcashRegisterEstimatedStock = new JTextField();
@@ -873,14 +844,14 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_textFieldcashRegisterEstimatedStock.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldcashRegisterEstimatedStock.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldcashRegisterEstimatedStock.gridx = 2;
-		gbc_textFieldcashRegisterEstimatedStock.gridy = 3;
+		gbc_textFieldcashRegisterEstimatedStock.gridy = 2;
 		panelcashRegisterManagement.add(textFieldcashRegisterEstimatedStock, gbc_textFieldcashRegisterEstimatedStock);
 		
 		JLabel lblcashRegisterEstimatedStockModify = new JLabel("Soll-Bestand");
 		GridBagConstraints gbc_lblcashRegisterEstimatedStockModify = new GridBagConstraints();
 		gbc_lblcashRegisterEstimatedStockModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblcashRegisterEstimatedStockModify.gridx = 3;
-		gbc_lblcashRegisterEstimatedStockModify.gridy = 3;
+		gbc_lblcashRegisterEstimatedStockModify.gridy = 2;
 		panelcashRegisterManagement.add(lblcashRegisterEstimatedStockModify, gbc_lblcashRegisterEstimatedStockModify);
 		
 		textFieldcashRegisterEstimatedStockModify = new JTextField();
@@ -889,7 +860,7 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_textFieldcashRegisterEstimatedStockModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldcashRegisterEstimatedStockModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldcashRegisterEstimatedStockModify.gridx = 5;
-		gbc_textFieldcashRegisterEstimatedStockModify.gridy = 3;
+		gbc_textFieldcashRegisterEstimatedStockModify.gridy = 2;
 		panelcashRegisterManagement.add(textFieldcashRegisterEstimatedStockModify, gbc_textFieldcashRegisterEstimatedStockModify);
 		
 		JButton btnaddcashRegister = new JButton("Kasse hinzufügen");
@@ -897,7 +868,7 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_btnaddcashRegister.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddcashRegister.insets = new Insets(0, 0, 5, 5);
 		gbc_btnaddcashRegister.gridx = 2;
-		gbc_btnaddcashRegister.gridy = 4;
+		gbc_btnaddcashRegister.gridy = 3;
 		panelcashRegisterManagement.add(btnaddcashRegister, gbc_btnaddcashRegister);
 		
 		JButton btncashRegisterSaveChanges = new JButton("Änderungen speichern");
@@ -905,15 +876,15 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_btncashRegisterSaveChanges.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btncashRegisterSaveChanges.insets = new Insets(0, 0, 5, 0);
 		gbc_btncashRegisterSaveChanges.gridx = 5;
-		gbc_btncashRegisterSaveChanges.gridy = 4;
+		gbc_btncashRegisterSaveChanges.gridy = 3;
 		panelcashRegisterManagement.add(btncashRegisterSaveChanges, gbc_btncashRegisterSaveChanges);
 		
-		JButton btncashRegisterClearInputs = new JButton("Eingaben löschen");
+		JButton btncashRegisterClearInputs = new JButton("Felder zurücksetzen");
 		GridBagConstraints gbc_btncashRegisterClearInputs = new GridBagConstraints();
 		gbc_btncashRegisterClearInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btncashRegisterClearInputs.insets = new Insets(0, 0, 5, 5);
 		gbc_btncashRegisterClearInputs.gridx = 2;
-		gbc_btncashRegisterClearInputs.gridy = 5;
+		gbc_btncashRegisterClearInputs.gridy = 4;
 		panelcashRegisterManagement.add(btncashRegisterClearInputs, gbc_btncashRegisterClearInputs);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -924,24 +895,24 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_scrollPane.gridwidth = 6;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 7;
+		gbc_scrollPane.gridy = 6;
 		panelcashRegisterManagement.add(scrollPane, gbc_scrollPane);
 		
 		JLabel lblcashRegisterTypSearch = new JLabel("Typ");
 		GridBagConstraints gbc_lblcashRegisterTypSearch = new GridBagConstraints();
 		gbc_lblcashRegisterTypSearch.insets = new Insets(0, 0, 5, 5);
 		gbc_lblcashRegisterTypSearch.gridx = 0;
-		gbc_lblcashRegisterTypSearch.gridy = 8;
+		gbc_lblcashRegisterTypSearch.gridy = 7;
 		panelcashRegisterManagement.add(lblcashRegisterTypSearch, gbc_lblcashRegisterTypSearch);
 		
 		JComboBox comboBoxcashRegisterTypSearch = new JComboBox();
 		comboBoxcashRegisterTypSearch.setModel(new DefaultComboBoxModel(new String[] {"Barkasse", "Konto", "Kostenstelle"}));
 		GridBagConstraints gbc_comboBoxcashRegisterTypSearch = new GridBagConstraints();
 		gbc_comboBoxcashRegisterTypSearch.gridwidth = 4;
-		gbc_comboBoxcashRegisterTypSearch.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxcashRegisterTypSearch.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxcashRegisterTypSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxcashRegisterTypSearch.gridx = 2;
-		gbc_comboBoxcashRegisterTypSearch.gridy = 8;
+		gbc_comboBoxcashRegisterTypSearch.gridy = 7;
 		panelcashRegisterManagement.add(comboBoxcashRegisterTypSearch, gbc_comboBoxcashRegisterTypSearch);
 		
 		JButton btncashRegisterDeleteSearch = new JButton("Suchen");
@@ -950,21 +921,21 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_btncashRegisterDeleteSearch.gridwidth = 4;
 		gbc_btncashRegisterDeleteSearch.insets = new Insets(0, 0, 5, 0);
 		gbc_btncashRegisterDeleteSearch.gridx = 2;
-		gbc_btncashRegisterDeleteSearch.gridy = 9;
+		gbc_btncashRegisterDeleteSearch.gridy = 8;
 		panelcashRegisterManagement.add(btncashRegisterDeleteSearch, gbc_btncashRegisterDeleteSearch);
 		
 		JButton btncashRegisterDelete = new JButton("Kasse löschen");
 		GridBagConstraints gbc_btncashRegisterDelete = new GridBagConstraints();
 		gbc_btncashRegisterDelete.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btncashRegisterDelete.gridwidth = 6;
-		gbc_btncashRegisterDelete.gridx = 0;
-		gbc_btncashRegisterDelete.gridy = 10;
+		gbc_btncashRegisterDelete.gridwidth = 4;
+		gbc_btncashRegisterDelete.gridx = 2;
+		gbc_btncashRegisterDelete.gridy = 9;
 		panelcashRegisterManagement.add(btncashRegisterDelete, gbc_btncashRegisterDelete);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
 		
-		JMenu mnNewMenuOptions = new JMenu("Datei");
+		JMenu mnNewMenuOptions = new JMenu("Menü");
 		menuBar.add(mnNewMenuOptions);
 		
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmen\u00FC");

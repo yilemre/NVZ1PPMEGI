@@ -581,7 +581,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		JMenuBar menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
 
-		JMenu mnNewMenuOptions = new JMenu("Datei");
+		JMenu mnNewMenuOptions = new JMenu("Menü");
 		menuBar.add(mnNewMenuOptions);
 
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmen\u00FC");

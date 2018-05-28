@@ -46,6 +46,8 @@ public class GuiMenue implements ActionListener {
 	private JButton btncomponentManagement;
 
 	
+	
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -111,7 +113,7 @@ public class GuiMenue implements ActionListener {
 		menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
 
-		mnNewMenuOptions = new JMenu("Datei");
+		mnNewMenuOptions = new JMenu("Menü");
 		menuBar.add(mnNewMenuOptions);
 
 		mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");

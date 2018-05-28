@@ -322,7 +322,7 @@ public class GUIRegisterCustomer implements ActionListener {
 		JMenuBar menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
 		
-		JMenu mnNewMenuOptions = new JMenu("Datei");
+		JMenu mnNewMenuOptions = new JMenu("Menü");
 		menuBar.add(mnNewMenuOptions);
 		
 		JMenuItem mntmNewMenuItemabortRegister = new JMenuItem("Registrierung abbrechen");
