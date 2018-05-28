@@ -3,16 +3,24 @@ package logic;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import DataAccess.SQLManager;
 
 
 public class PersonManagement {
     
-    public static void addPerson(String firstname, String surname, String street, int housenumber, int zipcode, String email,String username, String password) throws SQLException  {
-	Timestamp t = new Timestamp(System.currentTimeMillis()); 
-    	SQLManager.getInstance().insertPersonIntoDB(firstname, surname, street, housenumber, zipcode, email, t, username, password);
+    public static void addPerson(String firstname, String surname, String street, int housenumber, int zipcode, String email, String username, String password, int rights) throws SQLException  {
+    String dateTimeString = null;
+    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    LocalDate date = LocalDate.now();
+    dateTimeString = df.format(date);
+    	SQLManager.getInstance().insertPersonIntoDB(firstname, surname, street, housenumber, zipcode, email, dateTimeString, username, password, rights);
     }
 
     public static void deletePerson(int ID) throws SQLException {
@@ -20,9 +28,9 @@ public class PersonManagement {
     }
 
     public static void modifyPerson(int id, String firstname, String surname, String street, String housenumber,
-	String zipcode,String email, String username, String password) throws SQLException {
+	String zipcode,String email, String username, String password, int rights) throws SQLException {
 	Timestamp t = new Timestamp(System.currentTimeMillis());  
-	SQLManager.getInstance().modifyPerson1(id, firstname, surname,street,housenumber,zipcode,email,t,username,password);
+	SQLManager.getInstance().modifyPerson1(id, firstname, surname,street,housenumber,zipcode,email,t,username,password, rights);
     }
     //public static ArrayList<String> getAllPerson() throws SQLException {
 	//return SQLManager.getInstance().getAllPersons(); 
