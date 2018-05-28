@@ -11,7 +11,7 @@ import DataAccess.SQLManager;
 public class ProductionManagement {
 
 	public static void addAssignment(String title,String type, double forecastedCosts, double realCosts,int assignmentStatus,String notes) throws SQLException {
-		SQLManager.getInstance().insertAssignmentIntoDB();
+		SQLManager.getInstance().insertAssignmentIntoDB(title, type, forecastedCosts, realCosts, assignmentStatus, notes);
 	}
 
 	/*public static void addPCBAssignment(String title,String type, double forecastedCosts, double realCosts,int assignmentStatus,String notes) throws SQLException {
