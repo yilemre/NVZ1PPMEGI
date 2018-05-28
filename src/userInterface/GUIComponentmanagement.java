@@ -22,6 +22,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+
+import logic.ComponentManagement;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -785,7 +788,11 @@ public class GUIComponentmanagement implements ActionListener {
 
 		}
 		if (command == "Kategorie hinzufügen") {
-
+		    try {
+		    ComponentManagement.addCategory(textFieldcategoryNameNew.getText(), textFieldcategoryNoteNew.getText());
+		    } catch (Exception a) {
+			a.getStackTrace(); 
+		    }
 		}
 		if (command == "Änderungen an Kategorie speichern") {
 

@@ -1,10 +1,16 @@
 package logic;
 
-public class ComponentManagement {
 
-		public void addCategory() {
-			//dummy
+import java.sql.SQLException;
+
+import DataAccess.SQLManager;
+
+public class ComponentManagement {
+    		//Emre begin
+		public static void addCategory(String name, String note) throws SQLException {
+		    SQLManager.getInstance().addCategoryToDB(name, note); 
 		}
+		//Emre end
 		
 		public void deleteCategory() {
 			//dummy
