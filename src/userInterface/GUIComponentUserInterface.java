@@ -49,7 +49,10 @@ public class GUIComponentUserInterface implements ActionListener {
 	private JTextField textFieldUsername;
 	private JPasswordField passwordFieldnewPassword;
 	private JPasswordField passwordFieldnewPasswordRepeat;
-
+   
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
