@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,10 +17,13 @@ import DataAccess.SQLManager;
 public class PersonManagement {
     
     public static void addPerson(String firstname, String surname, String street, int housenumber, int zipcode, String email, String username, String password, int rights) throws SQLException  {
+    //Marius start
     String dateTimeString = null;
     DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-    LocalDate date = LocalDate.now();
-    dateTimeString = df.format(date);
+    Calendar cal = Calendar.getInstance();
+    Date     time = cal.getTime();
+    dateTimeString = df.format(time);
+    //Marius end 
     	SQLManager.getInstance().insertPersonIntoDB(firstname, surname, street, housenumber, zipcode, email, dateTimeString, username, password, rights);
     }
 

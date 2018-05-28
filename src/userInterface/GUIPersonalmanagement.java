@@ -296,6 +296,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		
 		JButton btnaddPerson = new JButton("Person hinzuf\u00FCgen");
 		btnaddPerson.addActionListener(this);
+		btnaddPerson.setActionCommand("Person hinzuf\u00FCgen");
 		GridBagConstraints gbc_btnaddPerson = new GridBagConstraints();
 		gbc_btnaddPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddPerson.insets = new Insets(0, 0, 5, 0);
@@ -657,7 +658,7 @@ frmElabVerwaltungsprogramm.setVisible(true);
 			Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
 		    } 
 		    catch (Exception a) {
-			a.getMessage();
+			a.printStackTrace();
 		    }
 		    //Emre end
 		}

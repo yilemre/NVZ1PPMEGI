@@ -37,7 +37,7 @@ public class SQLManager {
 		Statement stmt = c.createStatement();
 		String sql ="INSERT INTO Persons (firstname, surname, street, housenumber, zipcode, email, timestamp, username, password, rights) VALUES ('"+firstname+"','"+surname+"','"+street+"',"+housenumber+","+zipcode+",'"+email+"','"+datetime+"','"+username+"','"+password+"',"+rights+");";
 		stmt.executeUpdate(sql);
-		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Person");
+		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Persons");
 		rs.next();
 		result = rs.getInt(1);
 		rs.close();
