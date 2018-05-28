@@ -52,7 +52,7 @@ public class SQLManager {
 		return id;
 	}
 	
-	//Emre begin
+	//Emre begin 
 	public void modifyPerson1(int id, String firstname, String surname, String street, String housenumber,
 		String zipcode,String email, Timestamp t, String username, String password) throws SQLException {
 	    	Statement stmt = c.createStatement(); 
