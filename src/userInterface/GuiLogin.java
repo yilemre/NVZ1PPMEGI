@@ -27,7 +27,7 @@ import javax.swing.JTextPane;
 import javax.swing.JEditorPane;
 import javax.swing.ImageIcon;
 
-public class GuiLogin {
+public class GuiLogin implements ActionListener {
 
 	private JFrame frmElabVerwaltungsprogramm;
 	private JTextField textFielduserName;
@@ -40,30 +40,17 @@ public class GuiLogin {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GuiLogin window = new GuiLogin();
-					window.frmElabVerwaltungsprogramm.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
 	 */
-	public GuiLogin() {
-		initialize();
-	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public GuiLogin() {
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 836, 649);
@@ -109,10 +96,7 @@ public class GuiLogin {
 		frmElabVerwaltungsprogramm.getContentPane().add(passwordField, gbc_passwordField);
 		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnLogin.addActionListener(this);
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
 		gbc_btnLogin.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnLogin.insets = new Insets(0, 0, 5, 0);
@@ -121,6 +105,7 @@ public class GuiLogin {
 		frmElabVerwaltungsprogramm.getContentPane().add(btnLogin, gbc_btnLogin);
 		
 		btnregister = new JButton("Registrieren");
+		btnregister.addActionListener(this);
 		btnregister.setToolTipText("Als neuer Kunde hier registrieren");
 		GridBagConstraints gbc_btnregister = new GridBagConstraints();
 		gbc_btnregister.fill = GridBagConstraints.HORIZONTAL;
@@ -135,5 +120,24 @@ public class GuiLogin {
 		gbc_lblNewLabel.gridx = 1;
 		gbc_lblNewLabel.gridy = 4;
 		frmElabVerwaltungsprogramm.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+	frmElabVerwaltungsprogramm.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		String command = e.getActionCommand();
+		
+		if (command== "Registrieren") {
+			
+			GUIRegisterCustomer regcu= new GUIRegisterCustomer();
+			frmElabVerwaltungsprogramm.dispose();
+			
+		}
+		
+		
+		
+		
 	}
 }

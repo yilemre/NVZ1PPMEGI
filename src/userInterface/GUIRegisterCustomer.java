@@ -39,7 +39,7 @@ import javax.swing.JMenuItem;
 import java.awt.Toolkit;
 import java.awt.Window.Type;
 
-public class GUIRegisterCustomer {
+public class GUIRegisterCustomer implements ActionListener {
 
 	private JFrame frmElabVerwaltungsprogramm;
 	private JTextField textFieldname;
@@ -53,33 +53,17 @@ public class GUIRegisterCustomer {
 	private JTextField textFieldprofessorShip;
 	private JPasswordField passwordFieldrepeatPassword;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUIRegisterCustomer window = new GUIRegisterCustomer();
-					window.frmElabVerwaltungsprogramm.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
 	 */
-	public GUIRegisterCustomer() {
-		initialize();
-	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public GUIRegisterCustomer() {
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
@@ -294,10 +278,8 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(passwordField, gbc_passwordField);
 		
 		JButton btnaddPerson = new JButton("Registrieren");
-		btnaddPerson.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		btnaddPerson.addActionListener(this);
+		
 		
 		JLabel lblPasswordRepeat = new JLabel("Passwort wiederholen");
 		GridBagConstraints gbc_lblPasswordRepeat = new GridBagConstraints();
@@ -340,10 +322,11 @@ public class GUIRegisterCustomer {
 		JMenuBar menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
 		
-		JMenu mnNewMenuOptions = new JMenu("Datei");
+		JMenu mnNewMenuOptions = new JMenu("Menü");
 		menuBar.add(mnNewMenuOptions);
 		
 		JMenuItem mntmNewMenuItemabortRegister = new JMenuItem("Registrierung abbrechen");
+		mntmNewMenuItemabortRegister.addActionListener(this);
 		mntmNewMenuItemabortRegister.setBorderPainted(true);
 		mnNewMenuOptions.add(mntmNewMenuItemabortRegister);
 		mntmNewMenuItemabortRegister.setToolTipText("Sie kehren zum Login zurÃ¼ck");
@@ -352,6 +335,38 @@ public class GUIRegisterCustomer {
 		
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
+		frmElabVerwaltungsprogramm.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		String command = e.getActionCommand();
+		
+		if (command == "Registrieren") {
+			
+			
+		}
+
+		if (command == "Eingaben l\u00F6schen") {
+			
+			
+		}
+		
+
+		if (command == "Registrierung abbrechen") {
+		
+		GuiLogin abortReg= new GuiLogin();
+		frmElabVerwaltungsprogramm.dispose();
+			
+		}
+
+		if (command == "Anleitung anzeigen") {
+			
+			
+		}
+		
+		
 		
 	}
 }

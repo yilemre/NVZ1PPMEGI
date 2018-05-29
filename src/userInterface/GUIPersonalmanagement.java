@@ -22,6 +22,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+
+import logic.PersonManagement;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -38,8 +41,9 @@ import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.ListSelectionModel;
 
-public class GUIPersonalmanagement {
+public class GUIPersonalmanagement implements ActionListener{
 
 	private JFrame frmElabVerwaltungsprogramm;
 	private JTextField textFieldname;
@@ -60,34 +64,24 @@ public class GUIPersonalmanagement {
 	private JPasswordField passwordFieldModify;
 	private JTextField textFieldsearchModifyPerson;
 	private JTextField textFieldsearchDeletePerson;
+	private JTextField textFieldID;
+	private JTextField textFieldIDModify;
+	private JComboBox comboBoxType = new JComboBox();
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUIPersonalmanagement window = new GUIPersonalmanagement();
-					window.frmElabVerwaltungsprogramm.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
 	 */
-	public GUIPersonalmanagement() {
-		initialize();
-	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public GUIPersonalmanagement() {
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
@@ -117,10 +111,10 @@ public class GUIPersonalmanagement {
 		JPanel paneladdPerson = new JPanel();
 		tabbedPane.addTab("Person hinzuf\u00FCgen", null, paneladdPerson, null);
 		GridBagLayout gbl_paneladdPerson = new GridBagLayout();
-		gbl_paneladdPerson.columnWidths = new int[]{0, 0, 0};
-		gbl_paneladdPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_paneladdPerson.columnWidths = new int[]{179, 0, 0};
+		gbl_paneladdPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_paneladdPerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_paneladdPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_paneladdPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		paneladdPerson.setLayout(gbl_paneladdPerson);
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -131,12 +125,30 @@ public class GUIPersonalmanagement {
 		gbc_lblNewLabel.gridy = 0;
 		paneladdPerson.add(lblNewLabel, gbc_lblNewLabel);
 		
+		JLabel lblID = new JLabel("ID");
+		GridBagConstraints gbc_lblID = new GridBagConstraints();
+		gbc_lblID.anchor = GridBagConstraints.EAST;
+		gbc_lblID.insets = new Insets(0, 0, 5, 5);
+		gbc_lblID.gridx = 0;
+		gbc_lblID.gridy = 1;
+		paneladdPerson.add(lblID, gbc_lblID);
+		
+		textFieldID = new JTextField();
+		textFieldID.setEditable(false);
+		GridBagConstraints gbc_textFieldID = new GridBagConstraints();
+		gbc_textFieldID.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldID.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldID.gridx = 1;
+		gbc_textFieldID.gridy = 1;
+		paneladdPerson.add(textFieldID, gbc_textFieldID);
+		textFieldID.setColumns(10);
+		
 		JLabel lblname = new JLabel("Vorname");
 		GridBagConstraints gbc_lblname = new GridBagConstraints();
 		gbc_lblname.anchor = GridBagConstraints.EAST;
 		gbc_lblname.insets = new Insets(0, 0, 5, 5);
 		gbc_lblname.gridx = 0;
-		gbc_lblname.gridy = 1;
+		gbc_lblname.gridy = 2;
 		paneladdPerson.add(lblname, gbc_lblname);
 		
 		textFieldname = new JTextField();
@@ -144,7 +156,7 @@ public class GUIPersonalmanagement {
 		gbc_textFieldname.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldname.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldname.gridx = 1;
-		gbc_textFieldname.gridy = 1;
+		gbc_textFieldname.gridy = 2;
 		paneladdPerson.add(textFieldname, gbc_textFieldname);
 		textFieldname.setColumns(10);
 		
@@ -153,7 +165,7 @@ public class GUIPersonalmanagement {
 		gbc_lbllastName.anchor = GridBagConstraints.EAST;
 		gbc_lbllastName.insets = new Insets(0, 0, 5, 5);
 		gbc_lbllastName.gridx = 0;
-		gbc_lbllastName.gridy = 2;
+		gbc_lbllastName.gridy = 3;
 		paneladdPerson.add(lbllastName, gbc_lbllastName);
 		
 		textFieldlastName = new JTextField();
@@ -161,7 +173,7 @@ public class GUIPersonalmanagement {
 		gbc_textFieldlastName.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldlastName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldlastName.gridx = 1;
-		gbc_textFieldlastName.gridy = 2;
+		gbc_textFieldlastName.gridy = 3;
 		paneladdPerson.add(textFieldlastName, gbc_textFieldlastName);
 		textFieldlastName.setColumns(10);
 		
@@ -170,7 +182,7 @@ public class GUIPersonalmanagement {
 		gbc_lblStreet.anchor = GridBagConstraints.EAST;
 		gbc_lblStreet.insets = new Insets(0, 0, 5, 5);
 		gbc_lblStreet.gridx = 0;
-		gbc_lblStreet.gridy = 3;
+		gbc_lblStreet.gridy = 4;
 		paneladdPerson.add(lblStreet, gbc_lblStreet);
 		
 		textFieldStreet = new JTextField();
@@ -178,7 +190,7 @@ public class GUIPersonalmanagement {
 		gbc_textFieldStreet.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldStreet.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldStreet.gridx = 1;
-		gbc_textFieldStreet.gridy = 3;
+		gbc_textFieldStreet.gridy = 4;
 		paneladdPerson.add(textFieldStreet, gbc_textFieldStreet);
 		textFieldStreet.setColumns(10);
 		
@@ -187,7 +199,7 @@ public class GUIPersonalmanagement {
 		gbc_lblhouseNumber.anchor = GridBagConstraints.EAST;
 		gbc_lblhouseNumber.insets = new Insets(0, 0, 5, 5);
 		gbc_lblhouseNumber.gridx = 0;
-		gbc_lblhouseNumber.gridy = 4;
+		gbc_lblhouseNumber.gridy = 5;
 		paneladdPerson.add(lblhouseNumber, gbc_lblhouseNumber);
 		
 		textFieldhouseNumber = new JTextField();
@@ -195,7 +207,7 @@ public class GUIPersonalmanagement {
 		gbc_textFieldhouseNumber.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldhouseNumber.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldhouseNumber.gridx = 1;
-		gbc_textFieldhouseNumber.gridy = 4;
+		gbc_textFieldhouseNumber.gridy = 5;
 		paneladdPerson.add(textFieldhouseNumber, gbc_textFieldhouseNumber);
 		textFieldhouseNumber.setColumns(10);
 		
@@ -204,7 +216,7 @@ public class GUIPersonalmanagement {
 		gbc_lblzipCode.anchor = GridBagConstraints.EAST;
 		gbc_lblzipCode.insets = new Insets(0, 0, 5, 5);
 		gbc_lblzipCode.gridx = 0;
-		gbc_lblzipCode.gridy = 5;
+		gbc_lblzipCode.gridy = 6;
 		paneladdPerson.add(lblzipCode, gbc_lblzipCode);
 		
 		textFieldzipCode = new JTextField();
@@ -212,7 +224,7 @@ public class GUIPersonalmanagement {
 		gbc_textFieldzipCode.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldzipCode.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldzipCode.gridx = 1;
-		gbc_textFieldzipCode.gridy = 5;
+		gbc_textFieldzipCode.gridy = 6;
 		paneladdPerson.add(textFieldzipCode, gbc_textFieldzipCode);
 		textFieldzipCode.setColumns(10);
 		
@@ -221,7 +233,7 @@ public class GUIPersonalmanagement {
 		gbc_lbleMail.anchor = GridBagConstraints.EAST;
 		gbc_lbleMail.insets = new Insets(0, 0, 5, 5);
 		gbc_lbleMail.gridx = 0;
-		gbc_lbleMail.gridy = 6;
+		gbc_lbleMail.gridy = 7;
 		paneladdPerson.add(lbleMail, gbc_lbleMail);
 		
 		textFieldeMail = new JTextField();
@@ -229,7 +241,7 @@ public class GUIPersonalmanagement {
 		gbc_textFieldeMail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldeMail.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldeMail.gridx = 1;
-		gbc_textFieldeMail.gridy = 6;
+		gbc_textFieldeMail.gridy = 7;
 		paneladdPerson.add(textFieldeMail, gbc_textFieldeMail);
 		textFieldeMail.setColumns(10);
 		
@@ -238,16 +250,15 @@ public class GUIPersonalmanagement {
 		gbc_lblTyp.anchor = GridBagConstraints.EAST;
 		gbc_lblTyp.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTyp.gridx = 0;
-		gbc_lblTyp.gridy = 7;
+		gbc_lblTyp.gridy = 8;
 		paneladdPerson.add(lblTyp, gbc_lblTyp);
-		
-		JComboBox comboBoxType = new JComboBox();
+	
 		comboBoxType.setModel(new DefaultComboBoxModel(new String[] {"Kunde", "Mitglieder", "Lehrstuhl bezogene Personen"}));
 		GridBagConstraints gbc_comboBoxType = new GridBagConstraints();
 		gbc_comboBoxType.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxType.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxType.gridx = 1;
-		gbc_comboBoxType.gridy = 7;
+		gbc_comboBoxType.gridy = 8;
 		paneladdPerson.add(comboBoxType, gbc_comboBoxType);
 		
 		JLabel lbluserName = new JLabel("Username");
@@ -255,7 +266,7 @@ public class GUIPersonalmanagement {
 		gbc_lbluserName.anchor = GridBagConstraints.EAST;
 		gbc_lbluserName.insets = new Insets(0, 0, 5, 5);
 		gbc_lbluserName.gridx = 0;
-		gbc_lbluserName.gridy = 8;
+		gbc_lbluserName.gridy = 9;
 		paneladdPerson.add(lbluserName, gbc_lbluserName);
 		
 		textFielduserName = new JTextField();
@@ -263,7 +274,7 @@ public class GUIPersonalmanagement {
 		gbc_textFielduserName.insets = new Insets(0, 0, 5, 0);
 		gbc_textFielduserName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFielduserName.gridx = 1;
-		gbc_textFielduserName.gridy = 8;
+		gbc_textFielduserName.gridy = 9;
 		paneladdPerson.add(textFielduserName, gbc_textFielduserName);
 		textFielduserName.setColumns(10);
 		
@@ -272,7 +283,7 @@ public class GUIPersonalmanagement {
 		gbc_lblPassword.anchor = GridBagConstraints.EAST;
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPassword.gridx = 0;
-		gbc_lblPassword.gridy = 9;
+		gbc_lblPassword.gridy = 10;
 		paneladdPerson.add(lblPassword, gbc_lblPassword);
 		
 		passwordField = new JPasswordField();
@@ -280,23 +291,26 @@ public class GUIPersonalmanagement {
 		gbc_passwordField.insets = new Insets(0, 0, 5, 0);
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_passwordField.gridx = 1;
-		gbc_passwordField.gridy = 9;
+		gbc_passwordField.gridy = 10;
 		paneladdPerson.add(passwordField, gbc_passwordField);
 		
 		JButton btnaddPerson = new JButton("Person hinzuf\u00FCgen");
+		btnaddPerson.addActionListener(this);
+		btnaddPerson.setActionCommand("Person hinzuf\u00FCgen");
 		GridBagConstraints gbc_btnaddPerson = new GridBagConstraints();
 		gbc_btnaddPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddPerson.insets = new Insets(0, 0, 5, 0);
 		gbc_btnaddPerson.gridx = 1;
-		gbc_btnaddPerson.gridy = 10;
+		gbc_btnaddPerson.gridy = 11;
 		paneladdPerson.add(btnaddPerson, gbc_btnaddPerson);
 		
 		JButton btndeleteallInputs = new JButton("Eingaben l\u00F6schen");
+		btndeleteallInputs.addActionListener(this);
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteallInputs.insets = new Insets(0, 0, 5, 0);
 		gbc_btndeleteallInputs.gridx = 1;
-		gbc_btndeleteallInputs.gridy = 11;
+		gbc_btndeleteallInputs.gridy = 12;
 		paneladdPerson.add(btndeleteallInputs, gbc_btndeleteallInputs);
 		
 		JLabel lbleLabpicture = new JLabel("");
@@ -304,24 +318,43 @@ public class GUIPersonalmanagement {
 		GridBagConstraints gbc_lbleLabpicture = new GridBagConstraints();
 		gbc_lbleLabpicture.gridwidth = 2;
 		gbc_lbleLabpicture.gridx = 0;
-		gbc_lbleLabpicture.gridy = 12;
+		gbc_lbleLabpicture.gridy = 13;
 		paneladdPerson.add(lbleLabpicture, gbc_lbleLabpicture);
 		
 		JPanel panelmodifyPerson = new JPanel();
 		tabbedPane.addTab("Person bearbeiten", null, panelmodifyPerson, null);
 		GridBagLayout gbl_panelmodifyPerson = new GridBagLayout();
 		gbl_panelmodifyPerson.columnWidths = new int[]{164, 0, 0};
-		gbl_panelmodifyPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panelmodifyPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panelmodifyPerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelmodifyPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelmodifyPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelmodifyPerson.setLayout(gbl_panelmodifyPerson);
+		
+		JLabel lblIDModify = new JLabel("ID");
+		GridBagConstraints gbc_lblIDModify = new GridBagConstraints();
+		gbc_lblIDModify.anchor = GridBagConstraints.EAST;
+		gbc_lblIDModify.insets = new Insets(0, 0, 5, 5);
+		gbc_lblIDModify.gridx = 0;
+		gbc_lblIDModify.gridy = 0;
+		panelmodifyPerson.add(lblIDModify, gbc_lblIDModify);
+		
+		textFieldIDModify = new JTextField();
+		textFieldIDModify.setEditable(false);
+		textFieldIDModify.setText("");
+		GridBagConstraints gbc_textFieldIDModify = new GridBagConstraints();
+		gbc_textFieldIDModify.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldIDModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldIDModify.gridx = 1;
+		gbc_textFieldIDModify.gridy = 0;
+		panelmodifyPerson.add(textFieldIDModify, gbc_textFieldIDModify);
+		textFieldIDModify.setColumns(10);
 		
 		JLabel lblnameModify = new JLabel("Vorname");
 		GridBagConstraints gbc_lblnameModify = new GridBagConstraints();
 		gbc_lblnameModify.anchor = GridBagConstraints.EAST;
 		gbc_lblnameModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblnameModify.gridx = 0;
-		gbc_lblnameModify.gridy = 0;
+		gbc_lblnameModify.gridy = 1;
 		panelmodifyPerson.add(lblnameModify, gbc_lblnameModify);
 		
 		textFieldnameModify = new JTextField();
@@ -329,7 +362,7 @@ public class GUIPersonalmanagement {
 		gbc_textFieldnameModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldnameModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldnameModify.gridx = 1;
-		gbc_textFieldnameModify.gridy = 0;
+		gbc_textFieldnameModify.gridy = 1;
 		panelmodifyPerson.add(textFieldnameModify, gbc_textFieldnameModify);
 		textFieldnameModify.setColumns(10);
 		
@@ -338,7 +371,7 @@ public class GUIPersonalmanagement {
 		gbc_lbllastNameModify.anchor = GridBagConstraints.EAST;
 		gbc_lbllastNameModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lbllastNameModify.gridx = 0;
-		gbc_lbllastNameModify.gridy = 1;
+		gbc_lbllastNameModify.gridy = 2;
 		panelmodifyPerson.add(lbllastNameModify, gbc_lbllastNameModify);
 		
 		textFieldlastNameModify = new JTextField();
@@ -346,7 +379,7 @@ public class GUIPersonalmanagement {
 		gbc_textFieldlastNameModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldlastNameModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldlastNameModify.gridx = 1;
-		gbc_textFieldlastNameModify.gridy = 1;
+		gbc_textFieldlastNameModify.gridy = 2;
 		panelmodifyPerson.add(textFieldlastNameModify, gbc_textFieldlastNameModify);
 		textFieldlastNameModify.setColumns(10);
 		
@@ -355,7 +388,7 @@ public class GUIPersonalmanagement {
 		gbc_lblstreetModify.anchor = GridBagConstraints.EAST;
 		gbc_lblstreetModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblstreetModify.gridx = 0;
-		gbc_lblstreetModify.gridy = 2;
+		gbc_lblstreetModify.gridy = 3;
 		panelmodifyPerson.add(lblstreetModify, gbc_lblstreetModify);
 		
 		textFieldstreetModify = new JTextField();
@@ -363,7 +396,7 @@ public class GUIPersonalmanagement {
 		gbc_textFieldstreetModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldstreetModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldstreetModify.gridx = 1;
-		gbc_textFieldstreetModify.gridy = 2;
+		gbc_textFieldstreetModify.gridy = 3;
 		panelmodifyPerson.add(textFieldstreetModify, gbc_textFieldstreetModify);
 		textFieldstreetModify.setColumns(10);
 		
@@ -372,7 +405,7 @@ public class GUIPersonalmanagement {
 		gbc_lblhouseNumberModify.anchor = GridBagConstraints.EAST;
 		gbc_lblhouseNumberModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblhouseNumberModify.gridx = 0;
-		gbc_lblhouseNumberModify.gridy = 3;
+		gbc_lblhouseNumberModify.gridy = 4;
 		panelmodifyPerson.add(lblhouseNumberModify, gbc_lblhouseNumberModify);
 		
 		textFieldhouseNumberModify = new JTextField();
@@ -380,7 +413,7 @@ public class GUIPersonalmanagement {
 		gbc_textFieldhouseNumberModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldhouseNumberModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldhouseNumberModify.gridx = 1;
-		gbc_textFieldhouseNumberModify.gridy = 3;
+		gbc_textFieldhouseNumberModify.gridy = 4;
 		panelmodifyPerson.add(textFieldhouseNumberModify, gbc_textFieldhouseNumberModify);
 		textFieldhouseNumberModify.setColumns(10);
 		
@@ -389,7 +422,7 @@ public class GUIPersonalmanagement {
 		gbc_lblzipCodeModify.anchor = GridBagConstraints.EAST;
 		gbc_lblzipCodeModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblzipCodeModify.gridx = 0;
-		gbc_lblzipCodeModify.gridy = 4;
+		gbc_lblzipCodeModify.gridy = 5;
 		panelmodifyPerson.add(lblzipCodeModify, gbc_lblzipCodeModify);
 		
 		textFieldzipCodeModify = new JTextField();
@@ -397,7 +430,7 @@ public class GUIPersonalmanagement {
 		gbc_textFieldzipCodeModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldzipCodeModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldzipCodeModify.gridx = 1;
-		gbc_textFieldzipCodeModify.gridy = 4;
+		gbc_textFieldzipCodeModify.gridy = 5;
 		panelmodifyPerson.add(textFieldzipCodeModify, gbc_textFieldzipCodeModify);
 		textFieldzipCodeModify.setColumns(10);
 		
@@ -406,7 +439,7 @@ public class GUIPersonalmanagement {
 		gbc_lbleMailModify.anchor = GridBagConstraints.EAST;
 		gbc_lbleMailModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lbleMailModify.gridx = 0;
-		gbc_lbleMailModify.gridy = 5;
+		gbc_lbleMailModify.gridy = 6;
 		panelmodifyPerson.add(lbleMailModify, gbc_lbleMailModify);
 		
 		textFieldeMailModify = new JTextField();
@@ -414,7 +447,7 @@ public class GUIPersonalmanagement {
 		gbc_textFieldeMailModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldeMailModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldeMailModify.gridx = 1;
-		gbc_textFieldeMailModify.gridy = 5;
+		gbc_textFieldeMailModify.gridy = 6;
 		panelmodifyPerson.add(textFieldeMailModify, gbc_textFieldeMailModify);
 		textFieldeMailModify.setColumns(10);
 		
@@ -423,7 +456,7 @@ public class GUIPersonalmanagement {
 		gbc_lbltypModify.anchor = GridBagConstraints.EAST;
 		gbc_lbltypModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lbltypModify.gridx = 0;
-		gbc_lbltypModify.gridy = 6;
+		gbc_lbltypModify.gridy = 7;
 		panelmodifyPerson.add(lbltypModify, gbc_lbltypModify);
 		
 		JComboBox comboBoxTypeModify = new JComboBox();
@@ -432,7 +465,7 @@ public class GUIPersonalmanagement {
 		gbc_comboBoxTypeModify.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxTypeModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxTypeModify.gridx = 1;
-		gbc_comboBoxTypeModify.gridy = 6;
+		gbc_comboBoxTypeModify.gridy = 7;
 		panelmodifyPerson.add(comboBoxTypeModify, gbc_comboBoxTypeModify);
 		
 		JLabel lbluserNameModify = new JLabel("Username");
@@ -440,7 +473,7 @@ public class GUIPersonalmanagement {
 		gbc_lbluserNameModify.anchor = GridBagConstraints.EAST;
 		gbc_lbluserNameModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lbluserNameModify.gridx = 0;
-		gbc_lbluserNameModify.gridy = 7;
+		gbc_lbluserNameModify.gridy = 8;
 		panelmodifyPerson.add(lbluserNameModify, gbc_lbluserNameModify);
 		
 		textFielduserNameModify = new JTextField();
@@ -448,7 +481,7 @@ public class GUIPersonalmanagement {
 		gbc_textFielduserNameModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFielduserNameModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFielduserNameModify.gridx = 1;
-		gbc_textFielduserNameModify.gridy = 7;
+		gbc_textFielduserNameModify.gridy = 8;
 		panelmodifyPerson.add(textFielduserNameModify, gbc_textFielduserNameModify);
 		textFielduserNameModify.setColumns(10);
 		
@@ -457,7 +490,7 @@ public class GUIPersonalmanagement {
 		gbc_lblpasswordModify.anchor = GridBagConstraints.EAST;
 		gbc_lblpasswordModify.insets = new Insets(0, 0, 5, 5);
 		gbc_lblpasswordModify.gridx = 0;
-		gbc_lblpasswordModify.gridy = 8;
+		gbc_lblpasswordModify.gridy = 9;
 		panelmodifyPerson.add(lblpasswordModify, gbc_lblpasswordModify);
 		
 		passwordFieldModify = new JPasswordField();
@@ -465,15 +498,16 @@ public class GUIPersonalmanagement {
 		gbc_passwordFieldModify.insets = new Insets(0, 0, 5, 0);
 		gbc_passwordFieldModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_passwordFieldModify.gridx = 1;
-		gbc_passwordFieldModify.gridy = 8;
+		gbc_passwordFieldModify.gridy = 9;
 		panelmodifyPerson.add(passwordFieldModify, gbc_passwordFieldModify);
 		
 		JButton btnsaveModifiedValues = new JButton("\u00C4nderungen speichern");
+		btnsaveModifiedValues.addActionListener(this);
 		GridBagConstraints gbc_btnsaveModifiedValues = new GridBagConstraints();
 		gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsaveModifiedValues.insets = new Insets(0, 0, 5, 0);
 		gbc_btnsaveModifiedValues.gridx = 1;
-		gbc_btnsaveModifiedValues.gridy = 9;
+		gbc_btnsaveModifiedValues.gridy = 10;
 		panelmodifyPerson.add(btnsaveModifiedValues, gbc_btnsaveModifiedValues);
 		
 		JScrollPane scrollPanemodifyPerson = new JScrollPane();
@@ -484,10 +518,11 @@ public class GUIPersonalmanagement {
 		gbc_scrollPanemodifyPerson.gridwidth = 2;
 		gbc_scrollPanemodifyPerson.fill = GridBagConstraints.BOTH;
 		gbc_scrollPanemodifyPerson.gridx = 0;
-		gbc_scrollPanemodifyPerson.gridy = 10;
+		gbc_scrollPanemodifyPerson.gridy = 11;
 		panelmodifyPerson.add(scrollPanemodifyPerson, gbc_scrollPanemodifyPerson);
 		
 		JList listPerson = new JList();
+		listPerson.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listPerson.setModel(new AbstractListModel() {
 			String[] values = new String[] {};
 			public int getSize() {
@@ -505,7 +540,7 @@ public class GUIPersonalmanagement {
 		gbc_comboBoxsearchModifyPerson.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxsearchModifyPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxsearchModifyPerson.gridx = 0;
-		gbc_comboBoxsearchModifyPerson.gridy = 11;
+		gbc_comboBoxsearchModifyPerson.gridy = 12;
 		panelmodifyPerson.add(comboBoxsearchModifyPerson, gbc_comboBoxsearchModifyPerson);
 		
 		textFieldsearchModifyPerson = new JTextField();
@@ -513,15 +548,16 @@ public class GUIPersonalmanagement {
 		gbc_textFieldsearchModifyPerson.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldsearchModifyPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldsearchModifyPerson.gridx = 1;
-		gbc_textFieldsearchModifyPerson.gridy = 11;
+		gbc_textFieldsearchModifyPerson.gridy = 12;
 		panelmodifyPerson.add(textFieldsearchModifyPerson, gbc_textFieldsearchModifyPerson);
 		textFieldsearchModifyPerson.setColumns(10);
 		
 		JButton btnsearchModifyPerson = new JButton("Suchen");
+		btnsearchModifyPerson.addActionListener(this);
 		GridBagConstraints gbc_btnsearchModifyPerson = new GridBagConstraints();
 		gbc_btnsearchModifyPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsearchModifyPerson.gridx = 1;
-		gbc_btnsearchModifyPerson.gridy = 12;
+		gbc_btnsearchModifyPerson.gridy = 13;
 		panelmodifyPerson.add(btnsearchModifyPerson, gbc_btnsearchModifyPerson);
 		
 		JPanel paneldeletePerson = new JPanel();
@@ -545,6 +581,7 @@ public class GUIPersonalmanagement {
 		paneldeletePerson.add(scrollPanedeletePerson, gbc_scrollPanedeletePerson);
 		
 		JList listdeletePerson = new JList();
+		listdeletePerson.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPanedeletePerson.setViewportView(listdeletePerson);
 		
 		JComboBox comboBoxsearchDeletePerson = new JComboBox();
@@ -565,7 +602,8 @@ public class GUIPersonalmanagement {
 		paneldeletePerson.add(textFieldsearchDeletePerson, gbc_textFieldsearchDeletePerson);
 		textFieldsearchDeletePerson.setColumns(10);
 		
-		JButton btnsearchDeletePerson = new JButton("Suchen");
+		JButton btnsearchDeletePerson = new JButton("Person Suchen");
+		btnsearchDeletePerson.addActionListener(this);
 		GridBagConstraints gbc_btnsearchDeletePerson = new GridBagConstraints();
 		gbc_btnsearchDeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsearchDeletePerson.insets = new Insets(0, 0, 5, 0);
@@ -573,7 +611,8 @@ public class GUIPersonalmanagement {
 		gbc_btnsearchDeletePerson.gridy = 2;
 		paneldeletePerson.add(btnsearchDeletePerson, gbc_btnsearchDeletePerson);
 		
-		JButton btndeletePerson = new JButton("Person/en l\u00F6schen");
+		JButton btndeletePerson = new JButton("Person löschen");
+		btndeletePerson.addActionListener(this);
 		GridBagConstraints gbc_btndeletePerson = new GridBagConstraints();
 		gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeletePerson.gridx = 1;
@@ -583,23 +622,98 @@ public class GUIPersonalmanagement {
 		JMenuBar menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
 		
-		JMenu mnNewMenuOptions = new JMenu("Datei");
+		JMenu mnNewMenuOptions = new JMenu("Menü");
 		menuBar.add(mnNewMenuOptions);
 		
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmen\u00FC");
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
-		
+		mntmNewMenuItembacktoMain.addActionListener(this);
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
-		
+		mntmNewMenuItemlogOut.addActionListener(this);
 		JMenuItem mntmNewMenuItemcloseapplication = new JMenuItem("Anwendung verlassen");
 		mnNewMenuOptions.add(mntmNewMenuItemcloseapplication);
-		
+		mntmNewMenuItemcloseapplication.addActionListener(this);
 		JMenu mnNewMenuhelpWindow = new JMenu("?");
 		menuBar.add(mnNewMenuhelpWindow);
 		
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
+		mntmNewMenuItemshowManual.addActionListener(this);
 		
+		
+frmElabVerwaltungsprogramm.setVisible(true);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		String command = e.getActionCommand(); 
+		
+		if (command=="Person hinzuf\u00FCgen") {
+		    //Emre begin
+		    
+		    try {
+			PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
+				Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
+		    } 
+		    catch (Exception a) {
+			a.printStackTrace();
+		    }
+		    //Emre end
+		}
+
+		if (command=="Eingaben l\u00F6schen") {
+		    //Emre begin
+		    textFieldname.setText("");
+		    textFieldlastName.setText("");
+		    textFieldStreet.setText("");
+		    textFieldhouseNumber.setText("");
+		    textFieldzipCode.setText("");
+		    textFieldeMail.setText("");
+		    textFielduserName.setText("");
+		    passwordField.setText("");
+		    //Emre end
+		}
+
+		if (command=="\u00C4nderungen speichern") {
+			
+		}
+
+		if (command=="Suchen") {
+			
+		}
+
+		if (command=="Person suchen") {
+			
+		}
+		
+		
+		if (command=="Person/en l\u00F6schen") {
+			
+		}
+	
+		if (command =="Hauptmen\u00FC") {
+			
+		GuiMenue gui = new GuiMenue();	
+		frmElabVerwaltungsprogramm.dispose();
+		
+		}
+		
+		if (command=="Ausloggen") {
+		
+		GuiLogin gui = new GuiLogin();	
+		frmElabVerwaltungsprogramm.dispose();	
+		}
+		if (command=="Anwendung verlassen") {
+			
+			System.exit(0);
+			
+		}
+		if (command=="Anleitung anzeigen") {
+			
+			
+		}
 	}
 }

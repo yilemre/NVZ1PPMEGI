@@ -2,48 +2,42 @@ package logic;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Person {
-    //private final int person_id; 
-    //private static int count_id=0; 
-    private int type; 
+    
+    private int id; 
     private String firstname;
     private String lastname;
     private String street;
     private int housenumber;
     private int plz;
     private String email;
-    private Timestamp timestamp;
-    private final String username; 
+    private Date timestamp;
+    private  String username; 
     private  String password;
     private double costsForComponents ;
     ArrayList<Component> shoppingCart = new ArrayList();
 	
-    public Person(int type,String firstname, String lastname, String street, int housenumber, int plz, String email,String username, String password){
-	//this.person_id = count_id; 
-	//count_id++; 
-	this.type = type; 
+    public Person(int id,String firstname, String lastname, String street, int housenumber, int plz, String email, Date timestamp, String username, String password){
+	this.id = id; 
 	this.firstname = firstname; 
 	this.lastname = lastname; 
 	this.street = street; 
 	this.housenumber = housenumber; 
 	this.plz = plz; 
 	this.email = email; 
-	this.timestamp = new Timestamp(System.currentTimeMillis()); 
+	this.timestamp = timestamp;
 	this.username = username; 
-	this.password = password; 	    
+	this.password = password; 	   
     }
             
-    //public Person(){    
-	//this.person_id = count_id; 
-    //}
-    
-    public int getType() {
-	return type; 
-    }    
-    public void setType(int type) {
-	this.type = type; 
+    public Person(){    
+	
     }
+    
+       
+    
     public String getFirstname() {
         return firstname;
     }
@@ -92,7 +86,7 @@ public class Person {
         this.email = email;
     }
 
-    public Timestamp getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
