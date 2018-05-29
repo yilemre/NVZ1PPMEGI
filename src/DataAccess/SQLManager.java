@@ -65,6 +65,14 @@ public class SQLManager {
 
 	}		
 	//Emre end
+	
+	public ResultSet getPersons1() throws SQLException {
+	    Statement stmt = c.createStatement(); 
+	    String sql = "SELECT * FROM Persons"; 
+	    ResultSet rs = stmt.executeQuery(sql); 
+	    
+	    return rs; 
+	}
 
 	public List<Person> getPersons() throws SQLException {
 		List<Person> result = new ArrayList<Person>();

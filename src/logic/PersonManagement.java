@@ -17,13 +17,13 @@ import DataAccess.SQLManager;
 public class PersonManagement {
     
     public static void addPerson(String firstname, String surname, String street, int housenumber, int zipcode, String email, String username, String password, int rights) throws SQLException  {
-    //Marius start
-    String dateTimeString = null;
-    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-    Calendar cal = Calendar.getInstance();
-    Date     time = cal.getTime();
-    dateTimeString = df.format(time);
-    //Marius end 
+	//Marius start
+	String dateTimeString = null;
+	DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+	Calendar cal = Calendar.getInstance();
+	Date     time = cal.getTime();
+	dateTimeString = df.format(time);
+	//Marius end 
     	SQLManager.getInstance().insertPersonIntoDB(firstname, surname, street, housenumber, zipcode, email, dateTimeString, username, password, rights);
     }
 
@@ -36,10 +36,11 @@ public class PersonManagement {
 	Timestamp t = new Timestamp(System.currentTimeMillis());  
 	SQLManager.getInstance().modifyPerson1(id, firstname, surname,street,housenumber,zipcode,email,t,username,password, rights);
     }
-    //public static ArrayList<String> getAllPerson() throws SQLException {
-	//return SQLManager.getInstance().getAllPersons(); 
-	
-    //}
+    
+    public static ResultSet getPersons() throws SQLException {
+	return SQLManager.getInstance().getPersons1(); 
+    }
+    /*
     public static void modifyPersonsFirstname(int id, String newValue) throws SQLException {
 	SQLManager.getInstance().modifyPerson(id, AttributeTypesPerson.firstname, newValue);
     }
@@ -66,5 +67,5 @@ public class PersonManagement {
     }
     public static void modifyPersonsPassword(int id, String newValue) throws SQLException {
 	SQLManager.getInstance().modifyPerson(id, AttributeTypesPerson.password, newValue);
-    }	
+    }*/	
 }
