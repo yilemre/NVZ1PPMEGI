@@ -216,6 +216,7 @@ public class SQLManager {
 		
 	}
 	
+	//You need to check whether or not there are already parts with ID x for Person Y in Card! If so: Increase amount and don't add new row!
 	public void addPartToShoppingCard(int idPart, int idPerson, int amount) throws SQLException {
 		Statement stmt = c.createStatement();
 		String sql ="INSERT INTO ShoppingCardParts (idPerson, idPart, amount) VALUES((SELECT idPerson FROM Persons WHERE idPerson="+idPerson+"), (SELECT idPart FROM Parts WHERE idPart="+idPart+"),"+amount+");";
