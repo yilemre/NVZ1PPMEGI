@@ -267,12 +267,12 @@ public class SQLManager {
 
 
 
-//Nico begin	
+//Nico begin reworked by Marius
 
-	public int insertOrderIntoDB () throws SQLException{
+	public int insertOrderIntoDB (String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException{
 		int result=0;
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO Orders () VALUES ();";
+		String sql ="INSERT INTO Orders (titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note) VALUES ('"+title+"', "+type+", "+projectedCosts+","+realCosts+",(SELECT idPerson FROM Person WHERE idPerson="+idCustomer+"), (SELECT idPerson FROM Person WHERE idPerson="+idAdvisor+"), ";";
 		stmt.executeUpdate(sql);
 		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Orders");
 		rs.next();
