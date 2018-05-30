@@ -330,11 +330,17 @@ public class GUIPersonalmanagement{
 		JButton btndeleteallInputs = new JButton("Eingaben löschen");
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		btndeleteallInputs.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				textFieldname.setText("");
+				textFieldlastName.setText("");
+				textFieldStreet.setText("");
+				textFieldhouseNumber.setText("");
+				textFieldzipCode.setText("");
+				textFieldeMail.setText("");
+				comboBoxType.setSelectedIndex(0);
+				textFielduserName.setText("");
+				passwordField.setText("");
 			}
 		});
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
@@ -588,7 +594,7 @@ public class GUIPersonalmanagement{
 		
 		
 		JComboBox comboBoxsearchModifyPerson = new JComboBox();
-		comboBoxsearchModifyPerson.setModel(new DefaultComboBoxModel(new String[] {"Vorname", "Nachname"}));
+		comboBoxsearchModifyPerson.setModel(new DefaultComboBoxModel(new String[] {"Vorname", "Nachname", "Mitgliedschaft"}));
 		GridBagConstraints gbc_comboBoxsearchModifyPerson = new GridBagConstraints();
 		gbc_comboBoxsearchModifyPerson.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxsearchModifyPerson.fill = GridBagConstraints.HORIZONTAL;
@@ -608,18 +614,38 @@ public class GUIPersonalmanagement{
 		JButton btnsearchModifyPerson = new JButton("Suchen");
 		GridBagConstraints gbc_btnsearchModifyPerson = new GridBagConstraints();
 		btnsearchModifyPerson.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String searchValue = textFieldsearchModifyPerson.getText();
 				switch(comboBoxsearchModifyPerson.getSelectedIndex()) {
 				case 0:
-					table.setModel(new PersonTableModel(PersonManagement.getPersonsByName(searchValue)));
+					try {
+						table.setModel(new PersonTableModel(PersonManagement.getPersonsByName(searchValue)));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					break;
 				case 1:
-					table.setModel(new PersonTableModel(PersonManagement.getPersonsByLastname(searchValue)));
-				}
-				
+					try {
+						table.setModel(new PersonTableModel(PersonManagement.getPersonsByLastname(searchValue)));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				case 2:
+					try {
+						table.setModel(new PersonTableModel(PersonManagement.getPersonsByRights(searchValue)));
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+					}
 			}
 		});
 		gbc_btnsearchModifyPerson.insets = new Insets(0, 0, 5, 0);

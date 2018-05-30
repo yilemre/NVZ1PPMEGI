@@ -43,7 +43,7 @@ public class PersonManagement {
     }
     
     public static List<Person> getPersons() throws SQLException {
-	return SQLManager.getInstance().getPersons(); 
+    	return SQLManager.getInstance().getPersons(); 
     }
     /*
     public static void modifyPersonsFirstname(int id, String newValue) throws SQLException {
@@ -74,13 +74,24 @@ public class PersonManagement {
 	SQLManager.getInstance().modifyPerson(id, AttributeTypesPerson.password, newValue);
     }*/
 
-	public static List<Person> getPersonsByName(String searchValue) {
-		// TODO Auto-generated method stub
-		return null;
+	public static List<Person> getPersonsByName(String searchValue) throws SQLException{
+		return SQLManager.getInstance().getPersonsByFirsname(searchValue);
 	}
 
-	public static List<Person> getPersonsByLastname(String searchValue) {
-		// TODO Auto-generated method stub
-		return null;
+	public static List<Person> getPersonsByLastname(String searchValue) throws SQLException {
+		return SQLManager.getInstance().getPersonsByFirsname(searchValue);
+	}
+
+	public static List<Person> getPersonsByRights(String searchValue) throws SQLException{
+		switch(searchValue){
+			case "Kunde":
+				return SQLManager.getInstance().getPersonsByRights(0);
+			case "Mitglied":
+				return SQLManager.getInstance().getPersonsByRights(1);
+			case "Lehrstuhlmitglied":
+				return SQLManager.getInstance().getPersonsByRights(2);
+			default:
+				return null;
+		}
 	}	
 }

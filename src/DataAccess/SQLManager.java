@@ -89,6 +89,49 @@ public class SQLManager {
 
 		return result;
 	}
+	
+	public List<Person> getPersonsByFirsname(String firstname) throws SQLException {
+		List<Person> result = new ArrayList<Person>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Persons WHERE firstname='"+firstname+"'";
+		ResultSet rs = stmt.executeQuery(sql);
+		while (rs.next()){
+			Person temp = new Person (rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getString("timestamp"),rs.getString("username"),rs.getString("password"),rs.getInt("rights"));
+
+			result.add(temp);			
+		}
+
+		return result;
+	}
+	
+	public List<Person> getPersonsByLastname(String surname) throws SQLException {
+		List<Person> result = new ArrayList<Person>();
+
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Persons WHERE surname='"+surname+"'";
+		ResultSet rs = stmt.executeQuery(sql);
+		while (rs.next()){
+			Person temp = new Person (rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getString("timestamp"),rs.getString("username"),rs.getString("password"),rs.getInt("rights"));
+
+			result.add(temp);			
+		}
+
+		return result;
+	}
+	
+	public List<Person> getPersonsByRights(int rights) throws SQLException {
+		List<Person> result = new ArrayList<Person>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Persons WHERE rights="+rights+"";
+		ResultSet rs = stmt.executeQuery(sql);
+		while (rs.next()){
+			Person temp = new Person (rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getString("timestamp"),rs.getString("username"),rs.getString("password"),rs.getInt("rights"));
+
+			result.add(temp);			
+		}
+
+		return result;
+	}
 
 	//If you call this method you can give it a AttributeTypes.xxxx attribute to say which attribute should be changed
 /*
