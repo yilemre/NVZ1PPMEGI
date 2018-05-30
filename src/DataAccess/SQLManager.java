@@ -65,13 +65,13 @@ public class SQLManager {
 
 	}		
 	//Emre end
-	
+
 	public ResultSet getPersons1() throws SQLException {
-	    Statement stmt = c.createStatement(); 
-	    String sql = "SELECT * FROM Persons"; 
-	    ResultSet rs = stmt.executeQuery(sql); 
-	    
-	    return rs; 
+		Statement stmt = c.createStatement(); 
+		String sql = "SELECT * FROM Persons"; 
+		ResultSet rs = stmt.executeQuery(sql); 
+
+		return rs; 
 	}
 
 	public List<Person> getPersons() throws SQLException {
@@ -275,7 +275,7 @@ public class SQLManager {
 
 
 
-//Nico begin	
+	//Nico begin	
 
 	public int insertOrderIntoDB () throws SQLException{
 		int result=0;
@@ -297,7 +297,7 @@ public class SQLManager {
 		stmt.close();	
 		return id;
 	}
-	
+
 	public void modifyOrder1(int id, String title, String type, int idAdvisor, int idSecondaryAdvisor, String notes, double forecastedCosts, double realCosts, String fileLocation) throws SQLException {
 		Statement stmt = c.createStatement(); 
 		String sql = "UPDATE Orders "
@@ -306,7 +306,7 @@ public class SQLManager {
 		stmt.executeUpdate(sql); 
 		stmt.close();
 	}
-	
+
 	public void modifyOrder(int id, AttributeTypesOrder attribute, String newValue) throws SQLException{
 		Statement stmt = c.createStatement();
 		switch(attribute) {
@@ -350,10 +350,10 @@ public class SQLManager {
 			stmt.executeUpdate(sql7);
 			stmt.close();
 			break;
-			}
 		}
-		
-		public void modifyOrderStatus(int id, AttributeTypesOrderStatus attribute, int newValue ) throws SQLException {
+	}
+
+	public void modifyOrderStatus(int id, AttributeTypesOrderStatus attribute, int newValue ) throws SQLException {
 		Statement stmt = c.createStatement();
 		switch(attribute) {
 		case accepted: 
@@ -396,10 +396,70 @@ public class SQLManager {
 			stmt.executeUpdate(sql7);
 			stmt.close();
 			break;
-			}
 		}
-	
-// Nico End
+	}
+
+	// search methods - Work in Progress
+	public String getOrdersByTitle(String title) throws SQLException, TitleNotInDBException {
+		String result ="";
+
+		Statement stmt = c.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM Orders WHERE titel LIKE '"+title+"';");
+		while (rs.next()){
+			//Order temp = new Order (rs.getInt("ID"), rs.getString("Titel"),rs.getString("Typ"),(rs.getDouble("Prognostizierte Kosten")), (rs.getDouble("Reele Kosten")), rs.getInt("Kunde"), rs.getInt("Verantwortlicher"), rs.getInt("Vertreter"), rs.getString("Dateiname"), rs.getString("Dateipfad"), rs.getString("Notizen"));
+			String temp = "";
+			result = temp;			
+		}
+
+		if (result.isEmpty()) throw new TitleNotInDBException();
+
+
+		rs.close();
+		stmt.close();
+
+		return result;
+	}
+
+	public String getOrdersByType(String type) throws SQLException, TypeNotInDBException {
+		String result ="";
+
+		Statement stmt = c.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM Orders WHERE type LIKE '"+type+"';");
+		while (rs.next()){
+			//Order temp = new Order (rs.getInt("ID"), rs.getString("Titel"),rs.getString("Typ"),(rs.getDouble("Prognostizierte Kosten")), (rs.getDouble("Reele Kosten")), rs.getInt("Kunde"), rs.getInt("Verantwortlicher"), rs.getInt("Vertreter"), rs.getString("Dateiname"), rs.getString("Dateipfad"), rs.getString("Notizen"));
+			String temp = "";
+			result = temp;			
+		}
+
+		if (result.isEmpty()) throw new TypeNotInDBException();
+
+
+		rs.close();
+		stmt.close();
+
+		return result;
+	}
+
+	public String getOrdersByStatus(int status) throws SQLException, StatusNotInDBException {
+		String result ="";
+
+		Statement stmt = c.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM OrderStatus WHERE status LIKE '"+status+"';");
+		while (rs.next()){
+			//Order temp = new Order (rs.getInt("ID"), rs.getInt("Status"),rs.getString("Zeitstempel"));
+			String temp = "";
+			result = temp;			
+		}
+
+		if (result.isEmpty()) throw new StatusNotInDBException();
+
+
+		rs.close();
+		stmt.close();
+
+		return result;
+	}
+	// Nico End
 }
 
 

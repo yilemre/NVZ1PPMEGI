@@ -7,8 +7,10 @@ import java.sql.Timestamp;
 import java.sql.ResultSet;
 
 import DataAccess.SQLManager;
+import Exceptions.ELabException;
 
 public class ProductionManagement {
+	
 
 	public static void addOrder(String title, String type, String notes, String fileLocation, double forecastedCosts, double realCosts, int idAdvisor, int SecondaryAdvisor) throws SQLException {
 		SQLManager.getInstance().insertOrderIntoDB();
@@ -82,5 +84,22 @@ public class ProductionManagement {
 	
 	public static void modifyOrderStatusBillGenerated(int id, int newValue) throws SQLException {
 		SQLManager.getInstance().modifyOrderStatus(id, AttributeTypesOrderStatus.billGenerated, newValue);
+	}
+	
+	//search methods - Work in Progress
+	
+	public /* List<Order>*/ String searchForTitle(String title) throws SQLException, ELabException {
+		/* List<Order>*/ String result = SQLManager.getInstance().getOrdersByTitle(title);
+		return result;
+	}
+	
+	public /* List<Order>*/ String searchForType(String type) throws SQLException, ELabException {
+		/* List<Order>*/ String result = SQLManager.getInstance().getOrdersByType(type);
+		return result;
+	}
+	
+	public /* List<Order>*/ String searchForStatus(int status) throws SQLException, ELabException {
+		/* List<Order>*/ String result = SQLManager.getInstance().getOrdersByStatus(status);
+		return result;
 	}
 }
