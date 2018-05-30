@@ -1,8 +1,4 @@
-
-
 package userInterface;
-
-
 
 import java.awt.EventQueue;
 
@@ -18,10 +14,15 @@ import java.awt.BorderLayout;
 import javax.swing.JTextArea;
 import javax.swing.JInternalFrame;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import logic.PersonManagement;
 
@@ -42,8 +43,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.ListSelectionModel;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
-public class GUIPersonalmanagement implements ActionListener{
+public class GUIPersonalmanagement{
 
 	private JFrame frmElabVerwaltungsprogramm;
 	private JTextField textFieldname;
@@ -67,6 +70,9 @@ public class GUIPersonalmanagement implements ActionListener{
 	private JTextField textFieldID;
 	private JTextField textFieldIDModify;
 	private JComboBox comboBoxType = new JComboBox();
+	private JComboBox comboBoxTypeModify;
+	private JTable table;
+	private List<String> comboBoxEntries;
 	
 
 	/**
@@ -82,6 +88,10 @@ public class GUIPersonalmanagement implements ActionListener{
 	 * Initialize the contents of the frame.
 	 */
 	public GUIPersonalmanagement() {
+		comboBoxEntries= new ArrayList<String>();
+		comboBoxEntries.add("Kunde");
+		comboBoxEntries.add("Mitglied");
+		comboBoxEntries.add("Lehrstuhlmitglied");
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
@@ -253,7 +263,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		gbc_lblTyp.gridy = 8;
 		paneladdPerson.add(lblTyp, gbc_lblTyp);
 	
-		comboBoxType.setModel(new DefaultComboBoxModel(new String[] {"Kunde", "Mitglieder", "Lehrstuhl bezogene Personen"}));
+		comboBoxType.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
 		GridBagConstraints gbc_comboBoxType = new GridBagConstraints();
 		gbc_comboBoxType.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxType.fill = GridBagConstraints.HORIZONTAL;
@@ -295,8 +305,21 @@ public class GUIPersonalmanagement implements ActionListener{
 		paneladdPerson.add(passwordField, gbc_passwordField);
 		
 		JButton btnaddPerson = new JButton("Person hinzufügen");
-		btnaddPerson.addActionListener(this);
-		btnaddPerson.setActionCommand("Person hinzufügen");
+		btnaddPerson.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			    try {
+				PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
+				Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
+				refreshTable();
+			    } 
+			    catch (Exception a) {
+				a.printStackTrace();
+				
+			    }
+			}
+		});
+		
 		GridBagConstraints gbc_btnaddPerson = new GridBagConstraints();
 		gbc_btnaddPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddPerson.insets = new Insets(0, 0, 5, 0);
@@ -305,8 +328,15 @@ public class GUIPersonalmanagement implements ActionListener{
 		paneladdPerson.add(btnaddPerson, gbc_btnaddPerson);
 		
 		JButton btndeleteallInputs = new JButton("Eingaben löschen");
-		btndeleteallInputs.addActionListener(this);
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
+		btndeleteallInputs.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteallInputs.insets = new Insets(0, 0, 5, 0);
 		gbc_btndeleteallInputs.gridx = 1;
@@ -325,9 +355,9 @@ public class GUIPersonalmanagement implements ActionListener{
 		tabbedPane.addTab("Person bearbeiten", null, panelmodifyPerson, null);
 		GridBagLayout gbl_panelmodifyPerson = new GridBagLayout();
 		gbl_panelmodifyPerson.columnWidths = new int[]{164, 0, 0};
-		gbl_panelmodifyPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panelmodifyPerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelmodifyPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelmodifyPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panelmodifyPerson.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gbl_panelmodifyPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panelmodifyPerson.setLayout(gbl_panelmodifyPerson);
 		
 		JLabel lblIDModify = new JLabel("ID");
@@ -459,8 +489,8 @@ public class GUIPersonalmanagement implements ActionListener{
 		gbc_lbltypModify.gridy = 7;
 		panelmodifyPerson.add(lbltypModify, gbc_lbltypModify);
 		
-		JComboBox comboBoxTypeModify = new JComboBox();
-		comboBoxTypeModify.setModel(new DefaultComboBoxModel(new String[] {"Kunde", "Mitglieder", "Lehrstuhl bezogene Personen"}));
+		comboBoxTypeModify = new JComboBox();
+		comboBoxTypeModify.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
 		GridBagConstraints gbc_comboBoxTypeModify = new GridBagConstraints();
 		gbc_comboBoxTypeModify.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxTypeModify.fill = GridBagConstraints.HORIZONTAL;
@@ -502,7 +532,23 @@ public class GUIPersonalmanagement implements ActionListener{
 		panelmodifyPerson.add(passwordFieldModify, gbc_passwordFieldModify);
 		
 		JButton btnsaveModifiedValues = new JButton("Änderungen speichern");
-		btnsaveModifiedValues.addActionListener(this);
+		btnsaveModifiedValues.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					PersonManagement.modifyPerson(Integer.parseInt(textFieldIDModify.getText()), textFieldnameModify.getText(), textFieldlastNameModify.getText(), textFieldstreetModify.getText(), Integer.parseInt(textFieldhouseNumberModify.getText()), Integer.parseInt(textFieldzipCodeModify.getText()), textFieldeMailModify.getText(), textFielduserNameModify.getText(), new String(passwordFieldModify.getPassword()), comboBoxTypeModify.getSelectedIndex());
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				refreshTable();
+			}
+		});
+		
 		GridBagConstraints gbc_btnsaveModifiedValues = new GridBagConstraints();
 		gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsaveModifiedValues.insets = new Insets(0, 0, 5, 0);
@@ -521,18 +567,25 @@ public class GUIPersonalmanagement implements ActionListener{
 		gbc_scrollPanemodifyPerson.gridy = 11;
 		panelmodifyPerson.add(scrollPanemodifyPerson, gbc_scrollPanemodifyPerson);
 		
-		JList listPerson = new JList();
-		listPerson.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listPerson.setModel(new AbstractListModel() {
-			String[] values = new String[] {};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		table = new JTable();
+		try {
+			table.setModel(new PersonTableModel(PersonManagement.getPersons()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPanemodifyPerson.setViewportView(table);
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				handleEditPersonSelectionEvent(e);
+				
 			}
 		});
-		scrollPanemodifyPerson.setViewportView(listPerson);
+		table.clearSelection();
+		//scrollPanemodifyPerson.add(table);
+		
 		
 		JComboBox comboBoxsearchModifyPerson = new JComboBox();
 		comboBoxsearchModifyPerson.setModel(new DefaultComboBoxModel(new String[] {"Vorname", "Nachname"}));
@@ -553,8 +606,23 @@ public class GUIPersonalmanagement implements ActionListener{
 		textFieldsearchModifyPerson.setColumns(10);
 		
 		JButton btnsearchModifyPerson = new JButton("Suchen");
-		btnsearchModifyPerson.addActionListener(this);
 		GridBagConstraints gbc_btnsearchModifyPerson = new GridBagConstraints();
+		btnsearchModifyPerson.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String searchValue = textFieldsearchModifyPerson.getText();
+				switch(comboBoxsearchModifyPerson.getSelectedIndex()) {
+				case 0:
+					table.setModel(new PersonTableModel(PersonManagement.getPersonsByName(searchValue)));
+					break;
+				case 1:
+					table.setModel(new PersonTableModel(PersonManagement.getPersonsByLastname(searchValue)));
+				}
+				
+			}
+		});
+		gbc_btnsearchModifyPerson.insets = new Insets(0, 0, 5, 0);
 		gbc_btnsearchModifyPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsearchModifyPerson.gridx = 1;
 		gbc_btnsearchModifyPerson.gridy = 13;
@@ -603,7 +671,6 @@ public class GUIPersonalmanagement implements ActionListener{
 		textFieldsearchDeletePerson.setColumns(10);
 		
 		JButton btnsearchDeletePerson = new JButton("Person Suchen");
-		btnsearchDeletePerson.addActionListener(this);
 		GridBagConstraints gbc_btnsearchDeletePerson = new GridBagConstraints();
 		gbc_btnsearchDeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsearchDeletePerson.insets = new Insets(0, 0, 5, 0);
@@ -612,7 +679,6 @@ public class GUIPersonalmanagement implements ActionListener{
 		paneldeletePerson.add(btnsearchDeletePerson, gbc_btnsearchDeletePerson);
 		
 		JButton btndeletePerson = new JButton("Person löschen");
-		btndeletePerson.addActionListener(this);
 		GridBagConstraints gbc_btndeletePerson = new GridBagConstraints();
 		gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeletePerson.gridx = 1;
@@ -627,93 +693,76 @@ public class GUIPersonalmanagement implements ActionListener{
 		
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmenü");
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
-		mntmNewMenuItembacktoMain.addActionListener(this);
+		mntmNewMenuItembacktoMain.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GuiMenue gui = new GuiMenue();
+				frmElabVerwaltungsprogramm.dispose();
+			}
+		});
+		
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
-		mntmNewMenuItemlogOut.addActionListener(this);
+		mntmNewMenuItemlogOut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GuiLogin gui = new GuiLogin();	
+				frmElabVerwaltungsprogramm.dispose();
+			}
+		});
+		
 		JMenuItem mntmNewMenuItemcloseapplication = new JMenuItem("Anwendung verlassen");
 		mnNewMenuOptions.add(mntmNewMenuItemcloseapplication);
-		mntmNewMenuItemcloseapplication.addActionListener(this);
+		mntmNewMenuItemcloseapplication.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		JMenu mnNewMenuhelpWindow = new JMenu("?");
+		
 		menuBar.add(mnNewMenuhelpWindow);
 		
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//ToDo
+			}
+		});
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
-		mntmNewMenuItemshowManual.addActionListener(this);
 		
 		
 frmElabVerwaltungsprogramm.setVisible(true);
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-		String command = e.getActionCommand(); 
-		
-		if (command=="Person hinzufügen") {
-		    //Emre begin
-		    
-		    try {
-			PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
-				Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
-		    } 
-		    catch (Exception a) {
-			a.printStackTrace();
-		    }
-		    //Emre end
-		}
-
-		if (command=="Eingaben löschen") {
-		    //Emre begin
-		    textFieldname.setText("");
-		    textFieldlastName.setText("");
-		    textFieldStreet.setText("");
-		    textFieldhouseNumber.setText("");
-		    textFieldzipCode.setText("");
-		    textFieldeMail.setText("");
-		    textFielduserName.setText("");
-		    passwordField.setText("");
-		    //Emre end
-		}
-
-		if (command=="Änderungen speichern") {
-			
-		}
-
-		if (command=="Suchen") {
-			
-		}
-
-		if (command=="Person suchen") {
-			
-		}
-		
-		
-		if (command=="Person/en löschen") {
-			
-		}
-	
-		if (command =="Hauptmenü") {
-			
-		GuiMenue gui = new GuiMenue();	
-		frmElabVerwaltungsprogramm.dispose();
-		
-		}
-		
-		if (command=="Ausloggen") {
-		
-		GuiLogin gui = new GuiLogin();	
-		frmElabVerwaltungsprogramm.dispose();	
-		}
-		if (command=="Anwendung verlassen") {
-			
-			System.exit(0);
-			
-		}
-		if (command=="Anleitung anzeigen") {
-			
-			
+	protected void handleEditPersonSelectionEvent(ListSelectionEvent e) {
+		if(table.getSelectedRow()>-1) {
+		textFieldIDModify.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
+		textFieldnameModify.setText((String)table.getValueAt(table.getSelectedRow(), 1));
+		textFieldlastNameModify.setText((String)table.getValueAt(table.getSelectedRow(), 2));
+		textFieldstreetModify.setText((String)table.getValueAt(table.getSelectedRow(), 3));
+		textFieldhouseNumberModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
+		textFieldzipCodeModify.setText(table.getValueAt(table.getSelectedRow(), 5).toString());
+		textFieldeMailModify.setText((String)table.getValueAt(table.getSelectedRow(), 6));
+		comboBoxTypeModify.setSelectedIndex(comboBoxEntries.indexOf((String)table.getValueAt(table.getSelectedRow(), 9)));
+		textFielduserNameModify.setText((String)table.getValueAt(table.getSelectedRow(), 7));
+		passwordFieldModify.setText((String)table.getValueAt(table.getSelectedRow(), 8));
 		}
 	}
+	
+	protected void refreshTable() {
+		try {
+			table.setModel(new PersonTableModel(PersonManagement.getPersons()));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		table.clearSelection();
+	}
+
 }

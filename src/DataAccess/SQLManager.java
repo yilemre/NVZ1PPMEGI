@@ -1,3 +1,4 @@
+//Mainly everything by Marius
 package DataAccess;
 
 import java.sql.*;
@@ -31,6 +32,7 @@ public class SQLManager {
 		}
 	}
 
+	//rights: 0 is a customer, 1 a member and 2 a "Lehrstuhl bez. Person" so 0 and 2 should only see ComponentManagement and 1 everything
 	public int insertPersonIntoDB (String firstname, String surname, String street, int housenumber, int zipcode, String email, String datetime, String username, String password, int rights) throws SQLException{
 		int result=0;
 		Statement stmt = c.createStatement();
@@ -53,26 +55,26 @@ public class SQLManager {
 	}
 
 	//Emre begin 
-	public void modifyPerson1(int id, String firstname, String surname, String street, String housenumber,
-			String zipcode,String email, Timestamp t, String username, String password, int rights) throws SQLException {
+	public void modifyPerson(int id, String firstname, String surname, String street, int housenumber,
+			int zipcode,String email, String t, String username, String password, int rights) throws SQLException {
 		Statement stmt = c.createStatement(); 
-		String sql = "UPDATE Persons "
-				+ "SET firstname='"+firstname+"',surname='"+surname+"',street ='"+street+"', housenumber="+housenumber+", zipcode="+zipcode+", email='"+email+"',timestamp='"+t+"', username='"+username+"', password='"+password+"', rights="+rights+""
-				+ " WHERE idPerson="+id+";";
+		String sql = "UPDATE Persons SET firstname='"+firstname+"',surname='"+surname+"',street ='"+street+"', housenumber="+housenumber+", zipcode="+zipcode+", email='"+email+"',timestamp='"+t+"', username='"+username+"', password='"+password+"', rights="+rights+" WHERE idPerson="+id+";";
 		stmt.executeUpdate(sql); 
 		stmt.close();
 
 	}		
 	//Emre end
 
+	/*why?!
 	public ResultSet getPersons1() throws SQLException {
 		Statement stmt = c.createStatement(); 
 		String sql = "SELECT * FROM Persons"; 
 		ResultSet rs = stmt.executeQuery(sql); 
 
 		return rs; 
-	}
+	}*/
 
+	//correct
 	public List<Person> getPersons() throws SQLException {
 		List<Person> result = new ArrayList<Person>();
 
@@ -80,7 +82,7 @@ public class SQLManager {
 		String sql = "SELECT * FROM Persons";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Person temp = new Person (rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getDate("timestamp"),rs.getString("username"),rs.getString("password"));
+			Person temp = new Person (rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getString("timestamp"),rs.getString("username"),rs.getString("password"),rs.getInt("rights"));
 
 			result.add(temp);			
 		}
@@ -89,7 +91,7 @@ public class SQLManager {
 	}
 
 	//If you call this method you can give it a AttributeTypes.xxxx attribute to say which attribute should be changed
-
+/*
 	public void modifyPerson(int id, AttributeTypesPerson attribute, String newValue) throws SQLException{
 		Statement stmt = c.createStatement();
 		switch(attribute) {
@@ -145,7 +147,7 @@ public class SQLManager {
 			break;
 		}
 	}
-
+*/
 	public int addCategoryToDB(String name, String note) throws SQLException {
 		int result=0;
 		Statement stmt = c.createStatement();
@@ -255,9 +257,8 @@ public class SQLManager {
 		}
 
 	}
+	
 	//You need to check whether or not there are already parts with ID x for Person Y in Card! If so: Increase amount and don't add new row!
-
-
 	public void addPartToShoppingCard(int idPart, int idPerson, int amount) throws SQLException {
 		Statement stmt = c.createStatement();
 		String sql ="INSERT INTO ShoppingCardParts (idPerson, idPart, amount) VALUES((SELECT idPerson FROM Persons WHERE idPerson="+idPerson+"), (SELECT idPart FROM Parts WHERE idPart="+idPart+"),"+amount+");";
@@ -274,17 +275,29 @@ public class SQLManager {
 
 
 
-<<<<<<< HEAD
 //Nico begin reworked by Marius
-=======
-	//Nico begin	
->>>>>>> d06964621cd4b8f713ca6d8a7ff62f9e09ab74d4
 
-	public int insertOrderIntoDB (String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException{
+	//Nico begin	
+
+	/*type: 0 for "3D-Prints", 1 for "circuit board", 2 for "other"
+	every order is going to be inserted with the status 0 which is "accepted"!
+	Values for all the other status:
+		0 accepted
+		1 made
+		2 costs calculated
+		3 picked up
+		4 billed
+		5 waiting for material
+		6 production interrupted
+		7 bill generated
+	*/
+	public int insertOrderIntoDB (String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note, String datetime) throws SQLException{
 		int result=0;
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO Orders (titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note) VALUES ('"+title+"', "+type+", "+projectedCosts+","+realCosts+",(SELECT idPerson FROM Person WHERE idPerson="+idCustomer+"), (SELECT idPerson FROM Person WHERE idPerson="+idAdvisor+"), ";";
+		String sql ="INSERT INTO Orders (titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note) VALUES ('"+title+"', "+type+", "+projectedCosts+","+realCosts+",(SELECT idPerson FROM Persons WHERE idPerson="+idCustomer+"), (SELECT idPerson FROM Persons WHERE idPerson="+idAdvisor+"), (SELECT idPerson FROM Persons WHERE idPerson="+idSecondaryAdvisor+"), '"+fileName+"','"+fileLocation+"', '"+note+"');";
 		stmt.executeUpdate(sql);
+		String sql2 ="INSERT INTO OrderStatus (idOrder, status, timestamp) VALUES ((SELECT last_insert_rowid() FROM Orders), 1, '"+datetime+"';)";
+		stmt.executeUpdate(sql2);
 		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Orders");
 		rs.next();
 		result = rs.getInt(1);
@@ -301,22 +314,21 @@ public class SQLManager {
 		return id;
 	}
 
-	public void modifyOrder1(int id, String title, int type, int idAdvisor, int idSecondaryAdvisor, String notes, double forecastedCosts, double realCosts, String fileLocation) throws SQLException {
+	public void modifyOrder1(int id, String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
 		Statement stmt = c.createStatement(); 
-		String sql = "UPDATE Orders "
-				+ "SET title='"+title+"', type='"+type+"', idAdvisor='"+idAdvisor+"' , idSecondaryAdvisor='"+idSecondaryAdvisor+"' , notes='"+notes+"' , forecastedCosts='"+forecastedCosts+"' ,realCosts ='"+realCosts+"', fileLocation="+fileLocation+
-				" WHERE idOrder="+id+";";
+		String sql = "UPDATE Orders SET title='"+title+"', type='"+type+"', projectedCosts='"+projectedCosts+"' , realCosts='"+realCosts+"' , idCutomer='"+idCustomer+"' , idAdvisor='"+idAdvisor+"' ,idSecondaryAdvisor ='"+idSecondaryAdvisor+"', fileName="+fileName+", fileLocation='"+fileLocation+"', note='"+note+"' WHERE idOrder="+id+";";
 		stmt.executeUpdate(sql); 
 		stmt.close();
 	}
 	
-	public void modifyOrderType(int id, AttributeTypesOrder attribute, int newValue) throws SQLException{
+	/*Method not needed
+	public void setOrderType(int id, AttributeTypesOrder attribute, int newValue) throws SQLException{
 		Statement stmt = c.createStatement();
 		String sql ="ALTER Orders SET type="+newValue+"WHERE idOrder="+id+";";
 		stmt.executeUpdate(sql); 
 		stmt.close();
-	}
-
+	}*/
+	
 	public void modifyOrder(int id, AttributeTypesOrder attribute, String newValue) throws SQLException{
 		Statement stmt = c.createStatement();
 		switch(attribute) {
@@ -358,6 +370,7 @@ public class SQLManager {
 		}
 	}
 
+	/*We want to have a new row for every change in orderStatus this method would overwrite it!!!
 	public void modifyOrderStatus(int id, AttributeTypesOrderStatus attribute, int newValue ) throws SQLException {
 		Statement stmt = c.createStatement();
 		switch(attribute) {
@@ -366,7 +379,7 @@ public class SQLManager {
 			stmt.executeUpdate(sql);
 			stmt.close();
 			break;
-		case finished:
+		case made:
 			String sql1 ="ALTER OrderStatus SET status="+newValue+"WHERE idOrder="+id+";";
 			stmt.executeUpdate(sql1);
 			stmt.close();
@@ -402,6 +415,13 @@ public class SQLManager {
 			stmt.close();
 			break;
 		}
+	}*/
+	
+	public void changeOrderStatus(int id, int status, String datetime) throws SQLException{
+		Statement stmt = c.createStatement(); 
+		String sql = "INSERT INTO OrderStatus (idOrder, status, timestamp) VALUES (id,"+status+", '"+datetime+"';)";
+		stmt.executeUpdate(sql); 
+		stmt.close();
 	}
 
 	// search methods - Work in Progress
@@ -444,9 +464,9 @@ public class SQLManager {
 		return result;
 	}
 	
-	//interner to-DO Kommentar - hier muss die Verbindung geschaffen werden, dass er in der Tabelle Status sucht, aber die Daten aus Orders ausgibt
+	/*interner to-DO Kommentar - hier muss die Verbindung geschaffen werden, dass er in der Tabelle Status sucht, aber die Daten aus Orders ausgibt
 	public String getOrdersByStatus(int status) throws SQLException, StatusNotInDBException {
-		String result ="";
+		List<Order> result = new ArrayList<Order>();
 
 		Statement stmt = c.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM OrderStatus WHERE status LIKE '"+status+"';");
@@ -464,7 +484,7 @@ public class SQLManager {
 
 		return result;
 	}
-	// Nico End
+	// Nico End*/
 }
 
 

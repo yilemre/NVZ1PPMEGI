@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -31,14 +32,18 @@ public class PersonManagement {
 	SQLManager.getInstance().deletePersonFromDB(ID); 
     }
 
-    public static void modifyPerson(int id, String firstname, String surname, String street, String housenumber,
-	String zipcode,String email, String username, String password, int rights) throws SQLException {
-	Timestamp t = new Timestamp(System.currentTimeMillis());  
-	SQLManager.getInstance().modifyPerson1(id, firstname, surname,street,housenumber,zipcode,email,t,username,password, rights);
+    public static void modifyPerson(int id, String firstname, String surname, String street, int housenumber,
+	int zipcode,String email, String username, String password, int rights) throws SQLException {
+    String dateTimeString = null;
+    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    Calendar cal = Calendar.getInstance();
+    Date     time = cal.getTime();
+    dateTimeString = df.format(time); 
+	SQLManager.getInstance().modifyPerson(id, firstname, surname,street,housenumber,zipcode,email,dateTimeString,username,password, rights);
     }
     
-    public static ResultSet getPersons() throws SQLException {
-	return SQLManager.getInstance().getPersons1(); 
+    public static List<Person> getPersons() throws SQLException {
+	return SQLManager.getInstance().getPersons(); 
     }
     /*
     public static void modifyPersonsFirstname(int id, String newValue) throws SQLException {
@@ -67,5 +72,15 @@ public class PersonManagement {
     }
     public static void modifyPersonsPassword(int id, String newValue) throws SQLException {
 	SQLManager.getInstance().modifyPerson(id, AttributeTypesPerson.password, newValue);
-    }*/	
+    }*/
+
+	public static List<Person> getPersonsByName(String searchValue) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static List<Person> getPersonsByLastname(String searchValue) {
+		// TODO Auto-generated method stub
+		return null;
+	}	
 }

@@ -13,13 +13,19 @@ public class Person {
     private int housenumber;
     private int plz;
     private String email;
-    private Date timestamp;
+    private String timestamp;
     private  String username; 
     private  String password;
+    private int rights;
     private double costsForComponents ;
-    ArrayList<Component> shoppingCart = new ArrayList();
+    public double getCostsForComponents() {
+		return costsForComponents;
+	}
+
+
+	ArrayList<Component> shoppingCart = new ArrayList();
 	
-    public Person(int id,String firstname, String lastname, String street, int housenumber, int plz, String email, Date timestamp, String username, String password){
+    public Person(int id,String firstname, String lastname, String street, int housenumber, int plz, String email, String timestamp, String username, String password, int rights){
 	this.id = id; 
 	this.firstname = firstname; 
 	this.lastname = lastname; 
@@ -29,15 +35,43 @@ public class Person {
 	this.email = email; 
 	this.timestamp = timestamp;
 	this.username = username; 
-	this.password = password; 	   
+	this.password = password; 	
+	this.rights=rights;
     }
             
-    public Person(){    
+    public int getRights() {
+		return rights;
+	}
+
+	public void setRights(int rights) {
+		this.rights = rights;
+	}
+
+	public String getReadableRights(int rights) {
+		switch (rights) {
+			case 0:
+				return "Kunde";
+			case 1:
+				return "Mitglied";
+			case 2:
+				return "Lehrstuhlmitglied";
+			default:
+				return "Das passiert nicht!";
+		}
+	}
+	public Person(){    
 	
     }
     
-       
-    
+
+	public int getId() {
+		return id;
+	}
+
+	public void setCostsForComponents(double costsForComponents) {
+		this.costsForComponents = costsForComponents;
+	}
+	
     public String getFirstname() {
         return firstname;
     }
@@ -86,11 +120,11 @@ public class Person {
         this.email = email;
     }
 
-    public Date getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 
