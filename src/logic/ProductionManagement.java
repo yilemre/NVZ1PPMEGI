@@ -12,7 +12,7 @@ import Exceptions.ELabException;
 public class ProductionManagement {
 	
 
-	public static void addOrder(String title, String type, String notes, String fileLocation, double forecastedCosts, double realCosts, int idAdvisor, int SecondaryAdvisor) throws SQLException {
+	public static void addOrder(String title, int type, String notes, String fileLocation, double forecastedCosts, double realCosts, int idAdvisor, int SecondaryAdvisor) throws SQLException {
 		SQLManager.getInstance().insertOrderIntoDB();
 	}
 
@@ -20,7 +20,7 @@ public class ProductionManagement {
 		SQLManager.getInstance().deleteOrderFromDB(ID);
 	}
 
-	public static void modifyOrder(int id, String title, String type, int idAdvisor, int idSecondaryAdvisor, String notes, double forecastedCosts, double realCosts, String fileLocation) throws SQLException {
+	public static void modifyOrder(int id, String title, int type, int idAdvisor, int idSecondaryAdvisor, String notes, double forecastedCosts, double realCosts, String fileLocation) throws SQLException {
 		Timestamp t = new Timestamp(System.currentTimeMillis());  
 		SQLManager.getInstance().modifyOrder1(id, title, type, idAdvisor, idSecondaryAdvisor, notes, forecastedCosts, realCosts, fileLocation);
 	}
@@ -30,8 +30,8 @@ public class ProductionManagement {
 		SQLManager.getInstance().modifyOrder(id, AttributeTypesOrder.title, newValue);
 	}
 
-	public static void modifyOrderType(int id, String newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrder(id, AttributeTypesOrder.type, newValue);
+	public static void modifyOrderType(int id, int newValue) throws SQLException {
+		SQLManager.getInstance().modifyOrderType(id, AttributeTypesOrder.type, newValue);
 	}
 
 	public static void modifyOrderForecastedCosts(int id, String newValue) throws SQLException {

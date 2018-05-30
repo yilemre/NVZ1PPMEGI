@@ -91,7 +91,7 @@ public class GUIRegisterCustomer implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(tabbedPane, gbc_tabbedPane);
 		
 		JPanel paneladdPerson = new JPanel();
-		tabbedPane.addTab("Person hinzuf\u00FCgen", null, paneladdPerson, null);
+		tabbedPane.addTab("Person hinzufügen", null, paneladdPerson, null);
 		GridBagLayout gbl_paneladdPerson = new GridBagLayout();
 		gbl_paneladdPerson.columnWidths = new int[]{0, 0, 0};
 		gbl_paneladdPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -141,7 +141,7 @@ public class GUIRegisterCustomer implements ActionListener {
 		paneladdPerson.add(textFieldlastName, gbc_textFieldlastName);
 		textFieldlastName.setColumns(10);
 		
-		JLabel lblStreet = new JLabel("Stra\u00DFe");
+		JLabel lblStreet = new JLabel("Straße");
 		GridBagConstraints gbc_lblStreet = new GridBagConstraints();
 		gbc_lblStreet.anchor = GridBagConstraints.EAST;
 		gbc_lblStreet.insets = new Insets(0, 0, 5, 5);
@@ -303,7 +303,7 @@ public class GUIRegisterCustomer implements ActionListener {
 		gbc_btnaddPerson.gridy = 12;
 		paneladdPerson.add(btnaddPerson, gbc_btnaddPerson);
 		
-		JButton btndeleteallInputs = new JButton("Eingaben l\u00F6schen");
+		JButton btndeleteallInputs = new JButton("Eingaben löschen");
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteallInputs.insets = new Insets(0, 0, 5, 0);
@@ -322,7 +322,7 @@ public class GUIRegisterCustomer implements ActionListener {
 		JMenuBar menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
 		
-		JMenu mnNewMenuOptions = new JMenu("Men�");
+		JMenu mnNewMenuOptions = new JMenu("Men�");
 		menuBar.add(mnNewMenuOptions);
 		
 		JMenuItem mntmNewMenuItemabortRegister = new JMenuItem("Registrierung abbrechen");
@@ -348,7 +348,7 @@ public class GUIRegisterCustomer implements ActionListener {
 			
 		}
 
-		if (command == "Eingaben l\u00F6schen") {
+		if (command == "Eingaben löschen") {
 			
 			
 		}

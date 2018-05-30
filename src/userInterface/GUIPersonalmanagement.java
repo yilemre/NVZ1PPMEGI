@@ -177,7 +177,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		paneladdPerson.add(textFieldlastName, gbc_textFieldlastName);
 		textFieldlastName.setColumns(10);
 		
-		JLabel lblStreet = new JLabel("Stra\u00DFe");
+		JLabel lblStreet = new JLabel("Straße");
 		GridBagConstraints gbc_lblStreet = new GridBagConstraints();
 		gbc_lblStreet.anchor = GridBagConstraints.EAST;
 		gbc_lblStreet.insets = new Insets(0, 0, 5, 5);
@@ -383,7 +383,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		panelmodifyPerson.add(textFieldlastNameModify, gbc_textFieldlastNameModify);
 		textFieldlastNameModify.setColumns(10);
 		
-		JLabel lblstreetModify = new JLabel("Stra\u00DFe");
+		JLabel lblstreetModify = new JLabel("Straße");
 		GridBagConstraints gbc_lblstreetModify = new GridBagConstraints();
 		gbc_lblstreetModify.anchor = GridBagConstraints.EAST;
 		gbc_lblstreetModify.insets = new Insets(0, 0, 5, 5);
@@ -501,7 +501,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		gbc_passwordFieldModify.gridy = 9;
 		panelmodifyPerson.add(passwordFieldModify, gbc_passwordFieldModify);
 		
-		JButton btnsaveModifiedValues = new JButton("\u00C4nderungen speichern");
+		JButton btnsaveModifiedValues = new JButton("Änderungen speichern");
 		btnsaveModifiedValues.addActionListener(this);
 		GridBagConstraints gbc_btnsaveModifiedValues = new GridBagConstraints();
 		gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
@@ -625,7 +625,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		JMenu mnNewMenuOptions = new JMenu("Menü");
 		menuBar.add(mnNewMenuOptions);
 		
-		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmen\u00FC");
+		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmenü");
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
 		mntmNewMenuItembacktoMain.addActionListener(this);
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");

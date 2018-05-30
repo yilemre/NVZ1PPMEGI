@@ -7,7 +7,6 @@ import java.util.Date;
 
 import logic.*;
 import Exceptions.*;
-import logic.Person;
 
 
 public class SQLManager {
@@ -298,11 +297,18 @@ public class SQLManager {
 		return id;
 	}
 
-	public void modifyOrder1(int id, String title, String type, int idAdvisor, int idSecondaryAdvisor, String notes, double forecastedCosts, double realCosts, String fileLocation) throws SQLException {
+	public void modifyOrder1(int id, String title, int type, int idAdvisor, int idSecondaryAdvisor, String notes, double forecastedCosts, double realCosts, String fileLocation) throws SQLException {
 		Statement stmt = c.createStatement(); 
 		String sql = "UPDATE Orders "
 				+ "SET title='"+title+"', type='"+type+"', idAdvisor='"+idAdvisor+"' , idSecondaryAdvisor='"+idSecondaryAdvisor+"' , notes='"+notes+"' , forecastedCosts='"+forecastedCosts+"' ,realCosts ='"+realCosts+"', fileLocation="+fileLocation+
 				" WHERE idOrder="+id+";";
+		stmt.executeUpdate(sql); 
+		stmt.close();
+	}
+	
+	public void modifyOrderType(int id, AttributeTypesOrder attribute, int newValue) throws SQLException{
+		Statement stmt = c.createStatement();
+		String sql ="ALTER Orders SET type="+newValue+"WHERE idOrder="+id+";";
 		stmt.executeUpdate(sql); 
 		stmt.close();
 	}
@@ -313,11 +319,6 @@ public class SQLManager {
 		case title: 
 			String sql ="ALTER Orders SET title="+newValue+"WHERE idOrder="+id+";";
 			stmt.executeUpdate(sql);
-			stmt.close();
-			break;
-		case type:
-			String sql1 ="ALTER Orders SET type="+newValue+"WHERE idOrder="+id+";";
-			stmt.executeUpdate(sql1);
 			stmt.close();
 			break;
 		case idAdvisor:
@@ -400,15 +401,14 @@ public class SQLManager {
 	}
 
 	// search methods - Work in Progress
-	public String getOrdersByTitle(String title) throws SQLException, TitleNotInDBException {
-		String result ="";
-
+	public List<Order> getOrdersByTitle(String title) throws SQLException, TitleNotInDBException {
+		List<Order> result = new ArrayList<Order>();
+		
 		Statement stmt = c.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM Orders WHERE titel LIKE '"+title+"';");
 		while (rs.next()){
-			//Order temp = new Order (rs.getInt("ID"), rs.getString("Titel"),rs.getString("Typ"),(rs.getDouble("Prognostizierte Kosten")), (rs.getDouble("Reele Kosten")), rs.getInt("Kunde"), rs.getInt("Verantwortlicher"), rs.getInt("Vertreter"), rs.getString("Dateiname"), rs.getString("Dateipfad"), rs.getString("Notizen"));
-			String temp = "";
-			result = temp;			
+			Order temp = new Order (rs.getInt("ID"), rs.getString("Titel"),rs.getInt("Typ"),(rs.getDouble("Prognostizierte Kosten")), (rs.getDouble("Reele Kosten")), rs.getInt("Kunde"), rs.getInt("Verantwortlicher"), rs.getInt("Vertreter"), rs.getString("Dateiname"), rs.getString("Dateipfad"), rs.getString("Notizen"));
+			result.add(temp);			
 		}
 
 		if (result.isEmpty()) throw new TitleNotInDBException();
@@ -420,15 +420,15 @@ public class SQLManager {
 		return result;
 	}
 
-	public String getOrdersByType(String type) throws SQLException, TypeNotInDBException {
-		String result ="";
-
+	public List<Order> getOrdersByType(int type) throws SQLException, TypeNotInDBException {
+		List<Order> result = new ArrayList<Order>();
+		
 		Statement stmt = c.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM Orders WHERE type LIKE '"+type+"';");
 		while (rs.next()){
-			//Order temp = new Order (rs.getInt("ID"), rs.getString("Titel"),rs.getString("Typ"),(rs.getDouble("Prognostizierte Kosten")), (rs.getDouble("Reele Kosten")), rs.getInt("Kunde"), rs.getInt("Verantwortlicher"), rs.getInt("Vertreter"), rs.getString("Dateiname"), rs.getString("Dateipfad"), rs.getString("Notizen"));
-			String temp = "";
-			result = temp;			
+			Order temp = new Order (rs.getInt("ID"), rs.getString("Titel"),rs.getInt("Typ"),(rs.getDouble("Prognostizierte Kosten")), (rs.getDouble("Reele Kosten")), rs.getInt("Kunde"), rs.getInt("Verantwortlicher"), rs.getInt("Vertreter"), rs.getString("Dateiname"), rs.getString("Dateipfad"), rs.getString("Notizen"));
+			
+			result.add(temp);
 		}
 
 		if (result.isEmpty()) throw new TypeNotInDBException();
@@ -439,7 +439,8 @@ public class SQLManager {
 
 		return result;
 	}
-
+	
+	//interner to-DO Kommentar - hier muss die Verbindung geschaffen werden, dass er in der Tabelle Status sucht, aber die Daten aus Orders ausgibt
 	public String getOrdersByStatus(int status) throws SQLException, StatusNotInDBException {
 		String result ="";
 

@@ -290,7 +290,7 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_btnaddBill.gridy = 9;
 		panelcreateBill.add(btnaddBill, gbc_btnaddBill);
 		
-		JButton btndeleteallInputs = new JButton("Eingaben l\u00F6schen");
+		JButton btndeleteallInputs = new JButton("Eingaben löschen");
 		btndeleteallInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
@@ -1059,7 +1059,7 @@ public class GUIFinanceManagement implements ActionListener {
 		
 		// Restliche Funktionen einbinden
 		
-		if (command == "Hauptmen\u00FC") {
+		if (command == "Hauptmenü") {
 			
 		GuiMenue mainMenu= new GuiMenue();
 		frmElabVerwaltungsprogramm.dispose();

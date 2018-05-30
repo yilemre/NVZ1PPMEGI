@@ -336,7 +336,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		}
 		
 
-		if (command=="Dem Warenkorb hinzuf�gen") {
+		if (command=="Dem Warenkorb hinzufügen") {
 			
 			
 		}

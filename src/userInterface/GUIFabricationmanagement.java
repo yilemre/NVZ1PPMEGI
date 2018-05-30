@@ -185,7 +185,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		paneladdOrder.add(textFieldfilePath, gbc_textFieldfilePath);
 		textFieldfilePath.setColumns(10);
 
-		JLabel lblpredictedCost = new JLabel("prognostizierte Kosten");
+		JLabel lblpredictedCost = new JLabel("Prognostizierte Kosten");
 		lblpredictedCost.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblpredictedCost = new GridBagConstraints();
 		gbc_lblpredictedCost.anchor = GridBagConstraints.EAST;
@@ -361,7 +361,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_comboBoxtypModify.gridy = 1;
 		panelmodify.add(comboBoxtypModify, gbc_comboBoxtypModify);
 
-		JLabel lblnoteOtherModify = new JLabel("Notiz zu sonstiges");
+		JLabel lblnoteOtherModify = new JLabel("Notiz zu Sonstiges");
 		lblnoteOtherModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblnoteOtherModify = new GridBagConstraints();
 		gbc_lblnoteOtherModify.gridwidth = 2;
@@ -402,7 +402,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(textFieldfilePathModify, gbc_textFieldfilePathModify);
 		textFieldfilePathModify.setColumns(10);
 
-		JLabel lblpredictedCostsModify = new JLabel("prognostizierte Kosten");
+		JLabel lblpredictedCostsModify = new JLabel("Prognostizierte Kosten");
 		lblpredictedCostsModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblpredictedCostsModify = new GridBagConstraints();
 		gbc_lblpredictedCostsModify.gridwidth = 2;
@@ -422,7 +422,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		panelmodify.add(textFieldpredictedCostsModify, gbc_textFieldpredictedCostsModify);
 		textFieldpredictedCostsModify.setColumns(10);
 
-		JLabel lblactualCostsModify = new JLabel("reelle Kosten");
+		JLabel lblactualCostsModify = new JLabel("Reelle Kosten");
 		lblactualCostsModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblactualCostsModify = new GridBagConstraints();
 		gbc_lblactualCostsModify.gridwidth = 2;
@@ -502,7 +502,7 @@ public class GUIFabricationmanagement implements ActionListener {
 		gbc_comboBox.gridy = 8;
 		panelmodify.add(comboBox, gbc_comboBox);
 
-		JButton btnsaveModifiedValues = new JButton("\u00C4nderungen speichern");
+		JButton btnsaveModifiedValues = new JButton("Änderungen speichern");
 		btnsaveModifiedValues.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnsaveModifiedValues.addActionListener(this);
 		GridBagConstraints gbc_btnsaveModifiedValues = new GridBagConstraints();
@@ -672,7 +672,7 @@ public class GUIFabricationmanagement implements ActionListener {
 			
 			// Nico begin
 			  try {
-					ProductionManagement.addOrder(textFieldorderTitel.getText(), Integer.toString(comboBoxorderTyp.getSelectedIndex()), textFieldnoteOther.getText(), textFieldfilePath.getText(), Double.parseDouble(textFieldpredictedCosts.getText()),
+					ProductionManagement.addOrder(textFieldorderTitel.getText(), comboBoxorderTyp.getSelectedIndex(), textFieldnoteOther.getText(), textFieldfilePath.getText(), Double.parseDouble(textFieldpredictedCosts.getText()),
 							Double.parseDouble(textFieldactualCosts.getText()), comboBoxresponsible.getSelectedIndex(), comboBoxstandinResponsible.getSelectedIndex());
 					
 				    } 
@@ -683,11 +683,14 @@ public class GUIFabricationmanagement implements ActionListener {
 		}
 
 		if (command == "Eingaben löschen") {
+			
 			//Nico begin
+			
 			textFieldorderTitel.setText("");
 			textFieldnoteOther.setText("");
 			textFieldpredictedCosts.setText("");
 			textFieldfilePath.setText("");
+			
 			//Nico end
 		}
 
