@@ -109,7 +109,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		frmElabVerwaltungsprogramm.getContentPane().add(tabbedPane, gbc_tabbedPane);
 		
 		JPanel paneladdPerson = new JPanel();
-		tabbedPane.addTab("Person hinzuf\u00FCgen", null, paneladdPerson, null);
+		tabbedPane.addTab("Person hinzufügen", null, paneladdPerson, null);
 		GridBagLayout gbl_paneladdPerson = new GridBagLayout();
 		gbl_paneladdPerson.columnWidths = new int[]{179, 0, 0};
 		gbl_paneladdPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -177,7 +177,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		paneladdPerson.add(textFieldlastName, gbc_textFieldlastName);
 		textFieldlastName.setColumns(10);
 		
-		JLabel lblStreet = new JLabel("Stra\u00DFe");
+		JLabel lblStreet = new JLabel("Straße");
 		GridBagConstraints gbc_lblStreet = new GridBagConstraints();
 		gbc_lblStreet.anchor = GridBagConstraints.EAST;
 		gbc_lblStreet.insets = new Insets(0, 0, 5, 5);
@@ -294,9 +294,9 @@ public class GUIPersonalmanagement implements ActionListener{
 		gbc_passwordField.gridy = 10;
 		paneladdPerson.add(passwordField, gbc_passwordField);
 		
-		JButton btnaddPerson = new JButton("Person hinzuf\u00FCgen");
+		JButton btnaddPerson = new JButton("Person hinzufügen");
 		btnaddPerson.addActionListener(this);
-		btnaddPerson.setActionCommand("Person hinzuf\u00FCgen");
+		btnaddPerson.setActionCommand("Person hinzufügen");
 		GridBagConstraints gbc_btnaddPerson = new GridBagConstraints();
 		gbc_btnaddPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddPerson.insets = new Insets(0, 0, 5, 0);
@@ -304,7 +304,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		gbc_btnaddPerson.gridy = 11;
 		paneladdPerson.add(btnaddPerson, gbc_btnaddPerson);
 		
-		JButton btndeleteallInputs = new JButton("Eingaben l\u00F6schen");
+		JButton btndeleteallInputs = new JButton("Eingaben löschen");
 		btndeleteallInputs.addActionListener(this);
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
@@ -383,7 +383,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		panelmodifyPerson.add(textFieldlastNameModify, gbc_textFieldlastNameModify);
 		textFieldlastNameModify.setColumns(10);
 		
-		JLabel lblstreetModify = new JLabel("Stra\u00DFe");
+		JLabel lblstreetModify = new JLabel("Straße");
 		GridBagConstraints gbc_lblstreetModify = new GridBagConstraints();
 		gbc_lblstreetModify.anchor = GridBagConstraints.EAST;
 		gbc_lblstreetModify.insets = new Insets(0, 0, 5, 5);
@@ -501,7 +501,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		gbc_passwordFieldModify.gridy = 9;
 		panelmodifyPerson.add(passwordFieldModify, gbc_passwordFieldModify);
 		
-		JButton btnsaveModifiedValues = new JButton("\u00C4nderungen speichern");
+		JButton btnsaveModifiedValues = new JButton("Änderungen speichern");
 		btnsaveModifiedValues.addActionListener(this);
 		GridBagConstraints gbc_btnsaveModifiedValues = new GridBagConstraints();
 		gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
@@ -625,7 +625,7 @@ public class GUIPersonalmanagement implements ActionListener{
 		JMenu mnNewMenuOptions = new JMenu("Menü");
 		menuBar.add(mnNewMenuOptions);
 		
-		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmen\u00FC");
+		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmenü");
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
 		mntmNewMenuItembacktoMain.addActionListener(this);
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
@@ -651,7 +651,7 @@ frmElabVerwaltungsprogramm.setVisible(true);
 		
 		String command = e.getActionCommand(); 
 		
-		if (command=="Person hinzuf\u00FCgen") {
+		if (command=="Person hinzufügen") {
 		    //Emre begin
 		    
 		    try {
@@ -664,7 +664,7 @@ frmElabVerwaltungsprogramm.setVisible(true);
 		    //Emre end
 		}
 
-		if (command=="Eingaben l\u00F6schen") {
+		if (command=="Eingaben löschen") {
 		    //Emre begin
 		    textFieldname.setText("");
 		    textFieldlastName.setText("");
@@ -677,7 +677,7 @@ frmElabVerwaltungsprogramm.setVisible(true);
 		    //Emre end
 		}
 
-		if (command=="\u00C4nderungen speichern") {
+		if (command=="Änderungen speichern") {
 			
 		}
 
@@ -690,11 +690,11 @@ frmElabVerwaltungsprogramm.setVisible(true);
 		}
 		
 		
-		if (command=="Person/en l\u00F6schen") {
+		if (command=="Person/en löschen") {
 			
 		}
 	
-		if (command =="Hauptmen\u00FC") {
+		if (command =="Hauptmenü") {
 			
 		GuiMenue gui = new GuiMenue();	
 		frmElabVerwaltungsprogramm.dispose();

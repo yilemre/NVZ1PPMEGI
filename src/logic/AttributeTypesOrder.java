@@ -2,5 +2,5 @@ package logic;
 
 public enum AttributeTypesOrder {
 
-	title, type, forecastedCosts, realCosts, notes, fileLocation, idAdvisor, idSecondaryAdvisor
+	title, forecastedCosts, realCosts, notes, fileLocation, idAdvisor, idSecondaryAdvisor
 }

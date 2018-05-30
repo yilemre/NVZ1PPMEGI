@@ -288,7 +288,7 @@ public class GUIComponentmanagement implements ActionListener {
 		gbc_btnaddPart.gridy = 9;
 		paneladdPart.add(btnaddPart, gbc_btnaddPart);
 
-		JButton btndeleteallInputs = new JButton("Eingabe l\u00F6schen");
+		JButton btndeleteallInputs = new JButton("Eingabe löschen");
 		btndeleteallInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btndeleteallInputs.addActionListener(this);
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
@@ -464,7 +464,7 @@ public class GUIComponentmanagement implements ActionListener {
 																																						panelmodify.add(textFieldstorageLocationModify, gbc_textFieldstorageLocationModify);
 																																						textFieldstorageLocationModify.setColumns(10);
 																																						
-																																								JButton btnsaveModifiedValues = new JButton("\u00C4nderungen speichern");
+																																								JButton btnsaveModifiedValues = new JButton("Änderungen speichern");
 																																								btnsaveModifiedValues.setFont(new Font("Tahoma", Font.PLAIN, 15));
 																																								btnsaveModifiedValues.addActionListener(this);
 																																								GridBagConstraints gbc_btnsaveModifiedValues = new GridBagConstraints();
@@ -805,7 +805,7 @@ public class GUIComponentmanagement implements ActionListener {
 		mnNewMenuOptions.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		menuBar.add(mnNewMenuOptions);
 
-		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmen\u00FC");
+		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmenü");
 		mntmNewMenuItembacktoMain.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
 		mntmNewMenuItembacktoMain.addActionListener(this);
@@ -836,7 +836,7 @@ public class GUIComponentmanagement implements ActionListener {
 		if (command == "Bauteil hinzufügen") {
 
 		}
-		if (command == "Eingabe l\u00F6schen") {
+		if (command == "Eingabe löschen") {
 
 			textFieldpartName.setText("");
 			textFieldpartLink.setText("");
@@ -846,7 +846,7 @@ public class GUIComponentmanagement implements ActionListener {
 			textFieldquantityOrdered.setText("");
 			textFieldstorageLocation.setText("");
 		}
-		if (command == "\u00C4nderungen speichern") {
+		if (command == "Änderungen speichern") {
 
 		}
 		if (command == "Suchen") {
@@ -885,7 +885,7 @@ public class GUIComponentmanagement implements ActionListener {
 
 		}
 
-		if (command == "Hauptmen\u00FC") {
+		if (command == "Hauptmenü") {
 
 			GuiMenue mainMenu = new GuiMenue();
 			frmElabVerwaltungsprogramm.dispose();
