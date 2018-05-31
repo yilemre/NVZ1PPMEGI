@@ -672,8 +672,8 @@ public class GUIFabricationmanagement implements ActionListener {
 			
 			// Nico begin
 			  try {
-					ProductionManagement.addOrder(textFieldorderTitel.getText(), comboBoxorderTyp.getSelectedIndex(), textFieldnoteOther.getText(), textFieldfilePath.getText(), Double.parseDouble(textFieldpredictedCosts.getText()),
-							Double.parseDouble(textFieldactualCosts.getText()), comboBoxresponsible.getSelectedIndex(), comboBoxstandinResponsible.getSelectedIndex());
+					ProductionManagement.addOrder(textFieldorderTitel.getText(), comboBoxorderTyp.getSelectedIndex(), Double.parseDouble(textFieldpredictedCosts.getText()),
+							Double.parseDouble(textFieldactualCosts.getText()), /*customerID,*/  comboBoxresponsible.getSelectedIndex(), comboBoxstandinResponsible.getSelectedIndex(), /*fileName,*/ textFieldfilePath.getText(), textFieldnoteOther.getText());
 					
 				    } 
 				    catch (Exception a) {
