@@ -65,16 +65,6 @@ public class SQLManager {
 	}		
 	//Emre end
 
-	/*why?!
-	public ResultSet getPersons1() throws SQLException {
-		Statement stmt = c.createStatement(); 
-		String sql = "SELECT * FROM Persons"; 
-		ResultSet rs = stmt.executeQuery(sql); 
-
-		return rs; 
-	}*/
-
-	//correct
 	public List<Person> getPersons() throws SQLException {
 		List<Person> result = new ArrayList<Person>();
 
@@ -93,7 +83,7 @@ public class SQLManager {
 	public List<Person> getPersonsByFirsname(String firstname) throws SQLException {
 		List<Person> result = new ArrayList<Person>();
 		Statement stmt = c.createStatement();
-		String sql = "SELECT * FROM Persons WHERE firstname='"+firstname+"'";
+		String sql = "SELECT * FROM Persons WHERE firstname LIKE'"+firstname+"'";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
 			Person temp = new Person (rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getString("timestamp"),rs.getString("username"),rs.getString("password"),rs.getInt("rights"));
@@ -108,7 +98,7 @@ public class SQLManager {
 		List<Person> result = new ArrayList<Person>();
 
 		Statement stmt = c.createStatement();
-		String sql = "SELECT * FROM Persons WHERE surname='"+surname+"'";
+		String sql = "SELECT * FROM Persons WHERE surname LIKE'"+surname+"'";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
 			Person temp = new Person (rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getString("timestamp"),rs.getString("username"),rs.getString("password"),rs.getInt("rights"));
