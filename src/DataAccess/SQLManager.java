@@ -254,6 +254,18 @@ public class SQLManager {
     		stmt.close();
 		    
 	} 
+	
+	public List<Component> getComponents() throws SQLException {
+	    List<Component> result = new ArrayList<Component>(); 
+	    Statement stmt = c.createStatement(); 
+	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts");
+	    
+	    while (rs.next()) {
+		Component c = new Component(rs.getInt("idPart"), rs.getString("name"), rs.getString("productlink"), rs.getDouble("price"), rs.getInt("storing"), rs.getInt("plannedAmount"), rs.getInt("orderedAmount"), rs.getString("storageLocation"),rs.getInt("idCategory"));
+		result.add(c); 
+	    }
+	    return result; 
+	}
 	//Emre end
 	/*
 	public void modifyPart(int id, AttributeTypesPart attribute, String newValue) throws SQLException {

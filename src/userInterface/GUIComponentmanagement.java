@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import logic.ComponentManagement;
 
@@ -45,6 +47,7 @@ import javax.swing.JMenuItem;
 import javax.swing.ListSelectionModel;
 import javax.swing.JSplitPane;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 
 public class GUIComponentmanagement  {
 
@@ -59,7 +62,7 @@ public class GUIComponentmanagement  {
 	private JTextField textFieldquantityPlanned;
 	private JTextField textFieldquantityOrdered;
 	private JTextField textFieldstorageLocation;
-	private JTextField textFieldstorageLocationModify;
+	
 	private JTextField textFieldpartNumberSearch;
 	private JTextField textFieldcategoryNameNew;
 	private JTextField textFieldcategoryIDModify;
@@ -69,7 +72,12 @@ public class GUIComponentmanagement  {
 	private JTextField textFieldcategoryNoteNew;
 	private JTextField textFieldcategoryNoteModify;
 	private JTextField tfArticleNo;
-
+	private JTable table;
+	private JTextField tfComponentModifyID;
+	JSpinner spinnerquantityStorageModify = new JSpinner();
+	JSpinner spinnerquantityPlannedModify = new JSpinner();
+	JSpinner spinnerquantityOrderedModify = new JSpinner();
+	private JTextField tfStorageLocationModify;
 	/**
 	 * Launch the application.
 	 */
@@ -359,11 +367,30 @@ public class GUIComponentmanagement  {
 						tabbedPane.addTab("Bauteil bearbeiten", null, panelmodify, null);
 						GridBagLayout gbl_panelmodify = new GridBagLayout();
 						gbl_panelmodify.columnWidths = new int[] { 152, 0, 0 };
-						gbl_panelmodify.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+						gbl_panelmodify.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 						gbl_panelmodify.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-						gbl_panelmodify.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
+						gbl_panelmodify.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
 								Double.MIN_VALUE };
 						panelmodify.setLayout(gbl_panelmodify);
+								
+								JLabel lblId = new JLabel("ID");
+								lblId.setFont(new Font("Tahoma", Font.PLAIN, 15));
+								GridBagConstraints gbc_lblId = new GridBagConstraints();
+								gbc_lblId.anchor = GridBagConstraints.EAST;
+								gbc_lblId.insets = new Insets(0, 0, 5, 5);
+								gbc_lblId.gridx = 0;
+								gbc_lblId.gridy = 0;
+								panelmodify.add(lblId, gbc_lblId);
+								
+								tfComponentModifyID = new JTextField();
+								tfComponentModifyID.setFont(new Font("Tahoma", Font.PLAIN, 15));
+								GridBagConstraints gbc_tfComponentModifyID = new GridBagConstraints();
+								gbc_tfComponentModifyID.insets = new Insets(0, 0, 5, 0);
+								gbc_tfComponentModifyID.fill = GridBagConstraints.HORIZONTAL;
+								gbc_tfComponentModifyID.gridx = 1;
+								gbc_tfComponentModifyID.gridy = 0;
+								panelmodify.add(tfComponentModifyID, gbc_tfComponentModifyID);
+								tfComponentModifyID.setColumns(10);
 						
 								JLabel lblpartNameModify = new JLabel("Bauteilname");
 								lblpartNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -371,7 +398,7 @@ public class GUIComponentmanagement  {
 								gbc_lblpartNameModify.anchor = GridBagConstraints.EAST;
 								gbc_lblpartNameModify.insets = new Insets(0, 0, 5, 5);
 								gbc_lblpartNameModify.gridx = 0;
-								gbc_lblpartNameModify.gridy = 0;
+								gbc_lblpartNameModify.gridy = 1;
 								panelmodify.add(lblpartNameModify, gbc_lblpartNameModify);
 								
 										textFieldpartNameModify = new JTextField();
@@ -380,7 +407,7 @@ public class GUIComponentmanagement  {
 										gbc_textFieldpartNameModify.insets = new Insets(0, 0, 5, 0);
 										gbc_textFieldpartNameModify.fill = GridBagConstraints.HORIZONTAL;
 										gbc_textFieldpartNameModify.gridx = 1;
-										gbc_textFieldpartNameModify.gridy = 0;
+										gbc_textFieldpartNameModify.gridy = 1;
 										panelmodify.add(textFieldpartNameModify, gbc_textFieldpartNameModify);
 										textFieldpartNameModify.setColumns(10);
 										
@@ -390,7 +417,7 @@ public class GUIComponentmanagement  {
 												gbc_lblcategoryModify.anchor = GridBagConstraints.EAST;
 												gbc_lblcategoryModify.insets = new Insets(0, 0, 5, 5);
 												gbc_lblcategoryModify.gridx = 0;
-												gbc_lblcategoryModify.gridy = 1;
+												gbc_lblcategoryModify.gridy = 2;
 												panelmodify.add(lblcategoryModify, gbc_lblcategoryModify);
 												
 														JComboBox comboBoxcategoryModify = new JComboBox();
@@ -399,7 +426,7 @@ public class GUIComponentmanagement  {
 														gbc_comboBoxcategoryModify.insets = new Insets(0, 0, 5, 0);
 														gbc_comboBoxcategoryModify.fill = GridBagConstraints.HORIZONTAL;
 														gbc_comboBoxcategoryModify.gridx = 1;
-														gbc_comboBoxcategoryModify.gridy = 1;
+														gbc_comboBoxcategoryModify.gridy = 2;
 														panelmodify.add(comboBoxcategoryModify, gbc_comboBoxcategoryModify);
 														
 																JLabel lblpartLinkModify = new JLabel("Produktlink");
@@ -408,7 +435,7 @@ public class GUIComponentmanagement  {
 																gbc_lblpartLinkModify.anchor = GridBagConstraints.EAST;
 																gbc_lblpartLinkModify.insets = new Insets(0, 0, 5, 5);
 																gbc_lblpartLinkModify.gridx = 0;
-																gbc_lblpartLinkModify.gridy = 2;
+																gbc_lblpartLinkModify.gridy = 3;
 																panelmodify.add(lblpartLinkModify, gbc_lblpartLinkModify);
 																
 																		textFieldpartLinkModify = new JTextField();
@@ -417,7 +444,7 @@ public class GUIComponentmanagement  {
 																		gbc_textFieldpartLinkModify.insets = new Insets(0, 0, 5, 0);
 																		gbc_textFieldpartLinkModify.fill = GridBagConstraints.HORIZONTAL;
 																		gbc_textFieldpartLinkModify.gridx = 1;
-																		gbc_textFieldpartLinkModify.gridy = 2;
+																		gbc_textFieldpartLinkModify.gridy = 3;
 																		panelmodify.add(textFieldpartLinkModify, gbc_textFieldpartLinkModify);
 																		textFieldpartLinkModify.setColumns(10);
 																		
@@ -427,7 +454,7 @@ public class GUIComponentmanagement  {
 																				gbc_lblpartPrizeModify.anchor = GridBagConstraints.EAST;
 																				gbc_lblpartPrizeModify.insets = new Insets(0, 0, 5, 5);
 																				gbc_lblpartPrizeModify.gridx = 0;
-																				gbc_lblpartPrizeModify.gridy = 3;
+																				gbc_lblpartPrizeModify.gridy = 4;
 																				panelmodify.add(lblpartPrizeModify, gbc_lblpartPrizeModify);
 																				
 																						textFieldpartPrizeModify = new JTextField();
@@ -436,7 +463,7 @@ public class GUIComponentmanagement  {
 																						gbc_textFieldpartPrizeModify.insets = new Insets(0, 0, 5, 0);
 																						gbc_textFieldpartPrizeModify.fill = GridBagConstraints.HORIZONTAL;
 																						gbc_textFieldpartPrizeModify.gridx = 1;
-																						gbc_textFieldpartPrizeModify.gridy = 3;
+																						gbc_textFieldpartPrizeModify.gridy = 4;
 																						panelmodify.add(textFieldpartPrizeModify, gbc_textFieldpartPrizeModify);
 																						textFieldpartPrizeModify.setColumns(10);
 																						
@@ -446,7 +473,7 @@ public class GUIComponentmanagement  {
 																								gbc_lblquantityStoringModify.anchor = GridBagConstraints.EAST;
 																								gbc_lblquantityStoringModify.insets = new Insets(0, 0, 5, 5);
 																								gbc_lblquantityStoringModify.gridx = 0;
-																								gbc_lblquantityStoringModify.gridy = 4;
+																								gbc_lblquantityStoringModify.gridy = 5;
 																								panelmodify.add(lblquantityStoringModify, gbc_lblquantityStoringModify);
 																								
 																										JSpinner spinnerquantityStorageModify = new JSpinner();
@@ -455,7 +482,7 @@ public class GUIComponentmanagement  {
 																										gbc_spinnerquantityStorageModify.fill = GridBagConstraints.HORIZONTAL;
 																										gbc_spinnerquantityStorageModify.insets = new Insets(0, 0, 5, 0);
 																										gbc_spinnerquantityStorageModify.gridx = 1;
-																										gbc_spinnerquantityStorageModify.gridy = 4;
+																										gbc_spinnerquantityStorageModify.gridy = 5;
 																										panelmodify.add(spinnerquantityStorageModify, gbc_spinnerquantityStorageModify);
 																										
 																												JLabel lblquantityPlannedModify = new JLabel("Menge (geplant)");
@@ -464,7 +491,7 @@ public class GUIComponentmanagement  {
 																												gbc_lblquantityPlannedModify.anchor = GridBagConstraints.EAST;
 																												gbc_lblquantityPlannedModify.insets = new Insets(0, 0, 5, 5);
 																												gbc_lblquantityPlannedModify.gridx = 0;
-																												gbc_lblquantityPlannedModify.gridy = 5;
+																												gbc_lblquantityPlannedModify.gridy = 6;
 																												panelmodify.add(lblquantityPlannedModify, gbc_lblquantityPlannedModify);
 																												
 																														JSpinner spinnerquantityPlannedModify = new JSpinner();
@@ -473,7 +500,7 @@ public class GUIComponentmanagement  {
 																														gbc_spinnerquantityPlannedModify.fill = GridBagConstraints.HORIZONTAL;
 																														gbc_spinnerquantityPlannedModify.insets = new Insets(0, 0, 5, 0);
 																														gbc_spinnerquantityPlannedModify.gridx = 1;
-																														gbc_spinnerquantityPlannedModify.gridy = 5;
+																														gbc_spinnerquantityPlannedModify.gridy = 6;
 																														panelmodify.add(spinnerquantityPlannedModify, gbc_spinnerquantityPlannedModify);
 																														
 																																JLabel lblquantityOrderedModify = new JLabel("Menge (bestellt)");
@@ -482,7 +509,7 @@ public class GUIComponentmanagement  {
 																																gbc_lblquantityOrderedModify.anchor = GridBagConstraints.EAST;
 																																gbc_lblquantityOrderedModify.insets = new Insets(0, 0, 5, 5);
 																																gbc_lblquantityOrderedModify.gridx = 0;
-																																gbc_lblquantityOrderedModify.gridy = 6;
+																																gbc_lblquantityOrderedModify.gridy = 7;
 																																panelmodify.add(lblquantityOrderedModify, gbc_lblquantityOrderedModify);
 																																
 																																		JSpinner spinnerquantityOrderedModify = new JSpinner();
@@ -491,7 +518,7 @@ public class GUIComponentmanagement  {
 																																		gbc_spinnerquantityOrderedModify.fill = GridBagConstraints.HORIZONTAL;
 																																		gbc_spinnerquantityOrderedModify.insets = new Insets(0, 0, 5, 0);
 																																		gbc_spinnerquantityOrderedModify.gridx = 1;
-																																		gbc_spinnerquantityOrderedModify.gridy = 6;
+																																		gbc_spinnerquantityOrderedModify.gridy = 7;
 																																		panelmodify.add(spinnerquantityOrderedModify, gbc_spinnerquantityOrderedModify);
 																																		
 																																				JLabel lblstorageLocationModify = new JLabel("Lagerort");
@@ -500,18 +527,18 @@ public class GUIComponentmanagement  {
 																																				gbc_lblstorageLocationModify.anchor = GridBagConstraints.EAST;
 																																				gbc_lblstorageLocationModify.insets = new Insets(0, 0, 5, 5);
 																																				gbc_lblstorageLocationModify.gridx = 0;
-																																				gbc_lblstorageLocationModify.gridy = 7;
+																																				gbc_lblstorageLocationModify.gridy = 8;
 																																				panelmodify.add(lblstorageLocationModify, gbc_lblstorageLocationModify);
-																																				
-																																						textFieldstorageLocationModify = new JTextField();
-																																						textFieldstorageLocationModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																																						GridBagConstraints gbc_textFieldstorageLocationModify = new GridBagConstraints();
-																																						gbc_textFieldstorageLocationModify.insets = new Insets(0, 0, 5, 0);
-																																						gbc_textFieldstorageLocationModify.fill = GridBagConstraints.HORIZONTAL;
-																																						gbc_textFieldstorageLocationModify.gridx = 1;
-																																						gbc_textFieldstorageLocationModify.gridy = 7;
-																																						panelmodify.add(textFieldstorageLocationModify, gbc_textFieldstorageLocationModify);
-																																						textFieldstorageLocationModify.setColumns(10);
+																																								
+																																								tfStorageLocationModify = new JTextField();
+																																								GridBagConstraints gbc_tfStorageLocationModify = new GridBagConstraints();
+																																								gbc_tfStorageLocationModify.anchor = GridBagConstraints.NORTH;
+																																								gbc_tfStorageLocationModify.insets = new Insets(0, 0, 5, 0);
+																																								gbc_tfStorageLocationModify.fill = GridBagConstraints.HORIZONTAL;
+																																								gbc_tfStorageLocationModify.gridx = 1;
+																																								gbc_tfStorageLocationModify.gridy = 8;
+																																								panelmodify.add(tfStorageLocationModify, gbc_tfStorageLocationModify);
+																																								tfStorageLocationModify.setColumns(10);
 																																						
 																																								JButton btnsaveModifiedValues = new JButton("Änderungen speichern");
 																																								btnsaveModifiedValues.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -520,7 +547,7 @@ public class GUIComponentmanagement  {
 																																								gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
 																																								gbc_btnsaveModifiedValues.insets = new Insets(0, 0, 5, 0);
 																																								gbc_btnsaveModifiedValues.gridx = 1;
-																																								gbc_btnsaveModifiedValues.gridy = 8;
+																																								gbc_btnsaveModifiedValues.gridy = 9;
 																																								panelmodify.add(btnsaveModifiedValues, gbc_btnsaveModifiedValues);
 																																								
 																																										JScrollPane scrollPanemodifyPart = new JScrollPane();
@@ -531,24 +558,31 @@ public class GUIComponentmanagement  {
 																																										gbc_scrollPanemodifyPart.gridwidth = 2;
 																																										gbc_scrollPanemodifyPart.fill = GridBagConstraints.BOTH;
 																																										gbc_scrollPanemodifyPart.gridx = 0;
-																																										gbc_scrollPanemodifyPart.gridy = 9;
+																																										gbc_scrollPanemodifyPart.gridy = 10;
 																																										panelmodify.add(scrollPanemodifyPart, gbc_scrollPanemodifyPart);
 																																										
-																																												JList listPart = new JList();
-																																												listPart.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																																												listPart.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-																																												listPart.setModel(new AbstractListModel() {
-																																													String[] values = new String[] {};
-
-																																													public int getSize() {
-																																														return values.length;
-																																													}
-
-																																													public Object getElementAt(int index) {
-																																														return values[index];
-																																													}
-																																												});
-																																												scrollPanemodifyPart.setViewportView(listPart);
+																																										//Emre begin
+																																										table = new JTable();
+																																										scrollPanemodifyPart.setViewportView(table);
+																																										table.setFont(new Font("Tahoma", Font.PLAIN, 15));
+																																										try {
+																																										    table.setModel(new ComponentTableModel(ComponentManagement.getComponents()));
+																																										} catch (SQLException e1) {
+																																										    // TODO Auto-generated catch block
+																																										    e1.printStackTrace();
+																																										}
+																																										
+																																										table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+																																										scrollPanemodifyPart.setViewportView(table);
+																																										table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+																																											
+																																											@Override
+																																											public void valueChanged(ListSelectionEvent e) {
+																																												handleEditPersonSelectionEvent(e);
+																																												
+																																											}
+																																										});
+																																										//Emre end
 																																												
 																																														JComboBox comboBoxsearchModifyPart = new JComboBox();
 																																														comboBoxsearchModifyPart.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -557,7 +591,7 @@ public class GUIComponentmanagement  {
 																																														gbc_comboBoxsearchModifyPart.insets = new Insets(0, 0, 5, 5);
 																																														gbc_comboBoxsearchModifyPart.fill = GridBagConstraints.HORIZONTAL;
 																																														gbc_comboBoxsearchModifyPart.gridx = 0;
-																																														gbc_comboBoxsearchModifyPart.gridy = 10;
+																																														gbc_comboBoxsearchModifyPart.gridy = 11;
 																																														panelmodify.add(comboBoxsearchModifyPart, gbc_comboBoxsearchModifyPart);
 																																														
 																																																textFieldsearchModifyPart = new JTextField();
@@ -566,7 +600,7 @@ public class GUIComponentmanagement  {
 																																																gbc_textFieldsearchModifyPart.insets = new Insets(0, 0, 5, 0);
 																																																gbc_textFieldsearchModifyPart.fill = GridBagConstraints.HORIZONTAL;
 																																																gbc_textFieldsearchModifyPart.gridx = 1;
-																																																gbc_textFieldsearchModifyPart.gridy = 10;
+																																																gbc_textFieldsearchModifyPart.gridy = 11;
 																																																panelmodify.add(textFieldsearchModifyPart, gbc_textFieldsearchModifyPart);
 																																																textFieldsearchModifyPart.setColumns(10);
 																																																
@@ -576,7 +610,7 @@ public class GUIComponentmanagement  {
 																																																		GridBagConstraints gbc_btnsearchModifyPart = new GridBagConstraints();
 																																																		gbc_btnsearchModifyPart.fill = GridBagConstraints.HORIZONTAL;
 																																																		gbc_btnsearchModifyPart.gridx = 1;
-																																																		gbc_btnsearchModifyPart.gridy = 11;
+																																																		gbc_btnsearchModifyPart.gridy = 12;
 																																																		panelmodify.add(btnsearchModifyPart, gbc_btnsearchModifyPart);
 
 		JPanel paneldeletePart = new JPanel();
@@ -920,5 +954,22 @@ public class GUIComponentmanagement  {
 		
 		frmElabVerwaltungsprogramm.setVisible(true);
 	}
-
+	//Emre begin 
+	protected void handleEditPersonSelectionEvent(ListSelectionEvent e) {
+	    // TODO Auto-generated method stub
+	    if (table.getSelectedRow()>-1) {
+		tfComponentModifyID.setText(table.getValueAt(table.getSelectedRow(),0).toString());
+		textFieldpartNameModify.setText(table.getValueAt(table.getSelectedRow(),2).toString());
+		textFieldpartLinkModify.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
+		textFieldpartPrizeModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
+		spinnerquantityStorageModify.setValue((table.getValueAt(table.getSelectedRow(),5 )).toString());
+		
+		spinnerquantityPlannedModify.setValue(table.getValueAt(table.getSelectedRow(), 6));
+		spinnerquantityOrderedModify.setValue(table.getValueAt(table.getSelectedRow(),7 ));
+		tfStorageLocationModify.setText(table.getValueAt(table.getSelectedRow(), 8).toString());		
+		
+	    }
+	    
+	}
+	//Emre end 
 	}

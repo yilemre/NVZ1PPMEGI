@@ -3,6 +3,7 @@ package logic;
 
 
 import java.sql.SQLException;
+import java.util.List;
 
 import DataAccess.SQLManager;
 
@@ -19,6 +20,9 @@ public class ComponentManagement {
 		
     public static void addPart(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int idCategory) throws SQLException {
 	SQLManager.getInstance().addPartIntoDB(articlenumber, productlink, name, price, storing, plannedAmount, orderedAmount, storageLocation, idCategory);
+    }
+    public static List<Component> getComponents() throws SQLException {
+	return SQLManager.getInstance().getComponents(); 
     }
     public static void deletePart(int id) throws SQLException {
 	SQLManager.getInstance().deletePartFromDB(id); 
