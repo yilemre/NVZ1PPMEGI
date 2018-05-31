@@ -68,6 +68,7 @@ public class GUIComponentmanagement  {
 	private JTextField textFieldsearchModifyPart;
 	private JTextField textFieldcategoryNoteNew;
 	private JTextField textFieldcategoryNoteModify;
+	private JTextField tfArticleNo;
 
 	/**
 	 * Launch the application.
@@ -113,9 +114,9 @@ public class GUIComponentmanagement  {
 		tabbedPane.addTab("Bauteil hinzufügen", null, paneladdPart, null);
 		GridBagLayout gbl_paneladdPart = new GridBagLayout();
 		gbl_paneladdPart.columnWidths = new int[] { 0, 0, 0 };
-		gbl_paneladdPart.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_paneladdPart.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_paneladdPart.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		gbl_paneladdPart.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
+		gbl_paneladdPart.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		paneladdPart.setLayout(gbl_paneladdPart);
 
@@ -126,6 +127,25 @@ public class GUIComponentmanagement  {
 		gbc_lblNewLabel.gridx = 1;
 		gbc_lblNewLabel.gridy = 0;
 		paneladdPart.add(lblNewLabel, gbc_lblNewLabel);
+		
+		JLabel lblArticleNo = new JLabel("Artikel-Nr.");
+		lblArticleNo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_lblArticleNo = new GridBagConstraints();
+		gbc_lblArticleNo.anchor = GridBagConstraints.EAST;
+		gbc_lblArticleNo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblArticleNo.gridx = 0;
+		gbc_lblArticleNo.gridy = 1;
+		paneladdPart.add(lblArticleNo, gbc_lblArticleNo);
+		
+		tfArticleNo = new JTextField();
+		tfArticleNo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_tfArticleNo = new GridBagConstraints();
+		gbc_tfArticleNo.insets = new Insets(0, 0, 5, 0);
+		gbc_tfArticleNo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tfArticleNo.gridx = 1;
+		gbc_tfArticleNo.gridy = 1;
+		paneladdPart.add(tfArticleNo, gbc_tfArticleNo);
+		tfArticleNo.setColumns(10);
 
 		JLabel lblpartName = new JLabel("Bauteilname");
 		lblpartName.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -133,7 +153,7 @@ public class GUIComponentmanagement  {
 		gbc_lblpartName.anchor = GridBagConstraints.EAST;
 		gbc_lblpartName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblpartName.gridx = 0;
-		gbc_lblpartName.gridy = 1;
+		gbc_lblpartName.gridy = 2;
 		paneladdPart.add(lblpartName, gbc_lblpartName);
 
 		textFieldpartName = new JTextField();
@@ -142,7 +162,7 @@ public class GUIComponentmanagement  {
 		gbc_textFieldpartName.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldpartName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldpartName.gridx = 1;
-		gbc_textFieldpartName.gridy = 1;
+		gbc_textFieldpartName.gridy = 2;
 		paneladdPart.add(textFieldpartName, gbc_textFieldpartName);
 		textFieldpartName.setColumns(10);
 
@@ -152,7 +172,7 @@ public class GUIComponentmanagement  {
 		gbc_lblcategory.anchor = GridBagConstraints.EAST;
 		gbc_lblcategory.insets = new Insets(0, 0, 5, 5);
 		gbc_lblcategory.gridx = 0;
-		gbc_lblcategory.gridy = 2;
+		gbc_lblcategory.gridy = 3;
 		paneladdPart.add(lblcategory, gbc_lblcategory);
 
 		JComboBox comboBoxcategory = new JComboBox();
@@ -161,7 +181,7 @@ public class GUIComponentmanagement  {
 		gbc_comboBoxcategory.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxcategory.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxcategory.gridx = 1;
-		gbc_comboBoxcategory.gridy = 2;
+		gbc_comboBoxcategory.gridy = 3;
 		paneladdPart.add(comboBoxcategory, gbc_comboBoxcategory);
 
 		JLabel lblpartLink = new JLabel("Produktlink");
@@ -170,7 +190,7 @@ public class GUIComponentmanagement  {
 		gbc_lblpartLink.anchor = GridBagConstraints.EAST;
 		gbc_lblpartLink.insets = new Insets(0, 0, 5, 5);
 		gbc_lblpartLink.gridx = 0;
-		gbc_lblpartLink.gridy = 3;
+		gbc_lblpartLink.gridy = 4;
 		paneladdPart.add(lblpartLink, gbc_lblpartLink);
 
 		textFieldpartLink = new JTextField();
@@ -179,7 +199,7 @@ public class GUIComponentmanagement  {
 		gbc_textFieldpartLink.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldpartLink.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldpartLink.gridx = 1;
-		gbc_textFieldpartLink.gridy = 3;
+		gbc_textFieldpartLink.gridy = 4;
 		paneladdPart.add(textFieldpartLink, gbc_textFieldpartLink);
 		textFieldpartLink.setColumns(10);
 
@@ -189,7 +209,7 @@ public class GUIComponentmanagement  {
 		gbc_lblpartPrize.anchor = GridBagConstraints.EAST;
 		gbc_lblpartPrize.insets = new Insets(0, 0, 5, 5);
 		gbc_lblpartPrize.gridx = 0;
-		gbc_lblpartPrize.gridy = 4;
+		gbc_lblpartPrize.gridy = 5;
 		paneladdPart.add(lblpartPrize, gbc_lblpartPrize);
 
 		textFieldpartPrize = new JTextField();
@@ -198,7 +218,7 @@ public class GUIComponentmanagement  {
 		gbc_textFieldpartPrize.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldpartPrize.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldpartPrize.gridx = 1;
-		gbc_textFieldpartPrize.gridy = 4;
+		gbc_textFieldpartPrize.gridy = 5;
 		paneladdPart.add(textFieldpartPrize, gbc_textFieldpartPrize);
 		textFieldpartPrize.setColumns(10);
 
@@ -208,7 +228,7 @@ public class GUIComponentmanagement  {
 		gbc_lblquantityStoring.anchor = GridBagConstraints.EAST;
 		gbc_lblquantityStoring.insets = new Insets(0, 0, 5, 5);
 		gbc_lblquantityStoring.gridx = 0;
-		gbc_lblquantityStoring.gridy = 5;
+		gbc_lblquantityStoring.gridy = 6;
 		paneladdPart.add(lblquantityStoring, gbc_lblquantityStoring);
 
 		textFieldquantityStoring = new JTextField();
@@ -217,7 +237,7 @@ public class GUIComponentmanagement  {
 		gbc_textFieldquantityStoring.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldquantityStoring.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldquantityStoring.gridx = 1;
-		gbc_textFieldquantityStoring.gridy = 5;
+		gbc_textFieldquantityStoring.gridy = 6;
 		paneladdPart.add(textFieldquantityStoring, gbc_textFieldquantityStoring);
 		textFieldquantityStoring.setColumns(10);
 
@@ -228,7 +248,7 @@ public class GUIComponentmanagement  {
 		gbc_lblquantityPlanned.anchor = GridBagConstraints.EAST;
 		gbc_lblquantityPlanned.insets = new Insets(0, 0, 5, 5);
 		gbc_lblquantityPlanned.gridx = 0;
-		gbc_lblquantityPlanned.gridy = 6;
+		gbc_lblquantityPlanned.gridy = 7;
 		paneladdPart.add(lblquantityPlanned, gbc_lblquantityPlanned);
 
 		textFieldquantityPlanned = new JTextField();
@@ -237,7 +257,7 @@ public class GUIComponentmanagement  {
 		gbc_textFieldquantityPlanned.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldquantityPlanned.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldquantityPlanned.gridx = 1;
-		gbc_textFieldquantityPlanned.gridy = 6;
+		gbc_textFieldquantityPlanned.gridy = 7;
 		paneladdPart.add(textFieldquantityPlanned, gbc_textFieldquantityPlanned);
 		textFieldquantityPlanned.setColumns(10);
 
@@ -247,7 +267,7 @@ public class GUIComponentmanagement  {
 		gbc_lblquantityOrdered.anchor = GridBagConstraints.EAST;
 		gbc_lblquantityOrdered.insets = new Insets(0, 0, 5, 5);
 		gbc_lblquantityOrdered.gridx = 0;
-		gbc_lblquantityOrdered.gridy = 7;
+		gbc_lblquantityOrdered.gridy = 8;
 		paneladdPart.add(lblquantityOrdered, gbc_lblquantityOrdered);
 
 		textFieldquantityOrdered = new JTextField();
@@ -256,7 +276,7 @@ public class GUIComponentmanagement  {
 		gbc_textFieldquantityOrdered.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldquantityOrdered.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldquantityOrdered.gridx = 1;
-		gbc_textFieldquantityOrdered.gridy = 7;
+		gbc_textFieldquantityOrdered.gridy = 8;
 		paneladdPart.add(textFieldquantityOrdered, gbc_textFieldquantityOrdered);
 		textFieldquantityOrdered.setColumns(10);
 
@@ -266,7 +286,7 @@ public class GUIComponentmanagement  {
 		gbc_lblstorageLocation.anchor = GridBagConstraints.EAST;
 		gbc_lblstorageLocation.insets = new Insets(0, 0, 5, 5);
 		gbc_lblstorageLocation.gridx = 0;
-		gbc_lblstorageLocation.gridy = 8;
+		gbc_lblstorageLocation.gridy = 9;
 		paneladdPart.add(lblstorageLocation, gbc_lblstorageLocation);
 
 		textFieldstorageLocation = new JTextField();
@@ -275,7 +295,7 @@ public class GUIComponentmanagement  {
 		gbc_textFieldstorageLocation.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldstorageLocation.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldstorageLocation.gridx = 1;
-		gbc_textFieldstorageLocation.gridy = 8;
+		gbc_textFieldstorageLocation.gridy = 9;
 		paneladdPart.add(textFieldstorageLocation, gbc_textFieldstorageLocation);
 		textFieldstorageLocation.setColumns(10);
 
@@ -283,7 +303,7 @@ public class GUIComponentmanagement  {
 		btnaddPart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			    try {
-				ComponentManagement.addPart("", textFieldpartLink.getText(), textFieldpartName.getText(), Double.parseDouble(textFieldpartPrize.getText()), Integer.parseInt(textFieldquantityStoring.getText()),
+				ComponentManagement.addPart(tfArticleNo.getText(), textFieldpartLink.getText(), textFieldpartName.getText(), Double.parseDouble(textFieldpartPrize.getText()), Integer.parseInt(textFieldquantityStoring.getText()),
 						Integer.parseInt(textFieldquantityPlanned.getText()), Integer.parseInt(textFieldquantityOrdered.getText()), textFieldstorageLocation.getText(),0);
 			    } catch (NumberFormatException e1) {
 				// TODO Auto-generated catch block
@@ -300,7 +320,7 @@ public class GUIComponentmanagement  {
 		gbc_btnaddPart.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddPart.insets = new Insets(0, 0, 5, 0);
 		gbc_btnaddPart.gridx = 1;
-		gbc_btnaddPart.gridy = 9;
+		gbc_btnaddPart.gridy = 10;
 		paneladdPart.add(btnaddPart, gbc_btnaddPart);
 
 		JButton btndeleteallInputs = new JButton("Eingabe löschen");
@@ -321,7 +341,7 @@ public class GUIComponentmanagement  {
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteallInputs.insets = new Insets(0, 0, 5, 0);
 		gbc_btndeleteallInputs.gridx = 1;
-		gbc_btndeleteallInputs.gridy = 10;
+		gbc_btndeleteallInputs.gridy = 11;
 		paneladdPart.add(btndeleteallInputs, gbc_btndeleteallInputs);
 
 		JLabel lbleLabpicture = new JLabel("");
@@ -329,7 +349,7 @@ public class GUIComponentmanagement  {
 		GridBagConstraints gbc_lbleLabpicture = new GridBagConstraints();
 		gbc_lbleLabpicture.gridwidth = 2;
 		gbc_lbleLabpicture.gridx = 0;
-		gbc_lbleLabpicture.gridy = 11;
+		gbc_lbleLabpicture.gridy = 12;
 		paneladdPart.add(lbleLabpicture, gbc_lbleLabpicture);
 				
 						JPanel panelmodify = new JPanel();
