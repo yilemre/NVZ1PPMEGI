@@ -83,12 +83,12 @@ public class PersonManagement {
 	}
 
 	public static List<Person> getPersonsByRights(String searchValue) throws SQLException{
-		switch(searchValue){
-			case "Kunde":
+		switch(searchValue.toLowerCase()){
+			case "kunde":
 				return SQLManager.getInstance().getPersonsByRights(0);
-			case "Mitglied":
+			case "mitglied":
 				return SQLManager.getInstance().getPersonsByRights(1);
-			case "Lehrstuhlmitglied":
+			case "lehrstuhlmitglied":
 				return SQLManager.getInstance().getPersonsByRights(2);
 			default:
 				return null;
