@@ -18,6 +18,7 @@ import java.awt.BorderLayout;
 import javax.swing.JTextArea;
 import javax.swing.JInternalFrame;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
@@ -45,7 +46,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JSplitPane;
 import javax.swing.JSpinner;
 
-public class GUIComponentmanagement implements ActionListener {
+public class GUIComponentmanagement  {
 
 	private JFrame frmElabVerwaltungsprogramm;
 	private JTextField textFieldpartName;
@@ -279,8 +280,22 @@ public class GUIComponentmanagement implements ActionListener {
 		textFieldstorageLocation.setColumns(10);
 
 		JButton btnaddPart = new JButton("Bauteil hinzufügen");
+		btnaddPart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			    try {
+				ComponentManagement.addPart("", textFieldpartLink.getText(), textFieldpartName.getText(), Double.parseDouble(textFieldpartPrize.getText()), Integer.parseInt(textFieldquantityStoring.getText()),
+						Integer.parseInt(textFieldquantityPlanned.getText()), Integer.parseInt(textFieldquantityOrdered.getText()), textFieldstorageLocation.getText(),0);
+			    } catch (NumberFormatException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			    } catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			    }
+			}
+		});
 		btnaddPart.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnaddPart.addActionListener(this);
+		
 		GridBagConstraints gbc_btnaddPart = new GridBagConstraints();
 		gbc_btnaddPart.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddPart.insets = new Insets(0, 0, 5, 0);
@@ -289,8 +304,19 @@ public class GUIComponentmanagement implements ActionListener {
 		paneladdPart.add(btnaddPart, gbc_btnaddPart);
 
 		JButton btndeleteallInputs = new JButton("Eingabe löschen");
+		btndeleteallInputs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			    textFieldpartName.setText("");
+			    textFieldpartLink.setText("");
+			    textFieldpartPrize.setText("");
+			    textFieldquantityStoring.setText("");
+			    textFieldquantityPlanned.setText("");
+			    textFieldquantityOrdered.setText("");
+			    textFieldstorageLocation.setText("");
+			    
+			}
+		});
 		btndeleteallInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btndeleteallInputs.addActionListener(this);
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteallInputs.insets = new Insets(0, 0, 5, 0);
@@ -466,7 +492,7 @@ public class GUIComponentmanagement implements ActionListener {
 																																						
 																																								JButton btnsaveModifiedValues = new JButton("Änderungen speichern");
 																																								btnsaveModifiedValues.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																																								btnsaveModifiedValues.addActionListener(this);
+																																								
 																																								GridBagConstraints gbc_btnsaveModifiedValues = new GridBagConstraints();
 																																								gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
 																																								gbc_btnsaveModifiedValues.insets = new Insets(0, 0, 5, 0);
@@ -523,7 +549,7 @@ public class GUIComponentmanagement implements ActionListener {
 																																																
 																																																		JButton btnsearchModifyPart = new JButton("Suchen");
 																																																		btnsearchModifyPart.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																																																		btnsearchModifyPart.addActionListener(this);
+																																																		
 																																																		GridBagConstraints gbc_btnsearchModifyPart = new GridBagConstraints();
 																																																		gbc_btnsearchModifyPart.fill = GridBagConstraints.HORIZONTAL;
 																																																		gbc_btnsearchModifyPart.gridx = 1;
@@ -577,7 +603,7 @@ public class GUIComponentmanagement implements ActionListener {
 
 		JButton btnpartSearch = new JButton("Nach Bauteil suchen");
 		btnpartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnpartSearch.addActionListener(this);
+		
 		GridBagConstraints gbc_btnpartSearch = new GridBagConstraints();
 		gbc_btnpartSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnpartSearch.insets = new Insets(0, 0, 5, 0);
@@ -587,7 +613,7 @@ public class GUIComponentmanagement implements ActionListener {
 
 		JButton btndeletePart = new JButton("Bauteil löschen");
 		btndeletePart.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btndeletePart.addActionListener(this);
+		
 		GridBagConstraints gbc_btndeletePart = new GridBagConstraints();
 		gbc_btndeletePart.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeletePart.gridx = 1;
@@ -663,8 +689,18 @@ public class GUIComponentmanagement implements ActionListener {
 																textFieldcategoryNameModify.setColumns(10);
 																
 																		JButton btncategoryNew = new JButton("Kategorie hinzufügen");
+																		btncategoryNew.addActionListener(new ActionListener() {
+																			public void actionPerformed(ActionEvent e) {
+																			    try {
+																				ComponentManagement.addCategory(textFieldcategoryNameNew.getText(),textFieldcategoryNoteNew.getText() );
+																			    } catch (Exception a) {
+																				a.getStackTrace(); 
+																			    }
+																			    
+																			}
+																		});
 																		btncategoryNew.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																		btncategoryNew.addActionListener(this);
+																		
 																		
 																		JLabel lblcategoryNoteNew = new JLabel("Notiz");
 																		lblcategoryNoteNew.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -712,7 +748,7 @@ public class GUIComponentmanagement implements ActionListener {
 																		
 																				JButton btncategoryModify = new JButton("Änderungen an Kategorie speichern");
 																				btncategoryModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																				btncategoryModify.addActionListener(this);
+																				
 																				GridBagConstraints gbc_btncategoryModify = new GridBagConstraints();
 																				gbc_btncategoryModify.fill = GridBagConstraints.HORIZONTAL;
 																				gbc_btncategoryModify.insets = new Insets(0, 0, 5, 5);
@@ -721,8 +757,13 @@ public class GUIComponentmanagement implements ActionListener {
 																				panelcategoryManagement.add(btncategoryModify, gbc_btncategoryModify);
 																				
 																						JButton btncategoryDeleteInputs = new JButton("Eingaben löschen");
+																						btncategoryDeleteInputs.addActionListener(new ActionListener() {
+																							public void actionPerformed(ActionEvent e) {
+																								textFieldcategoryNameNew.setText("");
+																								textFieldcategoryNoteNew.setText("");
+																							}
+																						});
 																						btncategoryDeleteInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																						btncategoryDeleteInputs.addActionListener(this);
 																						GridBagConstraints gbc_btncategoryDeleteInputs = new GridBagConstraints();
 																						gbc_btncategoryDeleteInputs.fill = GridBagConstraints.HORIZONTAL;
 																						gbc_btncategoryDeleteInputs.insets = new Insets(0, 0, 5, 5);
@@ -731,8 +772,14 @@ public class GUIComponentmanagement implements ActionListener {
 																						panelcategoryManagement.add(btncategoryDeleteInputs, gbc_btncategoryDeleteInputs);
 																						
 																								JButton btncategoryModifyDeleteInputs = new JButton("Änderungen löschen");
+																								btncategoryModifyDeleteInputs.addActionListener(new ActionListener() {
+																									public void actionPerformed(ActionEvent e) {
+																									    textFieldcategoryNameModify.setText("");
+																									    textFieldcategoryNoteModify.setText("");
+																									}
+																								});
 																								btncategoryModifyDeleteInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																								btncategoryModifyDeleteInputs.addActionListener(this);
+																								
 																								GridBagConstraints gbc_btncategoryModifyDeleteInputs = new GridBagConstraints();
 																								gbc_btncategoryModifyDeleteInputs.fill = GridBagConstraints.HORIZONTAL;
 																								gbc_btncategoryModifyDeleteInputs.insets = new Insets(0, 0, 5, 5);
@@ -779,7 +826,7 @@ public class GUIComponentmanagement implements ActionListener {
 																																
 																																		JButton btncategorySearch = new JButton("Nach Kategorie suchen");
 																																		btncategorySearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																																		btncategorySearch.addActionListener(this);
+																																		
 																																		GridBagConstraints gbc_btncategorySearch = new GridBagConstraints();
 																																		gbc_btncategorySearch.gridwidth = 5;
 																																		gbc_btncategorySearch.fill = GridBagConstraints.HORIZONTAL;
@@ -790,7 +837,7 @@ public class GUIComponentmanagement implements ActionListener {
 																																		
 																																				JButton btncategoryDelete = new JButton("Kategorie löschen");
 																																				btncategoryDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																																				btncategoryDelete.addActionListener(this);
+																																				
 																																				GridBagConstraints gbc_btncategoryDelete = new GridBagConstraints();
 																																				gbc_btncategoryDelete.gridwidth = 5;
 																																				gbc_btncategoryDelete.fill = GridBagConstraints.HORIZONTAL;
@@ -806,104 +853,43 @@ public class GUIComponentmanagement implements ActionListener {
 		menuBar.add(mnNewMenuOptions);
 
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmenü");
+		mntmNewMenuItembacktoMain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			    GuiMenue mainMenu = new GuiMenue();
+			    frmElabVerwaltungsprogramm.dispose();
+			    
+			}
+		});
 		mntmNewMenuItembacktoMain.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
-		mntmNewMenuItembacktoMain.addActionListener(this);
+		
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
+		mntmNewMenuItemlogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			    GuiLogin logout = new GuiLogin();
+			    frmElabVerwaltungsprogramm.dispose();
+			}
+		});
 		mntmNewMenuItemlogOut.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
-		mntmNewMenuItemlogOut.addActionListener(this);
+		
 		JMenuItem mntmNewMenuItemcloseapplication = new JMenuItem("Anwendung verlassen");
+		mntmNewMenuItemcloseapplication.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			    System.exit(0);
+			}
+		});
 		mntmNewMenuItemcloseapplication.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemcloseapplication);
-		mntmNewMenuItemcloseapplication.addActionListener(this);
+		
 		JMenu mnNewMenuhelpWindow = new JMenu("?");
 		menuBar.add(mnNewMenuhelpWindow);
 
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
 		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
-		mntmNewMenuItemshowManual.addActionListener(this);
+		
 		frmElabVerwaltungsprogramm.setVisible(true);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
-		String command = e.getActionCommand();
-
-		if (command == "Bauteil hinzufügen") {
-
-		}
-		if (command == "Eingabe löschen") {
-
-			textFieldpartName.setText("");
-			textFieldpartLink.setText("");
-			textFieldpartPrize.setText("");
-			textFieldquantityStoring.setText("");
-			textFieldquantityPlanned.setText("");
-			textFieldquantityOrdered.setText("");
-			textFieldstorageLocation.setText("");
-		}
-		if (command == "Änderungen speichern") {
-
-		}
-		if (command == "Suchen") {
-
-		}
-		if (command == "Nach Bauteil suchen") {
-
-		}
-		if (command == "Bauteil löschen") {
-
-		}
-		if (command == "Kategorie hinzufügen") {
-		    try {
-			ComponentManagement.addCategory(textFieldcategoryNameNew.getText(),textFieldcategoryNoteNew.getText() );
-		    } catch (Exception a) {
-			a.getStackTrace(); 
-		    }
-		    
-		}
-		if (command == "Änderungen an Kategorie speichern") {
-
-		}
-		if (command == "Eingaben löschen") {
-
-			textFieldcategoryNameNew.setText("");
-
-		}
-
-		if (command == "Änderungen löschen") {
-			textFieldcategoryNameModify.setText("");
-		}
-		if (command == "Nach Kategorie suchen") {
-
-		}
-		if (command == "Kategorie löschen") {
-
-		}
-
-		if (command == "Hauptmenü") {
-
-			GuiMenue mainMenu = new GuiMenue();
-			frmElabVerwaltungsprogramm.dispose();
-
-		}
-		if (command == "Ausloggen") {
-			GuiLogin logout = new GuiLogin();
-			frmElabVerwaltungsprogramm.dispose();
-
-		}
-		if (command == "Anwendung verlassen") {
-
-			System.exit(0);
-
-		}
-		if (command == "Anleitung anzeigen") {
-
-		}
-
 	}
-}

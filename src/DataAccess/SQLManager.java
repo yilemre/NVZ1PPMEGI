@@ -201,8 +201,15 @@ public class SQLManager {
 		stmt.close();	
 		return id;
 	}
+	//Emre begin 
+		public void modifyCategory(int id, String newName, String newNote) throws SQLException {
+		    Statement stmt = c.createStatement(); 
+		    stmt.executeUpdate("UPDATE Categorys SET name='"+ newName+"' , note='"+ newNote+"'+ WHERE idCategory ="+id+";");
+		    stmt.close();
+		}
+	//Emre end
 
-	public void modifyCategory(int id, AttributeTypesCategory attribute, String newValue) throws SQLException {
+	/*public void modifyCategory(int id, AttributeTypesCategory attribute, String newValue) throws SQLException {
 		Statement stmt = c.createStatement();
 		switch(attribute) {
 		case name:
@@ -216,7 +223,7 @@ public class SQLManager {
 			stmt.close();
 			break;
 		}
-	}
+	}*/
 
 	public int addPartIntoDB(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int category, int rights) throws SQLException {
 		int result=0;
@@ -238,7 +245,17 @@ public class SQLManager {
 		stmt.close();	
 		return id;
 	}
-
+	//Emre begin 
+	public void modifyPart (int id, String articlenumber, String productlink, String name, double price, int storing, 
+		int plannedAmount, int orderedAmount, String storageLocation, int idCategory) throws SQLException {
+	    	Statement stmt = c.createStatement(); 
+	    	stmt.executeUpdate("UPDATE Parts SET articlenumber = '"+ articlenumber+"', productlink='"+productlink+"',name='"+name+"', price="+
+	    	price+", storing="+ storing+", plannedAmount="+ plannedAmount+", orderedAmount="+ orderedAmount+",storageLocation='"+storageLocation+"',idCategory="+idCategory+";");
+    		stmt.close();
+		    
+	} 
+	//Emre end
+	/*
 	public void modifyPart(int id, AttributeTypesPart attribute, String newValue) throws SQLException {
 		Statement stmt = c.createStatement();
 		switch(attribute) {
@@ -289,7 +306,7 @@ public class SQLManager {
 			break;
 		}
 
-	}
+	}*/
 	
 	//You need to check whether or not there are already parts with ID x for Person Y in Card! If so: Increase amount and don't add new row!
 	public void addPartToShoppingCard(int idPart, int idPerson, int amount) throws SQLException {

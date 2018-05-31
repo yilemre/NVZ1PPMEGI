@@ -1,3 +1,4 @@
+//Emre
 package logic;
 
 
@@ -6,37 +7,27 @@ import java.sql.SQLException;
 import DataAccess.SQLManager;
 
 public class ComponentManagement {
-    		//Emre begin
-		public static void addCategory(String name, String note) throws SQLException {
-		    SQLManager.getInstance().addCategoryToDB(name, note); 
+    public static void addCategory(String name, String note) throws SQLException {
+	SQLManager.getInstance().addCategoryToDB(name, note); 
 		}
-		//Emre end
+    public static void deleteCategory(int id) throws SQLException{
+        SQLManager.getInstance().deleteCategoryFromDB(id); 
+    }
+    public static void modifyCategory(int id, String newName, String newNote) throws SQLException {
+	SQLManager.getInstance().modifyCategory(id, newName, newNote);    
+    }
 		
-		public void deleteCategory() {
-			//dummy
-		}
+    public static void addPart(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int idCategory) throws SQLException {
+	SQLManager.getInstance().addPartIntoDB(articlenumber, productlink, name, price, storing, plannedAmount, orderedAmount, storageLocation, idCategory,0);
+    }
+    public static void deletePart(int id) throws SQLException {
+	SQLManager.getInstance().deletePartFromDB(id); 
+    }
+    public static void modifyPart(int id, String articlenumber, String productlink, String name, double price, int storing, 
+	    int plannedAmount, int orderedAmount, String storageLocation, int idCategory) throws SQLException {
+		SQLManager.getInstance().modifyPart(id, articlenumber, productlink, name, price, storing, plannedAmount, orderedAmount, storageLocation, idCategory);
+    }
 		
-		public void renameCategory() {
-			//dummy
-		}
 		
-		public void createPart() {
-			//dummy
-		}
 		
-		public void modifyPart() {
-			//dummy
-		}
-		
-		public void deletePart() {
-			//dummy
-		}
-		
-		public void addPart() {
-			//dummy
-		}
-		
-		public void removePart() {
-			//dummy
-		}
 }
