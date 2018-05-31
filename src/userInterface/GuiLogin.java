@@ -26,6 +26,7 @@ import javax.swing.JList;
 import javax.swing.JTextPane;
 import javax.swing.JEditorPane;
 import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class GuiLogin implements ActionListener {
 
@@ -63,6 +64,7 @@ public class GuiLogin implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().setLayout(gridBagLayout);
 		
 		lblUsername = new JLabel("Username");
+		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
 		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUsername.anchor = GridBagConstraints.WEST;
@@ -71,6 +73,7 @@ public class GuiLogin implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(lblUsername, gbc_lblUsername);
 		
 		textFielduserName = new JTextField();
+		textFielduserName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFielduserName = new GridBagConstraints();
 		gbc_textFielduserName.insets = new Insets(0, 0, 5, 0);
 		gbc_textFielduserName.fill = GridBagConstraints.HORIZONTAL;
@@ -80,6 +83,7 @@ public class GuiLogin implements ActionListener {
 		textFielduserName.setColumns(10);
 		
 		lblPassword = new JLabel("Passwort");
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPassword.anchor = GridBagConstraints.WEST;
@@ -88,6 +92,7 @@ public class GuiLogin implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(lblPassword, gbc_lblPassword);
 		
 		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.insets = new Insets(0, 0, 5, 0);
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
@@ -96,6 +101,7 @@ public class GuiLogin implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(passwordField, gbc_passwordField);
 		
 		JButton btnLogin = new JButton("Login");
+		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnLogin.addActionListener(this);
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
 		gbc_btnLogin.fill = GridBagConstraints.HORIZONTAL;
@@ -105,6 +111,7 @@ public class GuiLogin implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(btnLogin, gbc_btnLogin);
 		
 		btnregister = new JButton("Registrieren");
+		btnregister.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnregister.addActionListener(this);
 		btnregister.setToolTipText("Als neuer Kunde hier registrieren");
 		GridBagConstraints gbc_btnregister = new GridBagConstraints();

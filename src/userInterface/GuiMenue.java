@@ -77,6 +77,7 @@ public class GuiMenue implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(lblguiMenue, gbc_lblguiMenue);
 
 		btnpersonalManagement = new JButton("Personenverwaltung");
+		btnpersonalManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnpersonalManagement.addActionListener(this);
 
 		GridBagConstraints gbc_btnpersonalManagement = new GridBagConstraints();
@@ -87,6 +88,7 @@ public class GuiMenue implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(btnpersonalManagement, gbc_btnpersonalManagement);
 
 		btnfinanceManagement = new JButton("Finanzverwaltung");
+		btnfinanceManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnfinanceManagement.addActionListener(this);
 
 		GridBagConstraints gbc_btnfinanceManagement = new GridBagConstraints();
@@ -97,6 +99,7 @@ public class GuiMenue implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(btnfinanceManagement, gbc_btnfinanceManagement);
 
 		btnorderManagement = new JButton("Auftragsverwaltung");
+		btnorderManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnorderManagement.addActionListener(this);
 		GridBagConstraints gbc_btnorderManagement = new GridBagConstraints();
 		gbc_btnorderManagement.fill = GridBagConstraints.HORIZONTAL;
@@ -106,6 +109,7 @@ public class GuiMenue implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(btnorderManagement, gbc_btnorderManagement);
 
 		btncomponentManagement = new JButton("Bauteileverwaltung");
+		btncomponentManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btncomponentManagement.addActionListener(this);
 		GridBagConstraints gbc_btncomponentManagement = new GridBagConstraints();
 		gbc_btncomponentManagement.fill = GridBagConstraints.HORIZONTAL;
@@ -117,13 +121,16 @@ public class GuiMenue implements ActionListener {
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
 
 		mnNewMenuOptions = new JMenu("Menü");
+		mnNewMenuOptions.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		menuBar.add(mnNewMenuOptions);
 
 		mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
+		mntmNewMenuItemlogOut.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mntmNewMenuItemlogOut.addActionListener(this);
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
 
 		mntmNewMenuItemcloseApplication = new JMenuItem("Anwendung verlassen");
+		mntmNewMenuItemcloseApplication.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mntmNewMenuItemcloseApplication.addActionListener(this);
 		mnNewMenuOptions.add(mntmNewMenuItemcloseApplication);
 
@@ -132,6 +139,7 @@ public class GuiMenue implements ActionListener {
 		menuBar.add(mnNewMenuhelpWindow);
 
 		mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mntmNewMenuItemshowManual.addActionListener(this);
 
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
