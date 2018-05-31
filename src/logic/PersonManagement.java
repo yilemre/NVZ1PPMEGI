@@ -75,11 +75,11 @@ public class PersonManagement {
     }*/
 
 	public static List<Person> getPersonsByName(String searchValue) throws SQLException{
-		return SQLManager.getInstance().getPersonsByFirsname(searchValue);
+		return SQLManager.getInstance().getPersonsByFirstname(searchValue);
 	}
 
 	public static List<Person> getPersonsByLastname(String searchValue) throws SQLException {
-		return SQLManager.getInstance().getPersonsByFirsname(searchValue);
+		return SQLManager.getInstance().getPersonsByLastname(searchValue);
 	}
 
 	public static List<Person> getPersonsByRights(String searchValue) throws SQLException{

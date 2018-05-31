@@ -4,102 +4,64 @@ package logic;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import DataAccess.SQLManager;
 import Exceptions.ELabException;
 
 public class ProductionManagement {
-	
 
-	public static void addOrder(String title, int type, String notes, String fileLocation, double forecastedCosts, double realCosts, int idAdvisor, int SecondaryAdvisor) throws SQLException {
-		SQLManager.getInstance().insertOrderIntoDB();
+
+	public static void addOrder(String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
+		String dateTimeString = null;
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		Date     time = cal.getTime();
+		dateTimeString = df.format(time);
+		SQLManager.getInstance().insertOrderIntoDB(title, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName ,fileLocation, note, dateTimeString);
 	}
 
 	public static void deleteOrder(int ID) throws SQLException {
 		SQLManager.getInstance().deleteOrderFromDB(ID);
 	}
 
-	public static void modifyOrder(int id, String title, int type, int idAdvisor, int idSecondaryAdvisor, String notes, double forecastedCosts, double realCosts, String fileLocation) throws SQLException {
-		Timestamp t = new Timestamp(System.currentTimeMillis());  
-		SQLManager.getInstance().modifyOrder1(id, title, type, idAdvisor, idSecondaryAdvisor, notes, forecastedCosts, realCosts, fileLocation);
+	public static void modifyOrder(int id, String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
+		SQLManager.getInstance().modifyOrder(id, title, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note);
 	}
 
-	// Order Modifier
-	public static void modifyOrderTitle(int id, String newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrder(id, AttributeTypesOrder.title, newValue);
-	}
-
-	public static void modifyOrderType(int id, int newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrderType(id, AttributeTypesOrder.type, newValue);
-	}
-
-	public static void modifyOrderForecastedCosts(int id, String newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrder(id, AttributeTypesOrder.forecastedCosts, newValue);
-	}
-
-	public static void modifyOrderRealCosts(int id, String newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrder(id, AttributeTypesOrder.realCosts, newValue);
+	public static List<Order> getOrders() throws SQLException {
+		return SQLManager.getInstance().getOrders(); 
 	}
 
 
-	public static void modifyOrderNotes(int id, String newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrder(id, AttributeTypesOrder.notes, newValue);
-	}
-	
-	
-	public static void modifyOrderFileLocation(int id, String newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrder(id, AttributeTypesOrder.fileLocation, newValue);
-	}
-	
-	
-	//OrderStatus Modifier
-	public static void modifyOrderStatusAccepted(int id, int newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrderStatus(id, AttributeTypesOrderStatus.accepted, newValue);
-	}
-	
-	public static void modifyOrderStatusFinished(int id, int newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrderStatus(id, AttributeTypesOrderStatus.finished, newValue);
-	}
-	
-	public static void modifyOrderStatusCostsCalculated(int id, int newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrderStatus(id, AttributeTypesOrderStatus.costsCalculated, newValue);
-	}
-	
-	public static void modifyOrderStatusPickedUp(int id, int newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrderStatus(id, AttributeTypesOrderStatus.pickedUp, newValue);
-	}
-	
-	public static void modifyOrderStatusBilled(int id, int newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrderStatus(id, AttributeTypesOrderStatus.billed, newValue);
-	}
-	
-	public static void modifyOrderStatusWaitingForMaterial(int id, int newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrderStatus(id, AttributeTypesOrderStatus.waitingForMaterial, newValue);
-	}
-	
-	public static void modifyOrderStatusProductionInterrupted(int id, int newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrderStatus(id, AttributeTypesOrderStatus.productionInterrupted, newValue);
-	}
-	
-	public static void modifyOrderStatusBillGenerated(int id, int newValue) throws SQLException {
-		SQLManager.getInstance().modifyOrderStatus(id, AttributeTypesOrderStatus.billGenerated, newValue);
-	}
-	
 	//search methods - Work in Progress
-	
-	public /* List<Order>*/ String searchForTitle(String title) throws SQLException, ELabException {
-		/* List<Order>*/ String result = SQLManager.getInstance().getOrdersByTitle(title);
+
+	public static List<Order> getOrderByTitle(String searchValue) throws SQLException {
+		List<Order> result = SQLManager.getInstance().getOrdersByTitle(searchValue);
 		return result;
 	}
-	
-	public /* List<Order>*/ String searchForType(String type) throws SQLException, ELabException {
-		/* List<Order>*/ String result = SQLManager.getInstance().getOrdersByType(type);
-		return result;
+
+	public static List<Order> getOrdersByType(String searchValue) throws SQLException{
+		switch(searchValue){
+		case "Leiterplatte":
+			return SQLManager.getInstance().getOrdersByType(0);
+		case "3D-Druck":
+			return SQLManager.getInstance().getOrdersByType(1);
+		case "Sonstiges":
+			return SQLManager.getInstance().getOrdersByType(2);
+		default:
+			return null;
+		}
 	}
-	
-	public /* List<Order>*/ String searchForStatus(int status) throws SQLException, ELabException {
-		/* List<Order>*/ String result = SQLManager.getInstance().getOrdersByStatus(status);
+
+	public static List<Order> getOrderByStatus(int status) throws SQLException {
+		List<Order> result = SQLManager.getInstance().getOrdersByStatus(status);
 		return result;
 	}
 }

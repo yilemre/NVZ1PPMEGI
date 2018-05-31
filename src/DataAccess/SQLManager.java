@@ -90,7 +90,7 @@ public class SQLManager {
 		return result;
 	}
 	
-	public List<Person> getPersonsByFirsname(String firstname) throws SQLException {
+	public List<Person> getPersonsByFirstname(String firstname) throws SQLException {
 		List<Person> result = new ArrayList<Person>();
 		Statement stmt = c.createStatement();
 		String sql = "SELECT * FROM Persons WHERE firstname='"+firstname+"'";
@@ -357,7 +357,7 @@ public class SQLManager {
 		return id;
 	}
 
-	public void modifyOrder1(int id, String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
+	public void modifyOrder(int id, String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
 		Statement stmt = c.createStatement(); 
 		String sql = "UPDATE Orders SET title='"+title+"', type='"+type+"', projectedCosts='"+projectedCosts+"' , realCosts='"+realCosts+"' , idCutomer='"+idCustomer+"' , idAdvisor='"+idAdvisor+"' ,idSecondaryAdvisor ='"+idSecondaryAdvisor+"', fileName="+fileName+", fileLocation='"+fileLocation+"', note='"+note+"' WHERE idOrder="+id+";";
 		stmt.executeUpdate(sql); 
@@ -372,7 +372,7 @@ public class SQLManager {
 		stmt.close();
 	}*/
 	
-	public void modifyOrder(int id, AttributeTypesOrder attribute, String newValue) throws SQLException{
+	public void modifyOrder1(int id, AttributeTypesOrder attribute, String newValue) throws SQLException{
 		Statement stmt = c.createStatement();
 		switch(attribute) {
 		case title: 
@@ -468,18 +468,15 @@ public class SQLManager {
 	}
 
 	// search methods - Work in Progress
-	public List<Order> getOrdersByTitle(String title) throws SQLException, TitleNotInDBException {
+	public List<Order> getOrdersByTitle(String title) throws SQLException {
 		List<Order> result = new ArrayList<Order>();
 		
 		Statement stmt = c.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM Orders WHERE titel LIKE '"+title+"';");
 		while (rs.next()){
-			Order temp = new Order (rs.getInt("ID"), rs.getString("Titel"),rs.getInt("Typ"),(rs.getDouble("Prognostizierte Kosten")), (rs.getDouble("Reele Kosten")), rs.getInt("Kunde"), rs.getInt("Verantwortlicher"), rs.getInt("Vertreter"), rs.getString("Dateiname"), rs.getString("Dateipfad"), rs.getString("Notizen"));
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"));
 			result.add(temp);			
 		}
-
-		if (result.isEmpty()) throw new TitleNotInDBException();
-
 
 		rs.close();
 		stmt.close();
@@ -487,19 +484,16 @@ public class SQLManager {
 		return result;
 	}
 
-	public List<Order> getOrdersByType(int type) throws SQLException, TypeNotInDBException {
+	public List<Order> getOrdersByType(int type) throws SQLException {
 		List<Order> result = new ArrayList<Order>();
-		
 		Statement stmt = c.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Orders WHERE type LIKE '"+type+"';");
+		String sql = "SELECT * FROM Orders WHERE type="+type+"";
+		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Order temp = new Order (rs.getInt("ID"), rs.getString("Titel"),rs.getInt("Typ"),(rs.getDouble("Prognostizierte Kosten")), (rs.getDouble("Reele Kosten")), rs.getInt("Kunde"), rs.getInt("Verantwortlicher"), rs.getInt("Vertreter"), rs.getString("Dateiname"), rs.getString("Dateipfad"), rs.getString("Notizen"));
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"));
 			
 			result.add(temp);
 		}
-
-		if (result.isEmpty()) throw new TypeNotInDBException();
-
 
 		rs.close();
 		stmt.close();
@@ -507,22 +501,37 @@ public class SQLManager {
 		return result;
 	}
 	
-	/*interner to-DO Kommentar - hier muss die Verbindung geschaffen werden, dass er in der Tabelle Status sucht, aber die Daten aus Orders ausgibt
-	public String getOrdersByStatus(int status) throws SQLException, StatusNotInDBException {
+	public List<Order> getOrders() throws SQLException {
 		List<Order> result = new ArrayList<Order>();
 
 		Statement stmt = c.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM OrderStatus WHERE status LIKE '"+status+"';");
+		String sql = "SELECT * FROM Orders";
+		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			//Order temp = new Order (rs.getInt("ID"), rs.getInt("Status"),rs.getString("Zeitstempel"));
-			String temp = "";
-			result = temp;			
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"));
+
+			result.add(temp);			
 		}
 
-		if (result.isEmpty()) throw new StatusNotInDBException();
-
-
+		return result;
+	}
+	
+	//
+	public List<Order> getOrdersByStatus(int status) throws SQLException {
+		List<Order> result = new ArrayList<Order>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT idOrder FROM OrderStatus WHERE status="+status+"";
+		ResultSet id = stmt.executeQuery(sql);
+		while(id.next()){
+		String sql1 = "SELECT * FROM Orders WHERE idOrder="+id+"";
+		ResultSet rs = stmt.executeQuery(sql1);
+		while (rs.next()){
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"));
+			result.add(temp);			
+		}
 		rs.close();
+		}
+		id.close();
 		stmt.close();
 
 		return result;
