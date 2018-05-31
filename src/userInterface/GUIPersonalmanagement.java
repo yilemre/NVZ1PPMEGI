@@ -73,6 +73,7 @@ public class GUIPersonalmanagement{
 	private JComboBox comboBoxTypeModify;
 	private JTable table;
 	private List<String> comboBoxEntries;
+	private JTable TableDeletePerson;
 	
 
 	/**
@@ -312,6 +313,7 @@ public class GUIPersonalmanagement{
 				PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
 				Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
 				refreshTable();
+				refreshTableDeletePerson();
 			    } 
 			    catch (Exception a) {
 				a.printStackTrace();
@@ -552,6 +554,7 @@ public class GUIPersonalmanagement{
 					e1.printStackTrace();
 				}
 				refreshTable();
+				refreshTableDeletePerson();
 			}
 		});
 		
@@ -654,6 +657,25 @@ public class GUIPersonalmanagement{
 		gbc_btnsearchModifyPerson.gridy = 13;
 		panelmodifyPerson.add(btnsearchModifyPerson, gbc_btnsearchModifyPerson);
 		
+		JButton btnSearchRemove = new JButton("Suche aufheben");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		btnSearchRemove.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					table.setModel(new PersonTableModel(PersonManagement.getPersons()));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton.gridx = 1;
+		gbc_btnNewButton.gridy = 14;
+		panelmodifyPerson.add(btnSearchRemove, gbc_btnNewButton);
+		
 		JPanel paneldeletePerson = new JPanel();
 		tabbedPane.addTab("Personen l\u00F6schen", null, paneldeletePerson, null);
 		GridBagLayout gbl_paneldeletePerson = new GridBagLayout();
@@ -674,9 +696,24 @@ public class GUIPersonalmanagement{
 		gbc_scrollPanedeletePerson.gridy = 0;
 		paneldeletePerson.add(scrollPanedeletePerson, gbc_scrollPanedeletePerson);
 		
-		JList listdeletePerson = new JList();
-		listdeletePerson.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPanedeletePerson.setViewportView(listdeletePerson);
+		TableDeletePerson = new JTable();
+		scrollPanedeletePerson.setColumnHeaderView(TableDeletePerson);
+		try {
+			TableDeletePerson.setModel(new PersonTableModel(PersonManagement.getPersons()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		TableDeletePerson.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPanedeletePerson.setViewportView(TableDeletePerson);
+		TableDeletePerson.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				handleEditPersonSelectionEvent(e);
+				
+			}
+		});
+		TableDeletePerson.clearSelection();
 		
 		JComboBox comboBoxsearchDeletePerson = new JComboBox();
 		comboBoxsearchDeletePerson.setModel(new DefaultComboBoxModel(new String[] {"Vorname", "Nachname"}));
@@ -706,6 +743,19 @@ public class GUIPersonalmanagement{
 		
 		JButton btndeletePerson = new JButton("Person löschen");
 		GridBagConstraints gbc_btndeletePerson = new GridBagConstraints();
+		btndeletePerson.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					PersonManagement.deletePerson(Integer.parseInt(TableDeletePerson.getValueAt(TableDeletePerson.getSelectedRow(), 0).toString()));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				refreshTableDeletePerson();
+				refreshTable();
+			}
+		});
 		gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeletePerson.gridx = 1;
 		gbc_btndeletePerson.gridy = 3;
@@ -789,6 +839,17 @@ frmElabVerwaltungsprogramm.setVisible(true);
 			e.printStackTrace();
 		}
 		table.clearSelection();
+	}
+	
+	
+	protected void refreshTableDeletePerson() {
+		try {
+			TableDeletePerson.setModel(new PersonTableModel(PersonManagement.getPersons()));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		TableDeletePerson.clearSelection();
 	}
 
 }
