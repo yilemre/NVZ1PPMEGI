@@ -20,6 +20,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+
+import sun.rmi.log.LogOutputStream;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -41,6 +44,7 @@ import javax.swing.JSplitPane;
 import javax.swing.ButtonGroup;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JTable;
 
 public class GUIComponentUserInterface implements ActionListener {
 
@@ -49,6 +53,7 @@ public class GUIComponentUserInterface implements ActionListener {
 	private JTextField textFieldUsername;
 	private JPasswordField passwordFieldnewPassword;
 	private JPasswordField passwordFieldnewPasswordRepeat;
+	private JTable tableshoppingCart;
    
 	
 	
@@ -103,29 +108,20 @@ public class GUIComponentUserInterface implements ActionListener {
 		gbl_panelshoppingCart.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelshoppingCart.setLayout(gbl_panelshoppingCart);
 		
-		JScrollPane scrollPanedeletePerson = new JScrollPane();
-		scrollPanedeletePerson.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPanedeletePerson.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		GridBagConstraints gbc_scrollPanedeletePerson = new GridBagConstraints();
-		gbc_scrollPanedeletePerson.gridwidth = 3;
-		gbc_scrollPanedeletePerson.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPanedeletePerson.fill = GridBagConstraints.BOTH;
-		gbc_scrollPanedeletePerson.gridx = 0;
-		gbc_scrollPanedeletePerson.gridy = 0;
-		panelshoppingCart.add(scrollPanedeletePerson, gbc_scrollPanedeletePerson);
+		JScrollPane scrollPaneshoppingCart = new JScrollPane();
+		scrollPaneshoppingCart.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneshoppingCart.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		GridBagConstraints gbc_scrollPaneshoppingCart = new GridBagConstraints();
+		gbc_scrollPaneshoppingCart.gridwidth = 3;
+		gbc_scrollPaneshoppingCart.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPaneshoppingCart.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneshoppingCart.gridx = 0;
+		gbc_scrollPaneshoppingCart.gridy = 0;
+		panelshoppingCart.add(scrollPaneshoppingCart, gbc_scrollPaneshoppingCart);
 		
-		JList listdeleteParts = new JList();
-		listdeleteParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		listdeleteParts.setModel(new AbstractListModel() {
-			String[] values = new String[] {};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		scrollPanedeletePerson.setViewportView(listdeleteParts);
+		tableshoppingCart = new JTable();
+		tableshoppingCart.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		scrollPaneshoppingCart.setViewportView(tableshoppingCart);
 		
 		JComboBox comboBoxcategoryPartSearch = new JComboBox();
 		comboBoxcategoryPartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -150,8 +146,12 @@ public class GUIComponentUserInterface implements ActionListener {
 		textFieldpartSearch.setColumns(10);
 		
 		JButton btnpartSearch = new JButton("Nach Bauteil suchen");
+		btnpartSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnpartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnpartSearch.addActionListener(this);
+		
 		GridBagConstraints gbc_btnpartSearch = new GridBagConstraints();
 		gbc_btnpartSearch.gridwidth = 2;
 		gbc_btnpartSearch.fill = GridBagConstraints.HORIZONTAL;
@@ -190,8 +190,12 @@ public class GUIComponentUserInterface implements ActionListener {
 		panelshoppingCart.add(spinnerincrementParts, gbc_spinnerincrementParts);
 		
 		JButton btndekrementParts = new JButton("Dem Warenkorb hinzufügen");
+		btndekrementParts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btndekrementParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btndekrementParts.addActionListener(this);
+		
 		btndekrementParts.setToolTipText("Das entnommene Bauteil wird ihrer Rechnung hinzugefügt");
 		GridBagConstraints gbc_btndekrementParts = new GridBagConstraints();
 		gbc_btndekrementParts.fill = GridBagConstraints.HORIZONTAL;
@@ -201,8 +205,12 @@ public class GUIComponentUserInterface implements ActionListener {
 		panelshoppingCart.add(btndekrementParts, gbc_btndekrementParts);
 		
 		JButton btnincrementParts = new JButton("Aus Warenkorb entfernen");
+		btnincrementParts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnincrementParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnincrementParts.addActionListener(this);
+	
 		btnincrementParts.setToolTipText("Das Bauteil wird in der angegebenen Menge \r\naus ihrem Warenkorb entfernt.");
 		GridBagConstraints gbc_btnincrementParts = new GridBagConstraints();
 		gbc_btnincrementParts.fill = GridBagConstraints.HORIZONTAL;
@@ -279,8 +287,17 @@ public class GUIComponentUserInterface implements ActionListener {
 		panelChangePassword.add(passwordFieldnewPasswordRepeat, gbc_passwordFieldnewPasswordRepeat);
 		
 		JButton btnclearAllInputs = new JButton("Eingaben löschen");
+		btnclearAllInputs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			passwordFieldnewPassword.setText("");
+			passwordFieldnewPasswordRepeat.setText("");
+			
+			
+			}
+		});
 		btnclearAllInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnclearAllInputs.addActionListener(this);
+		
 		GridBagConstraints gbc_btnclearAllInputs = new GridBagConstraints();
 		gbc_btnclearAllInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnclearAllInputs.gridwidth = 4;
@@ -290,8 +307,12 @@ public class GUIComponentUserInterface implements ActionListener {
 		panelChangePassword.add(btnclearAllInputs, gbc_btnclearAllInputs);
 		
 		JButton btnsaveChange = new JButton("Änderung speichern");
+		btnsaveChange.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnsaveChange.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnsaveChange.addActionListener(this);
+		
 		GridBagConstraints gbc_btnsaveChange = new GridBagConstraints();
 		gbc_btnsaveChange.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsaveChange.gridwidth = 4;
@@ -307,18 +328,30 @@ public class GUIComponentUserInterface implements ActionListener {
 		menuBar.add(mnNewMenuOptions);
 		
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
+		mntmNewMenuItemlogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				GuiLogin logout= new GuiLogin();
+				frmElabVerwaltungsprogramm.dispose();
+				
+			}
+		});
 		mntmNewMenuItemlogOut.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
-		mntmNewMenuItemlogOut.addActionListener(this);
+		
 		
 		JMenu mnNewMenuhelpWindow = new JMenu("?");
 		mnNewMenuhelpWindow.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		menuBar.add(mnNewMenuhelpWindow);
 		
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
-		mntmNewMenuItemshowManual.addActionListener(this);
+		
 		
 		
 		frmElabVerwaltungsprogramm.setVisible(true);

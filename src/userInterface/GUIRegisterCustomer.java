@@ -39,7 +39,7 @@ import javax.swing.JMenuItem;
 import java.awt.Toolkit;
 import java.awt.Window.Type;
 
-public class GUIRegisterCustomer implements ActionListener {
+public class GUIRegisterCustomer {
 
 	private JFrame frmElabVerwaltungsprogramm;
 	private JTextField textFieldname;
@@ -76,7 +76,7 @@ public class GUIRegisterCustomer implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblPersonenverwaltung = new JLabel("Neukundenregistierung");
-		lblPersonenverwaltung.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPersonenverwaltung.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_lblPersonenverwaltung = new GridBagConstraints();
 		gbc_lblPersonenverwaltung.insets = new Insets(0, 0, 5, 0);
 		gbc_lblPersonenverwaltung.gridx = 0;
@@ -299,8 +299,14 @@ public class GUIRegisterCustomer implements ActionListener {
 		paneladdPerson.add(passwordField, gbc_passwordField);
 		
 		JButton btnaddPerson = new JButton("Registrieren");
+		btnaddPerson.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			
+			}
+		});
 		btnaddPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnaddPerson.addActionListener(this);
+		
 		
 		
 		JLabel lblPasswordRepeat = new JLabel("Passwort wiederholen");
@@ -328,6 +334,23 @@ public class GUIRegisterCustomer implements ActionListener {
 		paneladdPerson.add(btnaddPerson, gbc_btnaddPerson);
 		
 		JButton btndeleteallInputs = new JButton("Eingaben löschen");
+		btndeleteallInputs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			textFieldname.setText("");	
+			textFieldlastName.setText("");
+			textFieldStreet.setText("");
+			textFieldhouseNumber.setText("");
+			textFieldzipCode.setText("");
+			textFieldeMail.setText("");
+			comboBoxType.setSelectedIndex(0);
+			textFielduserName.setText("");
+			textFieldprofessorShip.setText("");
+			passwordField.setText("");
+			passwordFieldrepeatPassword.setText("");
+			
+			}
+		});
 		btndeleteallInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
@@ -352,8 +375,16 @@ public class GUIRegisterCustomer implements ActionListener {
 		menuBar.add(mnNewMenuOptions);
 		
 		JMenuItem mntmNewMenuItemabortRegister = new JMenuItem("Registrierung abbrechen");
+		mntmNewMenuItemabortRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				GuiLogin gui = new GuiLogin();
+				frmElabVerwaltungsprogramm.dispose();
+				
+			}
+		});
 		mntmNewMenuItemabortRegister.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mntmNewMenuItemabortRegister.addActionListener(this);
+	
 		mntmNewMenuItemabortRegister.setBorderPainted(true);
 		mnNewMenuOptions.add(mntmNewMenuItemabortRegister);
 		mntmNewMenuItemabortRegister.setToolTipText("Sie kehren zum Login zurück");
@@ -365,37 +396,5 @@ public class GUIRegisterCustomer implements ActionListener {
 		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
 		frmElabVerwaltungsprogramm.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		String command = e.getActionCommand();
-		
-		if (command == "Registrieren") {
-			
-			
-		}
-
-		if (command == "Eingaben löschen") {
-			
-			
-		}
-		
-
-		if (command == "Registrierung abbrechen") {
-		
-		GuiLogin abortReg= new GuiLogin();
-		frmElabVerwaltungsprogramm.dispose();
-			
-		}
-
-		if (command == "Anleitung anzeigen") {
-			
-			
-		}
-		
-		
-		
 	}
 }

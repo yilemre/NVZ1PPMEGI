@@ -28,7 +28,7 @@ import javax.swing.JEditorPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 
-public class GuiLogin implements ActionListener {
+public class GuiLogin {
 
 	private JFrame frmElabVerwaltungsprogramm;
 	private JTextField textFielduserName;
@@ -101,8 +101,13 @@ public class GuiLogin implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(passwordField, gbc_passwordField);
 		
 		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			}
+		});
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogin.addActionListener(this);
+		
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
 		gbc_btnLogin.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnLogin.insets = new Insets(0, 0, 5, 0);
@@ -111,8 +116,15 @@ public class GuiLogin implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(btnLogin, gbc_btnLogin);
 		
 		btnregister = new JButton("Registrieren");
+		btnregister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				GUIRegisterCustomer regcu= new GUIRegisterCustomer();
+				frmElabVerwaltungsprogramm.dispose();
+			}
+		});
 		btnregister.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnregister.addActionListener(this);
+		
 		btnregister.setToolTipText("Als neuer Kunde hier registrieren");
 		GridBagConstraints gbc_btnregister = new GridBagConstraints();
 		gbc_btnregister.fill = GridBagConstraints.HORIZONTAL;
@@ -130,21 +142,5 @@ public class GuiLogin implements ActionListener {
 	frmElabVerwaltungsprogramm.setVisible(true);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-		String command = e.getActionCommand();
-		
-		if (command== "Registrieren") {
-			
-			GUIRegisterCustomer regcu= new GUIRegisterCustomer();
-			frmElabVerwaltungsprogramm.dispose();
-			
-		}
-		
-		
-		
-		
-	}
+	
 }
