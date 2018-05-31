@@ -302,6 +302,7 @@ public class GUIComponentmanagement  {
 		JButton btnaddPart = new JButton("Bauteil hinzufügen");
 		btnaddPart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			    //Emre begin
 			    try {
 				ComponentManagement.addPart(tfArticleNo.getText(), textFieldpartLink.getText(), textFieldpartName.getText(), Double.parseDouble(textFieldpartPrize.getText()), Integer.parseInt(textFieldquantityStoring.getText()),
 						Integer.parseInt(textFieldquantityPlanned.getText()), Integer.parseInt(textFieldquantityOrdered.getText()), textFieldstorageLocation.getText(),0);
@@ -313,6 +314,7 @@ public class GUIComponentmanagement  {
 				e1.printStackTrace();
 			    }
 			}
+			//Emre end
 		});
 		btnaddPart.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
@@ -326,6 +328,7 @@ public class GUIComponentmanagement  {
 		JButton btndeleteallInputs = new JButton("Eingabe löschen");
 		btndeleteallInputs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			    //Emre begin
 			    textFieldpartName.setText("");
 			    textFieldpartLink.setText("");
 			    textFieldpartPrize.setText("");
@@ -333,8 +336,8 @@ public class GUIComponentmanagement  {
 			    textFieldquantityPlanned.setText("");
 			    textFieldquantityOrdered.setText("");
 			    textFieldstorageLocation.setText("");
-			    
 			}
+			//Emre end
 		});
 		btndeleteallInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
@@ -711,6 +714,7 @@ public class GUIComponentmanagement  {
 																		JButton btncategoryNew = new JButton("Kategorie hinzufügen");
 																		btncategoryNew.addActionListener(new ActionListener() {
 																			public void actionPerformed(ActionEvent e) {
+																			    //Emre begin
 																			    try {
 																				ComponentManagement.addCategory(textFieldcategoryNameNew.getText(),textFieldcategoryNoteNew.getText() );
 																			    } catch (Exception a) {
@@ -718,6 +722,7 @@ public class GUIComponentmanagement  {
 																			    }
 																			    
 																			}
+																			//Emre end
 																		});
 																		btncategoryNew.setFont(new Font("Tahoma", Font.PLAIN, 15));
 																		
@@ -779,9 +784,11 @@ public class GUIComponentmanagement  {
 																						JButton btncategoryDeleteInputs = new JButton("Eingaben löschen");
 																						btncategoryDeleteInputs.addActionListener(new ActionListener() {
 																							public void actionPerformed(ActionEvent e) {
+																							    //Emre
 																								textFieldcategoryNameNew.setText("");
 																								textFieldcategoryNoteNew.setText("");
 																							}
+																							//Emre
 																						});
 																						btncategoryDeleteInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 																						GridBagConstraints gbc_btncategoryDeleteInputs = new GridBagConstraints();
@@ -794,9 +801,11 @@ public class GUIComponentmanagement  {
 																								JButton btncategoryModifyDeleteInputs = new JButton("Änderungen löschen");
 																								btncategoryModifyDeleteInputs.addActionListener(new ActionListener() {
 																									public void actionPerformed(ActionEvent e) {
+																									    //Emre begin
 																									    textFieldcategoryNameModify.setText("");
 																									    textFieldcategoryNoteModify.setText("");
 																									}
+																									//Emre end
 																								});
 																								btncategoryModifyDeleteInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 																								
