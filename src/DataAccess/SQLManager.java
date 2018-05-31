@@ -225,12 +225,12 @@ public class SQLManager {
 		}
 	}*/
 
-	public int addPartIntoDB(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int category, int rights) throws SQLException {
+	public int addPartIntoDB(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int category) throws SQLException {
 		int result=0;
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO Parts (articlenumber, productlink, name, price, storing, plannedAmount, orderedAmount, storageLocation, category, rights) VALUES ('"+articlenumber+"','"+productlink+"','"+name+"',"+price+","+storing+","+plannedAmount+","+orderedAmount+",'"+storageLocation+"',(SELECT idCategory FROM Categorys WHERE idCategory="+category+"'), "+rights+");";
+		String sql ="INSERT INTO Parts (articlenumber, productlink, name, price, storing, plannedAmount, orderedAmount, storageLocation, idCategory) VALUES ('"+articlenumber+"','"+productlink+"','"+name+"',"+price+","+storing+","+plannedAmount+","+orderedAmount+",'"+storageLocation+"',"+ category+")";
 		stmt.executeUpdate(sql);
-		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Person");
+		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Parts");
 		rs.next();
 		result = rs.getInt(1);
 		rs.close();

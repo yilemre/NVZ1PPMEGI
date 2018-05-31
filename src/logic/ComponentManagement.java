@@ -18,7 +18,7 @@ public class ComponentManagement {
     }
 		
     public static void addPart(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int idCategory) throws SQLException {
-	SQLManager.getInstance().addPartIntoDB(articlenumber, productlink, name, price, storing, plannedAmount, orderedAmount, storageLocation, idCategory,0);
+	SQLManager.getInstance().addPartIntoDB(articlenumber, productlink, name, price, storing, plannedAmount, orderedAmount, storageLocation, idCategory);
     }
     public static void deletePart(int id) throws SQLException {
 	SQLManager.getInstance().deletePartFromDB(id); 
