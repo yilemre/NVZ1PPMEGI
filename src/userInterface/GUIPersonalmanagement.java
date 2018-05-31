@@ -74,12 +74,12 @@ public class GUIPersonalmanagement{
 	private JTable table;
 	private List<String> comboBoxEntries;
 	private JTable TableDeletePerson;
-	
+
 
 	/**
 	 * Launch the application.
 	 */
-	
+
 
 	/**
 	 * Create the application.
@@ -103,7 +103,7 @@ public class GUIPersonalmanagement{
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		frmElabVerwaltungsprogramm.getContentPane().setLayout(gridBagLayout);
-		
+
 		JLabel lblPersonenverwaltung = new JLabel("Personenverwaltung");
 		lblPersonenverwaltung.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_lblPersonenverwaltung = new GridBagConstraints();
@@ -111,7 +111,7 @@ public class GUIPersonalmanagement{
 		gbc_lblPersonenverwaltung.gridx = 0;
 		gbc_lblPersonenverwaltung.gridy = 0;
 		frmElabVerwaltungsprogramm.getContentPane().add(lblPersonenverwaltung, gbc_lblPersonenverwaltung);
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
@@ -119,7 +119,7 @@ public class GUIPersonalmanagement{
 		gbc_tabbedPane.gridx = 0;
 		gbc_tabbedPane.gridy = 1;
 		frmElabVerwaltungsprogramm.getContentPane().add(tabbedPane, gbc_tabbedPane);
-		
+
 		JPanel paneladdPerson = new JPanel();
 		tabbedPane.addTab("Person hinzufügen", null, paneladdPerson, null);
 		GridBagLayout gbl_paneladdPerson = new GridBagLayout();
@@ -128,7 +128,7 @@ public class GUIPersonalmanagement{
 		gbl_paneladdPerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gbl_paneladdPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		paneladdPerson.setLayout(gbl_paneladdPerson);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(null);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -136,7 +136,7 @@ public class GUIPersonalmanagement{
 		gbc_lblNewLabel.gridx = 1;
 		gbc_lblNewLabel.gridy = 0;
 		paneladdPerson.add(lblNewLabel, gbc_lblNewLabel);
-		
+
 		JLabel lblID = new JLabel("ID");
 		lblID.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblID = new GridBagConstraints();
@@ -145,7 +145,7 @@ public class GUIPersonalmanagement{
 		gbc_lblID.gridx = 0;
 		gbc_lblID.gridy = 1;
 		paneladdPerson.add(lblID, gbc_lblID);
-		
+
 		textFieldID = new JTextField();
 		textFieldID.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldID.setEditable(false);
@@ -156,7 +156,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldID.gridy = 1;
 		paneladdPerson.add(textFieldID, gbc_textFieldID);
 		textFieldID.setColumns(10);
-		
+
 		JLabel lblname = new JLabel("Vorname");
 		lblname.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblname = new GridBagConstraints();
@@ -165,7 +165,7 @@ public class GUIPersonalmanagement{
 		gbc_lblname.gridx = 0;
 		gbc_lblname.gridy = 2;
 		paneladdPerson.add(lblname, gbc_lblname);
-		
+
 		textFieldname = new JTextField();
 		textFieldname.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldname = new GridBagConstraints();
@@ -175,7 +175,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldname.gridy = 2;
 		paneladdPerson.add(textFieldname, gbc_textFieldname);
 		textFieldname.setColumns(10);
-		
+
 		JLabel lbllastName = new JLabel("Nachname");
 		lbllastName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbllastName = new GridBagConstraints();
@@ -184,7 +184,7 @@ public class GUIPersonalmanagement{
 		gbc_lbllastName.gridx = 0;
 		gbc_lbllastName.gridy = 3;
 		paneladdPerson.add(lbllastName, gbc_lbllastName);
-		
+
 		textFieldlastName = new JTextField();
 		textFieldlastName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldlastName = new GridBagConstraints();
@@ -194,7 +194,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldlastName.gridy = 3;
 		paneladdPerson.add(textFieldlastName, gbc_textFieldlastName);
 		textFieldlastName.setColumns(10);
-		
+
 		JLabel lblStreet = new JLabel("Straße");
 		lblStreet.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblStreet = new GridBagConstraints();
@@ -203,7 +203,7 @@ public class GUIPersonalmanagement{
 		gbc_lblStreet.gridx = 0;
 		gbc_lblStreet.gridy = 4;
 		paneladdPerson.add(lblStreet, gbc_lblStreet);
-		
+
 		textFieldStreet = new JTextField();
 		textFieldStreet.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldStreet = new GridBagConstraints();
@@ -213,7 +213,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldStreet.gridy = 4;
 		paneladdPerson.add(textFieldStreet, gbc_textFieldStreet);
 		textFieldStreet.setColumns(10);
-		
+
 		JLabel lblhouseNumber = new JLabel("Hausnummer");
 		lblhouseNumber.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblhouseNumber = new GridBagConstraints();
@@ -222,7 +222,7 @@ public class GUIPersonalmanagement{
 		gbc_lblhouseNumber.gridx = 0;
 		gbc_lblhouseNumber.gridy = 5;
 		paneladdPerson.add(lblhouseNumber, gbc_lblhouseNumber);
-		
+
 		textFieldhouseNumber = new JTextField();
 		textFieldhouseNumber.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldhouseNumber = new GridBagConstraints();
@@ -232,7 +232,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldhouseNumber.gridy = 5;
 		paneladdPerson.add(textFieldhouseNumber, gbc_textFieldhouseNumber);
 		textFieldhouseNumber.setColumns(10);
-		
+
 		JLabel lblzipCode = new JLabel("PLZ");
 		lblzipCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblzipCode = new GridBagConstraints();
@@ -241,7 +241,7 @@ public class GUIPersonalmanagement{
 		gbc_lblzipCode.gridx = 0;
 		gbc_lblzipCode.gridy = 6;
 		paneladdPerson.add(lblzipCode, gbc_lblzipCode);
-		
+
 		textFieldzipCode = new JTextField();
 		textFieldzipCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldzipCode = new GridBagConstraints();
@@ -251,7 +251,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldzipCode.gridy = 6;
 		paneladdPerson.add(textFieldzipCode, gbc_textFieldzipCode);
 		textFieldzipCode.setColumns(10);
-		
+
 		JLabel lbleMail = new JLabel("E-Mail Adresse");
 		lbleMail.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbleMail = new GridBagConstraints();
@@ -260,7 +260,7 @@ public class GUIPersonalmanagement{
 		gbc_lbleMail.gridx = 0;
 		gbc_lbleMail.gridy = 7;
 		paneladdPerson.add(lbleMail, gbc_lbleMail);
-		
+
 		textFieldeMail = new JTextField();
 		GridBagConstraints gbc_textFieldeMail = new GridBagConstraints();
 		gbc_textFieldeMail.fill = GridBagConstraints.HORIZONTAL;
@@ -269,7 +269,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldeMail.gridy = 7;
 		paneladdPerson.add(textFieldeMail, gbc_textFieldeMail);
 		textFieldeMail.setColumns(10);
-		
+
 		JLabel lblTyp = new JLabel("Personenart");
 		lblTyp.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblTyp = new GridBagConstraints();
@@ -279,7 +279,7 @@ public class GUIPersonalmanagement{
 		gbc_lblTyp.gridy = 8;
 		paneladdPerson.add(lblTyp, gbc_lblTyp);
 		comboBoxType.setFont(new Font("Tahoma", Font.PLAIN, 15));
-	
+
 		comboBoxType.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
 		GridBagConstraints gbc_comboBoxType = new GridBagConstraints();
 		gbc_comboBoxType.insets = new Insets(0, 0, 5, 0);
@@ -287,7 +287,7 @@ public class GUIPersonalmanagement{
 		gbc_comboBoxType.gridx = 1;
 		gbc_comboBoxType.gridy = 8;
 		paneladdPerson.add(comboBoxType, gbc_comboBoxType);
-		
+
 		JLabel lbluserName = new JLabel("Username");
 		lbluserName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbluserName = new GridBagConstraints();
@@ -296,7 +296,7 @@ public class GUIPersonalmanagement{
 		gbc_lbluserName.gridx = 0;
 		gbc_lbluserName.gridy = 9;
 		paneladdPerson.add(lbluserName, gbc_lbluserName);
-		
+
 		textFielduserName = new JTextField();
 		textFielduserName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFielduserName = new GridBagConstraints();
@@ -306,7 +306,7 @@ public class GUIPersonalmanagement{
 		gbc_textFielduserName.gridy = 9;
 		paneladdPerson.add(textFielduserName, gbc_textFielduserName);
 		textFielduserName.setColumns(10);
-		
+
 		JLabel lblPassword = new JLabel("Passwort");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
@@ -315,7 +315,7 @@ public class GUIPersonalmanagement{
 		gbc_lblPassword.gridx = 0;
 		gbc_lblPassword.gridy = 10;
 		paneladdPerson.add(lblPassword, gbc_lblPassword);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
@@ -324,32 +324,32 @@ public class GUIPersonalmanagement{
 		gbc_passwordField.gridx = 1;
 		gbc_passwordField.gridy = 10;
 		paneladdPerson.add(passwordField, gbc_passwordField);
-		
+
 		JButton btnaddPerson = new JButton("Person hinzufügen");
 		btnaddPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnaddPerson.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			    try {
-				PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
-				Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
-				refreshTable();
-				refreshTableDeletePerson();
-			    } 
-			    catch (Exception a) {
-				a.printStackTrace();
-				
-			    }
+				try {
+					PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
+							Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
+					refreshTable();
+					refreshTableDeletePerson();
+				} 
+				catch (Exception a) {
+					a.printStackTrace();
+
+				}
 			}
 		});
-		
+
 		GridBagConstraints gbc_btnaddPerson = new GridBagConstraints();
 		gbc_btnaddPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddPerson.insets = new Insets(0, 0, 5, 0);
 		gbc_btnaddPerson.gridx = 1;
 		gbc_btnaddPerson.gridy = 11;
 		paneladdPerson.add(btnaddPerson, gbc_btnaddPerson);
-		
+
 		JButton btndeleteallInputs = new JButton("Eingaben löschen");
 		btndeleteallInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
@@ -372,7 +372,7 @@ public class GUIPersonalmanagement{
 		gbc_btndeleteallInputs.gridx = 1;
 		gbc_btndeleteallInputs.gridy = 12;
 		paneladdPerson.add(btndeleteallInputs, gbc_btndeleteallInputs);
-		
+
 		JLabel lbleLabpicture = new JLabel("");
 		lbleLabpicture.setIcon(new ImageIcon("C:\\Users\\Nils\\git\\ProPraElab\\ProPraElab\\pictures\\elab.png"));
 		GridBagConstraints gbc_lbleLabpicture = new GridBagConstraints();
@@ -380,7 +380,7 @@ public class GUIPersonalmanagement{
 		gbc_lbleLabpicture.gridx = 0;
 		gbc_lbleLabpicture.gridy = 13;
 		paneladdPerson.add(lbleLabpicture, gbc_lbleLabpicture);
-		
+
 		JPanel panelmodifyPerson = new JPanel();
 		tabbedPane.addTab("Person bearbeiten", null, panelmodifyPerson, null);
 		GridBagLayout gbl_panelmodifyPerson = new GridBagLayout();
@@ -389,7 +389,7 @@ public class GUIPersonalmanagement{
 		gbl_panelmodifyPerson.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		gbl_panelmodifyPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panelmodifyPerson.setLayout(gbl_panelmodifyPerson);
-		
+
 		JLabel lblIDModify = new JLabel("ID");
 		lblIDModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblIDModify = new GridBagConstraints();
@@ -398,7 +398,7 @@ public class GUIPersonalmanagement{
 		gbc_lblIDModify.gridx = 0;
 		gbc_lblIDModify.gridy = 0;
 		panelmodifyPerson.add(lblIDModify, gbc_lblIDModify);
-		
+
 		textFieldIDModify = new JTextField();
 		textFieldIDModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldIDModify.setEditable(false);
@@ -410,7 +410,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldIDModify.gridy = 0;
 		panelmodifyPerson.add(textFieldIDModify, gbc_textFieldIDModify);
 		textFieldIDModify.setColumns(10);
-		
+
 		JLabel lblnameModify = new JLabel("Vorname");
 		lblnameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblnameModify = new GridBagConstraints();
@@ -419,7 +419,7 @@ public class GUIPersonalmanagement{
 		gbc_lblnameModify.gridx = 0;
 		gbc_lblnameModify.gridy = 1;
 		panelmodifyPerson.add(lblnameModify, gbc_lblnameModify);
-		
+
 		textFieldnameModify = new JTextField();
 		textFieldnameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldnameModify = new GridBagConstraints();
@@ -429,7 +429,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldnameModify.gridy = 1;
 		panelmodifyPerson.add(textFieldnameModify, gbc_textFieldnameModify);
 		textFieldnameModify.setColumns(10);
-		
+
 		JLabel lbllastNameModify = new JLabel("Nachname");
 		lbllastNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbllastNameModify = new GridBagConstraints();
@@ -438,7 +438,7 @@ public class GUIPersonalmanagement{
 		gbc_lbllastNameModify.gridx = 0;
 		gbc_lbllastNameModify.gridy = 2;
 		panelmodifyPerson.add(lbllastNameModify, gbc_lbllastNameModify);
-		
+
 		textFieldlastNameModify = new JTextField();
 		textFieldlastNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldlastNameModify = new GridBagConstraints();
@@ -448,7 +448,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldlastNameModify.gridy = 2;
 		panelmodifyPerson.add(textFieldlastNameModify, gbc_textFieldlastNameModify);
 		textFieldlastNameModify.setColumns(10);
-		
+
 		JLabel lblstreetModify = new JLabel("Straße");
 		lblstreetModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblstreetModify = new GridBagConstraints();
@@ -457,7 +457,7 @@ public class GUIPersonalmanagement{
 		gbc_lblstreetModify.gridx = 0;
 		gbc_lblstreetModify.gridy = 3;
 		panelmodifyPerson.add(lblstreetModify, gbc_lblstreetModify);
-		
+
 		textFieldstreetModify = new JTextField();
 		textFieldstreetModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldstreetModify = new GridBagConstraints();
@@ -467,7 +467,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldstreetModify.gridy = 3;
 		panelmodifyPerson.add(textFieldstreetModify, gbc_textFieldstreetModify);
 		textFieldstreetModify.setColumns(10);
-		
+
 		JLabel lblhouseNumberModify = new JLabel("Hausnummer");
 		lblhouseNumberModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblhouseNumberModify = new GridBagConstraints();
@@ -476,7 +476,7 @@ public class GUIPersonalmanagement{
 		gbc_lblhouseNumberModify.gridx = 0;
 		gbc_lblhouseNumberModify.gridy = 4;
 		panelmodifyPerson.add(lblhouseNumberModify, gbc_lblhouseNumberModify);
-		
+
 		textFieldhouseNumberModify = new JTextField();
 		textFieldhouseNumberModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldhouseNumberModify = new GridBagConstraints();
@@ -486,7 +486,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldhouseNumberModify.gridy = 4;
 		panelmodifyPerson.add(textFieldhouseNumberModify, gbc_textFieldhouseNumberModify);
 		textFieldhouseNumberModify.setColumns(10);
-		
+
 		JLabel lblzipCodeModify = new JLabel("PLZ");
 		lblzipCodeModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblzipCodeModify = new GridBagConstraints();
@@ -495,7 +495,7 @@ public class GUIPersonalmanagement{
 		gbc_lblzipCodeModify.gridx = 0;
 		gbc_lblzipCodeModify.gridy = 5;
 		panelmodifyPerson.add(lblzipCodeModify, gbc_lblzipCodeModify);
-		
+
 		textFieldzipCodeModify = new JTextField();
 		textFieldzipCodeModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldzipCodeModify = new GridBagConstraints();
@@ -505,7 +505,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldzipCodeModify.gridy = 5;
 		panelmodifyPerson.add(textFieldzipCodeModify, gbc_textFieldzipCodeModify);
 		textFieldzipCodeModify.setColumns(10);
-		
+
 		JLabel lbleMailModify = new JLabel("E-Mail Adresse");
 		lbleMailModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbleMailModify = new GridBagConstraints();
@@ -514,7 +514,7 @@ public class GUIPersonalmanagement{
 		gbc_lbleMailModify.gridx = 0;
 		gbc_lbleMailModify.gridy = 6;
 		panelmodifyPerson.add(lbleMailModify, gbc_lbleMailModify);
-		
+
 		textFieldeMailModify = new JTextField();
 		textFieldeMailModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldeMailModify = new GridBagConstraints();
@@ -524,7 +524,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldeMailModify.gridy = 6;
 		panelmodifyPerson.add(textFieldeMailModify, gbc_textFieldeMailModify);
 		textFieldeMailModify.setColumns(10);
-		
+
 		JLabel lbltypModify = new JLabel("Personenart");
 		lbltypModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbltypModify = new GridBagConstraints();
@@ -533,7 +533,7 @@ public class GUIPersonalmanagement{
 		gbc_lbltypModify.gridx = 0;
 		gbc_lbltypModify.gridy = 7;
 		panelmodifyPerson.add(lbltypModify, gbc_lbltypModify);
-		
+
 		comboBoxTypeModify = new JComboBox();
 		comboBoxTypeModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxTypeModify.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
@@ -543,7 +543,7 @@ public class GUIPersonalmanagement{
 		gbc_comboBoxTypeModify.gridx = 1;
 		gbc_comboBoxTypeModify.gridy = 7;
 		panelmodifyPerson.add(comboBoxTypeModify, gbc_comboBoxTypeModify);
-		
+
 		JLabel lbluserNameModify = new JLabel("Username");
 		lbluserNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbluserNameModify = new GridBagConstraints();
@@ -552,7 +552,7 @@ public class GUIPersonalmanagement{
 		gbc_lbluserNameModify.gridx = 0;
 		gbc_lbluserNameModify.gridy = 8;
 		panelmodifyPerson.add(lbluserNameModify, gbc_lbluserNameModify);
-		
+
 		textFielduserNameModify = new JTextField();
 		textFielduserNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFielduserNameModify = new GridBagConstraints();
@@ -562,7 +562,7 @@ public class GUIPersonalmanagement{
 		gbc_textFielduserNameModify.gridy = 8;
 		panelmodifyPerson.add(textFielduserNameModify, gbc_textFielduserNameModify);
 		textFielduserNameModify.setColumns(10);
-		
+
 		JLabel lblpasswordModify = new JLabel("Passwort");
 		lblpasswordModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblpasswordModify = new GridBagConstraints();
@@ -571,7 +571,7 @@ public class GUIPersonalmanagement{
 		gbc_lblpasswordModify.gridx = 0;
 		gbc_lblpasswordModify.gridy = 9;
 		panelmodifyPerson.add(lblpasswordModify, gbc_lblpasswordModify);
-		
+
 		passwordFieldModify = new JPasswordField();
 		passwordFieldModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_passwordFieldModify = new GridBagConstraints();
@@ -580,11 +580,11 @@ public class GUIPersonalmanagement{
 		gbc_passwordFieldModify.gridx = 1;
 		gbc_passwordFieldModify.gridy = 9;
 		panelmodifyPerson.add(passwordFieldModify, gbc_passwordFieldModify);
-		
+
 		JButton btnsaveModifiedValues = new JButton("Änderungen speichern");
 		btnsaveModifiedValues.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnsaveModifiedValues.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -600,14 +600,14 @@ public class GUIPersonalmanagement{
 				refreshTableDeletePerson();
 			}
 		});
-		
+
 		GridBagConstraints gbc_btnsaveModifiedValues = new GridBagConstraints();
 		gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsaveModifiedValues.insets = new Insets(0, 0, 5, 0);
 		gbc_btnsaveModifiedValues.gridx = 1;
 		gbc_btnsaveModifiedValues.gridy = 10;
 		panelmodifyPerson.add(btnsaveModifiedValues, gbc_btnsaveModifiedValues);
-		
+
 		JScrollPane scrollPanemodifyPerson = new JScrollPane();
 		scrollPanemodifyPerson.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPanemodifyPerson.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -618,7 +618,7 @@ public class GUIPersonalmanagement{
 		gbc_scrollPanemodifyPerson.gridx = 0;
 		gbc_scrollPanemodifyPerson.gridy = 11;
 		panelmodifyPerson.add(scrollPanemodifyPerson, gbc_scrollPanemodifyPerson);
-		
+
 		table = new JTable();
 		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		try {
@@ -629,17 +629,17 @@ public class GUIPersonalmanagement{
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPanemodifyPerson.setViewportView(table);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				handleEditPersonSelectionEvent(e);
-				
+
 			}
 		});
 		table.clearSelection();
 		//scrollPanemodifyPerson.add(table);
-		
-		
+
+
 		JComboBox comboBoxsearchModifyPerson = new JComboBox();
 		comboBoxsearchModifyPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxsearchModifyPerson.setModel(new DefaultComboBoxModel(new String[] {"Vorname", "Nachname", "Mitgliedschaft"}));
@@ -649,7 +649,7 @@ public class GUIPersonalmanagement{
 		gbc_comboBoxsearchModifyPerson.gridx = 0;
 		gbc_comboBoxsearchModifyPerson.gridy = 12;
 		panelmodifyPerson.add(comboBoxsearchModifyPerson, gbc_comboBoxsearchModifyPerson);
-		
+
 		textFieldsearchModifyPerson = new JTextField();
 		textFieldsearchModifyPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldsearchModifyPerson = new GridBagConstraints();
@@ -659,7 +659,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldsearchModifyPerson.gridy = 12;
 		panelmodifyPerson.add(textFieldsearchModifyPerson, gbc_textFieldsearchModifyPerson);
 		textFieldsearchModifyPerson.setColumns(10);
-		
+
 		JButton btnsearchModifyPerson = new JButton("Suchen");
 		btnsearchModifyPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnsearchModifyPerson = new GridBagConstraints();
@@ -695,7 +695,7 @@ public class GUIPersonalmanagement{
 						e1.printStackTrace();
 					}
 					break;
-					}
+				}
 			}
 		});
 		gbc_btnsearchModifyPerson.insets = new Insets(0, 0, 5, 0);
@@ -703,11 +703,11 @@ public class GUIPersonalmanagement{
 		gbc_btnsearchModifyPerson.gridx = 1;
 		gbc_btnsearchModifyPerson.gridy = 13;
 		panelmodifyPerson.add(btnsearchModifyPerson, gbc_btnsearchModifyPerson);
-		
+
 		JButton btnSearchRemove = new JButton("Suche aufheben");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		btnSearchRemove.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -722,16 +722,16 @@ public class GUIPersonalmanagement{
 		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 14;
 		panelmodifyPerson.add(btnSearchRemove, gbc_btnNewButton);
-		
+
 		JPanel paneldeletePerson = new JPanel();
-		tabbedPane.addTab("Personen l\u00F6schen", null, paneldeletePerson, null);
+		tabbedPane.addTab("Personen löschen", null, paneldeletePerson, null);
 		GridBagLayout gbl_paneldeletePerson = new GridBagLayout();
 		gbl_paneldeletePerson.columnWidths = new int[]{168, 0, 0};
 		gbl_paneldeletePerson.rowHeights = new int[]{0, 0, 0, 0, 0};
 		gbl_paneldeletePerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gbl_paneldeletePerson.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		paneldeletePerson.setLayout(gbl_paneldeletePerson);
-		
+
 		JScrollPane scrollPanedeletePerson = new JScrollPane();
 		scrollPanedeletePerson.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPanedeletePerson.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -742,7 +742,7 @@ public class GUIPersonalmanagement{
 		gbc_scrollPanedeletePerson.gridx = 0;
 		gbc_scrollPanedeletePerson.gridy = 0;
 		paneldeletePerson.add(scrollPanedeletePerson, gbc_scrollPanedeletePerson);
-		
+
 		TableDeletePerson = new JTable();
 		scrollPanedeletePerson.setColumnHeaderView(TableDeletePerson);
 		try {
@@ -753,15 +753,15 @@ public class GUIPersonalmanagement{
 		TableDeletePerson.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPanedeletePerson.setViewportView(TableDeletePerson);
 		TableDeletePerson.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				handleEditPersonSelectionEvent(e);
-				
+
 			}
 		});
 		TableDeletePerson.clearSelection();
-		
+
 		JComboBox comboBoxsearchDeletePerson = new JComboBox();
 		comboBoxsearchDeletePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxsearchDeletePerson.setModel(new DefaultComboBoxModel(new String[] {"Vorname", "Nachname"}));
@@ -771,7 +771,7 @@ public class GUIPersonalmanagement{
 		gbc_comboBoxsearchDeletePerson.gridx = 0;
 		gbc_comboBoxsearchDeletePerson.gridy = 1;
 		paneldeletePerson.add(comboBoxsearchDeletePerson, gbc_comboBoxsearchDeletePerson);
-		
+
 		textFieldsearchDeletePerson = new JTextField();
 		textFieldsearchDeletePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldsearchDeletePerson = new GridBagConstraints();
@@ -781,7 +781,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldsearchDeletePerson.gridy = 1;
 		paneldeletePerson.add(textFieldsearchDeletePerson, gbc_textFieldsearchDeletePerson);
 		textFieldsearchDeletePerson.setColumns(10);
-		
+
 		JButton btnsearchDeletePerson = new JButton("Person Suchen");
 		btnsearchDeletePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnsearchDeletePerson = new GridBagConstraints();
@@ -790,7 +790,7 @@ public class GUIPersonalmanagement{
 		gbc_btnsearchDeletePerson.gridx = 1;
 		gbc_btnsearchDeletePerson.gridy = 2;
 		paneldeletePerson.add(btnsearchDeletePerson, gbc_btnsearchDeletePerson);
-		
+
 		JButton btndeletePerson = new JButton("Person löschen");
 		btndeletePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeletePerson = new GridBagConstraints();
@@ -811,43 +811,43 @@ public class GUIPersonalmanagement{
 		gbc_btndeletePerson.gridx = 1;
 		gbc_btndeletePerson.gridy = 3;
 		paneldeletePerson.add(btndeletePerson, gbc_btndeletePerson);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
-		
+
 		JMenu mnNewMenuOptions = new JMenu("Menü");
 		mnNewMenuOptions.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		menuBar.add(mnNewMenuOptions);
-		
+
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmenü");
 		mntmNewMenuItembacktoMain.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
 		mntmNewMenuItembacktoMain.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GuiMenue gui = new GuiMenue();
 				frmElabVerwaltungsprogramm.dispose();
 			}
 		});
-		
+
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
 		mntmNewMenuItemlogOut.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
 		mntmNewMenuItemlogOut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				GuiLogin gui = new GuiLogin();	
 				frmElabVerwaltungsprogramm.dispose();
 			}
 		});
-		
+
 		JMenuItem mntmNewMenuItemcloseapplication = new JMenuItem("Anwendung verlassen");
 		mntmNewMenuItemcloseapplication.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemcloseapplication);
 		mntmNewMenuItemcloseapplication.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -855,54 +855,54 @@ public class GUIPersonalmanagement{
 		});
 		JMenu mnNewMenuhelpWindow = new JMenu("?");
 		mnNewMenuhelpWindow.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		
+
 		menuBar.add(mnNewMenuhelpWindow);
-		
+
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
 		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mntmNewMenuItemshowManual.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//ToDo
 			}
 		});
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
-		
-		
-frmElabVerwaltungsprogramm.setVisible(true);
+
+
+		frmElabVerwaltungsprogramm.setVisible(true);
 	}
-	
+
 	protected void handleEditPersonSelectionEvent(ListSelectionEvent e) {
 		if(table.getSelectedRow()>-1) {
-		textFieldIDModify.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
-		textFieldnameModify.setText((String)table.getValueAt(table.getSelectedRow(), 1));
-		textFieldlastNameModify.setText((String)table.getValueAt(table.getSelectedRow(), 2));
-		textFieldstreetModify.setText((String)table.getValueAt(table.getSelectedRow(), 3));
-		textFieldhouseNumberModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
-		textFieldzipCodeModify.setText(table.getValueAt(table.getSelectedRow(), 5).toString());
-		textFieldeMailModify.setText((String)table.getValueAt(table.getSelectedRow(), 6));
-		comboBoxTypeModify.setSelectedIndex(comboBoxEntries.indexOf((String)table.getValueAt(table.getSelectedRow(), 9)));
-		textFielduserNameModify.setText((String)table.getValueAt(table.getSelectedRow(), 7));
-		passwordFieldModify.setText((String)table.getValueAt(table.getSelectedRow(), 8));
+			textFieldIDModify.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
+			textFieldnameModify.setText((String)table.getValueAt(table.getSelectedRow(), 1));
+			textFieldlastNameModify.setText((String)table.getValueAt(table.getSelectedRow(), 2));
+			textFieldstreetModify.setText((String)table.getValueAt(table.getSelectedRow(), 3));
+			textFieldhouseNumberModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
+			textFieldzipCodeModify.setText(table.getValueAt(table.getSelectedRow(), 5).toString());
+			textFieldeMailModify.setText((String)table.getValueAt(table.getSelectedRow(), 6));
+			comboBoxTypeModify.setSelectedIndex(comboBoxEntries.indexOf((String)table.getValueAt(table.getSelectedRow(), 9)));
+			textFielduserNameModify.setText((String)table.getValueAt(table.getSelectedRow(), 7));
+			passwordFieldModify.setText((String)table.getValueAt(table.getSelectedRow(), 8));
 		}
 	}
-	
+
 	protected void refreshTable() {
 		try {
 			table.setModel(new PersonTableModel(PersonManagement.getPersons()));
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		table.clearSelection();
 	}
-	
-	
+
+
 	protected void refreshTableDeletePerson() {
 		try {
 			TableDeletePerson.setModel(new PersonTableModel(PersonManagement.getPersons()));
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

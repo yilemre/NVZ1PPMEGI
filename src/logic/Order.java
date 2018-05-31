@@ -34,6 +34,10 @@ public class Order {
 		
 	}
 
+	public int getOrderId() {
+		return id;
+	}
+	
 	public String getTitle() {
 		return title;
 	}

@@ -60,7 +60,7 @@ public class ProductionManagement {
 		}
 	}
 
-	public static List<Order> getOrderByStatus(String searchValues) throws SQLException {
+	public static List<Order> getOrdersByStatus(String searchValues) throws SQLException {
 		switch(searchValues){
 		case "Angenommen":
 			return SQLManager.getInstance().getOrdersByStatus(0);
