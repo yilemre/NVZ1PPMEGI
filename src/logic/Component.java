@@ -12,8 +12,9 @@ public class Component {
     private String storageLocation;
     private int idCategory; 
     
-    public Component(int id, String name, String link, double price, int storing, int plannendAmount, int orderedAmount,String location,int idCategory){
+    public Component(int id, String articlenumber, String name, String link, double price, int storing, int plannendAmount, int orderedAmount,String location,int idCategory){
 	this.component_id = id; 
+	this.articlenumber = articlenumber; 
 	this.name = name; 
 	this.productLink = link;
 	this.price = price; 

@@ -202,28 +202,25 @@ public class SQLManager {
 		return id;
 	}
 	//Emre begin 
-		public void modifyCategory(int id, String newName, String newNote) throws SQLException {
-		    Statement stmt = c.createStatement(); 
-		    stmt.executeUpdate("UPDATE Categorys SET name='"+ newName+"' , note='"+ newNote+"'+ WHERE idCategory ="+id+";");
-		    stmt.close();
+	public void modifyCategory(int id, String newName, String newNote) throws SQLException {
+	    Statement stmt = c.createStatement(); 
+	    stmt.executeUpdate("UPDATE Categorys SET name='"+ newName+"' , note='"+ newNote+"'+ WHERE idCategory ="+id+";");
+	    stmt.close();
 		}
+	
+	public List<Category> getCategories () throws SQLException {
+	    List<Category> category = new ArrayList<Category>();
+	    Statement stmt = c.createStatement(); 
+	    ResultSet rs = stmt.executeQuery("SELECT * FROM Categorys"); 
+	    stmt.close();
+	    while(rs.next()) {
+		Category temp = new Category(rs.getInt("idCategory"), rs.getString("name"), rs.getString("note")); 
+		category.add(temp);		
+	    }
+	    return category; 
+	    
+	}
 	//Emre end
-
-	/*public void modifyCategory(int id, AttributeTypesCategory attribute, String newValue) throws SQLException {
-		Statement stmt = c.createStatement();
-		switch(attribute) {
-		case name:
-			String sql ="ALTER Categorys SET name="+newValue+"WHERE idCategory="+id+";";
-			stmt.executeUpdate(sql);
-			stmt.close();
-			break;
-		case note:
-			String sql1 ="ALTER Categorys SET name="+newValue+"WHERE idCategory="+id+";";
-			stmt.executeUpdate(sql1);
-			stmt.close();
-			break;
-		}
-	}*/
 
 	public int addPartIntoDB(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int category) throws SQLException {
 		int result=0;
@@ -250,7 +247,7 @@ public class SQLManager {
 		int plannedAmount, int orderedAmount, String storageLocation, int idCategory) throws SQLException {
 	    	Statement stmt = c.createStatement(); 
 	    	stmt.executeUpdate("UPDATE Parts SET articlenumber = '"+ articlenumber+"', productlink='"+productlink+"',name='"+name+"', price="+
-	    	price+", storing="+ storing+", plannedAmount="+ plannedAmount+", orderedAmount="+ orderedAmount+",storageLocation='"+storageLocation+"',idCategory="+idCategory+";");
+	    	price+", storing="+ storing+", plannedAmount="+ plannedAmount+", orderedAmount="+ orderedAmount+",storageLocation='"+storageLocation+"',idCategory="+idCategory+" WHERE idPart= "+ id);
     		stmt.close();
 		    
 	} 
@@ -261,64 +258,38 @@ public class SQLManager {
 	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts");
 	    
 	    while (rs.next()) {
-		Component c = new Component(rs.getInt("idPart"), rs.getString("name"), rs.getString("productlink"), rs.getDouble("price"), rs.getInt("storing"), rs.getInt("plannedAmount"), rs.getInt("orderedAmount"), rs.getString("storageLocation"),rs.getInt("idCategory"));
+		Component c = new Component(rs.getInt("idPart"),rs.getString("articlenumber"), rs.getString("name"), rs.getString("productlink"), rs.getDouble("price"), rs.getInt("storing"), rs.getInt("plannedAmount"), rs.getInt("orderedAmount"), rs.getString("storageLocation"),rs.getInt("idCategory"));
 		result.add(c); 
 	    }
 	    return result; 
 	}
+	
+	public List<Component> getComponentsByArticlenumber(String articlenumber) throws SQLException {
+	    List<Component> result = new ArrayList<Component>(); 
+	    Statement stmt = c.createStatement(); 
+	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts WHERE articlenumber = '" + articlenumber + "';"); 
+	    
+	    while (rs.next()) {
+		Component c = new Component(rs.getInt("idPart"),rs.getString("articlenumber"), rs.getString("name"), rs.getString("productlink"), rs.getDouble("price"), rs.getInt("storing"), rs.getInt("plannedAmount"), rs.getInt("orderedAmount"), rs.getString("storageLocation"),rs.getInt("idCategory"));
+		result.add(c); 
+	    }
+	    return result; 
+	}
+	
+	public List<Component> getComponentsByName(String name) throws SQLException {
+	    List<Component> result = new ArrayList<Component>(); 
+	    Statement stmt = c.createStatement(); 
+	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts WHERE name = '" + name+ "';"); 
+	    
+	    while (rs.next()) {
+		Component c = new Component(rs.getInt("idPart"),rs.getString("articlenumber"), rs.getString("name"), rs.getString("productlink"), rs.getDouble("price"), rs.getInt("storing"), rs.getInt("plannedAmount"), rs.getInt("orderedAmount"), rs.getString("storageLocation"),rs.getInt("idCategory"));
+		result.add(c); 
+	    }
+	    return result; 
+	}
+	
 	//Emre end
-	/*
-	public void modifyPart(int id, AttributeTypesPart attribute, String newValue) throws SQLException {
-		Statement stmt = c.createStatement();
-		switch(attribute) {
-		case articlenumber: 
-			String sql ="ALTER Parts SET articlenumber="+newValue+"WHERE idPart="+id+";";
-			stmt.executeUpdate(sql);
-			stmt.close();
-			break;
-		case productlink:
-			String sql1 ="ALTER Parts SET productlink="+newValue+"WHERE idPart="+id+";";
-			stmt.executeUpdate(sql1);
-			stmt.close();
-			break;
-		case name:
-			String sql2 ="ALTER Parts SET name="+newValue+"WHERE idPart="+id+";";
-			stmt.executeUpdate(sql2);
-			stmt.close();
-			break;
-		case price:
-			String sql3 ="ALTER Parts SET articlenumber="+Double.parseDouble(newValue)+"WHERE idPart="+id+";";
-			stmt.executeUpdate(sql3);
-			stmt.close();
-			break;
-		case storing:
-			String sql4 ="ALTER Parts SET storing="+Integer.parseInt(newValue)+"WHERE idPart="+id+";";
-			stmt.executeUpdate(sql4);
-			stmt.close();
-			break;
-		case plannedAmount:
-			String sql5 ="ALTER Parts SET plannedAmount="+Integer.parseInt(newValue)+"WHERE idPart="+id+";";
-			stmt.executeUpdate(sql5);
-			stmt.close();
-			break;
-		case orderedAmount:
-			String sql6 ="ALTER Parts SET orderedAmount="+Integer.parseInt(newValue)+"WHERE idPart="+id+";";
-			stmt.executeUpdate(sql6);
-			stmt.close();
-			break;
-		case storageLocation:
-			String sql7 ="ALTER Parts SET storageLocation="+newValue+"WHERE idPart="+id+";";
-			stmt.executeUpdate(sql7);
-			stmt.close();
-			break;
-		case category:
-			String sql8 ="ALTER Parts SET category="+Integer.parseInt(newValue)+"WHERE idPart="+id+";";
-			stmt.executeUpdate(sql8);
-			stmt.close();
-			break;
-		}
-
-	}*/
+	
 	
 	//You need to check whether or not there are already parts with ID x for Person Y in Card! If so: Increase amount and don't add new row!
 	public void addPartToShoppingCard(int idPart, int idPerson, int amount) throws SQLException {
