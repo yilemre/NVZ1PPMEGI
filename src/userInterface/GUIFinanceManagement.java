@@ -38,8 +38,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.ListSelectionModel;
 import javax.swing.JFormattedTextField;
+import javax.swing.JTable;
 
-public class GUIFinanceManagement implements ActionListener {
+public class GUIFinanceManagement {
 
 	private JFrame frmElabVerwaltungsprogramm;
 	private JTextField textFieldbillName;
@@ -69,7 +70,11 @@ public class GUIFinanceManagement implements ActionListener {
 	private JTextField textFieldrelatedPersonModify;
 	private JTextField textFieldrelatedJarModify;
 	private JTextField textField_7;
-	private JTextField textField_1;
+	private JTable tablecashRegister;
+	private JTable tablebillModify;
+	private JTable tablebillNew;
+	private JTable tabledeleteBill;
+	private JTable tablejar;
 
 	/**
 	 * Launch the application.
@@ -282,6 +287,10 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldrelatedJar.setColumns(10);
 		
 		JButton btnaddBill = new JButton("Rechnung hinzufügen");
+		btnaddBill.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnaddBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnaddBill = new GridBagConstraints();
 		gbc_btnaddBill.fill = GridBagConstraints.HORIZONTAL;
@@ -291,6 +300,10 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcreateBill.add(btnaddBill, gbc_btnaddBill);
 		
 		JButton btndeleteallInputs = new JButton("Eingaben löschen");
+		btndeleteallInputs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btndeleteallInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
@@ -310,9 +323,8 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_scrollPane_1.gridy = 11;
 		panelcreateBill.add(scrollPane_1, gbc_scrollPane_1);
 		
-		JList listbillNew = new JList();
-		listbillNew.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		scrollPane_1.setViewportView(listbillNew);
+		tablebillNew = new JTable();
+		scrollPane_1.setViewportView(tablebillNew);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -334,6 +346,10 @@ public class GUIFinanceManagement implements ActionListener {
 		textField.setColumns(10);
 		
 		JButton btnnewbillOrderSearch = new JButton("Auftrag suchen");
+		btnnewbillOrderSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnnewbillOrderSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnnewbillOrderSearch = new GridBagConstraints();
 		gbc_btnnewbillOrderSearch.fill = GridBagConstraints.HORIZONTAL;
@@ -509,6 +525,10 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(textFieldrelatedJarModify, gbc_textFieldrelatedJarModify);
 		
 		JButton btnsaveBillModify = new JButton("Rechnung ändern");
+		btnsaveBillModify.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnsaveBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnsaveBillModify = new GridBagConstraints();
 		gbc_btnsaveBillModify.fill = GridBagConstraints.HORIZONTAL;
@@ -518,6 +538,10 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(btnsaveBillModify, gbc_btnsaveBillModify);
 		
 		JButton btndeleteallInputsModify = new JButton("Felder leeren");
+		btndeleteallInputsModify.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btndeleteallInputsModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteallInputsModify = new GridBagConstraints();
 		gbc_btndeleteallInputsModify.fill = GridBagConstraints.HORIZONTAL;
@@ -537,8 +561,8 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_scrollPane_2.gridy = 11;
 		panel.add(scrollPane_2, gbc_scrollPane_2);
 		
-		JList listbillModify = new JList();
-		scrollPane_2.setViewportView(listbillModify);
+		tablebillModify = new JTable();
+		scrollPane_2.setViewportView(tablebillModify);
 		
 		JComboBox comboBox_3 = new JComboBox();
 		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -560,6 +584,10 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(textField_7, gbc_textField_7);
 		
 		JButton btnSearchBillModify = new JButton("Rechnung suchen");
+		btnSearchBillModify.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnSearchBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnSearchBillModify = new GridBagConstraints();
 		gbc_btnSearchBillModify.fill = GridBagConstraints.HORIZONTAL;
@@ -568,7 +596,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panel.add(btnSearchBillModify, gbc_btnSearchBillModify);
 		
 		JPanel paneldeleteBill = new JPanel();
-		tabbedPane.addTab("Rechnungen löschen", null, paneldeleteBill, null);
+		tabbedPane.addTab("Rechnung löschen", null, paneldeleteBill, null);
 		GridBagLayout gbl_paneldeleteBill = new GridBagLayout();
 		gbl_paneldeleteBill.columnWidths = new int[]{0, 0, 0, 0};
 		gbl_paneldeleteBill.rowHeights = new int[]{0, 0, 0, 0, 0};
@@ -576,20 +604,19 @@ public class GUIFinanceManagement implements ActionListener {
 		gbl_paneldeleteBill.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		paneldeleteBill.setLayout(gbl_paneldeleteBill);
 		
-		JScrollPane scrollPanedeletePerson = new JScrollPane();
-		scrollPanedeletePerson.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPanedeletePerson.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		GridBagConstraints gbc_scrollPanedeletePerson = new GridBagConstraints();
-		gbc_scrollPanedeletePerson.gridwidth = 3;
-		gbc_scrollPanedeletePerson.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPanedeletePerson.fill = GridBagConstraints.BOTH;
-		gbc_scrollPanedeletePerson.gridx = 0;
-		gbc_scrollPanedeletePerson.gridy = 0;
-		paneldeleteBill.add(scrollPanedeletePerson, gbc_scrollPanedeletePerson);
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane_3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		GridBagConstraints gbc_scrollPane_3 = new GridBagConstraints();
+		gbc_scrollPane_3.gridwidth = 3;
+		gbc_scrollPane_3.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_3.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_3.gridx = 0;
+		gbc_scrollPane_3.gridy = 0;
+		paneldeleteBill.add(scrollPane_3, gbc_scrollPane_3);
 		
-		JList listbillDelete = new JList();
-		listbillDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		scrollPanedeletePerson.setViewportView(listbillDelete);
+		tabledeleteBill = new JTable();
+		scrollPane_3.setViewportView(tabledeleteBill);
 		
 		JComboBox comboBoxdeleteBillSearch = new JComboBox();
 		comboBoxdeleteBillSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -613,16 +640,24 @@ public class GUIFinanceManagement implements ActionListener {
 		textFielddeleteBillSearch.setColumns(10);
 		
 		JButton btndeleteBillSearch = new JButton("Suchen");
+		btndeleteBillSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btndeleteBillSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteBillSearch = new GridBagConstraints();
 		gbc_btndeleteBillSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteBillSearch.gridwidth = 2;
-		gbc_btndeleteBillSearch.insets = new Insets(0, 0, 5, 5);
+		gbc_btndeleteBillSearch.insets = new Insets(0, 0, 5, 0);
 		gbc_btndeleteBillSearch.gridx = 1;
 		gbc_btndeleteBillSearch.gridy = 2;
 		paneldeleteBill.add(btndeleteBillSearch, gbc_btndeleteBillSearch);
 		
 		JButton btndeleteBill = new JButton("Rechnung löschen");
+		btndeleteBill.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btndeleteBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteBill = new GridBagConstraints();
 		gbc_btndeleteBill.gridwidth = 2;
@@ -641,6 +676,7 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegister_JarManagement.setLayout(gbl_panelcashRegister_JarManagement);
 		
 		JTabbedPane tabbedPanecashRegister_JarManagement = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPanecashRegister_JarManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_tabbedPanecashRegister_JarManagement = new GridBagConstraints();
 		gbc_tabbedPanecashRegister_JarManagement.fill = GridBagConstraints.BOTH;
 		gbc_tabbedPanecashRegister_JarManagement.gridx = 0;
@@ -770,6 +806,10 @@ public class GUIFinanceManagement implements ActionListener {
 		textFieldjarEstimatedStockModify.setColumns(10);
 		
 		JButton btnaddJar = new JButton("Topf hinzufügen");
+		btnaddJar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnaddJar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnaddJar = new GridBagConstraints();
 		gbc_btnaddJar.insets = new Insets(0, 0, 5, 5);
@@ -779,6 +819,10 @@ public class GUIFinanceManagement implements ActionListener {
 		panelJarManagement.add(btnaddJar, gbc_btnaddJar);
 		
 		JButton btnjarSaveChanges = new JButton("Änderungen speichern");
+		btnjarSaveChanges.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnjarSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnjarSaveChanges = new GridBagConstraints();
 		gbc_btnjarSaveChanges.fill = GridBagConstraints.HORIZONTAL;
@@ -788,6 +832,14 @@ public class GUIFinanceManagement implements ActionListener {
 		panelJarManagement.add(btnjarSaveChanges, gbc_btnjarSaveChanges);
 		
 		JButton btnjarClearInputs = new JButton("Eingabe löschen");
+		btnjarClearInputs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			textFieldjarName.setText("");
+			textFieldjarActualStock.setText("");
+			textFieldjarEstimatedStock.setText("");
+			}
+		});
 		btnjarClearInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnjarClearInputs = new GridBagConstraints();
 		gbc_btnjarClearInputs.fill = GridBagConstraints.HORIZONTAL;
@@ -807,11 +859,14 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_scrollPanejar.gridy = 6;
 		panelJarManagement.add(scrollPanejar, gbc_scrollPanejar);
 		
-		JList listjar = new JList();
-		listjar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		scrollPanejar.setViewportView(listjar);
+		tablejar = new JTable();
+		scrollPanejar.setViewportView(tablejar);
 		
 		JButton btnjarDelete = new JButton("Topf löschen");
+		btnjarDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnjarDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnjarDelete = new GridBagConstraints();
 		gbc_btnjarDelete.fill = GridBagConstraints.HORIZONTAL;
@@ -824,9 +879,9 @@ public class GUIFinanceManagement implements ActionListener {
 		tabbedPanecashRegister_JarManagement.addTab("Kassen verwalten", null, panelcashRegisterManagement, null);
 		GridBagLayout gbl_panelcashRegisterManagement = new GridBagLayout();
 		gbl_panelcashRegisterManagement.columnWidths = new int[]{0, 0, 0, 87, 0, 0, 0};
-		gbl_panelcashRegisterManagement.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panelcashRegisterManagement.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panelcashRegisterManagement.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelcashRegisterManagement.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelcashRegisterManagement.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		panelcashRegisterManagement.setLayout(gbl_panelcashRegisterManagement);
 		
 		JLabel lblcashRegisterName = new JLabel("Kassenname");
@@ -943,6 +998,10 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(textFieldcashRegisterEstimatedStockModify, gbc_textFieldcashRegisterEstimatedStockModify);
 		
 		JButton btnaddcashRegister = new JButton("Kasse hinzufügen");
+		btnaddcashRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnaddcashRegister.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnaddcashRegister = new GridBagConstraints();
 		gbc_btnaddcashRegister.fill = GridBagConstraints.HORIZONTAL;
@@ -952,6 +1011,10 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(btnaddcashRegister, gbc_btnaddcashRegister);
 		
 		JButton btncashRegisterSaveChanges = new JButton("Änderungen speichern");
+		btncashRegisterSaveChanges.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btncashRegisterSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btncashRegisterSaveChanges = new GridBagConstraints();
 		gbc_btncashRegisterSaveChanges.fill = GridBagConstraints.HORIZONTAL;
@@ -961,6 +1024,15 @@ public class GUIFinanceManagement implements ActionListener {
 		panelcashRegisterManagement.add(btncashRegisterSaveChanges, gbc_btncashRegisterSaveChanges);
 		
 		JButton btncashRegisterClearInputs = new JButton("Felder zurücksetzen");
+		btncashRegisterClearInputs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			textFieldcashRegisterName.setText("");
+			textFieldcashRegisterActualStock.setText("");
+			textFieldcashRegisterEstimatedStock.setText("");
+			
+			}
+		});
 		btncashRegisterClearInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btncashRegisterClearInputs = new GridBagConstraints();
 		gbc_btncashRegisterClearInputs.fill = GridBagConstraints.HORIZONTAL;
@@ -980,43 +1052,20 @@ public class GUIFinanceManagement implements ActionListener {
 		gbc_scrollPane.gridy = 6;
 		panelcashRegisterManagement.add(scrollPane, gbc_scrollPane);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_1.gridx = 0;
-		gbc_comboBox_1.gridy = 7;
-		panelcashRegisterManagement.add(comboBox_1, gbc_comboBox_1);
-		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.gridwidth = 4;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 2;
-		gbc_textField_1.gridy = 7;
-		panelcashRegisterManagement.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
-		
-		JButton btncashRegisterDeleteSearch = new JButton("Suchen");
-		btncashRegisterDeleteSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_btncashRegisterDeleteSearch = new GridBagConstraints();
-		gbc_btncashRegisterDeleteSearch.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btncashRegisterDeleteSearch.gridwidth = 4;
-		gbc_btncashRegisterDeleteSearch.insets = new Insets(0, 0, 5, 0);
-		gbc_btncashRegisterDeleteSearch.gridx = 2;
-		gbc_btncashRegisterDeleteSearch.gridy = 8;
-		panelcashRegisterManagement.add(btncashRegisterDeleteSearch, gbc_btncashRegisterDeleteSearch);
+		tablecashRegister = new JTable();
+		scrollPane.setViewportView(tablecashRegister);
 		
 		JButton btncashRegisterDelete = new JButton("Kasse löschen");
+		btncashRegisterDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btncashRegisterDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btncashRegisterDelete = new GridBagConstraints();
 		gbc_btncashRegisterDelete.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btncashRegisterDelete.gridwidth = 4;
 		gbc_btncashRegisterDelete.gridx = 2;
-		gbc_btncashRegisterDelete.gridy = 9;
+		gbc_btncashRegisterDelete.gridy = 7;
 		panelcashRegisterManagement.add(btncashRegisterDelete, gbc_btncashRegisterDelete);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -1027,63 +1076,59 @@ public class GUIFinanceManagement implements ActionListener {
 		menuBar.add(mnNewMenuOptions);
 		
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmen\u00FC");
+		mntmNewMenuItembacktoMain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			GuiMenue backmen = new GuiMenue();
+			frmElabVerwaltungsprogramm.dispose();
+			
+			
+			}
+		});
 		mntmNewMenuItembacktoMain.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
-		mntmNewMenuItembacktoMain.addActionListener(this);
+	
 		
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
+		mntmNewMenuItemlogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				GuiLogin logout = new GuiLogin();
+				frmElabVerwaltungsprogramm.dispose();
+				
+			}
+		});
 		mntmNewMenuItemlogOut.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
-		mntmNewMenuItemlogOut.addActionListener(this);
+		
 		
 		JMenuItem mntmNewMenuItemcloseapplication = new JMenuItem("Anwendung verlassen");
+		mntmNewMenuItemcloseapplication.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			System.exit(0);
+			
+			}
+		});
 		mntmNewMenuItemcloseapplication.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemcloseapplication);
-		mntmNewMenuItembacktoMain.addActionListener(this);
+	
 		
 		JMenu mnNewMenuhelpWindow = new JMenu("?");
 		mnNewMenuhelpWindow.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		menuBar.add(mnNewMenuhelpWindow);
 		
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
-		mntmNewMenuItemshowManual.addActionListener(this);
+		
 		frmElabVerwaltungsprogramm.setVisible(true);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
 	
-		String command = e.getActionCommand();
-		
-		// Restliche Funktionen einbinden
-		
-		if (command == "Hauptmenü") {
-			
-		GuiMenue mainMenu= new GuiMenue();
-		frmElabVerwaltungsprogramm.dispose();
-		
-		}
-		
-		if (command=="Ausloggen") {
-		
-		GuiLogin login = new GuiLogin();
-		frmElabVerwaltungsprogramm.dispose();
-			
-			
-		}
-		
-		if (command =="Anwendung verlassen") {
-		
-			System.exit(0);
-			
-		}
-		
-		if (command == "Anleitung anzeigen") {
-			
-			
-		}
-		
-	}
+	
 }
