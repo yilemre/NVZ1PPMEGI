@@ -14,6 +14,7 @@ public class CategoryTableModel extends AbstractTableModel {
 	this.list = list; 
     }
     
+    
     @Override
     public int getColumnCount() {
 	// TODO Auto-generated method stub

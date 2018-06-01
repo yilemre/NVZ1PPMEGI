@@ -15,6 +15,7 @@ public class ComponentTableModel extends AbstractTableModel {
     public ComponentTableModel(List<Component> list) {
 	this.list = list; 
     }
+    
 
     @Override
     public int getColumnCount() {

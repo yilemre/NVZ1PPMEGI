@@ -14,11 +14,12 @@ public class Category {
     
     public String toString() {
 	return "ID: " + id + ", Name: " + name; 
-    }
-
+    } 
+ 
     public int getId() {
         return id;
-    }
+    } 
+    
 
     public void setId(int id) {
         this.id = id;

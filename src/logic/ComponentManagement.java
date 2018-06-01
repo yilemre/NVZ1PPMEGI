@@ -22,6 +22,7 @@ public class ComponentManagement {
     public static List<Category> getCategories() throws SQLException {
 	return SQLManager.getInstance().getCategories(); 
     }
+    
 		
     public static void addPart(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int idCategory) throws SQLException {
 	SQLManager.getInstance().addPartIntoDB(articlenumber, productlink, name, price, storing, plannedAmount, orderedAmount, storageLocation, idCategory);

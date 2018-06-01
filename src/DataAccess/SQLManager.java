@@ -220,7 +220,7 @@ public class SQLManager {
 	    return category; 
 	    
 	}
-	//Emre end
+	//Emre end 
 
 	public int addPartIntoDB(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int category) throws SQLException {
 		int result=0;

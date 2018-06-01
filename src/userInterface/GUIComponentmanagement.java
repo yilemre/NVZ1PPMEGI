@@ -781,7 +781,7 @@ public class GUIComponentmanagement  {
 				
 			    }			    
 			}
-			//Emre end
+			//Emre end 
 		});
 		btnpartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
