@@ -220,6 +220,25 @@ public class SQLManager {
 	    return category; 
 	    
 	}
+	
+	public Category[] getCategoryArray () throws SQLException {
+	    int count=0; 
+	    Statement stmt = c.createStatement(); 
+	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Categorys"); 
+	    rs.next(); 
+	    count = rs.getInt(1); 
+	    stmt.close();
+	    Category[] c = new Category[count]; 
+	    rs = stmt.executeQuery("SELECT * FROM Categorys"); 
+	    int x = 0;
+	    while(rs.next()) {
+		Category a = new Category(rs.getInt("idCategory"), rs.getString("name"), rs.getString("note")); 
+		c[x] = a; 
+		x+=1; 
+	    }
+	    return c;
+	    
+	}
 	//Emre end 
 
 	public int addPartIntoDB(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int category) throws SQLException {

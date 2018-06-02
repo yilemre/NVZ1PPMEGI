@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import logic.Category;
 import logic.ComponentManagement;
 import logic.PersonManagement;
 
@@ -84,6 +85,9 @@ public class GUIComponentmanagement  {
 	private JTextField tfOrderedAmount;
 	private JTable ComponentTableDelete;
 	private JTable CategoryTable;
+	private JTextField tfArticleNoModify;
+	JComboBox comboBoxcategoryModify = new JComboBox();
+	JComboBox comboBoxcategory = new JComboBox();
 	
 	/**
 	 * Launch the application.
@@ -190,15 +194,25 @@ public class GUIComponentmanagement  {
 		gbc_lblcategory.gridy = 3;
 		paneladdPart.add(lblcategory, gbc_lblcategory);
 
-		JComboBox comboBoxcategory = new JComboBox();
+		
 		comboBoxcategory.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxcategory = new GridBagConstraints();
 		gbc_comboBoxcategory.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxcategory.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxcategory.gridx = 1;
 		gbc_comboBoxcategory.gridy = 3;
-		paneladdPart.add(comboBoxcategory, gbc_comboBoxcategory);		
+		paneladdPart.add(comboBoxcategory, gbc_comboBoxcategory);	
 		
+		//Emre begin, fill JComboxBox with categories from db 
+		try {
+		    for(int i = 0; i<ComponentManagement.getCategoryArray().length; i++) {
+		        comboBoxcategory.addItem(ComponentManagement.getCategoryArray()[i]);
+		    }
+		} catch (SQLException e1) {
+		    // TODO Auto-generated catch block
+		    e1.printStackTrace();
+		}
+		//Emre end
 
 		JLabel lblpartLink = new JLabel("Produktlink");
 		lblpartLink.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -321,7 +335,7 @@ public class GUIComponentmanagement  {
 			    //Emre begin
 			    try {
 				ComponentManagement.addPart(tfArticleNo.getText(), textFieldpartLink.getText(), textFieldpartName.getText(), Double.parseDouble(textFieldpartPrize.getText()), Integer.parseInt(textFieldquantityStoring.getText()),
-						Integer.parseInt(textFieldquantityPlanned.getText()), Integer.parseInt(textFieldquantityOrdered.getText()), textFieldstorageLocation.getText(),0);
+						Integer.parseInt(textFieldquantityPlanned.getText()), Integer.parseInt(textFieldquantityOrdered.getText()), textFieldstorageLocation.getText(),getCategoryId(comboBoxcategory.getSelectedIndex()));
 			    } catch (NumberFormatException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -347,6 +361,7 @@ public class GUIComponentmanagement  {
 		btndeleteallInputs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			    //Emre begin
+			    tfArticleNo.setText("");
 			    textFieldpartName.setText("");
 			    textFieldpartLink.setText("");
 			    textFieldpartPrize.setText("");
@@ -377,9 +392,9 @@ public class GUIComponentmanagement  {
 						tabbedPane.addTab("Bauteil bearbeiten", null, panelmodify, null);
 						GridBagLayout gbl_panelmodify = new GridBagLayout();
 						gbl_panelmodify.columnWidths = new int[] { 152, 0, 0 };
-						gbl_panelmodify.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+						gbl_panelmodify.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 						gbl_panelmodify.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-						gbl_panelmodify.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
+						gbl_panelmodify.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
 								Double.MIN_VALUE };
 						panelmodify.setLayout(gbl_panelmodify);
 								
@@ -402,6 +417,25 @@ public class GUIComponentmanagement  {
 								gbc_tfComponentModifyID.gridy = 0;
 								panelmodify.add(tfComponentModifyID, gbc_tfComponentModifyID);
 								tfComponentModifyID.setColumns(10);
+								
+								JLabel lblArticleNoModify = new JLabel("Artikel-Nr.");
+								lblArticleNoModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+								GridBagConstraints gbc_lblArticleNoModify = new GridBagConstraints();
+								gbc_lblArticleNoModify.anchor = GridBagConstraints.EAST;
+								gbc_lblArticleNoModify.insets = new Insets(0, 0, 5, 5);
+								gbc_lblArticleNoModify.gridx = 0;
+								gbc_lblArticleNoModify.gridy = 1;
+								panelmodify.add(lblArticleNoModify, gbc_lblArticleNoModify);
+								
+								tfArticleNoModify = new JTextField();
+								tfArticleNoModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+								GridBagConstraints gbc_tfArticleNoModify = new GridBagConstraints();
+								gbc_tfArticleNoModify.insets = new Insets(0, 0, 5, 0);
+								gbc_tfArticleNoModify.fill = GridBagConstraints.HORIZONTAL;
+								gbc_tfArticleNoModify.gridx = 1;
+								gbc_tfArticleNoModify.gridy = 1;
+								panelmodify.add(tfArticleNoModify, gbc_tfArticleNoModify);
+								tfArticleNoModify.setColumns(10);
 						
 								JLabel lblpartNameModify = new JLabel("Bauteilname");
 								lblpartNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -409,7 +443,7 @@ public class GUIComponentmanagement  {
 								gbc_lblpartNameModify.anchor = GridBagConstraints.EAST;
 								gbc_lblpartNameModify.insets = new Insets(0, 0, 5, 5);
 								gbc_lblpartNameModify.gridx = 0;
-								gbc_lblpartNameModify.gridy = 1;
+								gbc_lblpartNameModify.gridy = 2;
 								panelmodify.add(lblpartNameModify, gbc_lblpartNameModify);
 								
 										textFieldpartNameModify = new JTextField();
@@ -418,7 +452,7 @@ public class GUIComponentmanagement  {
 										gbc_textFieldpartNameModify.insets = new Insets(0, 0, 5, 0);
 										gbc_textFieldpartNameModify.fill = GridBagConstraints.HORIZONTAL;
 										gbc_textFieldpartNameModify.gridx = 1;
-										gbc_textFieldpartNameModify.gridy = 1;
+										gbc_textFieldpartNameModify.gridy = 2;
 										panelmodify.add(textFieldpartNameModify, gbc_textFieldpartNameModify);
 										textFieldpartNameModify.setColumns(10);
 										
@@ -428,18 +462,27 @@ public class GUIComponentmanagement  {
 												gbc_lblcategoryModify.anchor = GridBagConstraints.EAST;
 												gbc_lblcategoryModify.insets = new Insets(0, 0, 5, 5);
 												gbc_lblcategoryModify.gridx = 0;
-												gbc_lblcategoryModify.gridy = 2;
+												gbc_lblcategoryModify.gridy = 3;
 												panelmodify.add(lblcategoryModify, gbc_lblcategoryModify);
 												
-														JComboBox comboBoxcategoryModify = new JComboBox();
+														
 														
 														comboBoxcategoryModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 														GridBagConstraints gbc_comboBoxcategoryModify = new GridBagConstraints();
 														gbc_comboBoxcategoryModify.insets = new Insets(0, 0, 5, 0);
 														gbc_comboBoxcategoryModify.fill = GridBagConstraints.HORIZONTAL;
 														gbc_comboBoxcategoryModify.gridx = 1;
-														gbc_comboBoxcategoryModify.gridy = 2;
+														gbc_comboBoxcategoryModify.gridy = 3;
 														panelmodify.add(comboBoxcategoryModify, gbc_comboBoxcategoryModify);
+														
+														try {
+														    for(int i = 0; i<ComponentManagement.getCategoryArray().length; i++) {
+														        comboBoxcategoryModify.addItem(ComponentManagement.getCategoryArray()[i]);
+														    }
+														} catch (SQLException e1) {
+														    // TODO Auto-generated catch block
+														    e1.printStackTrace();
+														}
 														
 																												
 																JLabel lblpartLinkModify = new JLabel("Produktlink");
@@ -448,7 +491,7 @@ public class GUIComponentmanagement  {
 																gbc_lblpartLinkModify.anchor = GridBagConstraints.EAST;
 																gbc_lblpartLinkModify.insets = new Insets(0, 0, 5, 5);
 																gbc_lblpartLinkModify.gridx = 0;
-																gbc_lblpartLinkModify.gridy = 3;
+																gbc_lblpartLinkModify.gridy = 4;
 																panelmodify.add(lblpartLinkModify, gbc_lblpartLinkModify);
 																
 																		textFieldpartLinkModify = new JTextField();
@@ -457,7 +500,7 @@ public class GUIComponentmanagement  {
 																		gbc_textFieldpartLinkModify.insets = new Insets(0, 0, 5, 0);
 																		gbc_textFieldpartLinkModify.fill = GridBagConstraints.HORIZONTAL;
 																		gbc_textFieldpartLinkModify.gridx = 1;
-																		gbc_textFieldpartLinkModify.gridy = 3;
+																		gbc_textFieldpartLinkModify.gridy = 4;
 																		panelmodify.add(textFieldpartLinkModify, gbc_textFieldpartLinkModify);
 																		textFieldpartLinkModify.setColumns(10);
 																		
@@ -467,7 +510,7 @@ public class GUIComponentmanagement  {
 																				gbc_lblpartPrizeModify.anchor = GridBagConstraints.EAST;
 																				gbc_lblpartPrizeModify.insets = new Insets(0, 0, 5, 5);
 																				gbc_lblpartPrizeModify.gridx = 0;
-																				gbc_lblpartPrizeModify.gridy = 4;
+																				gbc_lblpartPrizeModify.gridy = 5;
 																				panelmodify.add(lblpartPrizeModify, gbc_lblpartPrizeModify);
 																				
 																						textFieldpartPrizeModify = new JTextField();
@@ -476,7 +519,7 @@ public class GUIComponentmanagement  {
 																						gbc_textFieldpartPrizeModify.insets = new Insets(0, 0, 5, 0);
 																						gbc_textFieldpartPrizeModify.fill = GridBagConstraints.HORIZONTAL;
 																						gbc_textFieldpartPrizeModify.gridx = 1;
-																						gbc_textFieldpartPrizeModify.gridy = 4;
+																						gbc_textFieldpartPrizeModify.gridy = 5;
 																						panelmodify.add(textFieldpartPrizeModify, gbc_textFieldpartPrizeModify);
 																						textFieldpartPrizeModify.setColumns(10);
 																						
@@ -486,7 +529,7 @@ public class GUIComponentmanagement  {
 																								gbc_lblquantityStoringModify.anchor = GridBagConstraints.EAST;
 																								gbc_lblquantityStoringModify.insets = new Insets(0, 0, 5, 5);
 																								gbc_lblquantityStoringModify.gridx = 0;
-																								gbc_lblquantityStoringModify.gridy = 5;
+																								gbc_lblquantityStoringModify.gridy = 6;
 																								panelmodify.add(lblquantityStoringModify, gbc_lblquantityStoringModify);
 																												
 																												tfStoring = new JTextField();
@@ -496,7 +539,7 @@ public class GUIComponentmanagement  {
 																												gbc_tfStoring.insets = new Insets(0, 0, 5, 0);
 																												gbc_tfStoring.fill = GridBagConstraints.HORIZONTAL;
 																												gbc_tfStoring.gridx = 1;
-																												gbc_tfStoring.gridy = 5;
+																												gbc_tfStoring.gridy = 6;
 																												panelmodify.add(tfStoring, gbc_tfStoring);
 																												tfStoring.setColumns(10);
 																										
@@ -506,7 +549,7 @@ public class GUIComponentmanagement  {
 																												gbc_lblquantityPlannedModify.anchor = GridBagConstraints.EAST;
 																												gbc_lblquantityPlannedModify.insets = new Insets(0, 0, 5, 5);
 																												gbc_lblquantityPlannedModify.gridx = 0;
-																												gbc_lblquantityPlannedModify.gridy = 6;
+																												gbc_lblquantityPlannedModify.gridy = 7;
 																												panelmodify.add(lblquantityPlannedModify, gbc_lblquantityPlannedModify);
 																																
 																																tfPlannedAmount = new JTextField();
@@ -515,7 +558,7 @@ public class GUIComponentmanagement  {
 																																gbc_tfPlannedAmount.insets = new Insets(0, 0, 5, 0);
 																																gbc_tfPlannedAmount.fill = GridBagConstraints.HORIZONTAL;
 																																gbc_tfPlannedAmount.gridx = 1;
-																																gbc_tfPlannedAmount.gridy = 6;
+																																gbc_tfPlannedAmount.gridy = 7;
 																																panelmodify.add(tfPlannedAmount, gbc_tfPlannedAmount);
 																																tfPlannedAmount.setColumns(10);
 																														
@@ -525,7 +568,7 @@ public class GUIComponentmanagement  {
 																																gbc_lblquantityOrderedModify.anchor = GridBagConstraints.EAST;
 																																gbc_lblquantityOrderedModify.insets = new Insets(0, 0, 5, 5);
 																																gbc_lblquantityOrderedModify.gridx = 0;
-																																gbc_lblquantityOrderedModify.gridy = 7;
+																																gbc_lblquantityOrderedModify.gridy = 8;
 																																panelmodify.add(lblquantityOrderedModify, gbc_lblquantityOrderedModify);
 																																				
 																																				tfOrderedAmount = new JTextField();
@@ -534,7 +577,7 @@ public class GUIComponentmanagement  {
 																																				gbc_tfOrderedAmount.insets = new Insets(0, 0, 5, 0);
 																																				gbc_tfOrderedAmount.fill = GridBagConstraints.HORIZONTAL;
 																																				gbc_tfOrderedAmount.gridx = 1;
-																																				gbc_tfOrderedAmount.gridy = 7;
+																																				gbc_tfOrderedAmount.gridy = 8;
 																																				panelmodify.add(tfOrderedAmount, gbc_tfOrderedAmount);
 																																				tfOrderedAmount.setColumns(10);
 																																		
@@ -544,7 +587,7 @@ public class GUIComponentmanagement  {
 																																				gbc_lblstorageLocationModify.anchor = GridBagConstraints.EAST;
 																																				gbc_lblstorageLocationModify.insets = new Insets(0, 0, 5, 5);
 																																				gbc_lblstorageLocationModify.gridx = 0;
-																																				gbc_lblstorageLocationModify.gridy = 8;
+																																				gbc_lblstorageLocationModify.gridy = 9;
 																																				panelmodify.add(lblstorageLocationModify, gbc_lblstorageLocationModify);
 																																								
 																																								tfStorageLocationModify = new JTextField();
@@ -554,7 +597,7 @@ public class GUIComponentmanagement  {
 																																								gbc_tfStorageLocationModify.insets = new Insets(0, 0, 5, 0);
 																																								gbc_tfStorageLocationModify.fill = GridBagConstraints.HORIZONTAL;
 																																								gbc_tfStorageLocationModify.gridx = 1;
-																																								gbc_tfStorageLocationModify.gridy = 8;
+																																								gbc_tfStorageLocationModify.gridy = 9;
 																																								panelmodify.add(tfStorageLocationModify, gbc_tfStorageLocationModify);
 																																								tfStorageLocationModify.setColumns(10);
 																																						
@@ -562,9 +605,9 @@ public class GUIComponentmanagement  {
 																																								btnsaveModifiedValues.addActionListener(new ActionListener() {
 																																									public void actionPerformed(ActionEvent e) {
 																																									    //Emre begin Button for modify the Component/Part
-																																									    //TODO fill idCategory, last parameter, with Combobox 
+																																									   
 																																									    try {
-																																										ComponentManagement.modifyPart(Integer.parseInt(tfComponentModifyID.getText()), "", textFieldpartLinkModify.getText(), textFieldpartNameModify.getText(), Double.parseDouble(textFieldpartPrizeModify.getText()), Integer.parseInt(tfStoring.getText()), Integer.parseInt(tfPlannedAmount.getText()), Integer.parseInt(tfOrderedAmount.getText()), tfStorageLocationModify.getText(), 0);
+																																										ComponentManagement.modifyPart(Integer.parseInt(tfComponentModifyID.getText()), tfArticleNoModify.getText(), textFieldpartLinkModify.getText(), textFieldpartNameModify.getText(), Double.parseDouble(textFieldpartPrizeModify.getText()), Integer.parseInt(tfStoring.getText()), Integer.parseInt(tfPlannedAmount.getText()), Integer.parseInt(tfOrderedAmount.getText()), tfStorageLocationModify.getText(), 0);
 																																									    } catch (NumberFormatException e1) {
 																																										// TODO Auto-generated catch block
 																																										e1.printStackTrace();
@@ -582,7 +625,7 @@ public class GUIComponentmanagement  {
 																																								gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
 																																								gbc_btnsaveModifiedValues.insets = new Insets(0, 0, 5, 0);
 																																								gbc_btnsaveModifiedValues.gridx = 1;
-																																								gbc_btnsaveModifiedValues.gridy = 9;
+																																								gbc_btnsaveModifiedValues.gridy = 10;
 																																								panelmodify.add(btnsaveModifiedValues, gbc_btnsaveModifiedValues);
 																																								
 																																										JScrollPane scrollPanemodifyPart = new JScrollPane();
@@ -593,7 +636,7 @@ public class GUIComponentmanagement  {
 																																										gbc_scrollPanemodifyPart.gridwidth = 2;
 																																										gbc_scrollPanemodifyPart.fill = GridBagConstraints.BOTH;
 																																										gbc_scrollPanemodifyPart.gridx = 0;
-																																										gbc_scrollPanemodifyPart.gridy = 10;
+																																										gbc_scrollPanemodifyPart.gridy = 11;
 																																										panelmodify.add(scrollPanemodifyPart, gbc_scrollPanemodifyPart);
 																																										
 																																										// begin
@@ -626,7 +669,7 @@ public class GUIComponentmanagement  {
 																																														gbc_comboBoxsearchModifyPart.insets = new Insets(0, 0, 5, 5);
 																																														gbc_comboBoxsearchModifyPart.fill = GridBagConstraints.HORIZONTAL;
 																																														gbc_comboBoxsearchModifyPart.gridx = 0;
-																																														gbc_comboBoxsearchModifyPart.gridy = 11;
+																																														gbc_comboBoxsearchModifyPart.gridy = 12;
 																																														panelmodify.add(comboBoxsearchModifyPart, gbc_comboBoxsearchModifyPart);
 																																														
 																																																textFieldsearchModifyPart = new JTextField();
@@ -635,7 +678,7 @@ public class GUIComponentmanagement  {
 																																																gbc_textFieldsearchModifyPart.insets = new Insets(0, 0, 5, 0);
 																																																gbc_textFieldsearchModifyPart.fill = GridBagConstraints.HORIZONTAL;
 																																																gbc_textFieldsearchModifyPart.gridx = 1;
-																																																gbc_textFieldsearchModifyPart.gridy = 11;
+																																																gbc_textFieldsearchModifyPart.gridy = 12;
 																																																panelmodify.add(textFieldsearchModifyPart, gbc_textFieldsearchModifyPart);
 																																																textFieldsearchModifyPart.setColumns(10);
 																																																
@@ -684,14 +727,14 @@ public class GUIComponentmanagement  {
 																																																		gbc_btnsearchModifyPart.fill = GridBagConstraints.HORIZONTAL;
 																																																		gbc_btnsearchModifyPart.insets = new Insets(0, 0, 5, 0);
 																																																		gbc_btnsearchModifyPart.gridx = 1;
-																																																		gbc_btnsearchModifyPart.gridy = 12;
+																																																		gbc_btnsearchModifyPart.gridy = 13;
 																																																		panelmodify.add(btnsearchModifyPart, gbc_btnsearchModifyPart);
 																																																		btnsearchResetSearching.setFont(new Font("Tahoma", Font.PLAIN, 15));
 																																																		
 																																																		GridBagConstraints gbc_btnsearchResetSearching = new GridBagConstraints();
 																																																		gbc_btnsearchResetSearching.fill = GridBagConstraints.HORIZONTAL;
 																																																		gbc_btnsearchResetSearching.gridx = 1;
-																																																		gbc_btnsearchResetSearching.gridy = 13;
+																																																		gbc_btnsearchResetSearching.gridy = 14;
 																																																		panelmodify.add(btnsearchResetSearching, gbc_btnsearchResetSearching);
 
 		JPanel paneldeletePart = new JPanel();
@@ -902,6 +945,7 @@ public class GUIComponentmanagement  {
 																			    } catch (Exception a) {
 																				a.getStackTrace(); 
 																			    }
+																			    refreshCategoryCombobox(); 
 																			    
 																			}
 																			//Emre end
@@ -966,11 +1010,11 @@ public class GUIComponentmanagement  {
 																						JButton btncategoryDeleteInputs = new JButton("Eingaben löschen");
 																						btncategoryDeleteInputs.addActionListener(new ActionListener() {
 																							public void actionPerformed(ActionEvent e) {
-																							    //Emre
-																								textFieldcategoryNameNew.setText("");
-																								textFieldcategoryNoteNew.setText("");
+																							//Emre begin
+																							    textFieldcategoryNameNew.setText("");
+																							    textFieldcategoryNoteNew.setText("");
 																							}
-																							//Emre
+																							//Emre end
 																						});
 																						btncategoryDeleteInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
 																						GridBagConstraints gbc_btncategoryDeleteInputs = new GridBagConstraints();
@@ -1107,11 +1151,41 @@ public class GUIComponentmanagement  {
 		
 		frmElabVerwaltungsprogramm.setVisible(true);
 	}
+	
+	//Emre begin 
+	protected void refreshCategoryCombobox() {
+	    comboBoxcategory.removeAllItems();
+	    comboBoxcategoryModify.removeAllItems();
+	    // TODO Auto-generated method stub
+	    try {
+		    for(int i = 0; i<ComponentManagement.getCategoryArray().length; i++) {
+		        comboBoxcategory.addItem(ComponentManagement.getCategoryArray()[i]);
+		        comboBoxcategoryModify.addItem(ComponentManagement.getCategoryArray()[i]);
+		    }
+		} catch (SQLException e1) {
+		    // TODO Auto-generated catch block
+		    e1.printStackTrace();
+		}
+	    
+	    
+	}
+	protected int getCategoryId(int selectedIndex) {
+	    // TODO Auto-generated method stub
+	    try {
+		return ComponentManagement.getCategoryArray()[selectedIndex].getId();
+	    } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    } 
+	    return 0; 
+	    
+	    
+	}
 	protected void handleDeleteComponentSelectionEvent(ListSelectionEvent e) {
 	    // TODO Auto-generated method stub
 	    
 	}
-	//Emre begin 
+	
 	protected void refreshTable() {
 	    // TODO Auto-generated method stub
 	    	try {
@@ -1128,16 +1202,38 @@ public class GUIComponentmanagement  {
 	    // TODO Auto-generated method stub
 	    if (ComponentTableModify.getSelectedRow()>-1) {
 		tfComponentModifyID.setText(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(),0).toString());
+		tfArticleNoModify.setText(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(), 1).toString());
 		textFieldpartNameModify.setText(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(),2).toString());
 		textFieldpartLinkModify.setText(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(), 3).toString());
 		textFieldpartPrizeModify.setText(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(), 4).toString());
 		tfStoring.setText(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(),5).toString());		
 		tfPlannedAmount.setText(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(), 6).toString());
 		tfOrderedAmount.setText(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(), 7).toString());
-		tfStorageLocationModify.setText(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(), 8).toString());		
-		
+		tfStorageLocationModify.setText(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(), 8).toString());
+		comboBoxcategoryModify.setSelectedIndex(findCorrectIndexFromCategory(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(), 9).toString()));
+		//NACHFRAGEN
 	    }
 	    
+	}
+
+	private int findCorrectIndexFromCategory(String value) {
+	    // TODO Auto-generated method stub
+	    int x = Integer.parseInt(value);
+	    
+	    try {
+		Category [] array = ComponentManagement.getCategoryArray();
+		for(int i = 0; i<array.length; i++) {
+		    if(array[i].getId() == x) {
+			return i; 
+		    }
+			
+		    }
+	    } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	    
+	    	    return 0;
 	}
 	//Emre end 
 	}

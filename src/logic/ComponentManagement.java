@@ -19,9 +19,13 @@ public class ComponentManagement {
 	SQLManager.getInstance().modifyCategory(id, newName, newNote);    
     }
     
-    public static List<Category> getCategories() throws SQLException {
-	return SQLManager.getInstance().getCategories(); 
+    public static Category[] getCategoryArray() throws SQLException {
+	return SQLManager.getInstance().getCategoryArray(); 
     }
+    
+    public static List<Category> getCategories() throws SQLException {
+   	return SQLManager.getInstance().getCategories(); 
+       }
     
 		
     public static void addPart(String articlenumber, String productlink, String name, double price, int storing, int plannedAmount, int orderedAmount, String storageLocation, int idCategory) throws SQLException {
