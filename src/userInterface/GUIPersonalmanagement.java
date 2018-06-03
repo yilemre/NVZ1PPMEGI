@@ -1,5 +1,9 @@
 package userInterface;
 
+
+//author Nils 
+
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -45,6 +49,8 @@ import javax.swing.JMenuItem;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GUIPersonalmanagement{
 
@@ -94,16 +100,20 @@ public class GUIPersonalmanagement{
 		comboBoxEntries.add("Mitglied");
 		comboBoxEntries.add("Lehrstuhlmitglied");
 		frmElabVerwaltungsprogramm = new JFrame();
+	
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
-		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		frmElabVerwaltungsprogramm.getContentPane().setLayout(gridBagLayout);
-
+		
+		
+		
+		
 		JLabel lblPersonenverwaltung = new JLabel("Personenverwaltung");
 		lblPersonenverwaltung.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_lblPersonenverwaltung = new GridBagConstraints();

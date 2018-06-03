@@ -1,6 +1,6 @@
 package userInterface;
 
-
+//author Nils 
 
 import java.awt.EventQueue;
 
@@ -45,6 +45,11 @@ import javax.swing.ButtonGroup;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JTable;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
+import java.awt.Window.Type;
+import java.awt.Dialog.ModalExclusionType;
 
 public class GUIComponentUserInterface implements ActionListener {
 
@@ -74,7 +79,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
-		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0};

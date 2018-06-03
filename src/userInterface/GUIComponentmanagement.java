@@ -1,5 +1,8 @@
 package userInterface;
 
+
+//author Nils 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -50,8 +53,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JSplitPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
+<<<<<<< HEAD
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+=======
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+>>>>>>> branch 'master' of git@github.com:yilemre/NVZ1PPMEGI.git
 
 public class GUIComponentmanagement  {
 
@@ -105,7 +113,7 @@ public class GUIComponentmanagement  {
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1051, 772);
-		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0 };

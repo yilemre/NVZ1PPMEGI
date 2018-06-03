@@ -1,6 +1,6 @@
 package userInterface;
 
-
+//author Nils 
 
 import java.awt.EventQueue;
 

@@ -1,6 +1,6 @@
 package userInterface;
 
-
+//author Nils 
 
 import java.awt.EventQueue;
 
@@ -38,6 +38,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.Toolkit;
 import java.awt.Window.Type;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GUIRegisterCustomer {
 
@@ -65,9 +67,11 @@ public class GUIRegisterCustomer {
 	 */
 	public GUIRegisterCustomer() {
 		frmElabVerwaltungsprogramm = new JFrame();
+		
+		
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
-		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0};

@@ -1,5 +1,8 @@
 package userInterface;
 
+//author Nils 
+
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -29,6 +32,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GuiMenue implements ActionListener {
 
@@ -58,9 +63,10 @@ public class GuiMenue implements ActionListener {
 	public GuiMenue() {
 
 		frmElabVerwaltungsprogramm = new JFrame();
+		
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 691, 543);
-		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
