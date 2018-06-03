@@ -211,12 +211,13 @@ public class SQLManager {
 	public List<Category> getCategories () throws SQLException {
 	    List<Category> category = new ArrayList<Category>();
 	    Statement stmt = c.createStatement(); 
-	    ResultSet rs = stmt.executeQuery("SELECT * FROM Categorys"); 
-	    stmt.close();
+	    ResultSet rs = stmt.executeQuery("SELECT * FROM Categorys;"); 
+	    //stmt.close();
 	    while(rs.next()) {
 		Category temp = new Category(rs.getInt("idCategory"), rs.getString("name"), rs.getString("note")); 
-		category.add(temp);		
+		category.add(temp);
 	    }
+	    stmt.close();
 	    return category; 
 	    
 	}
@@ -286,7 +287,7 @@ public class SQLManager {
 	public List<Component> getComponentsByArticlenumber(String articlenumber) throws SQLException {
 	    List<Component> result = new ArrayList<Component>(); 
 	    Statement stmt = c.createStatement(); 
-	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts WHERE articlenumber = '" + articlenumber + "';"); 
+	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts WHERE articlenumber LIKE '" + articlenumber + "';"); 
 	    
 	    while (rs.next()) {
 		Component c = new Component(rs.getInt("idPart"),rs.getString("articlenumber"), rs.getString("name"), rs.getString("productlink"), rs.getDouble("price"), rs.getInt("storing"), rs.getInt("plannedAmount"), rs.getInt("orderedAmount"), rs.getString("storageLocation"),rs.getInt("idCategory"));
@@ -298,7 +299,7 @@ public class SQLManager {
 	public List<Component> getComponentsByName(String name) throws SQLException {
 	    List<Component> result = new ArrayList<Component>(); 
 	    Statement stmt = c.createStatement(); 
-	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts WHERE name = '" + name+ "';"); 
+	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts WHERE name LIKE '" + name+ "';"); 
 	    
 	    while (rs.next()) {
 		Component c = new Component(rs.getInt("idPart"),rs.getString("articlenumber"), rs.getString("name"), rs.getString("productlink"), rs.getDouble("price"), rs.getInt("storing"), rs.getInt("plannedAmount"), rs.getInt("orderedAmount"), rs.getString("storageLocation"),rs.getInt("idCategory"));

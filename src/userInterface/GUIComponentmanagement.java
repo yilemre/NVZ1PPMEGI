@@ -50,6 +50,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JSplitPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GUIComponentmanagement  {
 
@@ -84,7 +86,6 @@ public class GUIComponentmanagement  {
 	private JTextField tfPlannedAmount;
 	private JTextField tfOrderedAmount;
 	private JTable ComponentTableDelete;
-	private JTable CategoryTable;
 	private JTextField tfArticleNoModify;
 	JComboBox comboBoxcategoryModify = new JComboBox();
 	JComboBox comboBoxcategory = new JComboBox();
@@ -605,9 +606,14 @@ public class GUIComponentmanagement  {
 																																								btnsaveModifiedValues.addActionListener(new ActionListener() {
 																																									public void actionPerformed(ActionEvent e) {
 																																									    //Emre begin Button for modify the Component/Part
-																																									   
-																																									    try {
-																																										ComponentManagement.modifyPart(Integer.parseInt(tfComponentModifyID.getText()), tfArticleNoModify.getText(), textFieldpartLinkModify.getText(), textFieldpartNameModify.getText(), Double.parseDouble(textFieldpartPrizeModify.getText()), Integer.parseInt(tfStoring.getText()), Integer.parseInt(tfPlannedAmount.getText()), Integer.parseInt(tfOrderedAmount.getText()), tfStorageLocationModify.getText(), 0);
+																																									    								    																																				    
+																																									   try {
+																																										ComponentManagement.modifyPart(Integer.parseInt(tfComponentModifyID.getText()),tfArticleNoModify.getText(), 
+																																											textFieldpartLinkModify.getText(), textFieldpartNameModify.getText(),
+																																											Double.parseDouble(textFieldpartPrizeModify.getText()),Integer.parseInt(tfStoring.getText()), 
+																																											Integer.parseInt(tfPlannedAmount.getText()), Integer.parseInt(tfOrderedAmount.getText()),tfStorageLocationModify.getText(), 
+																																											ComponentManagement.getCategoryArray()[comboBoxcategoryModify.getSelectedIndex()].getId());
+																																										
 																																									    } catch (NumberFormatException e1) {
 																																										// TODO Auto-generated catch block
 																																										e1.printStackTrace();
@@ -639,7 +645,7 @@ public class GUIComponentmanagement  {
 																																										gbc_scrollPanemodifyPart.gridy = 11;
 																																										panelmodify.add(scrollPanemodifyPart, gbc_scrollPanemodifyPart);
 																																										
-																																										// begin
+																																										//Emre begin
 																																										ComponentTableModify = new JTable();
 																																										scrollPanemodifyPart.setViewportView(ComponentTableModify);
 																																										ComponentTableModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -686,13 +692,16 @@ public class GUIComponentmanagement  {
 																																																		btnsearchResetSearching.addActionListener(new ActionListener() {
 																																																			public void actionPerformed(ActionEvent arg0) {
 																																																			    //Emre begin Button for searching 
+																																																			    
 																																																			    try {
 																																																				ComponentTableModify.setModel(new ComponentTableModel(ComponentManagement.getComponents()));
 																																																			    } catch (SQLException e1) {
 																																																				// TODO Auto-generated catch block
 																																																				e1.printStackTrace();
 																																																			    }
+																																																			    textFieldsearchModifyPart.setText("");
 																																																			}
+																																																			//Emre end
 																																																		});
 																																																		
 																																																		JButton btnsearchModifyPart = new JButton("Suchen");
@@ -853,6 +862,18 @@ public class GUIComponentmanagement  {
 		});
 		
 		JButton btnResetDeleteSearch = new JButton("Suche aufheben");
+		btnResetDeleteSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			//Emre begin, reset table to all components from db 
+			    try {
+				ComponentTableDelete.setModel(new ComponentTableModel(ComponentManagement.getComponents()));
+			    } catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			    }			    
+			}
+			//Emre end 
+		});
 		btnResetDeleteSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnResetDeleteSearch = new GridBagConstraints();
 		gbc_btnResetDeleteSearch.fill = GridBagConstraints.HORIZONTAL;
@@ -1054,16 +1075,18 @@ public class GUIComponentmanagement  {
 																										gbc_scrollPane.gridy = 5;
 																										panelcategoryManagement.add(scrollPane, gbc_scrollPane);
 																										
-																										CategoryTable = new JTable();
-																										CategoryTable.setFont(new Font("Tahoma", Font.PLAIN, 15));
+																										//Emre begin 
+																										JTable CategoryTable = new JTable();
+																										CategoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 																										scrollPane.setViewportView(CategoryTable);
+																										CategoryTable.setFont(new Font("Tahoma", Font.PLAIN, 15));
 																										try {
-																										    CategoryTable.setModel(new CategoryTableModel(ComponentManagement.getCategories()));
+																										    CategoryTable.setModel(new CategoryTableModel(ComponentManagement.getCategories()));																										    
 																										} catch (SQLException e1) {
 																										    // TODO Auto-generated catch block
 																										    e1.printStackTrace();
-																										}
-																												
+																										}																										
+																										//Emre end		
 																														JLabel lblcategoryNameSearch = new JLabel("Kategorie");
 																														lblcategoryNameSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 																														GridBagConstraints gbc_lblcategoryNameSearch = new GridBagConstraints();
@@ -1211,7 +1234,7 @@ public class GUIComponentmanagement  {
 		tfOrderedAmount.setText(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(), 7).toString());
 		tfStorageLocationModify.setText(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(), 8).toString());
 		comboBoxcategoryModify.setSelectedIndex(findCorrectIndexFromCategory(ComponentTableModify.getValueAt(ComponentTableModify.getSelectedRow(), 9).toString()));
-		//NACHFRAGEN
+		
 	    }
 	    
 	}
@@ -1233,7 +1256,7 @@ public class GUIComponentmanagement  {
 		e.printStackTrace();
 	    }
 	    
-	    	    return 0;
+	    	    return -1;
 	}
 	//Emre end 
 	}
