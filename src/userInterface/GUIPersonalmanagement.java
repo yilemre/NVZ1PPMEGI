@@ -854,6 +854,14 @@ public class GUIPersonalmanagement{
 				refreshTable();
 			}
 		});
+		
+		JButton btnNewButton = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewButton.gridx = 1;
+		gbc_btnNewButton.gridy = 3;
+		paneldeletePerson.add(btnNewButton, gbc_btnNewButton);
 		gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeletePerson.gridx = 1;
 		gbc_btndeletePerson.gridy = 4;

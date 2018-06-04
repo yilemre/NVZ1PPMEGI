@@ -39,7 +39,18 @@ public class ProductionManagement {
 		return SQLManager.getInstance().getOrders(); 
 	}
 
-
+    public static ComboBoxPerson[] getCustomerArray() throws SQLException {
+	return SQLManager.getInstance().getCustomerArray(); 
+    }
+    
+    public static ComboBoxPerson[] getAdvisorArray() throws SQLException {
+	return SQLManager.getInstance().getAdvisorArray(); 
+    }
+    
+    public static ComboBoxPerson[] getSecondaryAdvisorArray() throws SQLException {
+	return SQLManager.getInstance().getSecondaryAdvisorArray(); 
+    }
+    
 	//search methods
 
 	public static List<Order> getOrderByTitle(String searchValue) throws SQLException {

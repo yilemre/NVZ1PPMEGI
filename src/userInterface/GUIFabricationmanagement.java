@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import logic.ComponentManagement;
 import logic.PersonManagement;
 import logic.ProductionManagement;
 
@@ -186,6 +187,14 @@ public class GUIFabricationmanagement {
 		gbc_comboBoxoderCustomer.gridx = 1;
 		gbc_comboBoxoderCustomer.gridy = 2;
 		paneladdOrder.add(comboBoxoderCustomer, gbc_comboBoxoderCustomer);
+		try {
+			for(int i = 0; i<ProductionManagement.getCustomerArray().length; i++) {
+				comboBoxoderCustomer.addItem(ProductionManagement.getCustomerArray()[i]);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		JLabel lblorderTitel = new JLabel("Titel");
 		lblorderTitel.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -339,6 +348,14 @@ public class GUIFabricationmanagement {
 		gbc_comboBoxresponsible_1.gridx = 1;
 		gbc_comboBoxresponsible_1.gridy = 10;
 		paneladdOrder.add(comboBoxresponsible_1, gbc_comboBoxresponsible_1);
+		try {
+			for(int i = 0; i<ProductionManagement.getAdvisorArray().length; i++) {
+				comboBoxresponsible_1.addItem(ProductionManagement.getAdvisorArray()[i]);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		JLabel lblstandinResponsible = new JLabel("Vertretung");
 		lblstandinResponsible.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -357,6 +374,14 @@ public class GUIFabricationmanagement {
 		gbc_comboBoxstandinResponsible_1.gridx = 1;
 		gbc_comboBoxstandinResponsible_1.gridy = 11;
 		paneladdOrder.add(comboBoxstandinResponsible_1, gbc_comboBoxstandinResponsible_1);
+		try {
+			for(int i = 0; i<ProductionManagement.getSecondaryAdvisorArray().length; i++) {
+				comboBoxstandinResponsible_1.addItem(ProductionManagement.getSecondaryAdvisorArray()[i]);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		JLabel lblorderStatus = new JLabel("Auftragsstatus");
 		lblorderStatus.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -473,12 +498,22 @@ public class GUIFabricationmanagement {
 		panelmodify.add(lblorderCustomerModify, gbc_lblorderCustomerModify);
 
 		JComboBox comboBoxorderCustomerModify = new JComboBox();
+		comboBoxorderCustomerModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxorderCustomerModify = new GridBagConstraints();
 		gbc_comboBoxorderCustomerModify.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxorderCustomerModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxorderCustomerModify.gridx = 2;
 		gbc_comboBoxorderCustomerModify.gridy = 1;
 		panelmodify.add(comboBoxorderCustomerModify, gbc_comboBoxorderCustomerModify);
+		try {
+			for(int i = 0; i<ProductionManagement.getCustomerArray().length; i++) {
+				comboBoxorderCustomerModify.addItem(ProductionManagement.getCustomerArray()[i]);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 
 		JLabel lblorderTitelModify = new JLabel("Titel");
 		lblorderTitelModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -638,6 +673,14 @@ public class GUIFabricationmanagement {
 		gbc_comboBoxresponsiblePersonModify_1.gridx = 2;
 		gbc_comboBoxresponsiblePersonModify_1.gridy = 9;
 		panelmodify.add(comboBoxresponsiblePersonModify_1, gbc_comboBoxresponsiblePersonModify_1);
+		try {
+		    for(int i = 0; i<ProductionManagement.getAdvisorArray().length; i++) {
+		        comboBoxresponsiblePersonModify_1.addItem(ProductionManagement.getAdvisorArray()[i]);
+		    }
+		} catch (SQLException e1) {
+		    // TODO Auto-generated catch block
+		    e1.printStackTrace();
+		}
 
 		JLabel lblstandinresponsiblePersonModify = new JLabel("Vertretung");
 		lblstandinresponsiblePersonModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -657,6 +700,14 @@ public class GUIFabricationmanagement {
 		gbc_comboBoxstandinresponsiblePersonModify_1.gridx = 2;
 		gbc_comboBoxstandinresponsiblePersonModify_1.gridy = 10;
 		panelmodify.add(comboBoxstandinresponsiblePersonModify_1, gbc_comboBoxstandinresponsiblePersonModify_1);
+		try {
+		    for(int i = 0; i<ProductionManagement.getSecondaryAdvisorArray().length; i++) {
+		        comboBoxstandinresponsiblePersonModify_1.addItem(ProductionManagement.getSecondaryAdvisorArray()[i]);
+		    }
+		} catch (SQLException e1) {
+		    // TODO Auto-generated catch block
+		    e1.printStackTrace();
+		}
 
 		JLabel lblmodifyOrderStatus = new JLabel("Auftragsstatus");
 		lblmodifyOrderStatus.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -808,9 +859,9 @@ public class GUIFabricationmanagement {
 		gbc_btnsaveModifiedValues.gridx = 2;
 
 		panelmodify.add(btnsaveModifiedValues, gbc_btnsaveModifiedValues);
-				panelmodify.add(btnsaveModifiedValues, gbc_btnsaveModifiedValues);
+		panelmodify.add(btnsaveModifiedValues, gbc_btnsaveModifiedValues);
 
-	
+
 		JPanel paneldeleteOrder = new JPanel();
 		tabbedPane.addTab("Auftrag löschen", null, paneldeleteOrder, null);
 		GridBagLayout gbl_paneldeleteOrder = new GridBagLayout();

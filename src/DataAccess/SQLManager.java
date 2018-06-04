@@ -546,37 +546,62 @@ public class SQLManager {
 
 		return result;
 	}
+	
+	public ComboBoxPerson[] getCustomerArray () throws SQLException {
+	    int count=0; 
+	    Statement stmt = c.createStatement(); 
+	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Persons"); 
+	    rs.next(); 
+	    count = rs.getInt(1); 
+	    stmt.close();
+	    ComboBoxPerson[] c = new ComboBoxPerson[count]; 
+	    rs = stmt.executeQuery("SELECT * FROM Persons WHERE rights !="+1+""); 
+	    int x = 0;
+	    while(rs.next()) {
+		ComboBoxPerson a = new ComboBoxPerson(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname")); 
+		c[x] = a; 
+		x+=1; 
+	    }
+	    return c;
+	    
+	}
+	
+	public ComboBoxPerson[] getAdvisorArray () throws SQLException {
+	    int count=0; 
+	    Statement stmt = c.createStatement(); 
+	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Persons"); 
+	    rs.next(); 
+	    count = rs.getInt(1); 
+	    stmt.close();
+	    ComboBoxPerson[] c = new ComboBoxPerson[count]; 
+	    rs = stmt.executeQuery("SELECT * FROM Persons WHERE rights="+1+""); 
+	    int x = 0;
+	    while(rs.next()) {
+		ComboBoxPerson a = new ComboBoxPerson(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname")); 
+		c[x] = a; 
+		x+=1; 
+	    }
+	    return c;
+	    
+	}
+	
+	public ComboBoxPerson[] getSecondaryAdvisorArray () throws SQLException {
+	    int count=0; 
+	    Statement stmt = c.createStatement(); 
+	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Persons"); 
+	    rs.next(); 
+	    count = rs.getInt(1); 
+	    stmt.close();
+	    ComboBoxPerson[] c = new ComboBoxPerson[count]; 
+	    rs = stmt.executeQuery("SELECT * FROM Persons WHERE rights="+1+""); 
+	    int x = 0;
+	    while(rs.next()) {
+		ComboBoxPerson a = new ComboBoxPerson(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname")); 
+		c[x] = a; 
+		x+=1; 
+	    }
+	    return c;
+	    
+	}
 	// Nico End*/
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
