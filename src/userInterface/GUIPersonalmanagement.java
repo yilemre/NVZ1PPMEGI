@@ -739,9 +739,9 @@ public class GUIPersonalmanagement{
 		tabbedPane.addTab("Personen löschen", null, paneldeletePerson, null);
 		GridBagLayout gbl_paneldeletePerson = new GridBagLayout();
 		gbl_paneldeletePerson.columnWidths = new int[]{168, 0, 0};
-		gbl_paneldeletePerson.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_paneldeletePerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_paneldeletePerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_paneldeletePerson.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_paneldeletePerson.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		paneldeletePerson.setLayout(gbl_paneldeletePerson);
 
 		JScrollPane scrollPanedeletePerson = new JScrollPane();
@@ -819,9 +819,17 @@ public class GUIPersonalmanagement{
 				refreshTable();
 			}
 		});
+		
+		JButton btnNewButton = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewButton.gridx = 1;
+		gbc_btnNewButton.gridy = 3;
+		paneldeletePerson.add(btnNewButton, gbc_btnNewButton);
 		gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeletePerson.gridx = 1;
-		gbc_btndeletePerson.gridy = 3;
+		gbc_btndeletePerson.gridy = 4;
 		paneldeletePerson.add(btndeletePerson, gbc_btndeletePerson);
 
 		JMenuBar menuBar = new JMenuBar();
