@@ -460,10 +460,10 @@ public class GUIFabricationmanagement {
 		tabbedPane.addTab("Auftrag bearbeiten", null, panelmodify, null);
 		GridBagLayout gbl_panelmodify = new GridBagLayout();
 		gbl_panelmodify.columnWidths = new int[] { 0, 0, 0, 0 };
-		gbl_panelmodify.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panelmodify.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_panelmodify.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		gbl_panelmodify.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
-				0.0, Double.MIN_VALUE };
+				0.0, 0.0, Double.MIN_VALUE };
 		panelmodify.setLayout(gbl_panelmodify);
 
 		JLabel lblorderIDModify = new JLabel("ID");
@@ -853,7 +853,21 @@ public class GUIFabricationmanagement {
 				refreshTableDeleteOrder();
 			}
 		});
+		
+		JButton btnclearSearchModify = new JButton("Suche aufheben");
+		btnclearSearchModify.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnclearSearchModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_btnclearSearchModify = new GridBagConstraints();
+		gbc_btnclearSearchModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnclearSearchModify.insets = new Insets(0, 0, 5, 5);
+		gbc_btnclearSearchModify.gridx = 2;
+		gbc_btnclearSearchModify.gridy = 15;
+		panelmodify.add(btnclearSearchModify, gbc_btnclearSearchModify);
 		GridBagConstraints gbc_btnsaveModifiedValues = new GridBagConstraints();
+		gbc_btnsaveModifiedValues.gridy = 16;
 		gbc_btnsaveModifiedValues.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsaveModifiedValues.insets = new Insets(0, 0, 0, 5);
 		gbc_btnsaveModifiedValues.gridx = 2;
@@ -866,9 +880,9 @@ public class GUIFabricationmanagement {
 		tabbedPane.addTab("Auftrag löschen", null, paneldeleteOrder, null);
 		GridBagLayout gbl_paneldeleteOrder = new GridBagLayout();
 		gbl_paneldeleteOrder.columnWidths = new int[] { 0, 98, 0, 0 };
-		gbl_paneldeleteOrder.rowHeights = new int[] { 0, 0, 0, 0, 0 };
+		gbl_paneldeleteOrder.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
 		gbl_paneldeleteOrder.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_paneldeleteOrder.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_paneldeleteOrder.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		paneldeleteOrder.setLayout(gbl_paneldeleteOrder);
 
 		JScrollPane scrollPanedeletePerson = new JScrollPane();
@@ -982,9 +996,22 @@ public class GUIFabricationmanagement {
 				refreshTable();
 			}
 		});
+		
+		JButton btnclearSearchDelete = new JButton("Suche aufheben");
+		btnclearSearchDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnclearSearchDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_btnclearSearchDelete = new GridBagConstraints();
+		gbc_btnclearSearchDelete.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnclearSearchDelete.insets = new Insets(0, 0, 5, 0);
+		gbc_btnclearSearchDelete.gridx = 2;
+		gbc_btnclearSearchDelete.gridy = 3;
+		paneldeleteOrder.add(btnclearSearchDelete, gbc_btnclearSearchDelete);
 		gbc_btndeleteOrder.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteOrder.gridx = 2;
-		gbc_btndeleteOrder.gridy = 3;
+		gbc_btndeleteOrder.gridy = 4;
 		paneldeleteOrder.add(btndeleteOrder, gbc_btndeleteOrder);
 
 		JMenuBar menuBar = new JMenuBar();
