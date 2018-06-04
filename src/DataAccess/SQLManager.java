@@ -546,37 +546,62 @@ public class SQLManager {
 
 		return result;
 	}
+	
+	public Person[] getCustomerArray () throws SQLException {
+	    int count=0; 
+	    Statement stmt = c.createStatement(); 
+	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Persons"); 
+	    rs.next(); 
+	    count = rs.getInt(1); 
+	    stmt.close();
+	    Person[] c = new Person[count]; 
+	    rs = stmt.executeQuery("SELECT * FROM Persons WHERE rights !="+1+""); 
+	    int x = 0;
+	    while(rs.next()) {
+		Person a = new Person(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname"), null, x, x, null, null, null, null, x); 
+		c[x] = a; 
+		x+=1; 
+	    }
+	    return c;
+	    
+	}
+	
+	public Person[] getAdvisorArray () throws SQLException {
+	    int count=0; 
+	    Statement stmt = c.createStatement(); 
+	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Persons"); 
+	    rs.next(); 
+	    count = rs.getInt(1); 
+	    stmt.close();
+	    Person[] c = new Person[count]; 
+	    rs = stmt.executeQuery("SELECT * FROM Persons WHERE rights="+1+""); 
+	    int x = 0;
+	    while(rs.next()) {
+		Person a = new Person(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname"), null, x, x, null, null, null, null, x); 
+		c[x] = a; 
+		x+=1; 
+	    }
+	    return c;
+	    
+	}
+	
+	public Person[] getSecondaryAdvisorArray () throws SQLException {
+	    int count=0; 
+	    Statement stmt = c.createStatement(); 
+	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Persons"); 
+	    rs.next(); 
+	    count = rs.getInt(1); 
+	    stmt.close();
+	    Person[] c = new Person[count]; 
+	    rs = stmt.executeQuery("SELECT * FROM Persons WHERE rights="+1+""); 
+	    int x = 0;
+	    while(rs.next()) {
+		Person a = new Person(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname"), null, x, x, null, null, null, null, x); 
+		c[x] = a; 
+		x+=1; 
+	    }
+	    return c;
+	    
+	}
 	// Nico End*/
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
