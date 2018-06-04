@@ -740,9 +740,9 @@ public class GUIPersonalmanagement{
 		tabbedPane.addTab("Personen löschen", null, paneldeletePerson, null);
 		GridBagLayout gbl_paneldeletePerson = new GridBagLayout();
 		gbl_paneldeletePerson.columnWidths = new int[]{168, 0, 0};
-		gbl_paneldeletePerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_paneldeletePerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gbl_paneldeletePerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_paneldeletePerson.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_paneldeletePerson.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		paneldeletePerson.setLayout(gbl_paneldeletePerson);
 
 		JScrollPane scrollPanedeletePerson = new JScrollPane();
@@ -803,37 +803,38 @@ public class GUIPersonalmanagement{
 		gbc_btnsearchDeletePerson.gridx = 1;
 		gbc_btnsearchDeletePerson.gridy = 2;
 		paneldeletePerson.add(btnsearchDeletePerson, gbc_btnsearchDeletePerson);
-
-		JButton btndeletePerson = new JButton("Person löschen");
-		btndeletePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_btndeletePerson = new GridBagConstraints();
-		btndeletePerson.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					PersonManagement.deletePerson(Integer.parseInt(TableDeletePerson.getValueAt(TableDeletePerson.getSelectedRow(), 0).toString()));
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				refreshTableDeletePerson();
-				refreshTable();
-			}
-		});
 		
 		JButton btndeleteSearch = new JButton("Suche löschen");
 		btndeleteSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_btnNewButton;
+
 		gbc_btndeleteSearch = new GridBagConstraints();
 		gbc_btndeleteSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteSearch.insets = new Insets(0, 0, 5, 0);
 		gbc_btndeleteSearch.gridx = 1;
 		gbc_btndeleteSearch.gridy = 3;
 		paneldeletePerson.add(btndeleteSearch, gbc_btndeleteSearch);
-		gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btndeletePerson.gridx = 1;
-		gbc_btndeletePerson.gridy = 4;
-		paneldeletePerson.add(btndeletePerson, gbc_btndeletePerson);
+		
+				JButton btndeletePerson = new JButton("Person löschen");
+				btndeletePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				GridBagConstraints gbc_btndeletePerson = new GridBagConstraints();
+				gbc_btndeletePerson.insets = new Insets(0, 0, 5, 0);
+				btndeletePerson.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							PersonManagement.deletePerson(Integer.parseInt(TableDeletePerson.getValueAt(TableDeletePerson.getSelectedRow(), 0).toString()));
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						refreshTableDeletePerson();
+						refreshTable();
+					}
+				});
+				gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
+				gbc_btndeletePerson.gridx = 1;
+				gbc_btndeletePerson.gridy = 4;
+				paneldeletePerson.add(btndeletePerson, gbc_btndeletePerson);
 
 		JMenuBar menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
