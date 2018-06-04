@@ -8,6 +8,10 @@ public class GUItest {
 		
 		GuiMenue gui = new GuiMenue();
 		
+		//GUIRegisterCustomer gui = new GUIRegisterCustomer();
+		
+		//GUIComponentUserInterface gui = new GUIComponentUserInterface();
+		
 	}
 
 }
