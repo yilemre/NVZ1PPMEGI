@@ -81,6 +81,7 @@ public class GUIPersonalmanagement{
 	private JTable table;
 	private List<String> comboBoxEntries;
 	private JTable TableDeletePerson;
+	private GridBagConstraints gbc_btndeleteSearch;
 
 
 	/**
@@ -820,13 +821,15 @@ public class GUIPersonalmanagement{
 			}
 		});
 		
-		JButton btnNewButton = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.gridx = 1;
-		gbc_btnNewButton.gridy = 3;
-		paneldeletePerson.add(btnNewButton, gbc_btnNewButton);
+		JButton btndeleteSearch = new JButton("Suche löschen");
+		btndeleteSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_btnNewButton;
+		gbc_btndeleteSearch = new GridBagConstraints();
+		gbc_btndeleteSearch.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btndeleteSearch.insets = new Insets(0, 0, 5, 0);
+		gbc_btndeleteSearch.gridx = 1;
+		gbc_btndeleteSearch.gridy = 3;
+		paneldeletePerson.add(btndeleteSearch, gbc_btndeleteSearch);
 		gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeletePerson.gridx = 1;
 		gbc_btndeletePerson.gridy = 4;
