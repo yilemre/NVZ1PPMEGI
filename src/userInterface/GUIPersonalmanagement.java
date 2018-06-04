@@ -839,9 +839,19 @@ public class GUIPersonalmanagement{
 		gbc_btnsearchDeletePerson.gridy = 3;
 		paneldeletePerson.add(btnsearchDeletePerson, gbc_btnsearchDeletePerson);
 		
-		JButton btndeleteSearch = new JButton("Suche löschen");
+		JButton btndeleteSearch = new JButton("Suche aufheben");
 		btndeleteSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
+		btndeleteSearch.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					TableDeletePerson.setModel(new PersonTableModel(PersonManagement.getPersons()));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		gbc_btndeleteSearch = new GridBagConstraints();
 		gbc_btndeleteSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteSearch.insets = new Insets(0, 0, 5, 0);
