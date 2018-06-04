@@ -594,6 +594,7 @@ public class GUIFabricationmanagement {
 		panelmodify.add(lblfileNameModify, gbc_lblfileNameModify);
 
 		textFieldfileNameModify = new JTextField();
+		textFieldfileNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldfileNameModify = new GridBagConstraints();
 		gbc_textFieldfileNameModify.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldfileNameModify.fill = GridBagConstraints.HORIZONTAL;
@@ -1196,16 +1197,16 @@ public class GUIFabricationmanagement {
 		if (table.getSelectedRow() > -1) {
 			textFieldorderIDModify.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
 			textFieldorderTitelModify.setText((String) table.getValueAt(table.getSelectedRow(), 1));
-			comboBoxtypModify.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 2)));
+			//comboBoxtypModify.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 2)));
 			textFieldnoteOtherModify.setText((String) table.getValueAt(table.getSelectedRow(), 10));
 			textFieldfilePathModify.setText((String) table.getValueAt(table.getSelectedRow(), 9));
 			textFieldfileNameModify.setText((String) table.getValueAt(table.getSelectedRow(), 8));
 			textFieldpredictedCostsModify.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
 			textFieldactualCostsModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
-			comboBoxModifyStatus.setSelectedIndex(comboBoxStatusEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
-			comboBoxorderCustomer.setSelectedIndex(findCorrectIndexFromCustomer(table.getValueAt(table.getSelectedRow(), 5).toString()));
-			comboBoxResponsible.setSelectedIndex(findCorrectIndexFromAdvisor(table.getValueAt(table.getSelectedRow(), 6).toString()));
-			comboBoxStandinResponsiblePersonModify.setSelectedIndex(findCorrectIndexFromSecondaryAdvisor(table.getValueAt(table.getSelectedRow(), 7).toString()));
+			//comboBoxModifyStatus.setSelectedIndex(comboBoxStatusEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
+			//comboBoxorderCustomer.setSelectedIndex(findCorrectIndexFromCustomer(table.getValueAt(table.getSelectedRow(), 5).toString()));
+			//comboBoxResponsible.setSelectedIndex(findCorrectIndexFromAdvisor(table.getValueAt(table.getSelectedRow(), 6).toString()));
+			//comboBoxStandinResponsiblePersonModify.setSelectedIndex(findCorrectIndexFromSecondaryAdvisor(table.getValueAt(table.getSelectedRow(), 7).toString()));
 		}
 
 	}
