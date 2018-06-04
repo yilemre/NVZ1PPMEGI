@@ -924,6 +924,40 @@ public class GUIFabricationmanagement {
 
 		JButton btnorderSearchDelete = new JButton("Suchen");
 		btnorderSearchDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnorderSearchDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String searchValue = textFieldorderSearchDelete.getText();
+				switch (comboBoxorderSearchModify.getSelectedIndex()) {
+				case 0:
+					try {
+						TableDeleteOrder.setModel(new OrderTableModel(ProductionManagement.getOrderByTitle(searchValue)));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				case 1:
+					try {
+						TableDeleteOrder.setModel(new OrderTableModel(ProductionManagement.getOrdersByType(searchValue)));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				case 2:
+					try {
+						TableDeleteOrder.setModel(new OrderTableModel(ProductionManagement.getOrdersByStatus(searchValue)));
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				}
+			}
+		});
 		GridBagConstraints gbc_btnorderSearchDelete = new GridBagConstraints();
 		gbc_btnorderSearchDelete.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnorderSearchDelete.insets = new Insets(0, 0, 5, 0);
@@ -1019,19 +1053,15 @@ public class GUIFabricationmanagement {
 			textFieldorderIDModify.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
 			//comboBoxorderCustomer.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 5)));
 			textFieldorderTitelModify.setText((String) table.getValueAt(table.getSelectedRow(), 1));
-			//comboBoxtypModify
-			//.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 2)));
+			//comboBoxtypModify.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 2)));
 			textFieldnoteOtherModify.setText((String) table.getValueAt(table.getSelectedRow(), 10));
 			textFieldfilePathModify.setText((String) table.getValueAt(table.getSelectedRow(), 9));
 			textFieldfileNameModify.setText((String) table.getValueAt(table.getSelectedRow(), 8));
 			textFieldpredictedCostsModify.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
 			textFieldactualCostsModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
-			//comboBoxresponsible
-			//.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 6)));
-			//comboBoxstandinresponsiblePersonModify
-			//.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 7)));
-			//comboBoxModifyStatus
-			//.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
+			//comboBoxresponsible.setSelectedIndex((String) table.getValueAt(table.getSelectedRow(), 6)));
+			//comboBoxstandinresponsiblePersonModify.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 7)));
+			//comboBoxModifyStatus.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
 		}
 
 	}

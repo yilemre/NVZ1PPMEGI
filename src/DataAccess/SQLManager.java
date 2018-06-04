@@ -361,7 +361,7 @@ public class SQLManager {
 
 	public int deleteOrderFromDB(int id) throws SQLException{
 		Statement stmt = c.createStatement();
-		String sql ="DELETE FROM Orders WHERE idOrder="+id+"";
+		String sql ="DELETE FROM Orders WHERE idOrder="+id;
 		stmt.executeUpdate(sql);
 		stmt.close();	
 		return id;
@@ -369,8 +369,7 @@ public class SQLManager {
 
 	public void modifyOrder(int id, String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
 		Statement stmt = c.createStatement(); 
-		String sql = "UPDATE Orders SET title='"+title+"', type='"+type+"', projectedCosts='"+projectedCosts+"' , realCosts='"+realCosts+"' , idCutomer='"+idCustomer+"' , idAdvisor='"+idAdvisor+"' ,idSecondaryAdvisor ='"+idSecondaryAdvisor+"', fileName="+fileName+", fileLocation='"+fileLocation+"', note='"+note+"' WHERE idOrder="+id+";";
-		stmt.executeUpdate(sql); 
+		stmt.executeUpdate("UPDATE Orders SET titel='"+title+"', type='"+type+"', projectedCosts='"+projectedCosts+"' , realCosts='"+realCosts+"' , idCustomer='"+idCustomer+"' , idAdvisor='"+idAdvisor+"' , idSecondaryAdvisor ='"+idSecondaryAdvisor+"', fileName="+fileName+", fileLocation='"+fileLocation+"', note='"+note+"' WHERE idOrder="+id); 
 		stmt.close();
 	}
 	
@@ -386,37 +385,37 @@ public class SQLManager {
 		Statement stmt = c.createStatement();
 		switch(attribute) {
 		case title: 
-			String sql ="ALTER Orders SET title="+newValue+"WHERE idOrder="+id+";";
+			String sql ="ALTER Orders SET titel="+newValue+"WHERE idOrder="+id;
 			stmt.executeUpdate(sql);
 			stmt.close();
 			break;
 		case idAdvisor:
-			String sql2 ="ALTER Orders SET idAdvisor="+Integer.parseInt(newValue)+"WHERE idOrder="+id+";";
+			String sql2 ="ALTER Orders SET idAdvisor="+Integer.parseInt(newValue)+"WHERE idOrder="+id;
 			stmt.executeUpdate(sql2);
 			stmt.close();
 			break;
 		case idSecondaryAdvisor:
-			String sql3 ="ALTER Orders SET idSecondaryAdvisor="+Integer.parseInt(newValue)+"WHERE idOrder="+id+";";
+			String sql3 ="ALTER Orders SET idSecondaryAdvisor="+Integer.parseInt(newValue)+"WHERE idOrder="+id;
 			stmt.executeUpdate(sql3);
 			stmt.close();
 			break;
 		case notes:
-			String sql4 ="ALTER Orders SET notes="+newValue+"WHERE idOrder="+id+";";
+			String sql4 ="ALTER Orders SET notes="+newValue+"WHERE idOrder="+id;
 			stmt.executeUpdate(sql4);
 			stmt.close();
 			break;
 		case forecastedCosts:
-			String sql5 ="ALTER Orders SET forecastedCosts="+Double.parseDouble(newValue)+"WHERE idOrder="+id+";";
+			String sql5 ="ALTER Orders SET forecastedCosts="+Double.parseDouble(newValue)+"WHERE idOrder="+id;
 			stmt.executeUpdate(sql5);
 			stmt.close();
 			break;
 		case realCosts:
-			String sql6 ="ALTER Orders SET realCosts="+Double.parseDouble(newValue)+"WHERE idOrder="+id+";";
+			String sql6 ="ALTER Orders SET realCosts="+Double.parseDouble(newValue)+"WHERE idOrder="+id;
 			stmt.executeUpdate(sql6);
 			stmt.close();
 			break;
 		case fileLocation:
-			String sql7 ="ALTER Orders SET fileLocation="+newValue+"WHERE idOrder="+id+";";
+			String sql7 ="ALTER Orders SET fileLocation="+newValue+"WHERE idOrder="+id;
 			stmt.executeUpdate(sql7);
 			stmt.close();
 			break;
