@@ -927,7 +927,7 @@ public class GUIFabricationmanagement {
 		btnorderSearchDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String searchValue = textFieldorderSearchDelete.getText();
-				switch (comboBoxorderSearchModify.getSelectedIndex()) {
+				switch (comboBoxorderSearchDelete.getSelectedIndex()) {
 				case 0:
 					try {
 						TableDeleteOrder.setModel(new OrderTableModel(ProductionManagement.getOrderByTitle(searchValue)));
