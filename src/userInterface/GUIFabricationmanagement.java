@@ -498,6 +498,7 @@ public class GUIFabricationmanagement {
 		panelmodify.add(lblorderCustomerModify, gbc_lblorderCustomerModify);
 
 		JComboBox comboBoxorderCustomerModify = new JComboBox();
+		comboBoxorderCustomerModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxorderCustomerModify = new GridBagConstraints();
 		gbc_comboBoxorderCustomerModify.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxorderCustomerModify.fill = GridBagConstraints.HORIZONTAL;
