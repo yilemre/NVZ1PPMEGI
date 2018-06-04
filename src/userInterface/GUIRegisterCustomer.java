@@ -357,7 +357,7 @@ public class GUIRegisterCustomer {
 			textFielduserName.setText("");
 			textFieldprofessorShip.setText("");
 			passwordField.setText("");
-			passwordFieldrepeatPassword.setText("");
+			//passwordFieldrepeatPassword.setText("");
 			
 			}
 		});
