@@ -368,8 +368,9 @@ public class SQLManager {
 	}
 
 	public void modifyOrder(int id, String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
-		Statement stmt = c.createStatement(); 
-		stmt.executeUpdate("UPDATE Orders SET titel='"+title+"', type='"+type+"', projectedCosts='"+projectedCosts+"' , realCosts='"+realCosts+"' , idCustomer='"+idCustomer+"' , idAdvisor='"+idAdvisor+"' , idSecondaryAdvisor ='"+idSecondaryAdvisor+"', fileName="+fileName+", fileLocation='"+fileLocation+"', note='"+note+"' WHERE idOrder="+id); 
+		Statement stmt = c.createStatement();
+		String sql ="UPDATE Orders SET titel='"+title+"', type='"+type+"', projectedCosts='"+projectedCosts+"' , realCosts='"+realCosts+"' , idCustomer='"+idCustomer+"' , idAdvisor='"+idAdvisor+"' , idSecondaryAdvisor ='"+idSecondaryAdvisor+"', fileName="+fileName+", fileLocation='"+fileLocation+"', note='"+note+"' WHERE idOrder="+id;
+		stmt.executeUpdate(sql);
 		stmt.close();
 	}
 	
@@ -469,12 +470,13 @@ public class SQLManager {
 		}
 	}*/
 	
-	public void changeOrderStatus(int id, int status, String datetime) throws SQLException{
+	public void changeOrderStatus(int id, int status) throws SQLException{
 		Statement stmt = c.createStatement(); 
-		String sql = "INSERT INTO OrderStatus (idOrder, status, timestamp) VALUES (id,"+status+", '"+datetime+"';)";
+		String sql = "UPDATE OrderStatus SET status='"+status+"' WHERE idOrder="+id;
 		stmt.executeUpdate(sql); 
 		stmt.close();
 	}
+	
 
 	// search methods - Work in Progress
 	public List<Order> getOrdersByTitle(String title) throws SQLException {

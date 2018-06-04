@@ -18,7 +18,7 @@ import Exceptions.ELabException;
 public class ProductionManagement {
 
 
-	public static void addOrder(String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
+	public static void addOrder(String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note, int status) throws SQLException {
 		String dateTimeString = null;
 		DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
@@ -33,6 +33,10 @@ public class ProductionManagement {
 
 	public static void modifyOrder(int id, String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
 		SQLManager.getInstance().modifyOrder(id, title, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note);
+	}
+	
+	public static void changeOrderStatus(int id, int status) throws SQLException{
+		SQLManager.getInstance().changeOrderStatus(id, status);
 	}
 
 	public static List<Order> getOrders() throws SQLException {
