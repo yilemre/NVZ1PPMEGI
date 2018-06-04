@@ -776,7 +776,7 @@ public class GUIPersonalmanagement{
 
 		JComboBox comboBoxsearchDeletePerson = new JComboBox();
 		comboBoxsearchDeletePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBoxsearchDeletePerson.setModel(new DefaultComboBoxModel(new String[] {"Vorname", "Nachname"}));
+		comboBoxsearchDeletePerson.setModel(new DefaultComboBoxModel(new String[] {"Vorname", "Nachname", "Mitgliedschaft"}));
 		GridBagConstraints gbc_comboBoxsearchDeletePerson = new GridBagConstraints();
 		gbc_comboBoxsearchDeletePerson.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxsearchDeletePerson.fill = GridBagConstraints.HORIZONTAL;
@@ -797,6 +797,41 @@ public class GUIPersonalmanagement{
 		JButton btnsearchDeletePerson = new JButton("Person Suchen");
 		btnsearchDeletePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnsearchDeletePerson = new GridBagConstraints();
+		btnsearchDeletePerson.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String searchValue = textFieldsearchDeletePerson.getText();
+				switch(comboBoxsearchDeletePerson.getSelectedIndex()) {
+				case 0:
+					try {
+						TableDeletePerson.setModel(new PersonTableModel(PersonManagement.getPersonsByName(searchValue)));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				case 1:
+					try {
+						TableDeletePerson.setModel(new PersonTableModel(PersonManagement.getPersonsByLastname(searchValue)));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				case 2:
+					try {
+						TableDeletePerson.setModel(new PersonTableModel(PersonManagement.getPersonsByRights(searchValue)));
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				}
+			}
+		});
 		gbc_btnsearchDeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsearchDeletePerson.insets = new Insets(0, 0, 5, 0);
 		gbc_btnsearchDeletePerson.gridx = 1;
