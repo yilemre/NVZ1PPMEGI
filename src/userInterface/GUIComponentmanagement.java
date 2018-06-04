@@ -86,6 +86,7 @@ public class GUIComponentmanagement  {
 	private JTextField textFieldcategoryNoteModify;
 	private JTextField tfArticleNo;
 	private JTable ComponentTableModify;
+	private JTable CategoryTable;
 	private JTextField tfComponentModifyID;
 	JSpinner spinnerquantityStorageModify = new JSpinner();
 	JSpinner spinnerquantityPlannedModify = new JSpinner();
@@ -977,6 +978,7 @@ public class GUIComponentmanagement  {
 																				a.getStackTrace(); 
 																			    }
 																			    refreshCategoryCombobox(); 
+																			    refreshCategoryTable(); 
 																			    
 																			}
 																			//Emre end
@@ -1029,6 +1031,22 @@ public class GUIComponentmanagement  {
 																		panelcategoryManagement.add(btncategoryNew, gbc_btncategoryNew);
 																		
 																				JButton btncategoryModify = new JButton("Änderungen an Kategorie speichern");
+																				btncategoryModify.addActionListener(new ActionListener() {
+																					public void actionPerformed(ActionEvent arg0) {
+																					  try {
+																					    ComponentManagement.modifyCategory(Integer.parseInt(textFieldcategoryIDModify.getText()), textFieldcategoryNameModify.getText(), textFieldcategoryNoteModify.getText());
+																					} catch (NumberFormatException e) {
+																					    // TODO Auto-generated catch block
+																					    e.printStackTrace();
+																					} catch (SQLException e) {
+																					    // TODO Auto-generated catch block
+																					    e.printStackTrace();
+																					}
+																					  refreshCategoryTable();
+																					  refreshCategoryCombobox(); 
+																					}
+																					
+																				});
 																				btncategoryModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 																				
 																				GridBagConstraints gbc_btncategoryModify = new GridBagConstraints();
@@ -1054,24 +1072,6 @@ public class GUIComponentmanagement  {
 																						gbc_btncategoryDeleteInputs.gridx = 1;
 																						gbc_btncategoryDeleteInputs.gridy = 4;
 																						panelcategoryManagement.add(btncategoryDeleteInputs, gbc_btncategoryDeleteInputs);
-																						
-																								JButton btncategoryModifyDeleteInputs = new JButton("Änderungen löschen");
-																								btncategoryModifyDeleteInputs.addActionListener(new ActionListener() {
-																									public void actionPerformed(ActionEvent e) {
-																									    //Emre begin
-																									    textFieldcategoryNameModify.setText("");
-																									    textFieldcategoryNoteModify.setText("");
-																									}
-																									//Emre end
-																								});
-																								btncategoryModifyDeleteInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																								
-																								GridBagConstraints gbc_btncategoryModifyDeleteInputs = new GridBagConstraints();
-																								gbc_btncategoryModifyDeleteInputs.fill = GridBagConstraints.HORIZONTAL;
-																								gbc_btncategoryModifyDeleteInputs.insets = new Insets(0, 0, 5, 5);
-																								gbc_btncategoryModifyDeleteInputs.gridx = 3;
-																								gbc_btncategoryModifyDeleteInputs.gridy = 4;
-																								panelcategoryManagement.add(btncategoryModifyDeleteInputs, gbc_btncategoryModifyDeleteInputs);
 																								
 																										JScrollPane scrollPane = new JScrollPane();
 																										scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -1086,7 +1086,7 @@ public class GUIComponentmanagement  {
 																										panelcategoryManagement.add(scrollPane, gbc_scrollPane);
 																										
 																										//Emre begin 
-																										JTable CategoryTable = new JTable();
+																										CategoryTable = new JTable();
 																										CategoryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 																										scrollPane.setViewportView(CategoryTable);
 																										CategoryTable.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1095,7 +1095,17 @@ public class GUIComponentmanagement  {
 																										} catch (SQLException e1) {
 																										    // TODO Auto-generated catch block
 																										    e1.printStackTrace();
-																										}																										
+																										}		
+																										CategoryTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+																											
+																										    public void valueChanged(ListSelectionEvent e) {
+																												handleEditCategorySelectionEvent(e);
+																												
+																											}
+																										});
+																										
+																										
+																										
 																										//Emre end		
 																														JLabel lblcategoryNameSearch = new JLabel("Kategorie");
 																														lblcategoryNameSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1185,6 +1195,26 @@ public class GUIComponentmanagement  {
 		frmElabVerwaltungsprogramm.setVisible(true);
 	}
 	
+	protected void refreshCategoryTable() {
+	    // TODO Auto-generated method stub
+	    try {
+		CategoryTable.setModel(new CategoryTableModel(ComponentManagement.getCategories()));																										    
+	    } catch (SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	    }		
+	    
+	}
+
+	protected void handleEditCategorySelectionEvent(ListSelectionEvent a) {
+	    // TODO Auto-generated method stub
+	    if(CategoryTable.getSelectedRow()>-1) {
+		textFieldcategoryIDModify.setText(CategoryTable.getValueAt(CategoryTable.getSelectedRow(), 0).toString());
+		textFieldcategoryNoteModify.setText(CategoryTable.getValueAt(CategoryTable.getSelectedRow(), 2).toString());
+		textFieldcategoryNameModify.setText(CategoryTable.getValueAt(CategoryTable.getSelectedRow(), 1).toString());
+	    }
+	}
+
 	//Emre begin 
 	protected void refreshCategoryCombobox() {
 	    comboBoxcategory.removeAllItems();
@@ -1198,8 +1228,7 @@ public class GUIComponentmanagement  {
 		} catch (SQLException e1) {
 		    // TODO Auto-generated catch block
 		    e1.printStackTrace();
-		}
-	    
+		}	    
 	    
 	}
 	protected int getCategoryId(int selectedIndex) {
