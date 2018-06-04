@@ -504,6 +504,15 @@ public class GUIFabricationmanagement {
 		gbc_comboBoxorderCustomerModify.gridx = 2;
 		gbc_comboBoxorderCustomerModify.gridy = 1;
 		panelmodify.add(comboBoxorderCustomerModify, gbc_comboBoxorderCustomerModify);
+		try {
+			for(int i = 0; i<ProductionManagement.getCustomerArray().length; i++) {
+				comboBoxorderCustomerModify.addItem(ProductionManagement.getCustomerArray()[i]);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 
 		JLabel lblorderTitelModify = new JLabel("Titel");
 		lblorderTitelModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
