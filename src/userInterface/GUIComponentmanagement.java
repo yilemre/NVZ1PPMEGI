@@ -32,6 +32,7 @@ import javax.swing.event.ListSelectionListener;
 import logic.Category;
 import logic.ComponentManagement;
 import logic.PersonManagement;
+import sun.misc.FloatingDecimal;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -113,7 +114,6 @@ public class GUIComponentmanagement  {
 	 */
 	public GUIComponentmanagement() {
 		frmElabVerwaltungsprogramm = new JFrame();
-		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1051, 772);
@@ -347,8 +347,10 @@ public class GUIComponentmanagement  {
 			public void actionPerformed(ActionEvent e) {
 			    //Emre begin
 			    try {
-				ComponentManagement.addPart(tfArticleNo.getText(), textFieldpartLink.getText(), textFieldpartName.getText(), Double.parseDouble(textFieldpartPrize.getText()), Integer.parseInt(textFieldquantityStoring.getText()),
-						Integer.parseInt(textFieldquantityPlanned.getText()), Integer.parseInt(textFieldquantityOrdered.getText()), textFieldstorageLocation.getText(),getCategoryId(comboBoxcategory.getSelectedIndex()));
+				ComponentManagement.addPart(tfArticleNo.getText(), textFieldpartLink.getText(), textFieldpartName.getText(),
+					Double.parseDouble(textFieldpartPrize.getText()), Integer.parseInt(textFieldquantityStoring.getText()),
+					Integer.parseInt(textFieldquantityPlanned.getText()), Integer.parseInt(textFieldquantityOrdered.getText()),
+					textFieldstorageLocation.getText(),getCategoryId(comboBoxcategory.getSelectedIndex()));
 			    } catch (NumberFormatException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -657,7 +659,7 @@ public class GUIComponentmanagement  {
 																																										gbc_scrollPanemodifyPart.gridy = 11;
 																																										panelmodify.add(scrollPanemodifyPart, gbc_scrollPanemodifyPart);
 																																										
-																																										//Emre begin
+																																										//Emre begin, table for modify Components
 																																										ComponentTableModify = new JTable();
 																																										scrollPanemodifyPart.setViewportView(ComponentTableModify);
 																																										ComponentTableModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -703,7 +705,7 @@ public class GUIComponentmanagement  {
 																																																		JButton btnsearchResetSearching = new JButton("Suche aufheben");
 																																																		btnsearchResetSearching.addActionListener(new ActionListener() {
 																																																			public void actionPerformed(ActionEvent arg0) {
-																																																			    //Emre begin Button for searching 
+																																																			    //Emre begin Button to reset searching 
 																																																			    
 																																																			    try {
 																																																				ComponentTableModify.setModel(new ComponentTableModel(ComponentManagement.getComponents()));
@@ -779,6 +781,7 @@ public class GUIComponentmanagement  {
 		gbc_scrollPanedeletePerson.gridy = 0;
 		paneldeletePart.add(scrollPanedeletePerson, gbc_scrollPanedeletePerson);
 		
+		//Emre begin, table for delete components
 		ComponentTableDelete = new JTable();
 		scrollPanedeletePerson.setViewportView(ComponentTableDelete);
 		ComponentTableDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -798,7 +801,7 @@ public class GUIComponentmanagement  {
 
 			}
 		});
-		
+		//Emre end
 
 		JComboBox comboBoxdeletePart = new JComboBox();
 		comboBoxdeletePart.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -859,7 +862,7 @@ public class GUIComponentmanagement  {
 		JButton btndeletePart = new JButton("Bauteil löschen");
 		btndeletePart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			    
+			    //Emre begin
 			    try {
 				ComponentManagement.deletePart(Integer.parseInt(ComponentTableDelete.getValueAt(ComponentTableDelete.getSelectedRow(), 0).toString()));
 			    } catch (NumberFormatException e1) {
@@ -870,6 +873,7 @@ public class GUIComponentmanagement  {
 				e1.printStackTrace();
 			    }
 			    refreshTable(); 
+			    //Emre end
 			}
 		});
 		
@@ -1034,19 +1038,20 @@ public class GUIComponentmanagement  {
 																				JButton btncategoryModify = new JButton("Änderungen an Kategorie speichern");
 																				btncategoryModify.addActionListener(new ActionListener() {
 																					public void actionPerformed(ActionEvent arg0) {
-																					  try {
-																					    ComponentManagement.modifyCategory(Integer.parseInt(textFieldcategoryIDModify.getText()), textFieldcategoryNameModify.getText(), textFieldcategoryNoteModify.getText());
-																					} catch (NumberFormatException e) {
+																					   //Emre begin
+																					    try {
+																						ComponentManagement.modifyCategory(Integer.parseInt(textFieldcategoryIDModify.getText()), textFieldcategoryNameModify.getText(), textFieldcategoryNoteModify.getText());
+																					    } catch (NumberFormatException e) {
 																					    // TODO Auto-generated catch block
+																						e.printStackTrace();
+																					    } catch (SQLException e) {
+																						// TODO Auto-generated catch block
 																					    e.printStackTrace();
-																					} catch (SQLException e) {
-																					    // TODO Auto-generated catch block
-																					    e.printStackTrace();
-																					}
+																					    }
 																					  refreshCategoryTable();
 																					  refreshCategoryCombobox(); 
 																					}
-																					
+																					//Emre end 
 																				});
 																				btncategoryModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 																				
@@ -1103,10 +1108,8 @@ public class GUIComponentmanagement  {
 																												handleEditCategorySelectionEvent(e);
 																												
 																											}
-																										});
-																										
-																										
-																										
+																										});																		
+																																											
 																										//Emre end		
 																														JLabel lblcategoryNameSearch = new JLabel("Kategorie");
 																														lblcategoryNameSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1164,17 +1167,6 @@ public class GUIComponentmanagement  {
 			    
 			}
 		});
-		
-		JMenuItem mntmNewMenuItemMinimize = new JMenuItem("Minimieren");
-		mntmNewMenuItemMinimize.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-				frmElabVerwaltungsprogramm.setState(JFrame.ICONIFIED);
-			
-			}
-		});
-		mntmNewMenuItemMinimize.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		mnNewMenuOptions.add(mntmNewMenuItemMinimize);
 		mntmNewMenuItembacktoMain.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
 		
@@ -1206,7 +1198,7 @@ public class GUIComponentmanagement  {
 		
 		frmElabVerwaltungsprogramm.setVisible(true);
 	}
-	
+	//Emre begin
 	protected void refreshCategoryTable() {
 	    // TODO Auto-generated method stub
 	    try {
@@ -1217,7 +1209,6 @@ public class GUIComponentmanagement  {
 	    }		
 	    
 	}
-
 	protected void handleEditCategorySelectionEvent(ListSelectionEvent a) {
 	    // TODO Auto-generated method stub
 	    if(CategoryTable.getSelectedRow()>-1) {
@@ -1227,7 +1218,6 @@ public class GUIComponentmanagement  {
 	    }
 	}
 
-	//Emre begin 
 	protected void refreshCategoryCombobox() {
 	    comboBoxcategory.removeAllItems();
 	    comboBoxcategoryModify.removeAllItems();
@@ -1289,8 +1279,8 @@ public class GUIComponentmanagement  {
 	    }
 	    
 	}
-
 	private int findCorrectIndexFromCategory(String value) {
+	    //method to find correct category index with id-Value to set category-combobox
 	    // TODO Auto-generated method stub
 	    int x = Integer.parseInt(value);
 	    
