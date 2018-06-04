@@ -739,9 +739,9 @@ public class GUIPersonalmanagement{
 		tabbedPane.addTab("Personen löschen", null, paneldeletePerson, null);
 		GridBagLayout gbl_paneldeletePerson = new GridBagLayout();
 		gbl_paneldeletePerson.columnWidths = new int[]{168, 0, 0};
-		gbl_paneldeletePerson.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_paneldeletePerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_paneldeletePerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_paneldeletePerson.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_paneldeletePerson.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		paneldeletePerson.setLayout(gbl_paneldeletePerson);
 
 		JScrollPane scrollPanedeletePerson = new JScrollPane();
@@ -781,7 +781,7 @@ public class GUIPersonalmanagement{
 		gbc_comboBoxsearchDeletePerson.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxsearchDeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxsearchDeletePerson.gridx = 0;
-		gbc_comboBoxsearchDeletePerson.gridy = 1;
+		gbc_comboBoxsearchDeletePerson.gridy = 2;
 		paneldeletePerson.add(comboBoxsearchDeletePerson, gbc_comboBoxsearchDeletePerson);
 
 		textFieldsearchDeletePerson = new JTextField();
@@ -790,7 +790,7 @@ public class GUIPersonalmanagement{
 		gbc_textFieldsearchDeletePerson.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldsearchDeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldsearchDeletePerson.gridx = 1;
-		gbc_textFieldsearchDeletePerson.gridy = 1;
+		gbc_textFieldsearchDeletePerson.gridy = 2;
 		paneldeletePerson.add(textFieldsearchDeletePerson, gbc_textFieldsearchDeletePerson);
 		textFieldsearchDeletePerson.setColumns(10);
 
@@ -835,7 +835,7 @@ public class GUIPersonalmanagement{
 		gbc_btnsearchDeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsearchDeletePerson.insets = new Insets(0, 0, 5, 0);
 		gbc_btnsearchDeletePerson.gridx = 1;
-		gbc_btnsearchDeletePerson.gridy = 2;
+		gbc_btnsearchDeletePerson.gridy = 3;
 		paneldeletePerson.add(btnsearchDeletePerson, gbc_btnsearchDeletePerson);
 
 		JButton btndeletePerson = new JButton("Person löschen");
@@ -856,7 +856,7 @@ public class GUIPersonalmanagement{
 		});
 		gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeletePerson.gridx = 1;
-		gbc_btndeletePerson.gridy = 3;
+		gbc_btndeletePerson.gridy = 4;
 		paneldeletePerson.add(btndeletePerson, gbc_btndeletePerson);
 
 		JMenuBar menuBar = new JMenuBar();
