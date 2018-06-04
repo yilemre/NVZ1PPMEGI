@@ -113,6 +113,7 @@ public class GUIComponentmanagement  {
 	 */
 	public GUIComponentmanagement() {
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1051, 772);
@@ -1163,6 +1164,17 @@ public class GUIComponentmanagement  {
 			    
 			}
 		});
+		
+		JMenuItem mntmNewMenuItemMinimize = new JMenuItem("Minimieren");
+		mntmNewMenuItemMinimize.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				frmElabVerwaltungsprogramm.setState(JFrame.ICONIFIED);
+			
+			}
+		});
+		mntmNewMenuItemMinimize.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnNewMenuOptions.add(mntmNewMenuItemMinimize);
 		mntmNewMenuItembacktoMain.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
 		

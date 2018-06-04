@@ -102,6 +102,7 @@ public class GUIPersonalmanagement{
 		comboBoxEntries.add("Mitglied");
 		comboBoxEntries.add("Lehrstuhlmitglied");
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 	
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
@@ -887,6 +888,18 @@ public class GUIPersonalmanagement{
 		JMenu mnNewMenuOptions = new JMenu("Menü");
 		mnNewMenuOptions.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		menuBar.add(mnNewMenuOptions);
+		
+		JMenuItem mntmNewMenuItemMinimize = new JMenuItem("Minimieren");
+		mntmNewMenuItemMinimize.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			frmElabVerwaltungsprogramm.setState(JFrame.ICONIFIED);
+			
+			
+			}
+		});
+		mntmNewMenuItemMinimize.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnNewMenuOptions.add(mntmNewMenuItemMinimize);
 
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmenü");
 		mntmNewMenuItembacktoMain.setFont(new Font("Segoe UI", Font.BOLD, 15));

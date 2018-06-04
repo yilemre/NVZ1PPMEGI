@@ -50,6 +50,7 @@ public class GuiMenue implements ActionListener {
 	private JMenu mnNewMenuhelpWindow;
 	private JMenuItem mntmNewMenuItemshowManual;
 	private JButton btncomponentManagement;
+	private JMenuItem mntmNewMenuItemMinimize;
 
 	
 	
@@ -64,6 +65,7 @@ public class GuiMenue implements ActionListener {
 	public GuiMenue() {
 
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
@@ -135,6 +137,17 @@ public class GuiMenue implements ActionListener {
 		mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
 		mntmNewMenuItemlogOut.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mntmNewMenuItemlogOut.addActionListener(this);
+		
+		mntmNewMenuItemMinimize = new JMenuItem("Minimieren");
+		mntmNewMenuItemMinimize.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+			frmElabVerwaltungsprogramm.setState(JFrame.ICONIFIED);
+			
+			}
+		});
+		mntmNewMenuItemMinimize.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnNewMenuOptions.add(mntmNewMenuItemMinimize);
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
 
 		mntmNewMenuItemcloseApplication = new JMenuItem("Anwendung verlassen");
