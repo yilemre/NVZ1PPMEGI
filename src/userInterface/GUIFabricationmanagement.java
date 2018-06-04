@@ -498,12 +498,22 @@ public class GUIFabricationmanagement {
 		panelmodify.add(lblorderCustomerModify, gbc_lblorderCustomerModify);
 
 		JComboBox comboBoxorderCustomerModify = new JComboBox();
+		comboBoxorderCustomerModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxorderCustomerModify = new GridBagConstraints();
 		gbc_comboBoxorderCustomerModify.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxorderCustomerModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxorderCustomerModify.gridx = 2;
 		gbc_comboBoxorderCustomerModify.gridy = 1;
 		panelmodify.add(comboBoxorderCustomerModify, gbc_comboBoxorderCustomerModify);
+		try {
+			for(int i = 0; i<ProductionManagement.getCustomerArray().length; i++) {
+				comboBoxorderCustomerModify.addItem(ProductionManagement.getCustomerArray()[i]);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 
 		JLabel lblorderTitelModify = new JLabel("Titel");
 		lblorderTitelModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
