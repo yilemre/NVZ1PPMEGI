@@ -20,6 +20,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+
+import logic.PersonManagement;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -40,6 +43,8 @@ import java.awt.Toolkit;
 import java.awt.Window.Type;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.Frame;
 
 public class GUIRegisterCustomer {
@@ -54,8 +59,8 @@ public class GUIRegisterCustomer {
 	private JTextField textFielduserName;
 	private JPasswordField passwordField;
 	private JTextField textFieldprofessorShip;
-	private JPasswordField passwordFieldrepeatPassword;
-
+	JComboBox comboBoxType = new JComboBox();
+	private List<String> comboBoxEntries;
 	
 
 	/**
@@ -67,10 +72,13 @@ public class GUIRegisterCustomer {
 	 * Initialize the contents of the frame.
 	 */
 	public GUIRegisterCustomer() {
+		
+		comboBoxEntries= new ArrayList<String>();
+		comboBoxEntries.add("Kunde");
+		comboBoxEntries.add("Lehrstuhlmitglied");
+		
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
-		
-		
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
 		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -101,9 +109,9 @@ public class GUIRegisterCustomer {
 		tabbedPane.addTab("Person hinzufügen", null, paneladdPerson, null);
 		GridBagLayout gbl_paneladdPerson = new GridBagLayout();
 		gbl_paneladdPerson.columnWidths = new int[]{0, 0, 0};
-		gbl_paneladdPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_paneladdPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_paneladdPerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_paneladdPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_paneladdPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		paneladdPerson.setLayout(gbl_paneladdPerson);
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -238,9 +246,9 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(lblTyp, gbc_lblTyp);
 		
 		JComboBox comboBoxType = new JComboBox();
+		comboBoxType.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
 		comboBoxType.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxType.setToolTipText("");
-		comboBoxType.setModel(new DefaultComboBoxModel(new String[] {"Kunde", "Lehrstuhl bezogene Person"}));
 		GridBagConstraints gbc_comboBoxType = new GridBagConstraints();
 		gbc_comboBoxType.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxType.fill = GridBagConstraints.HORIZONTAL;
@@ -307,36 +315,32 @@ public class GUIRegisterCustomer {
 		JButton btnaddPerson = new JButton("Registrieren");
 		btnaddPerson.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+				
+				int index = comboBoxType.getSelectedIndex();	
+					if (index==1){
+					
+					index++;
+					
+					
+				}
+					PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
+							Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), index);
 			
+				} 
+				catch (Exception a) {
+					a.printStackTrace();
+
+				}
 			
 			}
 		});
 		btnaddPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		
-		
-		
-		JLabel lblPasswordRepeat = new JLabel("Passwort wiederholen");
-		lblPasswordRepeat.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_lblPasswordRepeat = new GridBagConstraints();
-		gbc_lblPasswordRepeat.anchor = GridBagConstraints.EAST;
-		gbc_lblPasswordRepeat.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPasswordRepeat.gridx = 0;
-		gbc_lblPasswordRepeat.gridy = 11;
-		paneladdPerson.add(lblPasswordRepeat, gbc_lblPasswordRepeat);
-		
-		passwordFieldrepeatPassword = new JPasswordField();
-		passwordFieldrepeatPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_passwordFieldrepeatPassword = new GridBagConstraints();
-		gbc_passwordFieldrepeatPassword.insets = new Insets(0, 0, 5, 0);
-		gbc_passwordFieldrepeatPassword.fill = GridBagConstraints.HORIZONTAL;
-		gbc_passwordFieldrepeatPassword.gridx = 1;
-		gbc_passwordFieldrepeatPassword.gridy = 11;
-		paneladdPerson.add(passwordFieldrepeatPassword, gbc_passwordFieldrepeatPassword);
 		GridBagConstraints gbc_btnaddPerson = new GridBagConstraints();
 		gbc_btnaddPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddPerson.insets = new Insets(0, 0, 5, 0);
 		gbc_btnaddPerson.gridx = 1;
-		gbc_btnaddPerson.gridy = 12;
+		gbc_btnaddPerson.gridy = 11;
 		paneladdPerson.add(btnaddPerson, gbc_btnaddPerson);
 		
 		JButton btndeleteallInputs = new JButton("Eingaben löschen");
@@ -362,7 +366,7 @@ public class GUIRegisterCustomer {
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteallInputs.insets = new Insets(0, 0, 5, 0);
 		gbc_btndeleteallInputs.gridx = 1;
-		gbc_btndeleteallInputs.gridy = 13;
+		gbc_btndeleteallInputs.gridy = 12;
 		paneladdPerson.add(btndeleteallInputs, gbc_btndeleteallInputs);
 		
 		JLabel lbleLabpicture = new JLabel("");
@@ -370,7 +374,7 @@ public class GUIRegisterCustomer {
 		GridBagConstraints gbc_lbleLabpicture = new GridBagConstraints();
 		gbc_lbleLabpicture.gridwidth = 2;
 		gbc_lbleLabpicture.gridx = 0;
-		gbc_lbleLabpicture.gridy = 14;
+		gbc_lbleLabpicture.gridy = 13;
 		paneladdPerson.add(lbleLabpicture, gbc_lbleLabpicture);
 		
 		JMenuBar menuBar = new JMenuBar();
