@@ -204,7 +204,7 @@ public class SQLManager {
 	//Emre begin 
 	public void modifyCategory(int id, String newName, String newNote) throws SQLException {
 	    Statement stmt = c.createStatement(); 
-	    stmt.executeUpdate("UPDATE Categorys SET name='"+ newName+"' , note='"+ newNote+"'+ WHERE idCategory ="+id+";");
+	    stmt.executeUpdate("UPDATE Categorys SET name='"+ newName+"' , note='"+ newNote+"' WHERE idCategory ="+id+";");
 	    stmt.close();
 		}
 	
