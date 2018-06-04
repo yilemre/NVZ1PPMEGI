@@ -189,7 +189,7 @@ public class GUIFabricationmanagement {
 		paneladdOrder.add(comboBoxoderCustomer, gbc_comboBoxoderCustomer);
 		try {
 			for(int i = 0; i<ProductionManagement.getCustomerArray().length; i++) {
-				comboBoxorderCustomer.addItem(ProductionManagement.getCustomerArray()[i]);
+				comboBoxoderCustomer.addItem(ProductionManagement.getCustomerArray()[i]);
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block

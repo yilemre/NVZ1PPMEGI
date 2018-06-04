@@ -547,18 +547,18 @@ public class SQLManager {
 		return result;
 	}
 	
-	public Person[] getCustomerArray () throws SQLException {
+	public ComboBoxPerson[] getCustomerArray () throws SQLException {
 	    int count=0; 
 	    Statement stmt = c.createStatement(); 
 	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Persons"); 
 	    rs.next(); 
 	    count = rs.getInt(1); 
 	    stmt.close();
-	    Person[] c = new Person[count]; 
+	    ComboBoxPerson[] c = new ComboBoxPerson[count]; 
 	    rs = stmt.executeQuery("SELECT * FROM Persons WHERE rights !="+1+""); 
 	    int x = 0;
 	    while(rs.next()) {
-		Person a = new Person(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname"), null, x, x, null, null, null, null, x); 
+		ComboBoxPerson a = new ComboBoxPerson(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname")); 
 		c[x] = a; 
 		x+=1; 
 	    }
@@ -566,18 +566,18 @@ public class SQLManager {
 	    
 	}
 	
-	public Person[] getAdvisorArray () throws SQLException {
+	public ComboBoxPerson[] getAdvisorArray () throws SQLException {
 	    int count=0; 
 	    Statement stmt = c.createStatement(); 
 	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Persons"); 
 	    rs.next(); 
 	    count = rs.getInt(1); 
 	    stmt.close();
-	    Person[] c = new Person[count]; 
+	    ComboBoxPerson[] c = new ComboBoxPerson[count]; 
 	    rs = stmt.executeQuery("SELECT * FROM Persons WHERE rights="+1+""); 
 	    int x = 0;
 	    while(rs.next()) {
-		Person a = new Person(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname"), null, x, x, null, null, null, null, x); 
+		ComboBoxPerson a = new ComboBoxPerson(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname")); 
 		c[x] = a; 
 		x+=1; 
 	    }
@@ -585,18 +585,18 @@ public class SQLManager {
 	    
 	}
 	
-	public Person[] getSecondaryAdvisorArray () throws SQLException {
+	public ComboBoxPerson[] getSecondaryAdvisorArray () throws SQLException {
 	    int count=0; 
 	    Statement stmt = c.createStatement(); 
 	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Persons"); 
 	    rs.next(); 
 	    count = rs.getInt(1); 
 	    stmt.close();
-	    Person[] c = new Person[count]; 
+	    ComboBoxPerson[] c = new ComboBoxPerson[count]; 
 	    rs = stmt.executeQuery("SELECT * FROM Persons WHERE rights="+1+""); 
 	    int x = 0;
 	    while(rs.next()) {
-		Person a = new Person(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname"), null, x, x, null, null, null, null, x); 
+		ComboBoxPerson a = new ComboBoxPerson(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname")); 
 		c[x] = a; 
 		x+=1; 
 	    }
