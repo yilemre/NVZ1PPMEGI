@@ -34,6 +34,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Frame;
 
 public class GuiMenue implements ActionListener {
 
@@ -63,6 +64,7 @@ public class GuiMenue implements ActionListener {
 	public GuiMenue() {
 
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 691, 543);

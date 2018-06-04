@@ -50,6 +50,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 import java.awt.Window.Type;
 import java.awt.Dialog.ModalExclusionType;
+import java.awt.Frame;
 
 public class GUIComponentUserInterface implements ActionListener {
 
@@ -77,6 +78,7 @@ public class GUIComponentUserInterface implements ActionListener {
 	 */
 	public GUIComponentUserInterface() {
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
 		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

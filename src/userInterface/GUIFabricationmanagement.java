@@ -49,6 +49,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Frame;
 
 public class GUIFabricationmanagement {
 
@@ -102,6 +103,7 @@ public class GUIFabricationmanagement {
 		 * "Rechnung erzeugt");
 		 */
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);

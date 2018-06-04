@@ -59,6 +59,7 @@ import java.awt.event.WindowEvent;
 //=======
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Frame;
 //>>>>>>> branch 'master' of git@github.com:yilemre/NVZ1PPMEGI.git
 
 public class GUIComponentmanagement  {
@@ -111,6 +112,7 @@ public class GUIComponentmanagement  {
 	 */
 	public GUIComponentmanagement() {
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1051, 772);
 		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

@@ -51,6 +51,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Frame;
 
 public class GUIPersonalmanagement{
 
@@ -100,6 +101,7 @@ public class GUIPersonalmanagement{
 		comboBoxEntries.add("Mitglied");
 		comboBoxEntries.add("Lehrstuhlmitglied");
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 	
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);

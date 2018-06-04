@@ -40,6 +40,7 @@ import java.awt.Toolkit;
 import java.awt.Window.Type;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Frame;
 
 public class GUIRegisterCustomer {
 
@@ -67,6 +68,7 @@ public class GUIRegisterCustomer {
 	 */
 	public GUIRegisterCustomer() {
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		
 		
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");

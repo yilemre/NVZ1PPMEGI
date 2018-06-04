@@ -27,6 +27,7 @@ import javax.swing.JTextPane;
 import javax.swing.JEditorPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Frame;
 
 public class GuiLogin {
 
@@ -53,6 +54,7 @@ public class GuiLogin {
 	 */
 	public GuiLogin() {
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 836, 649);
 		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
