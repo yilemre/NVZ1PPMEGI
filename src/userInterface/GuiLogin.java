@@ -28,6 +28,9 @@ import javax.swing.JEditorPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Frame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class GuiLogin {
 
@@ -38,6 +41,12 @@ public class GuiLogin {
 	private JPasswordField passwordField;
 	private JLabel lblNewLabel;
 	private JButton btnregister;
+	private JMenuBar menuBar;
+	private JMenu mnNewMenuMenü;
+	private JMenu mnNewMenu_1;
+	private JMenuItem mntmNewMenuItemcloseApplication;
+	private JMenuItem mntmNewMenuItemMinimize;
+	private JMenuItem mntmNewMenuItemshowManual;
 
 	/**
 	 * Launch the application.
@@ -54,15 +63,16 @@ public class GuiLogin {
 	 */
 	public GuiLogin() {
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 836, 649);
 		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		frmElabVerwaltungsprogramm.getContentPane().setLayout(gridBagLayout);
 		
 		lblUsername = new JLabel("Username");
@@ -138,9 +148,55 @@ public class GuiLogin {
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Nils\\git\\ProPraElab\\ProPraElab\\pictures\\elab.png"));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel.gridx = 1;
 		gbc_lblNewLabel.gridy = 4;
 		frmElabVerwaltungsprogramm.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+		
+		menuBar = new JMenuBar();
+		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
+		
+		mnNewMenuMenü = new JMenu("Menü");
+		
+		mnNewMenuMenü.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		menuBar.add(mnNewMenuMenü);
+		
+		mntmNewMenuItemMinimize = new JMenuItem("Minimieren");
+		mntmNewMenuItemMinimize.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			frmElabVerwaltungsprogramm.setState(JFrame.ICONIFIED);
+			
+			}
+		});
+		mntmNewMenuItemMinimize.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnNewMenuMenü.add(mntmNewMenuItemMinimize);
+		
+		mntmNewMenuItemcloseApplication = new JMenuItem("Anwendung verlassen");
+		mntmNewMenuItemcloseApplication.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				System.exit(0);
+			
+			}
+		});
+		mntmNewMenuItemcloseApplication.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnNewMenuMenü.add(mntmNewMenuItemcloseApplication);
+		
+		mnNewMenu_1 = new JMenu("?");
+		mnNewMenu_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		menuBar.add(mnNewMenu_1);
+		
+		mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			
+			
+			}
+		});
+		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		mnNewMenu_1.add(mntmNewMenuItemshowManual);
 	frmElabVerwaltungsprogramm.setVisible(true);
 	}
 

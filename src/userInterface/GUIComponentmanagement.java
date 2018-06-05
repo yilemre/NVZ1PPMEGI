@@ -60,7 +60,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Frame;
-//>>>>>>> branch 'master' of git@github.com:yilemre/NVZ1PPMEGI.git
+
 
 public class GUIComponentmanagement  {
 
