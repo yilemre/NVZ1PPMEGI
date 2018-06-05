@@ -414,7 +414,7 @@ public class GUIPersonalmanagement{
 		gbl_panelmodifyPerson.columnWidths = new int[]{164, 0, 0};
 		gbl_panelmodifyPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 0, 0, 0};
 		gbl_panelmodifyPerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelmodifyPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panelmodifyPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelmodifyPerson.setLayout(gbl_panelmodifyPerson);
 
 		JLabel lblIDModify = new JLabel("ID");
@@ -732,6 +732,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(btnsearchModifyPerson, gbc_btnsearchModifyPerson);
 
 		JButton btnSearchRemove = new JButton("Suche aufheben");
+		btnSearchRemove.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		btnSearchRemove.addActionListener(new ActionListener() {
 
