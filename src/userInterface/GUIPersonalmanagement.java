@@ -350,6 +350,18 @@ public class GUIPersonalmanagement{
 							Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
 					refreshTable();
 					refreshTableDeletePerson();
+					textFieldname.setText("");
+					textFieldlastName.setText("");
+					textFieldStreet.setText("");
+					textFieldhouseNumber.setText("");
+					textFieldzipCode.setText("");
+					textFieldeMail.setText("");
+					comboBoxType.setSelectedIndex(0);
+					textFielduserName.setText("");
+					passwordField.setText("");
+				
+				
+				
 				} 
 				catch (Exception a) {
 					a.printStackTrace();
