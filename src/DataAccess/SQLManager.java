@@ -567,23 +567,16 @@ public class SQLManager {
 	    
 	}
 	
-	public ComboBoxPerson[] getAdvisorArray () throws SQLException {
-	    int count=0; 
-	    Statement stmt = c.createStatement(); 
-	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Persons"); 
-	    rs.next(); 
-	    count = rs.getInt(1); 
-	    stmt.close();
-	    ComboBoxPerson[] c = new ComboBoxPerson[count]; 
-	    rs = stmt.executeQuery("SELECT * FROM Persons WHERE rights="+1+""); 
-	    int x = 0;
-	    while(rs.next()) {
-		ComboBoxPerson a = new ComboBoxPerson(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname")); 
-		c[x] = a; 
-		x+=1; 
-	    }
-	    return c;
-	    
+	public List<Person> getAdvisorArray () throws SQLException {
+		List<Person> result = new ArrayList<Person>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Persons WHERE rights="+1+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		while (rs.next()){
+			Person temp = new Person(rs.getInt("idPerson"), rs.getString("firstname")//ToDo)
+			result.add(temp);
+		}
+		return result;
 	}
 	
 	public ComboBoxPerson[] getSecondaryAdvisorArray () throws SQLException {

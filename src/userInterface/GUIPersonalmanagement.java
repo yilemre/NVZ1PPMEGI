@@ -871,7 +871,7 @@ public class GUIPersonalmanagement{
 		gbc_btndeleteSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteSearch.insets = new Insets(0, 0, 5, 0);
 		gbc_btndeleteSearch.gridx = 1;
-		gbc_btndeleteSearch.gridy = 3;
+		gbc_btndeleteSearch.gridy = 4;
 		paneldeletePerson.add(btndeleteSearch, gbc_btndeleteSearch);
 		
 				JButton btndeletePerson = new JButton("Person löschen");
@@ -893,7 +893,7 @@ public class GUIPersonalmanagement{
 				});
 				gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
 				gbc_btndeletePerson.gridx = 1;
-				gbc_btndeletePerson.gridy = 4;
+				gbc_btndeletePerson.gridy = 5;
 				paneldeletePerson.add(btndeletePerson, gbc_btndeletePerson);
 
 		JMenuBar menuBar = new JMenuBar();
