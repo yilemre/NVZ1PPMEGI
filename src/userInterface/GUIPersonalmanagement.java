@@ -276,6 +276,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(lbleMail, gbc_lbleMail);
 
 		textFieldeMail = new JTextField();
+		textFieldeMail.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldeMail = new GridBagConstraints();
 		gbc_textFieldeMail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldeMail.insets = new Insets(0, 0, 5, 0);
@@ -400,7 +401,7 @@ public class GUIPersonalmanagement{
 		GridBagLayout gbl_panelmodifyPerson = new GridBagLayout();
 		gbl_panelmodifyPerson.columnWidths = new int[]{164, 0, 0};
 		gbl_panelmodifyPerson.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 0, 0, 0};
-		gbl_panelmodifyPerson.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gbl_panelmodifyPerson.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gbl_panelmodifyPerson.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panelmodifyPerson.setLayout(gbl_panelmodifyPerson);
 
