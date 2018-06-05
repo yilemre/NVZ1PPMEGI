@@ -1,6 +1,7 @@
 package userInterface;
 
-//author Nils 
+//author GUI Nils
+//author logic Nico
 
 import java.awt.EventQueue;
 
@@ -26,9 +27,12 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import logic.Category;
+import logic.ComboBoxPerson;
 import logic.ComponentManagement;
 import logic.PersonManagement;
 import logic.ProductionManagement;
+import logic.Order;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -73,19 +77,21 @@ public class GUIFabricationmanagement {
 	private JTextField textFieldfileNameModify;
 
 
-	private JComboBox comboBoxorderTyp = new JComboBox();
-	private JComboBox comboBoxresponsible = new JComboBox();
-	private JComboBox comboBoxstandinResponsible = new JComboBox();
-	private JComboBox comboBoxorderStatus = new JComboBox();
-	private JComboBox comboBoxstandinresponsiblePersonModify;
-	private JComboBox comboBoxresponsiblePersonModify;
+	private JComboBox comboBoxorderTyp;
+	private JComboBox comboBoxResponsible;
+	private JComboBox comboBoxStandinResponsible;
+	private JComboBox comboBoxorderStatus;
+	private JComboBox comboBoxStandinResponsiblePersonModify;
+	private JComboBox comboBoxResponsiblePersonModify;
 	private JComboBox comboBoxtypModify;
 	private JComboBox comboBoxModifyStatus;
 	private JComboBox comboBoxorderCustomer;
+	private JComboBox comboBoxorderCustomerModify;
 
 	private JTable table;
 	private JTable TableDeleteOrder;
 	private List<String> comboBoxEntries;
+	private List<String> comboBoxStatusEntries;
 
 	/**
 	 * Initialize the contents of the frame.
@@ -95,14 +101,17 @@ public class GUIFabricationmanagement {
 		comboBoxEntries.add("3D-Druck");
 		comboBoxEntries.add("Leiterplatte");
 		comboBoxEntries.add("Sonstiges");
-		/*
-		 * comboBoxEntries.add("Angenommen"); comboBoxEntries.add("Gefertigt");
-		 * comboBoxEntries.add("Kosten kalkuliert");
-		 * comboBoxEntries.add("Abgeholt"); comboBoxEntries.add("Abgerechnet");
-		 * comboBoxEntries.add("Warten auf Material"); comboBoxEntries.add(
-		 * "Fertigung unterbrochen/defekt"); comboBoxEntries.add(
-		 * "Rechnung erzeugt");
-		 */
+		
+		comboBoxStatusEntries = new ArrayList<String>();
+		comboBoxStatusEntries.add("Angenommen");
+		comboBoxStatusEntries.add("Gefertigt");
+		comboBoxStatusEntries.add("Kosten kalkuliert");
+		comboBoxStatusEntries.add("Abgeholt");
+		comboBoxStatusEntries.add("Abgerechnet");
+		comboBoxStatusEntries.add("Warten auf Material");
+		comboBoxStatusEntries.add("Fertigung unterbrochen/defekt");
+		comboBoxStatusEntries.add("Rechnung erzeugt");
+		
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -225,15 +234,15 @@ public class GUIFabricationmanagement {
 		gbc_lblorderTyp.gridy = 4;
 		paneladdOrder.add(lblorderTyp, gbc_lblorderTyp);
 
-		JComboBox comboBoxorderTyp_1 = new JComboBox();
-		comboBoxorderTyp_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBoxorderTyp_1.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
-		GridBagConstraints gbc_comboBoxorderTyp_1 = new GridBagConstraints();
-		gbc_comboBoxorderTyp_1.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBoxorderTyp_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxorderTyp_1.gridx = 1;
-		gbc_comboBoxorderTyp_1.gridy = 4;
-		paneladdOrder.add(comboBoxorderTyp_1, gbc_comboBoxorderTyp_1);
+		JComboBox comboBoxorderTyp = new JComboBox();
+		comboBoxorderTyp.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxorderTyp.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
+		GridBagConstraints gbc_comboBoxorderTyp = new GridBagConstraints();
+		gbc_comboBoxorderTyp.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxorderTyp.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxorderTyp.gridx = 1;
+		gbc_comboBoxorderTyp.gridy = 4;
+		paneladdOrder.add(comboBoxorderTyp, gbc_comboBoxorderTyp);
 
 		JLabel lblnoteOther = new JLabel("Notiz zu sonstiges");
 		lblnoteOther.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -322,7 +331,7 @@ public class GUIFabricationmanagement {
 
 		textFieldactualCosts = new JTextField();
 		textFieldactualCosts.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textFieldactualCosts.setEditable(false);
+		textFieldactualCosts.setEditable(true);
 		GridBagConstraints gbc_textFieldactualCosts = new GridBagConstraints();
 		gbc_textFieldactualCosts.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldactualCosts.fill = GridBagConstraints.HORIZONTAL;
@@ -341,17 +350,17 @@ public class GUIFabricationmanagement {
 		gbc_lblresponsiblePerson.gridy = 10;
 		paneladdOrder.add(lblresponsiblePerson, gbc_lblresponsiblePerson);
 
-		JComboBox comboBoxresponsible_1 = new JComboBox();
-		comboBoxresponsible_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_comboBoxresponsible_1 = new GridBagConstraints();
-		gbc_comboBoxresponsible_1.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBoxresponsible_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxresponsible_1.gridx = 1;
-		gbc_comboBoxresponsible_1.gridy = 10;
-		paneladdOrder.add(comboBoxresponsible_1, gbc_comboBoxresponsible_1);
+		JComboBox comboBoxResponsible = new JComboBox();
+		comboBoxResponsible.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_comboBoxResponsible = new GridBagConstraints();
+		gbc_comboBoxResponsible.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxResponsible.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxResponsible.gridx = 1;
+		gbc_comboBoxResponsible.gridy = 10;
+		paneladdOrder.add(comboBoxResponsible, gbc_comboBoxResponsible);
 		try {
 			for(int i = 0; i<ProductionManagement.getAdvisorArray().length; i++) {
-				comboBoxresponsible_1.addItem(ProductionManagement.getAdvisorArray()[i]);
+				comboBoxResponsible.addItem(ProductionManagement.getAdvisorArray()[i]);
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -367,17 +376,17 @@ public class GUIFabricationmanagement {
 		gbc_lblstandinResponsible.gridy = 11;
 		paneladdOrder.add(lblstandinResponsible, gbc_lblstandinResponsible);
 
-		JComboBox comboBoxstandinResponsible_1 = new JComboBox();
-		comboBoxstandinResponsible_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_comboBoxstandinResponsible_1 = new GridBagConstraints();
-		gbc_comboBoxstandinResponsible_1.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBoxstandinResponsible_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxstandinResponsible_1.gridx = 1;
-		gbc_comboBoxstandinResponsible_1.gridy = 11;
-		paneladdOrder.add(comboBoxstandinResponsible_1, gbc_comboBoxstandinResponsible_1);
+		JComboBox comboBoxStandinResponsible = new JComboBox();
+		comboBoxStandinResponsible.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_comboBoxStandinResponsible = new GridBagConstraints();
+		gbc_comboBoxStandinResponsible.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxStandinResponsible.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxStandinResponsible.gridx = 1;
+		gbc_comboBoxStandinResponsible.gridy = 11;
+		paneladdOrder.add(comboBoxStandinResponsible, gbc_comboBoxStandinResponsible);
 		try {
 			for(int i = 0; i<ProductionManagement.getSecondaryAdvisorArray().length; i++) {
-				comboBoxstandinResponsible_1.addItem(ProductionManagement.getSecondaryAdvisorArray()[i]);
+				comboBoxStandinResponsible.addItem(ProductionManagement.getSecondaryAdvisorArray()[i]);
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -393,29 +402,27 @@ public class GUIFabricationmanagement {
 		gbc_lblorderStatus.gridy = 12;
 		paneladdOrder.add(lblorderStatus, gbc_lblorderStatus);
 
-		JComboBox comboBoxorderStatus_1 = new JComboBox();
-		comboBoxorderStatus_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBoxorderStatus_1.setModel(
-				new DefaultComboBoxModel(new String[] { "Angenommen", "Gefertigt", "Kosten kalkuliert", "Abgeholt",
-						"Abgerechnet", "Warten auf Material", "Fertigung unterbrochen/defekt", "Rechnung erzeugt" }));
-		GridBagConstraints gbc_comboBoxorderStatus_1 = new GridBagConstraints();
-		gbc_comboBoxorderStatus_1.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBoxorderStatus_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxorderStatus_1.gridx = 1;
-		gbc_comboBoxorderStatus_1.gridy = 12;
-		paneladdOrder.add(comboBoxorderStatus_1, gbc_comboBoxorderStatus_1);
+		JComboBox comboBoxorderStatus = new JComboBox();
+		comboBoxorderStatus.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxorderStatus.setModel(new DefaultComboBoxModel(comboBoxStatusEntries.toArray()));
+		GridBagConstraints gbc_comboBoxorderStatus = new GridBagConstraints();
+		gbc_comboBoxorderStatus.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxorderStatus.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxorderStatus.gridx = 1;
+		gbc_comboBoxorderStatus.gridy = 12;
+		paneladdOrder.add(comboBoxorderStatus, gbc_comboBoxorderStatus);
 
 		JButton btnaddOrder = new JButton("Auftrag hinzufügen");
 		btnaddOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnaddOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ProductionManagement.addOrder(textFieldorderTitel.getText(), comboBoxorderTyp_1.getSelectedIndex(),
+					ProductionManagement.addOrder(textFieldorderTitel.getText(), comboBoxorderTyp.getSelectedIndex(),
 							Double.parseDouble(textFieldpredictedCosts.getText()),
 							Double.parseDouble(textFieldactualCosts.getText()),
-							comboBoxorderCustomer.getSelectedIndex() , comboBoxresponsible_1.getSelectedIndex(),
-							comboBoxstandinResponsible_1.getSelectedIndex(), textFieldfileName.getText() , textFieldfilePath.getText(),
-							textFieldnoteOther.getText());
+							getIdCustomer(comboBoxorderCustomer.getSelectedIndex()), getIdAdvisor(comboBoxResponsible.getSelectedIndex()),
+							getIdSecondaryAdvisor(comboBoxStandinResponsible.getSelectedIndex()), textFieldfileName.getText() , textFieldfilePath.getText(),
+							textFieldnoteOther.getText(), comboBoxorderStatus.getSelectedIndex());
 					refreshTable();
 					refreshTableDeleteOrder(); 
 				} catch (Exception a) {
@@ -546,15 +553,15 @@ public class GUIFabricationmanagement {
 		gbc_lblorderTypModify.gridy = 3;
 		panelmodify.add(lblorderTypModify, gbc_lblorderTypModify);
 
-		JComboBox comboBoxtypModify_1 = new JComboBox();
-		comboBoxtypModify_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBoxtypModify_1.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
-		GridBagConstraints gbc_comboBoxtypModify_1 = new GridBagConstraints();
-		gbc_comboBoxtypModify_1.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxtypModify_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxtypModify_1.gridx = 2;
-		gbc_comboBoxtypModify_1.gridy = 3;
-		panelmodify.add(comboBoxtypModify_1, gbc_comboBoxtypModify_1);
+		JComboBox comboBoxtypModify = new JComboBox();
+		comboBoxtypModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxtypModify.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
+		GridBagConstraints gbc_comboBoxtypModify = new GridBagConstraints();
+		gbc_comboBoxtypModify.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxtypModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxtypModify.gridx = 2;
+		gbc_comboBoxtypModify.gridy = 3;
+		panelmodify.add(comboBoxtypModify, gbc_comboBoxtypModify);
 
 		JLabel lblnoteOtherModify = new JLabel("Notiz zu Sonstiges");
 		lblnoteOtherModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -587,6 +594,7 @@ public class GUIFabricationmanagement {
 		panelmodify.add(lblfileNameModify, gbc_lblfileNameModify);
 
 		textFieldfileNameModify = new JTextField();
+		textFieldfileNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldfileNameModify = new GridBagConstraints();
 		gbc_textFieldfileNameModify.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldfileNameModify.fill = GridBagConstraints.HORIZONTAL;
@@ -666,21 +674,21 @@ public class GUIFabricationmanagement {
 		gbc_lblresponsiblePersonModify.gridy = 9;
 		panelmodify.add(lblresponsiblePersonModify, gbc_lblresponsiblePersonModify);
 
-		JComboBox comboBoxresponsiblePersonModify_1 = new JComboBox();
-		comboBoxresponsiblePersonModify_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_comboBoxresponsiblePersonModify_1 = new GridBagConstraints();
-		gbc_comboBoxresponsiblePersonModify_1.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxresponsiblePersonModify_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxresponsiblePersonModify_1.gridx = 2;
-		gbc_comboBoxresponsiblePersonModify_1.gridy = 9;
-		panelmodify.add(comboBoxresponsiblePersonModify_1, gbc_comboBoxresponsiblePersonModify_1);
+		JComboBox comboBoxResponsiblePersonModify = new JComboBox();
+		comboBoxResponsiblePersonModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_comboBoxResponsiblePersonModify = new GridBagConstraints();
+		gbc_comboBoxResponsiblePersonModify.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxResponsiblePersonModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxResponsiblePersonModify.gridx = 2;
+		gbc_comboBoxResponsiblePersonModify.gridy = 9;
+		panelmodify.add(comboBoxResponsiblePersonModify, gbc_comboBoxResponsiblePersonModify);
 		try {
-		    for(int i = 0; i<ProductionManagement.getAdvisorArray().length; i++) {
-		        comboBoxresponsiblePersonModify_1.addItem(ProductionManagement.getAdvisorArray()[i]);
-		    }
+			for(int i = 0; i<ProductionManagement.getAdvisorArray().length; i++) {
+				comboBoxResponsiblePersonModify.addItem(ProductionManagement.getAdvisorArray()[i]);
+			}
 		} catch (SQLException e1) {
-		    // TODO Auto-generated catch block
-		    e1.printStackTrace();
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
 		JLabel lblstandinresponsiblePersonModify = new JLabel("Vertretung");
@@ -693,21 +701,21 @@ public class GUIFabricationmanagement {
 		gbc_lblstandinresponsiblePersonModify.gridy = 10;
 		panelmodify.add(lblstandinresponsiblePersonModify, gbc_lblstandinresponsiblePersonModify);
 
-		JComboBox comboBoxstandinresponsiblePersonModify_1 = new JComboBox();
-		comboBoxstandinresponsiblePersonModify_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_comboBoxstandinresponsiblePersonModify_1 = new GridBagConstraints();
-		gbc_comboBoxstandinresponsiblePersonModify_1.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxstandinresponsiblePersonModify_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxstandinresponsiblePersonModify_1.gridx = 2;
-		gbc_comboBoxstandinresponsiblePersonModify_1.gridy = 10;
-		panelmodify.add(comboBoxstandinresponsiblePersonModify_1, gbc_comboBoxstandinresponsiblePersonModify_1);
+		JComboBox comboBoxStandinResponsiblePersonModify = new JComboBox();
+		comboBoxStandinResponsiblePersonModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_comboBoxStandinResponsiblePersonModify = new GridBagConstraints();
+		gbc_comboBoxStandinResponsiblePersonModify.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxStandinResponsiblePersonModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxStandinResponsiblePersonModify.gridx = 2;
+		gbc_comboBoxStandinResponsiblePersonModify.gridy = 10;
+		panelmodify.add(comboBoxStandinResponsiblePersonModify, gbc_comboBoxStandinResponsiblePersonModify);
 		try {
-		    for(int i = 0; i<ProductionManagement.getSecondaryAdvisorArray().length; i++) {
-		        comboBoxstandinresponsiblePersonModify_1.addItem(ProductionManagement.getSecondaryAdvisorArray()[i]);
-		    }
+			for(int i = 0; i<ProductionManagement.getSecondaryAdvisorArray().length; i++) {
+				comboBoxStandinResponsiblePersonModify.addItem(ProductionManagement.getSecondaryAdvisorArray()[i]);
+			}
 		} catch (SQLException e1) {
-		    // TODO Auto-generated catch block
-		    e1.printStackTrace();
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
 		JLabel lblmodifyOrderStatus = new JLabel("Auftragsstatus");
@@ -720,17 +728,15 @@ public class GUIFabricationmanagement {
 		gbc_lblmodifyOrderStatus.gridy = 11;
 		panelmodify.add(lblmodifyOrderStatus, gbc_lblmodifyOrderStatus);
 
-		JComboBox comboBoxModifyStatus_1 = new JComboBox();
-		comboBoxModifyStatus_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBoxModifyStatus_1.setModel(
-				new DefaultComboBoxModel(new String[] { "Angenommen", "Gefertigt", "Kosten kalkuliert", "Abgeholt",
-						"Abgerechnet", "Warten auf Material", "Fertigung unterbrochen/defekt", "Rechnung erzeugt" }));
-		GridBagConstraints gbc_comboBoxModifyStatus_1 = new GridBagConstraints();
-		gbc_comboBoxModifyStatus_1.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxModifyStatus_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxModifyStatus_1.gridx = 2;
-		gbc_comboBoxModifyStatus_1.gridy = 11;
-		panelmodify.add(comboBoxModifyStatus_1, gbc_comboBoxModifyStatus_1);
+		JComboBox comboBoxModifyStatus = new JComboBox();
+		comboBoxModifyStatus.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxModifyStatus.setModel(new DefaultComboBoxModel(comboBoxStatusEntries.toArray()));
+		GridBagConstraints gbc_comboBoxModifyStatus = new GridBagConstraints();
+		gbc_comboBoxModifyStatus.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxModifyStatus.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxModifyStatus.gridx = 2;
+		gbc_comboBoxModifyStatus.gridy = 11;
+		panelmodify.add(comboBoxModifyStatus, gbc_comboBoxModifyStatus);
 
 		JScrollPane scrollPanemodifyOrder = new JScrollPane();
 		scrollPanemodifyOrder.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -744,6 +750,8 @@ public class GUIFabricationmanagement {
 		panelmodify.add(scrollPanemodifyOrder, gbc_scrollPanemodifyOrder);
 
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPanemodifyOrder.setViewportView(TableDeleteOrder);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		try {
 			table.setModel(new OrderTableModel(ProductionManagement.getOrders()));
@@ -761,7 +769,7 @@ public class GUIFabricationmanagement {
 			}
 		});
 		table.clearSelection();
-
+		
 		JComboBox comboBoxorderSearchModify = new JComboBox();
 		comboBoxorderSearchModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxorderSearchModify.setToolTipText("Bitte Suchkategorie auswählen");
@@ -832,17 +840,19 @@ public class GUIFabricationmanagement {
 		btnsaveModifiedValues.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnsaveModifiedValues.addActionListener(new ActionListener() {
 
+			//comboBoxresponsiblePersonModify
+			//comboBoxstandinresponsiblePersonModify
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					ProductionManagement.modifyOrder(Integer.parseInt(textFieldorderIDModify.getText()),
-							textFieldorderTitelModify.getText(), comboBoxtypModify_1.getSelectedIndex(),
+							textFieldorderTitelModify.getText(), comboBoxtypModify.getSelectedIndex(),
 							Double.parseDouble(textFieldpredictedCostsModify.getText()),
 							Double.parseDouble(textFieldactualCostsModify.getText()),
-							comboBoxoderCustomer.getSelectedIndex(), comboBoxresponsiblePersonModify_1.getSelectedIndex(),
-							comboBoxstandinresponsiblePersonModify_1
-							.getSelectedIndex(), textFieldfileNameModify.getText(),
+							ProductionManagement.getCustomerArray()[comboBoxorderCustomerModify.getSelectedIndex()].getId(), ProductionManagement.getAdvisorArray()[comboBoxResponsiblePersonModify.getSelectedIndex()].getId(),
+							ProductionManagement.getSecondaryAdvisorArray()[comboBoxStandinResponsiblePersonModify.getSelectedIndex()].getId(), textFieldfileNameModify.getText(),
 							textFieldfilePathModify.getText(), textFieldnoteOtherModify.getText());
+					ProductionManagement.changeOrderStatus(Integer.parseInt(textFieldorderIDModify.getText()), comboBoxModifyStatus.getSelectedIndex());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -854,10 +864,16 @@ public class GUIFabricationmanagement {
 				refreshTableDeleteOrder();
 			}
 		});
-		
+
 		JButton btnclearSearchModify = new JButton("Suche aufheben");
 		btnclearSearchModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					table.setModel(new OrderTableModel(ProductionManagement.getOrders()));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnclearSearchModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -886,26 +902,28 @@ public class GUIFabricationmanagement {
 		gbl_paneldeleteOrder.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		paneldeleteOrder.setLayout(gbl_paneldeleteOrder);
 
-		JScrollPane scrollPanedeletePerson = new JScrollPane();
-		scrollPanedeletePerson.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPanedeletePerson.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		GridBagConstraints gbc_scrollPanedeletePerson = new GridBagConstraints();
-		gbc_scrollPanedeletePerson.gridwidth = 3;
-		gbc_scrollPanedeletePerson.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPanedeletePerson.fill = GridBagConstraints.BOTH;
-		gbc_scrollPanedeletePerson.gridx = 0;
-		gbc_scrollPanedeletePerson.gridy = 0;
-		paneldeleteOrder.add(scrollPanedeletePerson, gbc_scrollPanedeletePerson);
+		JScrollPane scrollPanedeleteOrder = new JScrollPane();
+		scrollPanedeleteOrder.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPanedeleteOrder.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		GridBagConstraints gbc_scrollPanedeleteOrder = new GridBagConstraints();
+		gbc_scrollPanedeleteOrder.gridwidth = 3;
+		gbc_scrollPanedeleteOrder.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPanedeleteOrder.fill = GridBagConstraints.BOTH;
+		gbc_scrollPanedeleteOrder.gridx = 0;
+		gbc_scrollPanedeleteOrder.gridy = 0;
+		paneldeleteOrder.add(scrollPanedeleteOrder, gbc_scrollPanedeleteOrder);
 
 		TableDeleteOrder = new JTable();
-		scrollPanedeletePerson.setColumnHeaderView(TableDeleteOrder);
+		TableDeleteOrder.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPanedeleteOrder.setViewportView(TableDeleteOrder);
+		TableDeleteOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		try {
 			TableDeleteOrder.setModel(new OrderTableModel(ProductionManagement.getOrders()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		TableDeleteOrder.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPanedeletePerson.setViewportView(TableDeleteOrder);
+		scrollPanedeleteOrder.setViewportView(TableDeleteOrder);
 		TableDeleteOrder.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
 			@Override
@@ -997,12 +1015,19 @@ public class GUIFabricationmanagement {
 				refreshTable();
 			}
 		});
-		
+
 		JButton btnclearSearchDelete = new JButton("Suche aufheben");
 		btnclearSearchDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					TableDeleteOrder.setModel(new OrderTableModel(ProductionManagement.getOrders()));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
+
 		btnclearSearchDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnclearSearchDelete = new GridBagConstraints();
 		gbc_btnclearSearchDelete.fill = GridBagConstraints.HORIZONTAL;
@@ -1085,12 +1110,92 @@ public class GUIFabricationmanagement {
 
 		frmElabVerwaltungsprogramm.setVisible(true);
 	}
+	
+	protected void refreshCustomerCombobox() {
+		comboBoxorderCustomer.removeAllItems();
+		comboBoxorderCustomerModify.removeAllItems();
+		// TODO Auto-generated method stub
+		try {
+			for(int i = 0; i<ProductionManagement.getCustomerArray().length; i++) {
+				comboBoxorderCustomer.addItem(ProductionManagement.getCustomerArray()[i]);
+				comboBoxorderCustomerModify.addItem(ProductionManagement.getCustomerArray()[i]);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	    
+
+	}
+	
+	protected void refreshAdvisorCombobox() {
+		comboBoxResponsible.removeAllItems();
+		comboBoxResponsiblePersonModify.removeAllItems();
+		// TODO Auto-generated method stub
+		try {
+			for(int i = 0; i<ProductionManagement.getAdvisorArray().length; i++) {
+				comboBoxResponsible.addItem(ProductionManagement.getAdvisorArray()[i]);
+				comboBoxResponsiblePersonModify.addItem(ProductionManagement.getAdvisorArray()[i]);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	    
+
+	}
+	
+	protected void refreshSecondaryAdvisorCombobox() {
+		comboBoxStandinResponsible.removeAllItems();
+		comboBoxStandinResponsiblePersonModify.removeAllItems();
+		// TODO Auto-generated method stub
+		try {
+			for(int i = 0; i<ProductionManagement.getSecondaryAdvisorArray().length; i++) {
+				comboBoxStandinResponsible.addItem(ProductionManagement.getSecondaryAdvisorArray()[i]);
+				comboBoxStandinResponsiblePersonModify.addItem(ProductionManagement.getSecondaryAdvisorArray()[i]);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	    
+
+	}
+
+	protected int getIdAdvisor(int selectedIndex) {
+		// TODO Auto-generated method stub
+		try {
+			return ProductionManagement.getAdvisorArray()[selectedIndex].getId();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return 0;
+	}
+
+	protected int getIdSecondaryAdvisor(int selectedIndex) {
+		// TODO Auto-generated method stub
+		try {
+			return ProductionManagement.getSecondaryAdvisorArray()[selectedIndex].getId();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return 0;
+	}
+
+	protected int getIdCustomer(int selectedIndex) {
+		// TODO Auto-generated method stub
+		try {
+			return ProductionManagement.getCustomerArray()[selectedIndex].getId();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return 0;
+	}
 
 	protected void handleEditOrderSelectionEvent(ListSelectionEvent e) {
 		// TODO Auto-generated method stub
 		if (table.getSelectedRow() > -1) {
 			textFieldorderIDModify.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
-			//comboBoxorderCustomer.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 5)));
 			textFieldorderTitelModify.setText((String) table.getValueAt(table.getSelectedRow(), 1));
 			//comboBoxtypModify.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 2)));
 			textFieldnoteOtherModify.setText((String) table.getValueAt(table.getSelectedRow(), 10));
@@ -1098,11 +1203,72 @@ public class GUIFabricationmanagement {
 			textFieldfileNameModify.setText((String) table.getValueAt(table.getSelectedRow(), 8));
 			textFieldpredictedCostsModify.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
 			textFieldactualCostsModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
-			//comboBoxresponsible.setSelectedIndex((String) table.getValueAt(table.getSelectedRow(), 6)));
-			//comboBoxstandinresponsiblePersonModify.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 7)));
-			//comboBoxModifyStatus.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
+			//comboBoxModifyStatus.setSelectedIndex(comboBoxStatusEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
+			//comboBoxorderCustomer.setSelectedIndex(findCorrectIndexFromCustomer(table.getValueAt(table.getSelectedRow(), 5).toString()));
+			//comboBoxResponsible.setSelectedIndex(findCorrectIndexFromAdvisor(table.getValueAt(table.getSelectedRow(), 6).toString()));
+			//comboBoxStandinResponsiblePersonModify.setSelectedIndex(findCorrectIndexFromSecondaryAdvisor(table.getValueAt(table.getSelectedRow(), 7).toString()));
 		}
 
+	}
+	
+	private int findCorrectIndexFromCustomer(String value) {
+		// TODO Auto-generated method stub
+		int x = Integer.parseInt(value);
+
+		try {
+			ComboBoxPerson [] array = ProductionManagement.getCustomerArray();
+			for(int i = 0; i<array.length; i++) {
+				if(array[i].getId() == x) {
+					return i; 
+				}
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return -1;
+	}
+	
+	private int findCorrectIndexFromAdvisor(String value) {
+		// TODO Auto-generated method stub
+		int x = Integer.parseInt(value);
+
+		try {
+			ComboBoxPerson [] array = ProductionManagement.getAdvisorArray();
+			for(int i = 0; i<array.length; i++) {
+				if(array[i].getId() == x) {
+					return i; 
+				}
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return -1;
+	}
+	
+	private int findCorrectIndexFromSecondaryAdvisor(String value) {
+		// TODO Auto-generated method stub
+		int x = Integer.parseInt(value);
+
+		try {
+			ComboBoxPerson [] array = ProductionManagement.getSecondaryAdvisorArray();
+			for(int i = 0; i<array.length; i++) {
+				if(array[i].getId() == x) {
+					return i; 
+				}
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return -1;
 	}
 
 	protected void refreshTable() {

@@ -1,4 +1,5 @@
-//Author: Emre 
+//Author: Emre  
+
 package logic;
 
 public class Category {
