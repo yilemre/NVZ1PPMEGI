@@ -314,6 +314,7 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(passwordField, gbc_passwordField);
 		
 		JButton btnaddPerson = new JButton("Registrieren");
+		btnaddPerson.setToolTipText("Nach dem registrieren, kehren sie zum Login zurück");
 		btnaddPerson.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -328,6 +329,10 @@ public class GUIRegisterCustomer {
 					PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
 							Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), index);
 			
+				
+				 GuiLogin gui = new GuiLogin();
+				 frmElabVerwaltungsprogramm.dispose();
+				
 				} 
 				catch (Exception a) {
 					a.printStackTrace();
@@ -385,7 +390,7 @@ public class GUIRegisterCustomer {
 		mnNewMenuOptions.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		menuBar.add(mnNewMenuOptions);
 		
-		JMenuItem mntmNewMenuItemabortRegister = new JMenuItem("Registrierung abbrechen");
+		JMenuItem mntmNewMenuItemabortRegister = new JMenuItem("Zurück zum Login");
 		mntmNewMenuItemabortRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
