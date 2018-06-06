@@ -17,8 +17,8 @@ import Exceptions.ELabException;
 
 public class FinancialManagement {
 
-	public void createBill(int idOrder, int idPot, int idRegister, String name, int payKind, double amount) throws SQLException {
-		SQLManager.getInstance().addBilltoDB(idOrder, idPot, idRegister, name, payKind, amount);
+	public static int addBill(int idOrder, int idPot, int idRegister, int CustomerId, int AdvisorId, String name, int payKind, double amount) throws SQLException {
+		return SQLManager.getInstance().addBilltoDB(idOrder, idPot, idRegister, CustomerId, AdvisorId, name, payKind, amount);
 	}
 	
 	public static void addBillStatus(int idBill, int status) throws SQLException {
@@ -34,8 +34,12 @@ public class FinancialManagement {
 		SQLManager.getInstance().deleteBillFromDB(id);
 	}
 	
-	public void modifyBill(int id, int idOrder, int idPot, int idRegister, String name, int payKind, double amount) throws SQLException {
+	public static void modifyBill(int id, int idOrder, int idPot, int idRegister, String name, int payKind, double amount) throws SQLException {
 		SQLManager.getInstance().modifyBill(id, idOrder, idPot, idRegister, name, payKind, amount);
+	}
+	
+	public static void changeBillStatus(int id, int status) throws SQLException{
+		SQLManager.getInstance().changeBillStatus(id, status);
 	}
 	
 	public static List<Bill> getBills() throws SQLException {

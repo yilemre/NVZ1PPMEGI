@@ -514,10 +514,10 @@ public class SQLManager {
 		return id;
 	}
 	
-	public int addBilltoDB(int idOrder, int idPot, int idRegister, String name, int payKind, double amount) throws SQLException {
+	public int addBilltoDB(int idOrder, int idPot, int idRegister, int CustomerId, int AdvisorId, String name, int payKind, double amount) throws SQLException {
 		int result=0;
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO Bills (idOrder, idPot, idRegister, name, methodOfPayment, figure) VALUES ('"+idOrder+"', '"+idPot+"', '"+idRegister+"' , '"+name+"', '"+payKind+"', '"+amount+"');";
+		String sql ="INSERT INTO Bills (idOrder, idPot, idRegister, idCustomer, idAdvisor, name, methodOfPayment, figure) VALUES ('"+idOrder+"', '"+idPot+"', '"+idRegister+"' , '"+CustomerId+"', '"+AdvisorId+"', '"+name+"', '"+payKind+"', '"+amount+"');";
 		stmt.executeUpdate(sql);
 		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Bills");
 		rs.next();
@@ -552,6 +552,13 @@ public class SQLManager {
 		Statement stmt = c.createStatement();
 		String sql = "UPDATE Bills SET idOrder='"+idOrder+"', idPot='"+idPot+"', idRegister='"+idRegister+"', name='"+name+"' , methodOfPayment='"+payKind+"' , figure='"+amount+"' WHERE idOrder="+id+";";
 		stmt.executeUpdate(sql);
+		stmt.close();
+	}
+	
+	public void changeBillStatus(int id, int status) throws SQLException{
+		Statement stmt = c.createStatement(); 
+		String sql = "UPDATE BillStatus SET status='"+status+"' WHERE idBill="+id;
+		stmt.executeUpdate(sql); 
 		stmt.close();
 	}
 	
