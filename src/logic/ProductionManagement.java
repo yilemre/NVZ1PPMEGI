@@ -18,15 +18,19 @@ import Exceptions.ELabException;
 public class ProductionManagement {
 
 
-	public static void addOrder(String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note, int status) throws SQLException {
+	public static void addOrder(String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
+		SQLManager.getInstance().insertOrderIntoDB(title, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName ,fileLocation, note);
+	}
+	
+	public static void addOrderStatus(int status) throws SQLException {
 		String dateTimeString = null;
 		DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		Date     time = cal.getTime();
 		dateTimeString = df.format(time);
-		SQLManager.getInstance().insertOrderIntoDB(title, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName ,fileLocation, note, dateTimeString);
+		SQLManager.getInstance().insertOrderStatusIntoDB(status, dateTimeString);
 	}
-
+	
 	public static void deleteOrder(int ID) throws SQLException {
 		SQLManager.getInstance().deleteOrderFromDB(ID);
 	}
@@ -43,17 +47,21 @@ public class ProductionManagement {
 		return SQLManager.getInstance().getOrders(); 
 	}
 
-    public static ComboBoxPerson[] getCustomerArray() throws SQLException {
-	return SQLManager.getInstance().getCustomerArray(); 
+    public static List<Person> getCustomerArray() throws SQLException {
+	List<Person> result = SQLManager.getInstance().getCustomerArray();
+	return result;
     }
     
-    public static ComboBoxPerson[] getAdvisorArray() throws SQLException {
-	return SQLManager.getInstance().getAdvisorArray(); 
+    public static List<Person> getAdvisorArray() throws SQLException {
+    List<Person> result = SQLManager.getInstance().getAdvisorArray();
+    return result;
     }
     
-    public static ComboBoxPerson[] getSecondaryAdvisorArray() throws SQLException {
-	return SQLManager.getInstance().getSecondaryAdvisorArray(); 
+    public static List<Person> getSecondaryAdvisorArray() throws SQLException {
+	List<Person> result = SQLManager.getInstance().getSecondaryAdvisorArray();
+	return result;
     }
+    
     
 	//search methods
 

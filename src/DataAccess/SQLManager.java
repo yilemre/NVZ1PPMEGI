@@ -344,14 +344,25 @@ public class SQLManager {
 		6 production interrupted
 		7 bill generated
 	*/
-	public int insertOrderIntoDB (String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note, String datetime) throws SQLException{
+	public int insertOrderIntoDB (String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException{
 		int result=0;
 		Statement stmt = c.createStatement();
 		String sql ="INSERT INTO Orders (titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note) VALUES ('"+title+"', "+type+", "+projectedCosts+","+realCosts+",(SELECT idPerson FROM Persons WHERE idPerson="+idCustomer+"), (SELECT idPerson FROM Persons WHERE idPerson="+idAdvisor+"), (SELECT idPerson FROM Persons WHERE idPerson="+idSecondaryAdvisor+"), '"+fileName+"','"+fileLocation+"', '"+note+"');";
 		stmt.executeUpdate(sql);
-		String sql2 ="INSERT INTO OrderStatus (idOrder, status, timestamp) VALUES ((SELECT last_insert_rowid() FROM Orders), 1, '"+datetime+"';)";
-		stmt.executeUpdate(sql2);
 		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Orders");
+		rs.next();
+		result = rs.getInt(1);
+		rs.close();
+		stmt.close();	
+		return result;
+	}
+	
+	public int insertOrderStatusIntoDB(int status, String datetime) throws SQLException {
+		int result = 0;
+		Statement stmt = c.createStatement();
+		String sql ="INSERT INTO OrderStatus (status, timestamp) VALUES ('"+status+"', '"+datetime+"');";
+		stmt.executeUpdate(sql);
+		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM OrderStatus");
 		rs.next();
 		result = rs.getInt(1);
 		rs.close();
@@ -363,13 +374,13 @@ public class SQLManager {
 		Statement stmt = c.createStatement();
 		String sql ="DELETE FROM Orders WHERE idOrder="+id;
 		stmt.executeUpdate(sql);
-		stmt.close();	
+		stmt.close();
 		return id;
 	}
 
 	public void modifyOrder(int id, String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
 		Statement stmt = c.createStatement();
-		String sql ="UPDATE Orders SET titel='"+title+"', type='"+type+"', projectedCosts='"+projectedCosts+"' , realCosts='"+realCosts+"' , idCustomer='"+idCustomer+"' , idAdvisor='"+idAdvisor+"' , idSecondaryAdvisor ='"+idSecondaryAdvisor+"', fileName="+fileName+", fileLocation='"+fileLocation+"', note='"+note+"' WHERE idOrder="+id;
+		String sql ="UPDATE Orders SET titel='"+title+"',type='"+type+"',projectedCosts='"+projectedCosts+"' ,realCosts='"+realCosts+"' ,idCustomer='"+idCustomer+"' ,idAdvisor='"+idAdvisor+"' ,idSecondaryAdvisor ='"+idSecondaryAdvisor+"',fileName="+fileName+",fileLocation='"+fileLocation+"',note='"+note+"' WHERE idOrder="+id+";";
 		stmt.executeUpdate(sql);
 		stmt.close();
 	}
@@ -382,7 +393,7 @@ public class SQLManager {
 		stmt.close();
 	}*/
 	
-	public void modifyOrder1(int id, AttributeTypesOrder attribute, String newValue) throws SQLException{
+	/*public void modifyOrder1(int id, AttributeTypesOrder attribute, String newValue) throws SQLException{
 		Statement stmt = c.createStatement();
 		switch(attribute) {
 		case title: 
@@ -421,7 +432,7 @@ public class SQLManager {
 			stmt.close();
 			break;
 		}
-	}
+	}*/
 
 	/*We want to have a new row for every change in orderStatus this method would overwrite it!!!
 	public void modifyOrderStatus(int id, AttributeTypesOrderStatus attribute, int newValue ) throws SQLException {
@@ -481,11 +492,10 @@ public class SQLManager {
 	// search methods - Work in Progress
 	public List<Order> getOrdersByTitle(String title) throws SQLException {
 		List<Order> result = new ArrayList<Order>();
-		
 		Statement stmt = c.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Orders WHERE titel LIKE '"+title+"';");
+		ResultSet rs = stmt.executeQuery("SELECT * FROM Orders, OrderStatus WHERE Orders.idOrder = OrderStatus.idOrder AND titel LIKE '"+title+"'");
 		while (rs.next()){
-			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"));
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"),rs.getInt("status"));
 			result.add(temp);			
 		}
 
@@ -498,11 +508,10 @@ public class SQLManager {
 	public List<Order> getOrdersByType(int type) throws SQLException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
-		String sql = "SELECT * FROM Orders WHERE type="+type+"";
+		String sql = "SELECT * FROM Orders, OrderStatus WHERE Orders.idOrder = OrderStatus.idOrder AND type='"+type+"'";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"));
-			
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"),rs.getInt("status"));
 			result.add(temp);
 		}
 
@@ -514,12 +523,11 @@ public class SQLManager {
 	
 	public List<Order> getOrders() throws SQLException {
 		List<Order> result = new ArrayList<Order>();
-
 		Statement stmt = c.createStatement();
-		String sql = "SELECT * FROM Orders";
+		String sql = "SELECT * FROM Orders, OrderStatus WHERE Orders.idOrder = OrderStatus.idOrder";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"));
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"));
 
 			result.add(temp);			
 		}
@@ -531,40 +539,29 @@ public class SQLManager {
 	public List<Order> getOrdersByStatus(int status) throws SQLException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
-		String sql = "SELECT idOrder FROM OrderStatus WHERE status="+status+"";
-		ResultSet id = stmt.executeQuery(sql);
-		while(id.next()){
-		String sql1 = "SELECT * FROM Orders WHERE idOrder="+id+"";
-		ResultSet rs = stmt.executeQuery(sql1);
+		String sql = "SELECT * FROM Orders, OrderStatus WHERE Orders.idOrder = OrderStatus.idOrder AND status='"+status+"'";
+		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"));
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"));
 			result.add(temp);			
 		}
+		
 		rs.close();
-		}
-		id.close();
 		stmt.close();
-
+		
 		return result;
 	}
 	
-	public ComboBoxPerson[] getCustomerArray () throws SQLException {
-	    int count=0; 
-	    Statement stmt = c.createStatement(); 
-	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Persons"); 
-	    rs.next(); 
-	    count = rs.getInt(1); 
-	    stmt.close();
-	    ComboBoxPerson[] c = new ComboBoxPerson[count]; 
-	    rs = stmt.executeQuery("SELECT * FROM Persons WHERE rights !="+1+""); 
-	    int x = 0;
-	    while(rs.next()) {
-		ComboBoxPerson a = new ComboBoxPerson(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname")); 
-		c[x] = a; 
-		x+=1; 
-	    }
-	    return c;
-	    
+	public List<Person> getCustomerArray () throws SQLException {
+	   List<Person> result = new ArrayList<Person>();
+	   Statement stmt = c.createStatement();
+	   String sql = "SELECT * FROM Persons WHERE rights !="+1+";";
+	   ResultSet rs = stmt.executeQuery(sql);
+	   while(rs.next()){
+		   	Person temp = new Person(rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getString("timestamp"),rs.getString("username"),rs.getString("password"),rs.getInt("rights"));
+			result.add(temp);	   
+	   }
+	   return result; 
 	}
 	
 	public List<Person> getAdvisorArray () throws SQLException {
@@ -573,29 +570,22 @@ public class SQLManager {
 		String sql = "SELECT * FROM Persons WHERE rights="+1+";";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Person temp = new Person(rs.getInt("idPerson"), rs.getString("firstname")//ToDo)
+			Person temp = new Person(rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getString("timestamp"),rs.getString("username"),rs.getString("password"),rs.getInt("rights"));
 			result.add(temp);
 		}
 		return result;
 	}
 	
-	public ComboBoxPerson[] getSecondaryAdvisorArray () throws SQLException {
-	    int count=0; 
-	    Statement stmt = c.createStatement(); 
-	    ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Persons"); 
-	    rs.next(); 
-	    count = rs.getInt(1); 
-	    stmt.close();
-	    ComboBoxPerson[] c = new ComboBoxPerson[count]; 
-	    rs = stmt.executeQuery("SELECT * FROM Persons WHERE rights="+1+""); 
-	    int x = 0;
-	    while(rs.next()) {
-		ComboBoxPerson a = new ComboBoxPerson(rs.getInt("idPerson"), rs.getString("firstname"), rs.getString("surname")); 
-		c[x] = a; 
-		x+=1; 
+	public List<Person> getSecondaryAdvisorArray () throws SQLException {
+	    List<Person> result = new ArrayList<Person>();
+	    Statement stmt = c.createStatement();
+	    String sql = "SELECT * FROM Persons WHERE rights="+1+";";
+	    ResultSet rs = stmt.executeQuery(sql);
+	    while (rs.next()){
+	    	Person temp = new Person(rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getString("timestamp"),rs.getString("username"),rs.getString("password"),rs.getInt("rights"));
+	    	result.add(temp);
 	    }
-	    return c;
-	    
+	    return result;
 	}
 	// Nico End*/
 }

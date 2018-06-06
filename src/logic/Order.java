@@ -17,7 +17,7 @@ public class Order {
 	private String fileLocation;
 	private int status;
 	
-	public Order(int id, String title, int type, double forecastedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String notes, String fileName, String fileLocation) {
+	public Order(int id, String title, int type, double forecastedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String notes, String fileName, String fileLocation, int status) {
 		this.id = id;
 		this.title = title;
 		this.type = type;
@@ -29,11 +29,34 @@ public class Order {
 		this.notes = notes;
 		this.fileName = fileName;
 		this.fileLocation = fileLocation;
-		this.status = 1;
+		this.status = status;
 	}
 	
 	public Order(){
 		
+	}
+	
+	public String getReadableStatus(int status) {
+		switch (status) {
+			case 0:
+				return "Angenommen";
+			case 1:
+				return "Gefertigt";
+			case 2:
+				return "Kosten kalkuliert";
+			case 3:
+				return "Abgeholt";
+			case 4:
+				return "Abgerechnet";
+			case 5:
+				return "Warten auf Material";
+			case 6:
+				return "Fertigung unterbrochen/defekt";
+			case 7:
+				return "Rechnung erzeugt";
+			default:
+				return "Das passiert nicht!";
+		}
 	}
 
 	public int getOrderId() {

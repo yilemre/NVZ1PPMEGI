@@ -144,6 +144,8 @@ public class Person {
       //  return person_id;
     //}
     
-	
-	
+    public String toString() {
+    	return "ID: " + id + ", Name: " + firstname + " " + lastname; 
+        }
+
 }
