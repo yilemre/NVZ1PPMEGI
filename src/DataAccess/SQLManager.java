@@ -489,7 +489,7 @@ public class SQLManager {
 	}
 	
 
-	// search methods - Work in Progress
+	// search methods
 	public List<Order> getOrdersByTitle(String title) throws SQLException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
@@ -586,6 +586,115 @@ public class SQLManager {
 	    	result.add(temp);
 	    }
 	    return result;
+	}
+	
+	//Financial SQL
+	
+	public int addRegistertoDB(double debitAmount, double actualAmount, String name, int type) throws SQLException{
+		int result = 0;
+		Statement stmt = c.createStatement();
+		String sql ="INSERT INTO Registers (debitAmount, actualAmount, name, type) VALUES ('"+debitAmount+"','"+actualAmount+"','"+name+"','"+type+"')";
+		stmt.executeUpdate(sql);
+		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Registers");
+		rs.next();
+		result = rs.getInt(1);
+		rs.close();
+		stmt.close();
+		return result;
+	}
+		
+	public void modifyRegister(double debitAmount, double actualAmount, String name, int type) throws SQLException{
+		Statement stmt = c.createStatement();
+		stmt.executeUpdate("UPDATE Registers SET debitAmount = '"+debitAmount+"', actualAmount = '"+actualAmount+"', name ='"+name+"', type ='"+type);
+		stmt.close();
+	}
+	
+	public int addPottoDB(double debitAmount, double actualAmount, String name, int idRegister) throws SQLException{
+		int result = 0;
+		Statement stmt = c.createStatement();
+		String sql ="INSERT INTO Pots (debitAmount, actualAmount, name, idRegister) VALUES ('"+debitAmount+"','"+actualAmount+"','"+name+"','"+idRegister+"')";
+		stmt.executeUpdate(sql);
+		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Registers");
+		rs.next();
+		result = rs.getInt(1);
+		rs.close();
+		stmt.close();
+		return result;
+	}
+		
+	public void modifyPot(double debitAmount, double actualAmount, String name, int idRegister) throws SQLException{
+		Statement stmt = c.createStatement();
+		stmt.executeUpdate("UPDATE Pots SET debitAmount = '"+debitAmount+"', actualAmount = '"+actualAmount+"', name ='"+name+"', idRegister ='"+idRegister);
+		stmt.close();
+	}
+	
+	public int addBilltoDB(int idOrder, int idPot, String name, int payKind, double amount) throws SQLException {
+		int result=0;
+		Statement stmt = c.createStatement();
+		String sql ="INSERT INTO Bills (idOrder, idPot, name, methodOfPayment, figure) VALUES ('"+idOrder+"', "+idPot+", '"+name+"', '"+payKind+"', '"+amount+"');";
+		stmt.executeUpdate(sql);
+		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Bills");
+		rs.next();
+		result = rs.getInt(1);
+		rs.close();
+		stmt.close();	
+		return result;
+	}
+	
+	public int addBillStatustoDB(int idBill, int status, String datetime) throws SQLException {
+		int result = 0;
+		Statement stmt = c.createStatement();
+		String sql ="INSERT INTO BillStatus (idOrder, status, timestamp) VALUES ("+idBill+ ", "+status+", '"+datetime+"');";
+		stmt.executeUpdate(sql);
+		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM BillStatus");
+		rs.next();
+		result = rs.getInt(1);
+		rs.close();
+		stmt.close();	
+		return result;
+	}
+	
+	public int deleteBillFromDB(int id) throws SQLException{
+		Statement stmt = c.createStatement();
+		String sql ="DELETE FROM Bills WHERE idBill="+id;
+		stmt.executeUpdate(sql);
+		stmt.close();
+		return id;
+	}
+	
+	public void modifyBill(int id, int idOrder, int idPot, String name, int payKind, double amount) throws SQLException {
+		Statement stmt = c.createStatement();
+		String sql = "UPDATE Bills SET idOrder='"+idOrder+"', idPot='"+idPot+"', name='"+name+"' , methodOfPayment='"+payKind+"' , figure='"+amount+"' WHERE idOrder="+id+";";
+		stmt.executeUpdate(sql);
+		stmt.close();
+	}
+	
+	public List<Bill> getBills() throws SQLException {
+		List<Bill> result = new ArrayList<Bill>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Bills, BillStatus WHERE Bills.idBill = BillStatus.idBill";
+		ResultSet rs = stmt.executeQuery(sql);
+		while (rs.next()){
+			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"),rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
+			result.add(temp);			
+		}
+
+		return result;
+	}
+	
+	public List<Bill> getBillByName(String name) throws SQLException {
+		List<Bill> result = new ArrayList<Bill>();
+		Statement stmt = c.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM Bills, BillStatus WHERE Bill.idBill = BillStatus.idBill AND titel LIKE '"+name+"'");
+		while (rs.next()){
+			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"),rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
+			result.add(temp);			
+		}
+
+		rs.close();
+		stmt.close();
+
+		return result;
 	}
 	// Nico End*/
 }
