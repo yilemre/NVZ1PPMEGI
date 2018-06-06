@@ -28,6 +28,7 @@ import logic.CashRegister;
 import logic.FinancialManagement;
 import logic.Order;
 import logic.Person;
+import logic.PersonManagement;
 import logic.Pot;
 import logic.ProductionManagement;
 
@@ -77,7 +78,7 @@ public class GUIFinanceManagement {
 	private JTextField textFieldcashRegisterActualStockModify;
 	private JTextField textFieldcashRegisterEstimatedStock;
 	private JTextField textFieldcashRegisterEstimatedStockModify;
-	private JTextField textField;
+	private JTextField textFieldOrderSearch;
 	private JTextField textFieldbillNameModify;
 	private JTextField textFieldsumBillModify;
 	private JTextField textFieldcustomerIDModify;
@@ -231,7 +232,7 @@ public class GUIFinanceManagement {
 		gbc_lblsumBill.gridy = 4;
 		panelcreateBill.add(lblsumBill, gbc_lblsumBill);
 		
-		textFieldhouseNumber = new JTextField();
+		textFieldhouseNumber = new JTextField("");
 		textFieldhouseNumber.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldhouseNumber = new GridBagConstraints();
 		gbc_textFieldhouseNumber.insets = new Insets(0, 0, 5, 0);
@@ -349,6 +350,10 @@ public class GUIFinanceManagement {
 		JButton btndeleteallInputs = new JButton("Eingaben löschen");
 		btndeleteallInputs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				comboBoxpaymentTyp.setSelectedIndex(0);
+				textFieldhouseNumber.setText("");
+				textFieldbillName.setText("");
 			}
 		});
 		btndeleteallInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -390,30 +395,62 @@ public class GUIFinanceManagement {
 		tableNewBill.clearSelection();
 		
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.gridx = 0;
-		gbc_comboBox.gridy = 12;
-		panelcreateBill.add(comboBox, gbc_comboBox);
+		JComboBox comboBoxOrderSearch = new JComboBox();
+		comboBoxOrderSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxOrderSearch.setModel(new DefaultComboBoxModel(new String[] {"Titel", "Art", "Status"}));
+		GridBagConstraints gbc_comboBoxOrderSearch = new GridBagConstraints();
+		gbc_comboBoxOrderSearch.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxOrderSearch.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxOrderSearch.gridx = 0;
+		gbc_comboBoxOrderSearch.gridy = 12;
+		panelcreateBill.add(comboBoxOrderSearch, gbc_comboBoxOrderSearch);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 12;
-		panelcreateBill.add(textField, gbc_textField);
-		textField.setColumns(10);
+		textFieldOrderSearch = new JTextField();
+		textFieldOrderSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_textFieldOrderSearch = new GridBagConstraints();
+		gbc_textFieldOrderSearch.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldOrderSearch.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldOrderSearch.gridx = 1;
+		gbc_textFieldOrderSearch.gridy = 12;
+		panelcreateBill.add(textFieldOrderSearch, gbc_textFieldOrderSearch);
+		textFieldOrderSearch.setColumns(10);
 		
 		JButton btnnewbillOrderSearch = new JButton("Auftrag suchen");
 		btnnewbillOrderSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String searchValue = textFieldOrderSearch.getText();
+				switch(comboBoxOrderSearch.getSelectedIndex()) {
+				case 0:
+					try {
+						tableNewBill.setModel(new OrderTableModel(ProductionManagement.getOrderByTitle(searchValue)));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				case 1:
+					try {
+						tableNewBill.setModel(new OrderTableModel(ProductionManagement.getOrdersByType(searchValue)));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				case 2:
+					try {
+						tableNewBill.setModel(new OrderTableModel(ProductionManagement.getOrdersByStatus(searchValue)));
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				}
 			}
 		});
+		
 		btnnewbillOrderSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnnewbillOrderSearch = new GridBagConstraints();
 		gbc_btnnewbillOrderSearch.fill = GridBagConstraints.HORIZONTAL;
@@ -610,13 +647,6 @@ public class GUIFinanceManagement {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		comboBoxrelatedJarModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_comboBoxrelatedJarModify = new GridBagConstraints();
-		gbc_comboBoxrelatedJarModify.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBoxrelatedJarModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxrelatedJarModify.gridx = 1;
-		gbc_comboBoxrelatedJarModify.gridy = 8;
-		panel.add(comboBoxrelatedJarModify, gbc_comboBoxrelatedJarModify);
 		btnsaveBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnsaveBillModify = new GridBagConstraints();
 		gbc_btnsaveBillModify.fill = GridBagConstraints.HORIZONTAL;
@@ -625,9 +655,23 @@ public class GUIFinanceManagement {
 		gbc_btnsaveBillModify.gridy = 9;
 		panel.add(btnsaveBillModify, gbc_btnsaveBillModify);
 		
+		comboBoxrelatedJarModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_comboBoxrelatedJarModify = new GridBagConstraints();
+		gbc_comboBoxrelatedJarModify.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxrelatedJarModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxrelatedJarModify.gridx = 1;
+		gbc_comboBoxrelatedJarModify.gridy = 8;
+		panel.add(comboBoxrelatedJarModify, gbc_comboBoxrelatedJarModify);
+		
+	
+		
 		JButton btndeleteallInputsModify = new JButton("Felder leeren");
 		btndeleteallInputsModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				comboBoxpaymentTypModify.setSelectedIndex(0);
+				textFieldsumBillModify.setText("");
+				textFieldbillNameModify.setText("");
 			}
 		});
 		btndeleteallInputsModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -668,14 +712,15 @@ public class GUIFinanceManagement {
 		});
 		tableBillModify.clearSelection();
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_comboBox_3 = new GridBagConstraints();
-		gbc_comboBox_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_3.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_3.gridx = 0;
-		gbc_comboBox_3.gridy = 12;
-		panel.add(comboBox_3, gbc_comboBox_3);
+		JComboBox comboBoxBillSearch = new JComboBox();
+		comboBoxBillSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxBillSearch.setModel(new DefaultComboBoxModel(new String[] {"Name", "Datum", "Status"}));
+		GridBagConstraints gbc_comboBoxBillSearch = new GridBagConstraints();
+		gbc_comboBoxBillSearch.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxBillSearch.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxBillSearch.gridx = 0;
+		gbc_comboBoxBillSearch.gridy = 12;
+		panel.add(comboBoxBillSearch, gbc_comboBoxBillSearch);
 		
 		textField_7 = new JTextField();
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -690,8 +735,39 @@ public class GUIFinanceManagement {
 		JButton btnSearchBillModify = new JButton("Rechnung suchen");
 		btnSearchBillModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String searchValue = textFieldOrderSearch.getText();
+				switch(comboBoxOrderSearch.getSelectedIndex()) {
+				case 0:
+					try {
+						tableBillModify.setModel(new BillTableModel(FinancialManagement.getBillByName(searchValue)));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				case 1:
+					try {
+						tableBillModify.setModel(new BillTableModel(FinancialManagement.getBillsByDate(searchValue)));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				case 2:
+					try {
+						tableBillModify.setModel(new BillTableModel(FinancialManagement.getBillsByStatus(searchValue)));
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				}
 			}
 		});
+		
 		btnSearchBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnSearchBillModify = new GridBagConstraints();
 		gbc_btnSearchBillModify.fill = GridBagConstraints.HORIZONTAL;
@@ -762,6 +838,36 @@ public class GUIFinanceManagement {
 		JButton btndeleteBillSearch = new JButton("Suchen");
 		btndeleteBillSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String searchValue = textFielddeleteBillSearch.getText();
+				switch(comboBoxdeleteBillSearch.getSelectedIndex()) {
+				case 0:
+					try {
+						tableDeleteBill.setModel(new BillTableModel(FinancialManagement.getBillByName(searchValue)));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				case 1:
+					try {
+						tableDeleteBill.setModel(new BillTableModel(FinancialManagement.getBillsByDate(searchValue)));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				case 2:
+					try {
+						tableDeleteBill.setModel(new BillTableModel(FinancialManagement.getBillsByStatus(searchValue)));
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+				}
 			}
 		});
 		btndeleteBillSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -776,8 +882,18 @@ public class GUIFinanceManagement {
 		JButton btndeleteBill = new JButton("Rechnung löschen");
 		btndeleteBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					FinancialManagement.deleteBill(Integer
+							.parseInt(tableDeleteBill.getValueAt(tableDeleteBill.getSelectedRow(), 0).toString()));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				refreshTableBillModify();
+				refreshTableDeleteBill();
 			}
 		});
+		
 		btndeleteBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteBill = new GridBagConstraints();
 		gbc_btndeleteBill.gridwidth = 2;
@@ -1001,8 +1117,17 @@ public class GUIFinanceManagement {
 		JButton btnjarDelete = new JButton("Topf löschen");
 		btnjarDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					FinancialManagement.deletePot(Integer
+							.parseInt(tableJar.getValueAt(tableJar.getSelectedRow(), 0).toString()));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				refreshTableJar();
 			}
 		});
+		
 		btnjarDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnjarDelete = new GridBagConstraints();
 		gbc_btnjarDelete.fill = GridBagConstraints.HORIZONTAL;
@@ -1210,8 +1335,17 @@ public class GUIFinanceManagement {
 		JButton btncashRegisterDelete = new JButton("Kasse löschen");
 		btncashRegisterDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					FinancialManagement.deleteCashRegister(Integer
+							.parseInt(tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 0).toString()));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				refreshTableCashRegister();
 			}
 		});
+		
 		btncashRegisterDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btncashRegisterDelete = new GridBagConstraints();
 		gbc_btncashRegisterDelete.fill = GridBagConstraints.HORIZONTAL;

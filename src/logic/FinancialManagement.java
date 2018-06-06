@@ -30,7 +30,7 @@ public class FinancialManagement {
 		SQLManager.getInstance().addBillStatustoDB(idBill, status, dateTimeString);
 	}
 	
-	public void deleteBill(int id) throws SQLException {
+	public static void deleteBill(int id) throws SQLException {
 		SQLManager.getInstance().deleteBillFromDB(id);
 	}
 	
@@ -47,7 +47,7 @@ public class FinancialManagement {
 		return result;
 	}
 	
-	public static List<Bill> getBillssByStatus(String searchValues) throws SQLException {
+	public static List<Bill> getBillsByStatus(String searchValues) throws SQLException {
 		switch(searchValues){
 		case "Nicht bezahlt":
 			return SQLManager.getInstance().getBillsByStatus(0);
@@ -56,6 +56,11 @@ public class FinancialManagement {
 		default:
 			return null;
 		}
+	}
+	
+	public static List<Bill> getBillsByDate(String searchValues) throws SQLException {
+		List<Bill> result = SQLManager.getInstance().getBillsByDate(searchValues);
+		return result;
 	}
 	
 	public void exportBillPDF() {
@@ -71,6 +76,10 @@ public class FinancialManagement {
 		SQLManager.getInstance().modifyPot(debitAmount, actualAmount, name, idRegister);
 	}
 	
+	public static void deletePot(int id) throws SQLException {
+		SQLManager.getInstance().deletePotFromDB(id);
+	}
+	
 	public static List<Pot> getPotArray() throws SQLException {
 		List<Pot> result = SQLManager.getInstance().getPotArray();
 		return result;
@@ -82,6 +91,10 @@ public class FinancialManagement {
 	
 	public void modifyRegister(double debitAmount, double actualAmount, String name, int type) throws SQLException {
 		SQLManager.getInstance().modifyRegister(debitAmount, actualAmount, name, type);
+	}
+	
+	public static void deleteCashRegister(int id) throws SQLException {
+		SQLManager.getInstance().deleteCashRegisterFromDB(id);
 	}
 	
 	public static List<CashRegister> getRegisterArray() throws SQLException {

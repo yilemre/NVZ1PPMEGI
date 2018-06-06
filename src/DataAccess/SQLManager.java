@@ -314,7 +314,7 @@ public class SQLManager {
 
 	public int deleteOrderFromDB(int id) throws SQLException{
 		Statement stmt = c.createStatement();
-		String sql ="DELETE FROM Orders WHERE idOrder="+id;
+		String sql ="DELETE FROM Orders, OrderStatus WHERE Orders.idOrder = OrderStatus.idOrder AND idOrder ="+id;
 		stmt.executeUpdate(sql);
 		stmt.close();
 		return id;
@@ -467,6 +467,14 @@ public class SQLManager {
 		   return result; 
 		}
 	
+	public int deleteCashRegisterFromDB(int id) throws SQLException{
+		Statement stmt = c.createStatement();
+		String sql ="DELETE FROM Register WHERE idRegister="+id;
+		stmt.executeUpdate(sql);
+		stmt.close();
+		return id;
+	}
+	
 	public int addPottoDB(double debitAmount, double actualAmount, String name, int idRegister) throws SQLException{
 		int result = 0;
 		Statement stmt = c.createStatement();
@@ -498,6 +506,14 @@ public class SQLManager {
 		   return result; 
 		}
 	
+	public int deletePotFromDB(int id) throws SQLException{
+		Statement stmt = c.createStatement();
+		String sql ="DELETE FROM Pots WHERE idPot="+id;
+		stmt.executeUpdate(sql);
+		stmt.close();
+		return id;
+	}
+	
 	public int addBilltoDB(int idOrder, int idPot, int idRegister, String name, int payKind, double amount) throws SQLException {
 		int result=0;
 		Statement stmt = c.createStatement();
@@ -526,7 +542,7 @@ public class SQLManager {
 	
 	public int deleteBillFromDB(int id) throws SQLException{
 		Statement stmt = c.createStatement();
-		String sql ="DELETE FROM Bills WHERE idBill="+id;
+		String sql ="DELETE FROM Bills, BillStatus WHERE Bills.idBill = BillStatus.idBill AND idBill ="+id;
 		stmt.executeUpdate(sql);
 		stmt.close();
 		return id;
@@ -571,6 +587,21 @@ public class SQLManager {
 		List<Bill> result = new ArrayList<Bill>();
 		Statement stmt = c.createStatement();
 		String sql = "SELECT * FROM Bills, BillStatus WHERE Bills.idBill = BillStatus.idBill AND status='"+status+"'";
+		ResultSet rs = stmt.executeQuery(sql);
+		while (rs.next()){
+			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idRegister") ,rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
+			result.add(temp);			
+		}
+		
+		rs.close();
+		stmt.close();
+		return result;
+	}
+	
+	public List<Bill> getBillsByDate(String date) throws SQLException {
+		List<Bill> result = new ArrayList<Bill>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Bills, BillStatus WHERE Bills.idBill = BillStatus.idBill AND timestamp='"+date+"'";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
 			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idRegister") ,rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
