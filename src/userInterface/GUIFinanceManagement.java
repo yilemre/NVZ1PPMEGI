@@ -1161,6 +1161,18 @@ public class GUIFinanceManagement {
 		JButton btnaddJar = new JButton("Topf hinzufügen");
 		btnaddJar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					 FinancialManagement.addPot(
+							 //dummy
+							 );
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				refreshTableJar();
 			}
 		});
 		btnaddJar.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1173,9 +1185,21 @@ public class GUIFinanceManagement {
 		
 		JButton btnjarSaveChanges = new JButton("Änderungen speichern");
 		btnjarSaveChanges.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+				public void actionPerformed(ActionEvent e) {
+					try {
+						 FinancialManagement.modifyPot(
+								 //dummy
+								 );
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					refreshTableJar();
+				}
+			});
 		btnjarSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnjarSaveChanges = new GridBagConstraints();
 		gbc_btnjarSaveChanges.fill = GridBagConstraints.HORIZONTAL;
@@ -1378,6 +1402,18 @@ public class GUIFinanceManagement {
 		JButton btnaddcashRegister = new JButton("Kasse hinzufügen");
 		btnaddcashRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					 FinancialManagement.addRegister(
+							 //dummy
+							 );
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				refreshTableJar();
 			}
 		});
 		btnaddcashRegister.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1391,6 +1427,18 @@ public class GUIFinanceManagement {
 		JButton btncashRegisterSaveChanges = new JButton("Änderungen speichern");
 		btncashRegisterSaveChanges.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					 FinancialManagement.modifyRegister(
+							 //dummy
+							 );
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				refreshTableJar();
 			}
 		});
 		btncashRegisterSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 15));
