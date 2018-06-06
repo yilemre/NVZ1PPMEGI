@@ -78,10 +78,10 @@ public class GUIFabricationmanagement {
 	private JTextField textFieldfileNameModify;
 
 
-	private JComboBox comboBoxorderTyp;
+	private JComboBox comboBoxorderTyp = new JComboBox();
 	private JComboBox comboBoxResponsible;
 	private JComboBox comboBoxStandinResponsible;
-	private JComboBox comboBoxorderStatus;
+	private JComboBox comboBoxorderStatus = new JComboBox();
 	private JComboBox comboBoxStandinResponsiblePersonModify;
 	private JComboBox comboBoxResponsiblePersonModify;
 	private JComboBox comboBoxtypModify;
@@ -234,8 +234,7 @@ public class GUIFabricationmanagement {
 		gbc_lblorderTyp.gridx = 0;
 		gbc_lblorderTyp.gridy = 4;
 		paneladdOrder.add(lblorderTyp, gbc_lblorderTyp);
-
-		JComboBox comboBoxorderTyp = new JComboBox();
+		
 		comboBoxorderTyp.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxorderTyp.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
 		GridBagConstraints gbc_comboBoxorderTyp = new GridBagConstraints();
@@ -403,7 +402,6 @@ public class GUIFabricationmanagement {
 		gbc_lblorderStatus.gridy = 12;
 		paneladdOrder.add(lblorderStatus, gbc_lblorderStatus);
 
-		JComboBox comboBoxorderStatus = new JComboBox();
 		comboBoxorderStatus.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxorderStatus.setModel(new DefaultComboBoxModel(comboBoxStatusEntries.toArray()));
 		GridBagConstraints gbc_comboBoxorderStatus = new GridBagConstraints();
@@ -871,13 +869,17 @@ public class GUIFabricationmanagement {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ProductionManagement.modifyOrder(Integer.parseInt(textFieldorderIDModify.getText()),
-							textFieldorderTitelModify.getText(), comboBoxtypModify.getSelectedIndex(),
+					 ProductionManagement.modifyOrder(Integer.parseInt(textFieldorderIDModify.getText()),
+							textFieldorderTitelModify.getText(), 
+							comboBoxtypModify.getSelectedIndex(),
 							Double.parseDouble(textFieldpredictedCostsModify.getText()),
 							Double.parseDouble(textFieldactualCostsModify.getText()),
-							getIdCustomer(comboBoxorderCustomer.getSelectedIndex()),getIdAdvisor(comboBoxResponsible.getSelectedIndex()),
-							getIdSecondaryAdvisor(comboBoxStandinResponsible.getSelectedIndex()), textFieldfileNameModify.getText(),
-							textFieldfilePathModify.getText(), textFieldnoteOtherModify.getText());
+							SQLManager.getInstance().getCustomerArray().get(comboBoxorderCustomerModify.getSelectedIndex()).getId(), 
+							SQLManager.getInstance().getAdvisorArray().get(comboBoxResponsiblePersonModify.getSelectedIndex()).getId(),
+							SQLManager.getInstance().getAdvisorArray().get(comboBoxStandinResponsiblePersonModify.getSelectedIndex()).getId(),
+							textFieldfileNameModify.getText(),
+							textFieldfilePathModify.getText(), 
+							textFieldnoteOtherModify.getText());
 					ProductionManagement.changeOrderStatus(Integer.parseInt(textFieldorderIDModify.getText()), comboBoxModifyStatus.getSelectedIndex());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
@@ -1135,34 +1137,21 @@ public class GUIFabricationmanagement {
 		frmElabVerwaltungsprogramm.setVisible(true);
 	}
 	
-	protected int getIdSecondaryAdvisor(int selectedIndex) {
-		return 0;
-	}
-
-	protected int getIdAdvisor(int selectedIndex) {
-		return 0;
-	}
-
-	protected int getIdCustomer(int selectedIndex) {
-		return 0;
-	}
-
-
 	protected void handleEditOrderSelectionEvent(ListSelectionEvent e) {
 		// TODO Auto-generated method stub
 		if (table.getSelectedRow() > -1) {
 			textFieldorderIDModify.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
 			textFieldorderTitelModify.setText((String) table.getValueAt(table.getSelectedRow(), 1).toString());
-			//comboBoxtypModify.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 2).toString()));
+			//comboBoxtypModify.setSelectedIndex(comboBoxEntries.indexOf((String)table.getValueAt(table.getSelectedRow(), 2)));
 			textFieldnoteOtherModify.setText((String) table.getValueAt(table.getSelectedRow(), 10).toString());
 			textFieldfilePathModify.setText((String) table.getValueAt(table.getSelectedRow(), 9).toString());
 			textFieldfileNameModify.setText((String) table.getValueAt(table.getSelectedRow(), 8).toString());
 			textFieldpredictedCostsModify.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
 			textFieldactualCostsModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
-			//comboBoxModifyStatus.setSelectedIndex(comboBoxStatusEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11).toString()));
-			//comboBoxorderCustomer.setSelectedIndex((table.getValueAt(table.getSelectedRow(), 5).toString()));
-			//comboBoxResponsible.setSelectedIndex((table.getValueAt(table.getSelectedRow(), 6).toString()));
-			//comboBoxStandinResponsiblePersonModify.setSelectedIndex((table.getValueAt(table.getSelectedRow(), 7).toString()));
+			//comboBoxModifyStatus.setSelectedIndex(comboBoxStatusEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
+			comboBoxorderCustomer.setSelectedItem((table.getValueAt(table.getSelectedRow(), 5)));
+			comboBoxResponsible.setSelectedItem((table.getValueAt(table.getSelectedRow(), 6)));
+			comboBoxStandinResponsiblePersonModify.setSelectedItem((table.getValueAt(table.getSelectedRow(), 7)));
 		}
 
 	}

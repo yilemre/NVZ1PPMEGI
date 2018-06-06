@@ -40,7 +40,7 @@ public class OrderTableModel extends AbstractTableModel {
 			case 1:
 				return String.class;
 			case 2:
-				return Integer.class;
+				return String.class;
 			case 3:
 				return Double.class;
 			case 4:
@@ -72,7 +72,7 @@ public class OrderTableModel extends AbstractTableModel {
 		case 1:
 			return list.get(rowIndex).getTitle();
 		case 2:
-			return list.get(rowIndex).getType();
+			return list.get(rowIndex).getReadableType(list.get(rowIndex).getType());
 		case 3:
 			return list.get(rowIndex).getForecastedCosts();
 		case 4:
@@ -90,7 +90,7 @@ public class OrderTableModel extends AbstractTableModel {
 		case 10:
 			return list.get(rowIndex).getNotes();
 		case 11:
-			return list.get(rowIndex).getStatus();
+			return list.get(rowIndex).getReadableStatus(list.get(rowIndex).getStatus());
 		default: 
 			return null; //can not happen
 		}
