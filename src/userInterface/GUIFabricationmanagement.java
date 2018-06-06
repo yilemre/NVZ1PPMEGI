@@ -1142,18 +1142,19 @@ public class GUIFabricationmanagement {
 		if (table.getSelectedRow() > -1) {
 			textFieldorderIDModify.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
 			textFieldorderTitelModify.setText((String) table.getValueAt(table.getSelectedRow(), 1).toString());
-			//comboBoxtypModify.setSelectedIndex(comboBoxEntries.indexOf((String)table.getValueAt(table.getSelectedRow(), 2)));
+			//comboBoxtypModify.setSelectedIndex(comboBoxEntries.indexOf(table.getValueAt(table.getSelectedRow(), 2).toString()));
 			textFieldnoteOtherModify.setText((String) table.getValueAt(table.getSelectedRow(), 10).toString());
 			textFieldfilePathModify.setText((String) table.getValueAt(table.getSelectedRow(), 9).toString());
 			textFieldfileNameModify.setText((String) table.getValueAt(table.getSelectedRow(), 8).toString());
 			textFieldpredictedCostsModify.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
 			textFieldactualCostsModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
 			//comboBoxModifyStatus.setSelectedIndex(comboBoxStatusEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
-			//comboBoxorderCustomer.setSelectedItem((table.getValueAt(table.getSelectedRow(), 5)));
+
 			//Emre begin
 			comboBoxorderCustomerModify.setSelectedIndex(getCorrectCustomerIndex(table.getValueAt(table.getSelectedRow(), 5).toString()));
-			comboBoxResponsible.setSelectedIndex(getCorrectResponsibleIndex(table.getValueAt(table.getSelectedRow(), 6).toString())); 
+			comboBoxResponsiblePersonModify.setSelectedIndex(getCorrectResponsibleIndex(table.getValueAt(table.getSelectedRow(), 6).toString())); 
 			comboBoxStandinResponsiblePersonModify.setSelectedIndex(getCorrectResponsibleIndex(table.getValueAt(table.getSelectedRow(), 7).toString()));
+			
 			//Emre end
 		}
 
