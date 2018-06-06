@@ -35,29 +35,6 @@ public class Order {
 	public Order(){
 		
 	}
-	
-	public String getReadableStatus(int status) {
-		switch (status) {
-			case 0:
-				return "Angenommen";
-			case 1:
-				return "Gefertigt";
-			case 2:
-				return "Kosten kalkuliert";
-			case 3:
-				return "Abgeholt";
-			case 4:
-				return "Abgerechnet";
-			case 5:
-				return "Warten auf Material";
-			case 6:
-				return "Fertigung unterbrochen/defekt";
-			case 7:
-				return "Rechnung erzeugt";
-			default:
-				return "Das passiert nicht!";
-		}
-	}
 
 	public int getOrderId() {
 		return id;
@@ -149,5 +126,41 @@ public class Order {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	
+	public String getReadableStatus(int status) {
+		switch (status) {
+			case 0:
+				return "Angenommen";
+			case 1:
+				return "Gefertigt";
+			case 2:
+				return "Kosten kalkuliert";
+			case 3:
+				return "Abgeholt";
+			case 4:
+				return "Abgerechnet";
+			case 5:
+				return "Warten auf Material";
+			case 6:
+				return "Fertigung unterbrochen/defekt";
+			case 7:
+				return "Rechnung erzeugt";
+			default:
+				return "Das passiert nicht!";
+		}
+	}
+	
+	public String getReadableType(int type) {
+		switch(type) {
+		case 0:
+			return "3D-Druck";
+		case 1:
+			return "Leiterplatte";
+		case 2:
+			return "Sonstiges";
+		default:
+			return "Das passiert nicht!";
+		}
 	}
 }

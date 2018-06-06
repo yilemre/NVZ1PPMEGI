@@ -357,10 +357,10 @@ public class SQLManager {
 		return result;
 	}
 	
-	public int insertOrderStatusIntoDB(int status, String datetime) throws SQLException {
+	public int insertOrderStatusIntoDB(int idOrder, int status, String datetime) throws SQLException {
 		int result = 0;
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO OrderStatus (status, timestamp) VALUES ('"+status+"', '"+datetime+"');";
+		String sql ="INSERT INTO OrderStatus (idOrder, status, timestamp) VALUES ("+idOrder+ ", "+status+", '"+datetime+"');";
 		stmt.executeUpdate(sql);
 		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM OrderStatus");
 		rs.next();
