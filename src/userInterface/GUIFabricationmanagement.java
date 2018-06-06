@@ -1149,13 +1149,56 @@ public class GUIFabricationmanagement {
 			textFieldpredictedCostsModify.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
 			textFieldactualCostsModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
 			//comboBoxModifyStatus.setSelectedIndex(comboBoxStatusEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
-			comboBoxorderCustomer.setSelectedItem((table.getValueAt(table.getSelectedRow(), 5)));
-			comboBoxResponsible.setSelectedItem((table.getValueAt(table.getSelectedRow(), 6)));
-			comboBoxStandinResponsiblePersonModify.setSelectedItem((table.getValueAt(table.getSelectedRow(), 7)));
+			//comboBoxorderCustomer.setSelectedItem((table.getValueAt(table.getSelectedRow(), 5)));
+			//Emre begin
+			comboBoxorderCustomerModify.setSelectedIndex(getCorrectCustomerIndex(table.getValueAt(table.getSelectedRow(), 5).toString()));
+			comboBoxResponsible.setSelectedIndex(getCorrectResponsibleIndex(table.getValueAt(table.getSelectedRow(), 6).toString())); 
+			comboBoxStandinResponsiblePersonModify.setSelectedIndex(getCorrectResponsibleIndex(table.getValueAt(table.getSelectedRow(), 7).toString()));
+			//Emre end
 		}
 
 	}
 	
+	
+	
+	//Emre begin
+	private int getCorrectResponsibleIndex(String value) {
+	    // TODO Auto-generated method stub
+	    int x = Integer.parseInt(value); 
+	    try {
+		for(int i = 0; i<ProductionManagement.getAdvisorArray().size();i++) {
+		if(ProductionManagement.getAdvisorArray().get(i).getId()== x) {
+		    return i; 
+		}
+		
+		}
+	    } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	    
+	    
+	    return -1;
+	}
+
+	private int getCorrectCustomerIndex(String value) {
+	    // TODO Auto-generated method stub
+	    int v = Integer.parseInt(value); 
+	    try {
+		for (int x = 0; x<ProductionManagement.getCustomerArray().size(); x++) {	
+		    if(ProductionManagement.getCustomerArray().get(x).getId() == v) {
+			return x; 
+		    }
+		
+		}
+	    } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	    return -1;
+	}
+	//Emre end
+
 	protected void refreshTable() {
 		try {
 			table.setModel(new OrderTableModel(ProductionManagement.getOrders()));

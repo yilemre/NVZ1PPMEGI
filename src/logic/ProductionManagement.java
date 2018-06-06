@@ -48,8 +48,8 @@ public class ProductionManagement {
 	}
 
     public static List<Person> getCustomerArray() throws SQLException {
-	List<Person> result = SQLManager.getInstance().getCustomerArray();
-	return result;
+		return SQLManager.getInstance().getCustomerArray();
+	
     }
     
     public static List<Person> getAdvisorArray() throws SQLException {
