@@ -23,6 +23,8 @@
 hs_err_pid*
 /bin/
 
-#SQLite Database
-ELab.db
+# SQLite Database and .classpath
+*.db
+.classpath
 sqlite-jdbc-3.21.0.jar
+
