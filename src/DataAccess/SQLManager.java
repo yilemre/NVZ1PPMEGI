@@ -123,64 +123,6 @@ public class SQLManager {
 		return result;
 	}
 
-	//If you call this method you can give it a AttributeTypes.xxxx attribute to say which attribute should be changed
-/*
-	public void modifyPerson(int id, AttributeTypesPerson attribute, String newValue) throws SQLException{
-		Statement stmt = c.createStatement();
-		switch(attribute) {
-		case firstname: 
-			String sql ="ALTER Persons SET firstname="+newValue+"WHERE idPerson="+id+";";
-			stmt.executeUpdate(sql);
-			stmt.close();
-			break;
-		case surname:
-			String sql1 ="ALTER Persons SET surname="+newValue+"WHERE idPerson="+id+";";
-			stmt.executeUpdate(sql1);
-			stmt.close();
-			break;
-		case street:
-			String sql2 ="ALTER Persons SET street="+newValue+"WHERE idPerson="+id+";";
-			stmt.executeUpdate(sql2);
-			stmt.close();
-			break;
-		case housenumber:
-			String sql3 ="ALTER Persons SET housenumber="+Integer.parseInt(newValue)+"WHERE idPerson="+id+";";
-			stmt.executeUpdate(sql3);
-			stmt.close();
-			break;
-		case zipcode:
-			String sql4 ="ALTER Persons SET zipcode="+Integer.parseInt(newValue)+"WHERE idPerson="+id+";";
-			stmt.executeUpdate(sql4);
-			stmt.close();
-			break;
-		case email:
-			String sql5 ="ALTER Persons SET email="+newValue+"WHERE idPerson="+id+";";
-			stmt.executeUpdate(sql5);
-			stmt.close();
-			break;
-		case timestamp:
-			String sql6 ="ALTER Persons SET timestamp="+newValue+"WHERE idPerson="+id+";";
-			stmt.executeUpdate(sql6);
-			stmt.close();
-			break;
-		case username:
-			String sql7 ="ALTER Persons SET timestamp="+newValue+"WHERE idPerson="+id+";";
-			stmt.executeUpdate(sql7);
-			stmt.close();
-			break;
-		case password:
-			String sql8 ="ALTER Persons SET timestamp="+newValue+"WHERE idPerson="+id+";";
-			stmt.executeUpdate(sql8);
-			stmt.close();
-			break;
-		case rights:
-			String sql9 ="ALTER Parts SET rights="+Integer.parseInt(newValue)+"WHERE idPart="+id+";";
-			stmt.executeUpdate(sql9);
-			stmt.close();
-			break;
-		}
-	}
-*/
 	public int addCategoryToDB(String name, String note) throws SQLException {
 		int result=0;
 		Statement stmt = c.createStatement();
@@ -384,103 +326,7 @@ public class SQLManager {
 		stmt.executeUpdate(sql);
 		stmt.close();
 	}
-	
-	/*Method not needed
-	public void setOrderType(int id, AttributeTypesOrder attribute, int newValue) throws SQLException{
-		Statement stmt = c.createStatement();
-		String sql ="ALTER Orders SET type="+newValue+"WHERE idOrder="+id+";";
-		stmt.executeUpdate(sql); 
-		stmt.close();
-	}*/
-	
-	/*public void modifyOrder1(int id, AttributeTypesOrder attribute, String newValue) throws SQLException{
-		Statement stmt = c.createStatement();
-		switch(attribute) {
-		case title: 
-			String sql ="ALTER Orders SET titel="+newValue+"WHERE idOrder="+id;
-			stmt.executeUpdate(sql);
-			stmt.close();
-			break;
-		case idAdvisor:
-			String sql2 ="ALTER Orders SET idAdvisor="+Integer.parseInt(newValue)+"WHERE idOrder="+id;
-			stmt.executeUpdate(sql2);
-			stmt.close();
-			break;
-		case idSecondaryAdvisor:
-			String sql3 ="ALTER Orders SET idSecondaryAdvisor="+Integer.parseInt(newValue)+"WHERE idOrder="+id;
-			stmt.executeUpdate(sql3);
-			stmt.close();
-			break;
-		case notes:
-			String sql4 ="ALTER Orders SET notes="+newValue+"WHERE idOrder="+id;
-			stmt.executeUpdate(sql4);
-			stmt.close();
-			break;
-		case forecastedCosts:
-			String sql5 ="ALTER Orders SET forecastedCosts="+Double.parseDouble(newValue)+"WHERE idOrder="+id;
-			stmt.executeUpdate(sql5);
-			stmt.close();
-			break;
-		case realCosts:
-			String sql6 ="ALTER Orders SET realCosts="+Double.parseDouble(newValue)+"WHERE idOrder="+id;
-			stmt.executeUpdate(sql6);
-			stmt.close();
-			break;
-		case fileLocation:
-			String sql7 ="ALTER Orders SET fileLocation="+newValue+"WHERE idOrder="+id;
-			stmt.executeUpdate(sql7);
-			stmt.close();
-			break;
-		}
-	}*/
-
-	/*We want to have a new row for every change in orderStatus this method would overwrite it!!!
-	public void modifyOrderStatus(int id, AttributeTypesOrderStatus attribute, int newValue ) throws SQLException {
-		Statement stmt = c.createStatement();
-		switch(attribute) {
-		case accepted: 
-			String sql ="ALTER OrderStatus SET status="+newValue+"WHERE idOrder="+id+";";
-			stmt.executeUpdate(sql);
-			stmt.close();
-			break;
-		case made:
-			String sql1 ="ALTER OrderStatus SET status="+newValue+"WHERE idOrder="+id+";";
-			stmt.executeUpdate(sql1);
-			stmt.close();
-			break;
-		case costsCalculated:
-			String sql2 ="ALTER OrderStatus SET status="+newValue+"WHERE idOrder="+id+";";
-			stmt.executeUpdate(sql2);
-			stmt.close();
-			break;
-		case pickedUp:
-			String sql3 ="ALTER OrderStatus SET status="+newValue+"WHERE idOrder="+id+";";
-			stmt.executeUpdate(sql3);
-			stmt.close();
-			break;
-		case billed:
-			String sql4 ="ALTER OrderStatus SET status="+newValue+"WHERE idOrder="+id+";";
-			stmt.executeUpdate(sql4);
-			stmt.close();
-			break;
-		case waitingForMaterial:
-			String sql5 ="ALTER OrderStatus SET status="+newValue+"WHERE idOrder="+id+";";
-			stmt.executeUpdate(sql5);
-			stmt.close();
-			break;
-		case productionInterrupted:
-			String sql6 ="ALTER OrderStatus SET status="+newValue+"WHERE idOrder="+id+";";
-			stmt.executeUpdate(sql6);
-			stmt.close();
-			break;
-		case billGenerated:
-			String sql7 ="ALTER OrderStatus SET status="+newValue+"WHERE idOrder="+id+";";
-			stmt.executeUpdate(sql7);
-			stmt.close();
-			break;
-		}
-	}*/
-	
+		
 	public void changeOrderStatus(int id, int status) throws SQLException{
 		Statement stmt = c.createStatement(); 
 		String sql = "UPDATE OrderStatus SET status='"+status+"' WHERE idOrder="+id;
@@ -588,7 +434,7 @@ public class SQLManager {
 	    return result;
 	}
 	
-	//Financial SQL
+	//Financial SQL by Nico
 	
 	public int addRegistertoDB(double debitAmount, double actualAmount, String name, int type) throws SQLException{
 		int result = 0;
@@ -609,6 +455,18 @@ public class SQLManager {
 		stmt.close();
 	}
 	
+	public List<CashRegister> getRegisterArray () throws SQLException {
+		   List<CashRegister> result = new ArrayList<CashRegister>();
+		   Statement stmt = c.createStatement();
+		   String sql = "SELECT * FROM Registers";
+		   ResultSet rs = stmt.executeQuery(sql);
+		   while(rs.next()){
+			   	CashRegister temp = new CashRegister(rs.getInt("idRegister"), rs.getDouble("debitAmount"), rs.getDouble("actualAmount"), rs.getString("name"), rs.getInt("type"));
+				result.add(temp);	   
+		   }
+		   return result; 
+		}
+	
 	public int addPottoDB(double debitAmount, double actualAmount, String name, int idRegister) throws SQLException{
 		int result = 0;
 		Statement stmt = c.createStatement();
@@ -628,10 +486,22 @@ public class SQLManager {
 		stmt.close();
 	}
 	
-	public int addBilltoDB(int idOrder, int idPot, String name, int payKind, double amount) throws SQLException {
+	public List<Pot> getPotArray () throws SQLException {
+		   List<Pot> result = new ArrayList<Pot>();
+		   Statement stmt = c.createStatement();
+		   String sql = "SELECT * FROM Pots";
+		   ResultSet rs = stmt.executeQuery(sql);
+		   while(rs.next()){
+			   	Pot temp = new Pot(rs.getInt("idPot"), rs.getString("name"), rs.getDouble("debitAmount"), rs.getDouble("actualAmount"), rs.getInt("idRegister"));
+				result.add(temp);	   
+		   }
+		   return result; 
+		}
+	
+	public int addBilltoDB(int idOrder, int idPot, int idRegister, String name, int payKind, double amount) throws SQLException {
 		int result=0;
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO Bills (idOrder, idPot, name, methodOfPayment, figure) VALUES ('"+idOrder+"', "+idPot+", '"+name+"', '"+payKind+"', '"+amount+"');";
+		String sql ="INSERT INTO Bills (idOrder, idPot, idRegister, name, methodOfPayment, figure) VALUES ('"+idOrder+"', '"+idPot+"', '"+idRegister+"' , '"+name+"', '"+payKind+"', '"+amount+"');";
 		stmt.executeUpdate(sql);
 		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Bills");
 		rs.next();
@@ -662,9 +532,9 @@ public class SQLManager {
 		return id;
 	}
 	
-	public void modifyBill(int id, int idOrder, int idPot, String name, int payKind, double amount) throws SQLException {
+	public void modifyBill(int id, int idOrder, int idPot, int idRegister, String name, int payKind, double amount) throws SQLException {
 		Statement stmt = c.createStatement();
-		String sql = "UPDATE Bills SET idOrder='"+idOrder+"', idPot='"+idPot+"', name='"+name+"' , methodOfPayment='"+payKind+"' , figure='"+amount+"' WHERE idOrder="+id+";";
+		String sql = "UPDATE Bills SET idOrder='"+idOrder+"', idPot='"+idPot+"', idRegister='"+idRegister+"', name='"+name+"' , methodOfPayment='"+payKind+"' , figure='"+amount+"' WHERE idOrder="+id+";";
 		stmt.executeUpdate(sql);
 		stmt.close();
 	}
@@ -675,7 +545,7 @@ public class SQLManager {
 		String sql = "SELECT * FROM Bills, BillStatus WHERE Bills.idBill = BillStatus.idBill";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"),rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
+			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idRegiser"), rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
 			result.add(temp);			
 		}
 
@@ -687,13 +557,28 @@ public class SQLManager {
 		Statement stmt = c.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM Bills, BillStatus WHERE Bill.idBill = BillStatus.idBill AND titel LIKE '"+name+"'");
 		while (rs.next()){
-			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"),rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
+			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idRegister") ,rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
 			result.add(temp);			
 		}
 
 		rs.close();
 		stmt.close();
 
+		return result;
+	}
+	
+	public List<Bill> getBillsByStatus(int status) throws SQLException {
+		List<Bill> result = new ArrayList<Bill>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Bills, BillStatus WHERE Bills.idBill = BillStatus.idBill AND status='"+status+"'";
+		ResultSet rs = stmt.executeQuery(sql);
+		while (rs.next()){
+			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idRegister") ,rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
+			result.add(temp);			
+		}
+		
+		rs.close();
+		stmt.close();
 		return result;
 	}
 	// Nico End*/

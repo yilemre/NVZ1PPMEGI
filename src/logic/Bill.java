@@ -8,8 +8,11 @@ public class Bill {
     private int status;
     private int payKind;
     private double amount;
+    private int idOrder;
+    private int idPot;
+    private int idRegister;
     
-    public Bill(int id, int idOrder, int idPot, String name, int payKind, double amount, int status){
+    public Bill(int id, int idOrder, int idPot, int idRegister, String name, int payKind, double amount, int status){
     this.id = id;
 	this.name = name; 
 	this.status = status; 
@@ -22,7 +25,7 @@ public class Bill {
     	
     }
     
-    public int getBillId() {
+    public int getId() {
         return id;
     }
 
@@ -57,6 +60,39 @@ public class Bill {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-    
-    
+
+	public int getIdOrder() {
+		return idOrder;
+	}
+
+	public void setIdOrder(int idOrder) {
+		this.idOrder = idOrder;
+	}
+
+	public int getIdPot() {
+		return idPot;
+	}
+
+	public void setIdPot(int idPot) {
+		this.idPot = idPot;
+	}
+
+	public int getIdRegister() {
+		return idRegister;
+	}
+
+	public void setIdRegister(int idRegister) {
+		this.idRegister = idRegister;
+	}
+   
+	public String getReadableStatus(int status) {
+		switch (status) {
+		case 0:
+			return "Nicht bezahlt";
+		case 1:
+			return "Bezahlt";
+		default:
+			return "Das passiert nicht!";
+		}
+	}
 }

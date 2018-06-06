@@ -20,6 +20,17 @@ import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import DataAccess.SQLManager;
+import logic.CashRegister;
+import logic.FinancialManagement;
+import logic.Order;
+import logic.Person;
+import logic.Pot;
+import logic.ProductionManagement;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -41,6 +52,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Frame;
@@ -71,11 +83,11 @@ public class GUIFinanceManagement {
 	private JTextField textFieldcustomerIDModify;
 	private JTextField textFieldrelatedPersonModify;
 	private JTextField textField_7;
-	private JTable tablecashRegister;
-	private JTable tablebillModify;
-	private JTable tablebillNew;
-	private JTable tabledeleteBill;
-	private JTable tablejar;
+	private JTable tableCashRegister;
+	private JTable tableBillModify;
+	private JTable tableNewBill;
+	private JTable tableDeleteBill;
+	private JTable tableJar;
 	JComboBox comboBoxpaymentTypModify = new JComboBox();
 	JComboBox comboBoxpaymentTyp = new JComboBox();
 	private List<String> comboBoxEntries;
@@ -172,10 +184,17 @@ public class GUIFinanceManagement {
 		gbc_lblrelatedOrder.anchor = GridBagConstraints.EAST;
 		gbc_lblrelatedOrder.insets = new Insets(0, 0, 5, 5);
 		gbc_lblrelatedOrder.gridx = 0;
-		gbc_lblrelatedOrder.gridy = 2;
 		panelcreateBill.add(lblrelatedOrder, gbc_lblrelatedOrder);
 		
 		JComboBox comboBoxrelatedOrder = new JComboBox();
+		try {
+			for(Order o : SQLManager.getInstance().getOrders()){
+				comboBoxrelatedOrder.addItem(o.toString());
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		comboBoxrelatedOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxrelatedOrder = new GridBagConstraints();
 		gbc_comboBoxrelatedOrder.insets = new Insets(0, 0, 5, 0);
@@ -272,6 +291,14 @@ public class GUIFinanceManagement {
 		panelcreateBill.add(lblrelatedCashRegister, gbc_lblrelatedCashRegister);
 		
 		JComboBox comboBoxrelatedCashRegister = new JComboBox();
+		try {
+			for(CashRegister c : SQLManager.getInstance().getRegisterArray()){
+				comboBoxrelatedCashRegister.addItem(c.toString());
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		comboBoxrelatedCashRegister.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxrelatedCashRegister = new GridBagConstraints();
 		gbc_comboBoxrelatedCashRegister.insets = new Insets(0, 0, 5, 0);
@@ -296,6 +323,14 @@ public class GUIFinanceManagement {
 		});
 		
 		JComboBox comboBoxrelatedJar = new JComboBox();
+		try {
+			for(Pot p : SQLManager.getInstance().getPotArray()){
+				comboBoxrelatedJar.addItem(p.toString());
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		comboBoxrelatedJar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxrelatedJar = new GridBagConstraints();
 		gbc_comboBoxrelatedJar.insets = new Insets(0, 0, 5, 0);
@@ -335,8 +370,25 @@ public class GUIFinanceManagement {
 		gbc_scrollPane_1.gridy = 11;
 		panelcreateBill.add(scrollPane_1, gbc_scrollPane_1);
 		
-		tablebillNew = new JTable();
-		scrollPane_1.setViewportView(tablebillNew);
+		tableNewBill = new JTable();
+		tableNewBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		try {
+			tableNewBill.setModel(new OrderTableModel(FinancialManagement.getOrders()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tableNewBill.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_1.setViewportView(tableNewBill);
+		tableNewBill.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				handleEditOrderSelectionEvent(e);
+
+			}
+		});
+		tableNewBill.clearSelection();
+		
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -414,6 +466,14 @@ public class GUIFinanceManagement {
 		panel.add(lblrelatedOrderModify, gbc_lblrelatedOrderModify);
 		
 		JComboBox comboBoxrelatedOrderModify = new JComboBox();
+		try {
+			for(Order o : SQLManager.getInstance().getOrders()){
+				comboBoxrelatedOrderModify.addItem(o.toString());
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		comboBoxrelatedOrderModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxrelatedOrderModify = new GridBagConstraints();
 		gbc_comboBoxrelatedOrderModify.insets = new Insets(0, 0, 5, 0);
@@ -510,6 +570,14 @@ public class GUIFinanceManagement {
 		panel.add(lblrelatedCashRegisterModify, gbc_lblrelatedCashRegisterModify);
 		
 		JComboBox comboBoxrelatedCashRegisterModify = new JComboBox();
+		try {
+			for(CashRegister c : SQLManager.getInstance().getRegisterArray()){
+				comboBoxrelatedCashRegisterModify.addItem(c.toString());
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		comboBoxrelatedCashRegisterModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxrelatedCashRegisterModify = new GridBagConstraints();
 		gbc_comboBoxrelatedCashRegisterModify.insets = new Insets(0, 0, 5, 0);
@@ -534,6 +602,14 @@ public class GUIFinanceManagement {
 		});
 		
 		JComboBox comboBoxrelatedJarModify = new JComboBox();
+		try {
+			for(Pot p : SQLManager.getInstance().getPotArray()){
+				comboBoxrelatedJarModify.addItem(p.toString());
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		comboBoxrelatedJarModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxrelatedJarModify = new GridBagConstraints();
 		gbc_comboBoxrelatedJarModify.insets = new Insets(0, 0, 5, 0);
@@ -573,8 +649,24 @@ public class GUIFinanceManagement {
 		gbc_scrollPane_2.gridy = 11;
 		panel.add(scrollPane_2, gbc_scrollPane_2);
 		
-		tablebillModify = new JTable();
-		scrollPane_2.setViewportView(tablebillModify);
+		tableBillModify = new JTable();
+		tableBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		try {
+			tableBillModify.setModel(new BillTableModel(FinancialManagement.getBills()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tableBillModify.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_2.setViewportView(tableBillModify);
+		tableBillModify.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				handleEditOrderSelectionEvent(e);
+
+			}
+		});
+		tableBillModify.clearSelection();
 		
 		JComboBox comboBox_3 = new JComboBox();
 		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -627,8 +719,24 @@ public class GUIFinanceManagement {
 		gbc_scrollPane_3.gridy = 0;
 		paneldeleteBill.add(scrollPane_3, gbc_scrollPane_3);
 		
-		tabledeleteBill = new JTable();
-		scrollPane_3.setViewportView(tabledeleteBill);
+		tableDeleteBill = new JTable();
+		tableDeleteBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		try {
+			tableDeleteBill.setModel(new BillTableModel(FinancialManagement.getBills()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tableDeleteBill.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_3.setViewportView(tableDeleteBill);
+		tableDeleteBill.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				handleEditOrderSelectionEvent(e);
+
+			}
+		});
+		tableDeleteBill.clearSelection();
 		
 		JComboBox comboBoxdeleteBillSearch = new JComboBox();
 		comboBoxdeleteBillSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -871,8 +979,24 @@ public class GUIFinanceManagement {
 		gbc_scrollPanejar.gridy = 6;
 		panelJarManagement.add(scrollPanejar, gbc_scrollPanejar);
 		
-		tablejar = new JTable();
-		scrollPanejar.setViewportView(tablejar);
+		tableJar = new JTable();
+		tableJar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		try {
+			tableJar.setModel(new PotTableModel(FinancialManagement.getPotArray()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tableJar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPanejar.setViewportView(tableJar);
+		tableJar.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				handleEditOrderSelectionEvent(e);
+
+			}
+		});
+		tableJar.clearSelection();
 		
 		JButton btnjarDelete = new JButton("Topf löschen");
 		btnjarDelete.addActionListener(new ActionListener() {
@@ -1063,9 +1187,25 @@ public class GUIFinanceManagement {
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 6;
 		panelcashRegisterManagement.add(scrollPane, gbc_scrollPane);
-		
-		tablecashRegister = new JTable();
-		scrollPane.setViewportView(tablecashRegister);
+
+		tableCashRegister = new JTable();
+		tableCashRegister.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		try {
+			tableCashRegister.setModel(new CashRegisterTableModel(FinancialManagement.getRegisterArray()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tableCashRegister.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(tableCashRegister);
+		tableCashRegister.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				handleEditOrderSelectionEvent(e);
+
+			}
+		});
+		tableCashRegister.clearSelection();
 		
 		JButton btncashRegisterDelete = new JButton("Kasse löschen");
 		btncashRegisterDelete.addActionListener(new ActionListener() {
@@ -1151,7 +1291,60 @@ public class GUIFinanceManagement {
 		
 		frmElabVerwaltungsprogramm.setVisible(true);
 	}
-
 	
+	protected void handleEditOrderSelectionEvent(ListSelectionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void refreshTableNewBill() {
+		try {
+			tableNewBill.setModel(new OrderTableModel(FinancialManagement.getOrders()));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tableNewBill.clearSelection();
+	}
+
+	protected void refreshTableDeleteBill() {
+		try {
+			tableDeleteBill.setModel(new BillTableModel(FinancialManagement.getBills()));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tableDeleteBill.clearSelection();
+	}
+	
+	protected void refreshTableBillModify() {
+		try {
+			tableBillModify.setModel(new BillTableModel(FinancialManagement.getBills()));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tableBillModify.clearSelection();
+	}
+	
+	protected void refreshTableJar() {
+		try {
+			tableJar.setModel(new OrderTableModel(FinancialManagement.getOrders()));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tableJar.clearSelection();
+	}
+	
+	protected void refreshTableCashRegister() {
+		try {
+			tableCashRegister.setModel(new OrderTableModel(FinancialManagement.getOrders()));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		tableCashRegister.clearSelection();
+	}
 	
 }
