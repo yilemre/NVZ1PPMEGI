@@ -18,17 +18,17 @@ import Exceptions.ELabException;
 public class ProductionManagement {
 
 
-	public static void addOrder(String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
-		SQLManager.getInstance().insertOrderIntoDB(title, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName ,fileLocation, note);
+	public static int addOrder(String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
+		return SQLManager.getInstance().insertOrderIntoDB(title, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName ,fileLocation, note);
 	}
 	
-	public static void addOrderStatus(int status) throws SQLException {
+	public static void addOrderStatus(int idOrder, int status) throws SQLException {
 		String dateTimeString = null;
 		DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		Date     time = cal.getTime();
 		dateTimeString = df.format(time);
-		SQLManager.getInstance().insertOrderStatusIntoDB(status, dateTimeString);
+		SQLManager.getInstance().insertOrderStatusIntoDB(idOrder, status, dateTimeString);
 	}
 	
 	public static void deleteOrder(int ID) throws SQLException {

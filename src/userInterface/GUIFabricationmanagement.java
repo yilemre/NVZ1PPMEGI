@@ -418,23 +418,35 @@ public class GUIFabricationmanagement {
 		btnaddOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ProductionManagement.addOrder(textFieldorderTitel.getText(), comboBoxorderTyp.getSelectedIndex(),
-							Double.parseDouble(textFieldpredictedCosts.getText()),
-							Double.parseDouble(textFieldactualCosts.getText()),
-							getIdCustomer(comboBoxorderCustomer.getSelectedIndex()),getIdAdvisor(comboBoxResponsible.getSelectedIndex()),
-							getIdSecondaryAdvisor(comboBoxStandinResponsible.getSelectedIndex()), textFieldfileName.getText() , textFieldfilePath.getText(),
-							textFieldnoteOther.getText());
-					ProductionManagement.addOrderStatus(comboBoxorderStatus.getSelectedIndex());
+					//Emre +
+				    	//add Order
+				    	//add orderStatus with last inserted orderId
+					ProductionManagement.addOrderStatus(
+						(ProductionManagement.addOrder(textFieldorderTitel.getText(), comboBoxorderTyp.getSelectedIndex(),
+						Double.parseDouble(textFieldpredictedCosts.getText()),
+						Double.parseDouble(textFieldactualCosts.getText()),
+						SQLManager.getInstance().getCustomerArray().get(comboBoxorderCustomer.getSelectedIndex()).getId(), 
+						SQLManager.getInstance().getAdvisorArray().get(comboBoxResponsible.getSelectedIndex()).getId(),
+						SQLManager.getInstance().getAdvisorArray().get(comboBoxStandinResponsible.getSelectedIndex()).getId(),
+						textFieldfileName.getText() , textFieldfilePath.getText(),
+						textFieldnoteOther.getText()))
+						,comboBoxorderStatus.getSelectedIndex());
+
+					//Emre -
 					refreshTable();
 					refreshTableDeleteOrder();
+					
 					textFieldorderTitel.setText("");
-					comboBoxorderTyp.setSelectedIndex(0);
+					comboBoxorderTyp.setSelectedIndex(-1);
+					comboBoxorderCustomer.setSelectedIndex(-1);
+					comboBoxResponsible.setSelectedIndex(-1);
+					comboBoxStandinResponsible.setSelectedIndex(-1);
 					textFieldactualCosts.setText("");
 					textFieldnoteOther.setText("");
 					textFieldpredictedCosts.setText("");
 					textFieldfilePath.setText("");
 					textFieldfileName.setText("");
-					comboBoxorderStatus.setSelectedIndex(0);
+					comboBoxorderStatus.setSelectedIndex(-1);
 				} catch (Exception a) {
 					a.printStackTrace();
 				}
