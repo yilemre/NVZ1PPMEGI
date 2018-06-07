@@ -314,7 +314,7 @@ public class SQLManager {
 
 	public int deleteOrderFromDB(int id) throws SQLException{
 		Statement stmt = c.createStatement();
-		String sql ="DELETE FROM Orders, OrderStatus WHERE Orders.idOrder = OrderStatus.idOrder AND idOrder ="+id;
+		String sql ="DELETE FROM Orders WHERE idOrder="+id;
 		stmt.executeUpdate(sql);
 		stmt.close();
 		return id;
@@ -322,11 +322,12 @@ public class SQLManager {
 
 	public void modifyOrder(int id, String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
 		Statement stmt = c.createStatement();
-		String sql ="UPDATE Orders SET titel='"+title+"',type='"+type+"',projectedCosts='"+projectedCosts+"' ,realCosts='"+realCosts+"' ,idCustomer='"+idCustomer+"' ,idAdvisor='"+idAdvisor+"' ,idSecondaryAdvisor ='"+idSecondaryAdvisor+"',fileName="+fileName+",fileLocation='"+fileLocation+"',note='"+note+"' WHERE idOrder="+id+";";
+		String sql ="UPDATE Orders SET titel='"+title+"',type="+type+",projectedCosts="+projectedCosts+" ,realCosts="+realCosts+" ,idCustomer="+idCustomer+" ,idAdvisor="+idAdvisor+" ,idSecondaryAdvisor ="+idSecondaryAdvisor+",fileName='"+fileName+",fileLocation='"+fileLocation+"',note='"+note+"' WHERE idOrder="+id+";";
 		stmt.executeUpdate(sql);
 		stmt.close();
 	}
-		
+	
+	//i think we dont need this method 'cause we don't actually overwrite a row in this table!
 	public void changeOrderStatus(int id, int status) throws SQLException{
 		Statement stmt = c.createStatement(); 
 		String sql = "UPDATE OrderStatus SET status='"+status+"' WHERE idOrder="+id;
@@ -336,10 +337,10 @@ public class SQLManager {
 	
 
 	// search methods
-	public List<Order> getOrdersByTitle(String title) throws SQLException {
+	public List<Order> getOrdersByTitle(String titel) throws SQLException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
-		String sql = "SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder HAVING title='"+title+"';";
+		String sql = "SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder HAVING titel='"+titel+"';";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
 			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"),rs.getInt("status"), rs.getString("timestamp"));

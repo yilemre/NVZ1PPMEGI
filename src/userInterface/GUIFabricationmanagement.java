@@ -577,16 +577,16 @@ public class GUIFabricationmanagement {
 		gbc_lblorderTypModify.gridx = 0;
 		gbc_lblorderTypModify.gridy = 3;
 		panelmodify.add(lblorderTypModify, gbc_lblorderTypModify);
-
-		JComboBox comboBoxtypModify = new JComboBox();
-		comboBoxtypModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBoxtypModify.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
-		GridBagConstraints gbc_comboBoxtypModify = new GridBagConstraints();
-		gbc_comboBoxtypModify.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxtypModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxtypModify.gridx = 2;
-		gbc_comboBoxtypModify.gridy = 3;
-		panelmodify.add(comboBoxtypModify, gbc_comboBoxtypModify);
+		
+		comboBoxTypeModify = new JComboBox();
+		comboBoxTypeModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxTypeModify.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
+		GridBagConstraints gbc_comboBoxTypeModify = new GridBagConstraints();
+		gbc_comboBoxTypeModify.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxTypeModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxTypeModify.gridx = 2;
+		gbc_comboBoxTypeModify.gridy = 3;
+		panelmodify.add(comboBoxTypeModify, gbc_comboBoxTypeModify);
 
 		JLabel lblnoteOtherModify = new JLabel("Notiz zu Sonstiges");
 		lblnoteOtherModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -755,7 +755,7 @@ public class GUIFabricationmanagement {
 		gbc_lblmodifyOrderStatus.gridy = 11;
 		panelmodify.add(lblmodifyOrderStatus, gbc_lblmodifyOrderStatus);
 
-		JComboBox comboBoxModifyStatus = new JComboBox();
+		comboBoxModifyStatus = new JComboBox();
 		comboBoxModifyStatus.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxModifyStatus.setModel(new DefaultComboBoxModel(comboBoxStatusEntries.toArray()));
 		GridBagConstraints gbc_comboBoxModifyStatus = new GridBagConstraints();
@@ -871,7 +871,7 @@ public class GUIFabricationmanagement {
 				try {
 					 ProductionManagement.modifyOrder(Integer.parseInt(textFieldorderIDModify.getText()),
 							textFieldorderTitelModify.getText(), 
-							comboBoxtypModify.getSelectedIndex(),
+							comboBoxTypeModify.getSelectedIndex(),
 							Double.parseDouble(textFieldpredictedCostsModify.getText()),
 							Double.parseDouble(textFieldactualCostsModify.getText()),
 							SQLManager.getInstance().getCustomerArray().get(comboBoxorderCustomerModify.getSelectedIndex()).getId(), 
@@ -880,7 +880,7 @@ public class GUIFabricationmanagement {
 							textFieldfileNameModify.getText(),
 							textFieldfilePathModify.getText(), 
 							textFieldnoteOtherModify.getText());
-					ProductionManagement.changeOrderStatus(Integer.parseInt(textFieldorderIDModify.getText()), comboBoxModifyStatus.getSelectedIndex());
+					ProductionManagement.addOrderStatus(Integer.parseInt(textFieldorderIDModify.getText()), comboBoxModifyStatus.getSelectedIndex());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1147,7 +1147,7 @@ public class GUIFabricationmanagement {
 			textFieldfileNameModify.setText((String) table.getValueAt(table.getSelectedRow(), 8).toString());
 			textFieldpredictedCostsModify.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
 			textFieldactualCostsModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
-			//comboBoxModifyStatus.setSelectedIndex(comboBoxStatusEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
+			comboBoxModifyStatus.setSelectedIndex(comboBoxStatusEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
 
 			//Emre begin
 			comboBoxorderCustomerModify.setSelectedIndex(getCorrectCustomerIndex(table.getValueAt(table.getSelectedRow(), 5).toString()));
