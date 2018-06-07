@@ -124,6 +124,7 @@ public class GUIFinanceManagement {
 		comboBoxStatusEntries.add("Bezahlt");
 		
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setUndecorated(true);
 	
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
