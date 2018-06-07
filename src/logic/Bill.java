@@ -3,54 +3,46 @@ import java.sql.Timestamp;
 
 
 public class Bill {
-    private final int bill_id;
-    private static int count_id = 0; 
-    private final Timestamp bill_date; 
-    private String billName;
-    private int billStatus;
+    private int id;
+    private String name;
+    private int status;
     private int payKind;
     private double amount;
+    private int idOrder;
+    private int idPot;
+    private int idRegister;
     
-    Bill(String name, int status,int payKind, double amount){
-	this.bill_id = count_id; 
-	count_id++; 
-	this.bill_date = new Timestamp(System.currentTimeMillis()); 
-	this.billName = name; 
-	this.billStatus = status; 
+    public Bill(int id, int idOrder, int idPot, int idRegister, String name, int payKind, double amount, int status){
+    this.id = id;
+	this.name = name; 
+	this.status = status; 
 	this.payKind = payKind; 
 	this.amount = amount; 
+	this.status = status;
     }
     
-    public int getBill_id() {
-        return bill_id;
-    }
-
-    public static int getCount_id() {
-        return count_id;
-    }
-
-    public static void setCount_id(int count_id) {
-        Bill.count_id = count_id;
-    }
-
-    public Timestamp getBill_date() {
-        return bill_date;
+    public Bill(){
+    	
     }
     
-    public String getBillName() {
-        return billName;
+    public int getId() {
+        return id;
     }
 
-    public void setBillName(String billName) {
-        this.billName = billName;
+    public String getName() {
+        return name;
     }
 
-    public int getBillStatus() {
-        return billStatus;
+    public void setname(String name) {
+        this.name = name;
     }
 
-    public void setBillStatus(int billStatus) {
-        this.billStatus = billStatus;
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public int getPayKind() {
@@ -68,6 +60,39 @@ public class Bill {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-    
-    
+
+	public int getIdOrder() {
+		return idOrder;
+	}
+
+	public void setIdOrder(int idOrder) {
+		this.idOrder = idOrder;
+	}
+
+	public int getIdPot() {
+		return idPot;
+	}
+
+	public void setIdPot(int idPot) {
+		this.idPot = idPot;
+	}
+
+	public int getIdRegister() {
+		return idRegister;
+	}
+
+	public void setIdRegister(int idRegister) {
+		this.idRegister = idRegister;
+	}
+   
+	public String getReadableStatus(int status) {
+		switch (status) {
+		case 0:
+			return "Nicht bezahlt";
+		case 1:
+			return "Bezahlt";
+		default:
+			return "Das passiert nicht!";
+		}
+	}
 }

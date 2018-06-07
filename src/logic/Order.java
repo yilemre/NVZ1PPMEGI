@@ -163,4 +163,8 @@ public class Order {
 			return "Das passiert nicht!";
 		}
 	}
+	
+    public String toString() {
+    	return "ID: " + id + ", Name: " + title; 
+        }
 }
