@@ -436,7 +436,7 @@ public class SQLManager {
 	
 	//Financial SQL by Nico
 	
-	public int addRegistertoDB(double debitAmount, double actualAmount, String name, int type) throws SQLException{
+	public int addRegistertoDB(double actualAmount, double debitAmount, String name, int type) throws SQLException{
 		int result = 0;
 		Statement stmt = c.createStatement();
 		String sql ="INSERT INTO Registers (debitAmount, actualAmount, name, type) VALUES ('"+debitAmount+"','"+actualAmount+"','"+name+"','"+type+"')";
@@ -449,9 +449,9 @@ public class SQLManager {
 		return result;
 	}
 		
-	public void modifyRegister(double debitAmount, double actualAmount, String name, int type) throws SQLException{
+	public void modifyRegister(int id, double actualAmount, double debitAmount, String name, int type) throws SQLException{
 		Statement stmt = c.createStatement();
-		stmt.executeUpdate("UPDATE Registers SET debitAmount = '"+debitAmount+"', actualAmount = '"+actualAmount+"', name ='"+name+"', type ='"+type);
+		stmt.executeUpdate("UPDATE Registers SET debitAmount = '"+debitAmount+"', actualAmount = '"+actualAmount+"', name ='"+name+"', type ='"+type+"' WHERE idRegister='"+id);
 		stmt.close();
 	}
 	
@@ -475,7 +475,7 @@ public class SQLManager {
 		return id;
 	}
 	
-	public int addPottoDB(double debitAmount, double actualAmount, String name, int idRegister) throws SQLException{
+	public int addPottoDB(double actualAmount, double debitAmount, String name, int idRegister) throws SQLException{
 		int result = 0;
 		Statement stmt = c.createStatement();
 		String sql ="INSERT INTO Pots (debitAmount, actualAmount, name, idRegister) VALUES ('"+debitAmount+"','"+actualAmount+"','"+name+"','"+idRegister+"')";
@@ -488,9 +488,9 @@ public class SQLManager {
 		return result;
 	}
 		
-	public void modifyPot(double debitAmount, double actualAmount, String name, int idRegister) throws SQLException{
+	public void modifyPot(int id, double actualAmount, double debitAmount, String name, int idRegister) throws SQLException{
 		Statement stmt = c.createStatement();
-		stmt.executeUpdate("UPDATE Pots SET debitAmount = '"+debitAmount+"', actualAmount = '"+actualAmount+"', name ='"+name+"', idRegister ='"+idRegister);
+		stmt.executeUpdate("UPDATE Pots SET debitAmount = '"+debitAmount+"', actualAmount = '"+actualAmount+"', name ='"+name+"', idRegister ='"+idRegister+"' WHERE idPots='"+id);
 		stmt.close();
 	}
 	

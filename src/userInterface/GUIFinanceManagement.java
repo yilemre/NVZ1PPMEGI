@@ -1272,8 +1272,10 @@ public class GUIFinanceManagement {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					 FinancialManagement.addPot(
-							 //dummy
-							 );
+							 textFieldjarName.getText(), 
+							 Double.parseDouble(textFieldjarActualStock.getText()),
+							 Double.parseDouble(textFieldjarEstimatedStock.getText()),  
+							 SQLManager.getInstance().getRegisterArray().get(comboBoxPotRegisterID.getSelectedIndex()).getId());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1282,6 +1284,10 @@ public class GUIFinanceManagement {
 					e1.printStackTrace();
 				}
 				refreshTableJar();
+				textFieldjarName.setText("");
+				textFieldjarActualStock.setText("");
+				textFieldjarEstimatedStock.setText("");
+				comboBoxPotRegisterID.setSelectedIndex(0);
 			}
 		});
 		btnaddJar.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1297,8 +1303,11 @@ public class GUIFinanceManagement {
 				public void actionPerformed(ActionEvent e) {
 					try {
 						 FinancialManagement.modifyPot(
-								 //dummy
-								 );
+								 Integer.parseInt(textFieldPotIDModify.getText()),
+								 Double.parseDouble(textFieldjarActualStockModify.getText()),
+								 Double.parseDouble(textFieldjarEstimatedStockModify.getText()), 
+								 textFieldjarNameModify.getText(),  
+								 SQLManager.getInstance().getRegisterArray().get(comboBoxPotRegisterIDModify.getSelectedIndex()).getId());
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -1307,6 +1316,11 @@ public class GUIFinanceManagement {
 						e1.printStackTrace();
 					}
 					refreshTableJar();
+					textFieldPotIDModify.setText("");
+					textFieldjarNameModify.setText("");
+					textFieldjarActualStockModify.setText("");
+					textFieldjarEstimatedStockModify.setText("");
+					comboBoxPotRegisterIDModify.setSelectedIndex(0);
 				}
 			});
 		btnjarSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 15));

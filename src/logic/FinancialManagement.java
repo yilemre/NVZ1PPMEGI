@@ -73,11 +73,11 @@ public class FinancialManagement {
 	
 	
 	public static int addPot(String name, double actualAmount, double debitAmount, int idRegister) throws SQLException {
-		return SQLManager.getInstance().addPottoDB(debitAmount, debitAmount, name, idRegister);	
+		return SQLManager.getInstance().addPottoDB(actualAmount, debitAmount, name, idRegister);	
 	}
 	
-	public void modifyPot(double debitAmount, double actualAmount, String name, int idRegister) throws SQLException {
-		SQLManager.getInstance().modifyPot(debitAmount, actualAmount, name, idRegister);
+	public static void modifyPot(int id, double actualAmount, double debitAmount, String name, int idRegister) throws SQLException {
+		SQLManager.getInstance().modifyPot(id, actualAmount, debitAmount, name, idRegister);
 	}
 	
 	public static void deletePot(int id) throws SQLException {
@@ -90,11 +90,11 @@ public class FinancialManagement {
 	  }
 	
 	public static int addRegister(String name, double actualAmount, double debitAmount, int type) throws SQLException {
-		return SQLManager.getInstance().addRegistertoDB(debitAmount, debitAmount, name, type);
+		return SQLManager.getInstance().addRegistertoDB(actualAmount, debitAmount, name, type);
 	}
 	
-	public void modifyRegister(double debitAmount, double actualAmount, String name, int type) throws SQLException {
-		SQLManager.getInstance().modifyRegister(debitAmount, actualAmount, name, type);
+	public static void modifyRegister(int id, double actualAmount, double debitAmount, String name, int type) throws SQLException {
+		SQLManager.getInstance().modifyRegister(id, actualAmount, debitAmount, name, type);
 	}
 	
 	public static void deleteCashRegister(int id) throws SQLException {
