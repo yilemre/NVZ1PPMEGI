@@ -95,8 +95,12 @@ public class GUIFinanceManagement {
 	private JTable tableDeleteBill;
 	private JTable tableJar;
 	
+	private JComboBox comboBoxrelatedOrder;
+	
 	JComboBox comboBoxpaymentTypModify = new JComboBox();
 	JComboBox comboBoxpaymentTyp = new JComboBox();
+	JComboBox comboBoxCashRegisterTypeModify = new JComboBox();
+	JComboBox comboBoxPotRegisterIDModify = new JComboBox();
 	
 	private List<String> comboBoxEntries;
 	private List<String> comboBoxStatusEntries;
@@ -1718,7 +1722,7 @@ public class GUIFinanceManagement {
 		mnNewMenuOptions.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		menuBar.add(mnNewMenuOptions);
 		
-		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmen\u00FC");
+		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmenü");
 		mntmNewMenuItembacktoMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -1785,7 +1789,125 @@ public class GUIFinanceManagement {
 	
 	protected void handleEditOrderSelectionEvent(ListSelectionEvent e) {
 		// TODO Auto-generated method stub
+		if (tableNewBill.getSelectedRow() > -1) {
+			comboBoxrelatedOrder.setSelectedIndex(getCorrectOrderIndex(tableNewBill.getValueAt(tableNewBill.getSelectedRow(), 0).toString()));
+			textFieldcustomerID.setText((String) tableNewBill.getValueAt(tableNewBill.getSelectedRow(), 5).toString());
+			textresponsiblePerson.setText((String) tableNewBill.getValueAt(tableNewBill.getSelectedRow(), 6).toString());
+		}
+		if(tableBillModify.getSelectedRow() > -1) {
+			textFieldBillIDModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 0).toString());
+			textFieldcustomerIDModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 5).toString());
+			textFieldrelatedPersonModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 6).toString());
+		}
+		if(tableJar.getSelectedRow() > -1) {
+			textFieldPotIDModify.setText((String) tableJar.getValueAt(tableJar.getSelectedRow(), 0).toString());
+			textFieldjarNameModify.setText((String) tableJar.getValueAt(tableJar.getSelectedRow(), 1).toString());
+			textFieldjarActualStockModify.setText((String) tableJar.getValueAt(tableJar.getSelectedRow(), 2).toString());
+			textFieldjarEstimatedStockModify.setText((String) tableJar.getValueAt(tableJar.getSelectedRow(), 3).toString());
+			//comboBoxPotRegisterIDModify.setSelectedIndex(getCorrectCashRegisterIndex(tableJar.getValueAt(tableJar.getSelectedRow(), 4).toString()));
+		}
+		if(tableCashRegister.getSelectedRow() > -1) {
+			textFieldCashRegisterIDModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 0).toString());
+			textFieldCashRegisterNameModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 1).toString());
+			textFieldcashRegisterActualStockModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 2).toString());
+			textFieldcashRegisterEstimatedStockModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 3).toString());
+			//comboBoxCashRegisterTypeModify.setSelectedIndex(tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 4).toString());
+		}
+	}
+	
+	private int getCorrectCashRegisterIndex(String value) {
+	    // TODO Auto-generated method stub
+	    int x = Integer.parseInt(value); 
+	    try {
+		for(int i = 0; i<FinancialManagement.getRegisterArray().size();i++) {
+		if(FinancialManagement.getRegisterArray().get(i).getId()== x) {
+		    return i; 
+		}
 		
+		}
+	    } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	    
+	    
+	    return -1;
+	}
+	
+	private int getCorrectPotIndex(String value) {
+	    // TODO Auto-generated method stub
+	    int x = Integer.parseInt(value); 
+	    try {
+		for(int i = 0; i<FinancialManagement.getPotArray().size();i++) {
+		if(FinancialManagement.getPotArray().get(i).getId()== x) {
+		    return i; 
+		}
+		
+		}
+	    } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	    
+	    
+	    return -1;
+	}
+	
+	private int getCorrectOrderIndex(String value) {
+	    // TODO Auto-generated method stub
+	    int x = Integer.parseInt(value); 
+	    try {
+		for(int i = 0; i<FinancialManagement.getOrders().size();i++) {
+		if(FinancialManagement.getOrders().get(i).getOrderId()== x) {
+		    return i; 
+		}
+		
+		}
+	    } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	    
+	    
+	    return -1;
+	}
+
+	private int getCorrectCustomerIndex(String value) {
+	    // TODO Auto-generated method stub
+	    int x = Integer.parseInt(value); 
+	    try {
+		for(int i = 0; i<FinancialManagement.getCustomerArray().size();i++) {
+		if(FinancialManagement.getCustomerArray().get(i).getId()== x) {
+		    return i; 
+		}
+		
+		}
+	    } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	    
+	    
+	    return -1;
+	}
+	
+	private int getCorrectAdvisorIndex(String value) {
+	    // TODO Auto-generated method stub
+	    int x = Integer.parseInt(value); 
+	    try {
+		for(int i = 0; i<FinancialManagement.getAdvisorArray().size();i++) {
+		if(FinancialManagement.getAdvisorArray().get(i).getId()== x) {
+		    return i; 
+		}
+		
+		}
+	    } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	    
+	    
+	    return -1;
 	}
 
 	protected void refreshTableNewBill() {

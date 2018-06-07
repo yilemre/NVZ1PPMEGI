@@ -500,7 +500,7 @@ public class SQLManager {
 		   String sql = "SELECT * FROM Pots";
 		   ResultSet rs = stmt.executeQuery(sql);
 		   while(rs.next()){
-			   	Pot temp = new Pot(rs.getInt("idPot"), rs.getString("name"), rs.getDouble("debitAmount"), rs.getDouble("actualAmount"), rs.getInt("idRegister"));
+			   	Pot temp = new Pot(rs.getInt("idPots"), rs.getString("name"), rs.getDouble("debitAmount"), rs.getDouble("actualAmount"), rs.getInt("idRegister"));
 				result.add(temp);	   
 		   }
 		   return result; 
