@@ -84,7 +84,7 @@ public class GUIFabricationmanagement {
 	private JComboBox comboBoxorderStatus = new JComboBox();
 	private JComboBox comboBoxStandinResponsiblePersonModify;
 	private JComboBox comboBoxResponsiblePersonModify;
-	private JComboBox comboBoxtypModify;
+	private JComboBox comboBoxTypeModify;
 	private JComboBox comboBoxModifyStatus;
 	private JComboBox comboBoxorderCustomer;
 	private JComboBox comboBoxorderCustomerModify;
@@ -1138,11 +1138,10 @@ public class GUIFabricationmanagement {
 	}
 	
 	protected void handleEditOrderSelectionEvent(ListSelectionEvent e) {
-		// TODO Auto-generated method stub
 		if (table.getSelectedRow() > -1) {
 			textFieldorderIDModify.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
 			textFieldorderTitelModify.setText((String) table.getValueAt(table.getSelectedRow(), 1).toString());
-			//comboBoxtypModify.setSelectedIndex(comboBoxEntries.indexOf(table.getValueAt(table.getSelectedRow(), 2).toString()));
+			comboBoxTypeModify.setSelectedIndex(comboBoxEntries.indexOf((String)table.getValueAt(table.getSelectedRow(), 2)));
 			textFieldnoteOtherModify.setText((String) table.getValueAt(table.getSelectedRow(), 10).toString());
 			textFieldfilePathModify.setText((String) table.getValueAt(table.getSelectedRow(), 9).toString());
 			textFieldfileNameModify.setText((String) table.getValueAt(table.getSelectedRow(), 8).toString());

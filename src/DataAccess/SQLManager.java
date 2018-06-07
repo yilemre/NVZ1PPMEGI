@@ -295,7 +295,7 @@ public class SQLManager {
 		rs.next();
 		result = rs.getInt(1);
 		rs.close();
-		stmt.close();	
+		stmt.close();
 		return result;
 	}
 	
@@ -339,9 +339,10 @@ public class SQLManager {
 	public List<Order> getOrdersByTitle(String title) throws SQLException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Orders, OrderStatus WHERE Orders.idOrder = OrderStatus.idOrder AND titel LIKE '"+title+"'");
+		String sql = "SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder HAVING title='"+title+"';";
+		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"),rs.getInt("status"));
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"),rs.getInt("status"), rs.getString("timestamp"));
 			result.add(temp);			
 		}
 
@@ -354,10 +355,10 @@ public class SQLManager {
 	public List<Order> getOrdersByType(int type) throws SQLException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
-		String sql = "SELECT * FROM Orders, OrderStatus WHERE Orders.idOrder = OrderStatus.idOrder AND type='"+type+"'";
+		String sql = "SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder HAVING type="+type+";";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"),rs.getInt("status"));
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"),rs.getInt("status"), rs.getString("timestamp"));
 			result.add(temp);
 		}
 
@@ -370,10 +371,10 @@ public class SQLManager {
 	public List<Order> getOrders() throws SQLException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
-		String sql = "SELECT * FROM Orders, OrderStatus WHERE Orders.idOrder = OrderStatus.idOrder";
+		String sql = "SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"));
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
 
 			result.add(temp);			
 		}
@@ -385,10 +386,10 @@ public class SQLManager {
 	public List<Order> getOrdersByStatus(int status) throws SQLException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
-		String sql = "SELECT * FROM Orders, OrderStatus WHERE Orders.idOrder = OrderStatus.idOrder AND status='"+status+"'";
+		String sql = "SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder HAVING status="+status+";";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"));
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
 			result.add(temp);			
 		}
 		

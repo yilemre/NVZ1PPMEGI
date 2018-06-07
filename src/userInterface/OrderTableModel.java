@@ -10,7 +10,7 @@ import logic.*;
 public class OrderTableModel extends AbstractTableModel {
 	
 	private List<Order> list = new ArrayList<Order>();
-	private String[] columns = {"ID", "Titel", "Typ", "Prognostizierte Kosten", "Reelle Kosten", "Kundennummer", "Verantwortlicher", "Vertreter", "Dateiname", "Dateipfad", "Notiz", "Status"};
+	private String[] columns = {"ID", "Titel", "Typ", "Prognostizierte Kosten", "Reelle Kosten", "Kundennummer", "Verantwortlicher", "Vertreter", "Dateiname", "Dateipfad", "Notiz", "Status", "Timestamp"};
 
 	public OrderTableModel(List<Order> list) {
 		this.list=list;
@@ -24,7 +24,7 @@ public class OrderTableModel extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 12;
+		return 13;
 	}
 
 	@Override
@@ -59,6 +59,8 @@ public class OrderTableModel extends AbstractTableModel {
 				return String.class;
 			case 11:
 				return String.class;
+			case 12:
+				return String.class;
 			default:
 				return null; //should not happen
 		}
@@ -91,6 +93,8 @@ public class OrderTableModel extends AbstractTableModel {
 			return list.get(rowIndex).getNotes();
 		case 11:
 			return list.get(rowIndex).getReadableStatus(list.get(rowIndex).getStatus());
+		case 12:
+			return list.get(rowIndex).getTimestamp();
 		default: 
 			return null; //can not happen
 		}

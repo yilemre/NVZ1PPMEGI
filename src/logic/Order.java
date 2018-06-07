@@ -16,8 +16,9 @@ public class Order {
 	private String fileName;
 	private String fileLocation;
 	private int status;
+	private String timestamp;
 	
-	public Order(int id, String title, int type, double forecastedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String notes, String fileName, String fileLocation, int status) {
+	public Order(int id, String title, int type, double forecastedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String notes, int status, String timestamp) {
 		this.id = id;
 		this.title = title;
 		this.type = type;
@@ -30,8 +31,9 @@ public class Order {
 		this.fileName = fileName;
 		this.fileLocation = fileLocation;
 		this.status = status;
+		this.timestamp = timestamp;
 	}
-	
+
 	public Order(){
 		
 	}
@@ -127,6 +129,11 @@ public class Order {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
+	public String getTimestamp() {
+		return timestamp;
+	}
+
 	
 	public String getReadableStatus(int status) {
 		switch (status) {
