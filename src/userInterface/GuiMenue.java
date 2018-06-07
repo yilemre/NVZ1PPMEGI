@@ -100,23 +100,23 @@ public class GuiMenue implements ActionListener {
 		btnfinanceManagement = new JButton("Finanzverwaltung");
 		btnfinanceManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnfinanceManagement.addActionListener(this);
+		
+				btnorderManagement = new JButton("Auftragsverwaltung");
+				btnorderManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				btnorderManagement.addActionListener(this);
+				GridBagConstraints gbc_btnorderManagement = new GridBagConstraints();
+				gbc_btnorderManagement.fill = GridBagConstraints.HORIZONTAL;
+				gbc_btnorderManagement.insets = new Insets(0, 0, 5, 0);
+				gbc_btnorderManagement.gridx = 0;
+				gbc_btnorderManagement.gridy = 2;
+				frmElabVerwaltungsprogramm.getContentPane().add(btnorderManagement, gbc_btnorderManagement);
 
 		GridBagConstraints gbc_btnfinanceManagement = new GridBagConstraints();
 		gbc_btnfinanceManagement.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnfinanceManagement.insets = new Insets(0, 0, 5, 0);
 		gbc_btnfinanceManagement.gridx = 0;
-		gbc_btnfinanceManagement.gridy = 2;
+		gbc_btnfinanceManagement.gridy = 3;
 		frmElabVerwaltungsprogramm.getContentPane().add(btnfinanceManagement, gbc_btnfinanceManagement);
-
-		btnorderManagement = new JButton("Auftragsverwaltung");
-		btnorderManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnorderManagement.addActionListener(this);
-		GridBagConstraints gbc_btnorderManagement = new GridBagConstraints();
-		gbc_btnorderManagement.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnorderManagement.insets = new Insets(0, 0, 5, 0);
-		gbc_btnorderManagement.gridx = 0;
-		gbc_btnorderManagement.gridy = 3;
-		frmElabVerwaltungsprogramm.getContentPane().add(btnorderManagement, gbc_btnorderManagement);
 
 		btncomponentManagement = new JButton("Bauteileverwaltung");
 		btncomponentManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
