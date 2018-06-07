@@ -98,6 +98,7 @@ public class GUIFinanceManagement {
 	
 	private List<String> comboBoxEntries;
 	private List<String> comboBoxStatusEntries;
+	private JTextField textField;
 	
 	/**
 	 * Launch the application.
@@ -124,7 +125,6 @@ public class GUIFinanceManagement {
 		
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setUndecorated(true);
-		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 	
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
@@ -156,9 +156,9 @@ public class GUIFinanceManagement {
 		tabbedPane.addTab("Rechnung erstellen", null, panelcreateBill, null);
 		GridBagLayout gbl_panelcreateBill = new GridBagLayout();
 		gbl_panelcreateBill.columnWidths = new int[]{0, 0, 0};
-		gbl_panelcreateBill.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panelcreateBill.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panelcreateBill.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelcreateBill.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelcreateBill.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0};
 		panelcreateBill.setLayout(gbl_panelcreateBill);
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -191,6 +191,7 @@ public class GUIFinanceManagement {
 		JLabel lblrelatedOrder = new JLabel("dazugehöriger Auftrag");
 		lblrelatedOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblrelatedOrder = new GridBagConstraints();
+		gbc_lblrelatedOrder.gridy = 2;
 		gbc_lblrelatedOrder.anchor = GridBagConstraints.EAST;
 		gbc_lblrelatedOrder.insets = new Insets(0, 0, 5, 5);
 		gbc_lblrelatedOrder.gridx = 0;
@@ -511,18 +512,27 @@ public class GUIFinanceManagement {
 		
 		btnnewbillOrderSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnnewbillOrderSearch = new GridBagConstraints();
+		gbc_btnnewbillOrderSearch.insets = new Insets(0, 0, 5, 0);
 		gbc_btnnewbillOrderSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnnewbillOrderSearch.gridx = 1;
 		gbc_btnnewbillOrderSearch.gridy = 14;
 		panelcreateBill.add(btnnewbillOrderSearch, gbc_btnnewbillOrderSearch);
 		
+		JButton btnclearSearchBillNew = new JButton("Suche aufheben");
+		btnclearSearchBillNew.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_btnclearSearchBillNew = new GridBagConstraints();
+		gbc_btnclearSearchBillNew.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnclearSearchBillNew.gridx = 1;
+		gbc_btnclearSearchBillNew.gridy = 15;
+		panelcreateBill.add(btnclearSearchBillNew, gbc_btnclearSearchBillNew);
+		
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Rechnung ändern", null, panel, null);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0};
 		panel.setLayout(gbl_panel);
 		
 		JLabel label = new JLabel("");
@@ -545,7 +555,7 @@ public class GUIFinanceManagement {
 		textFieldBillIDModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldBillIDModify.setEditable(false);
 		GridBagConstraints gbc_textFieldBillIDModify = new GridBagConstraints();
-		gbc_textFieldBillIDModify.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldBillIDModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldBillIDModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldBillIDModify.gridx = 1;
 		gbc_textFieldBillIDModify.gridy = 1;
@@ -885,12 +895,39 @@ public class GUIFinanceManagement {
 			}
 		});
 		
+		JComboBox comboBoxsearchBillModify = new JComboBox();
+		comboBoxsearchBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_comboBoxsearchBillModify = new GridBagConstraints();
+		gbc_comboBoxsearchBillModify.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxsearchBillModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxsearchBillModify.gridx = 0;
+		gbc_comboBoxsearchBillModify.gridy = 14;
+		panel.add(comboBoxsearchBillModify, gbc_comboBoxsearchBillModify);
+		
+		textField = new JTextField();
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 5, 0);
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 1;
+		gbc_textField.gridy = 14;
+		panel.add(textField, gbc_textField);
+		textField.setColumns(10);
+		
 		btnSearchBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnSearchBillModify = new GridBagConstraints();
-		gbc_btnSearchBillModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnSearchBillModify.insets = new Insets(0, 0, 5, 0);
+		gbc_btnSearchBillModify.fill = GridBagConstraints.BOTH;
 		gbc_btnSearchBillModify.gridx = 1;
-		gbc_btnSearchBillModify.gridy = 14;
+		gbc_btnSearchBillModify.gridy = 15;
 		panel.add(btnSearchBillModify, gbc_btnSearchBillModify);
+		
+		JButton btnclearSearchbillModify = new JButton("Suche aufgeben");
+		btnclearSearchbillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_btnclearSearchbillModify = new GridBagConstraints();
+		gbc_btnclearSearchbillModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnclearSearchbillModify.gridx = 1;
+		gbc_btnclearSearchbillModify.gridy = 16;
+		panel.add(btnclearSearchbillModify, gbc_btnclearSearchbillModify);
 		
 		JPanel paneldeleteBill = new JPanel();
 		tabbedPane.addTab("Rechnung löschen", null, paneldeleteBill, null);
