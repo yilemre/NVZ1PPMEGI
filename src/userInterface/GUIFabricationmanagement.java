@@ -1031,8 +1031,8 @@ public class GUIFabricationmanagement {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ProductionManagement.deleteOrder(Integer
-							.parseInt(TableDeleteOrder.getValueAt(TableDeleteOrder.getSelectedRow(), 0).toString()));
+					ProductionManagement.deleteOrder(
+							Integer.parseInt(TableDeleteOrder.getValueAt(TableDeleteOrder.getSelectedRow(), 0).toString()));
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

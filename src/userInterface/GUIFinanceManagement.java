@@ -1382,8 +1382,8 @@ public class GUIFinanceManagement {
 		btnjarDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					FinancialManagement.deletePot(Integer
-							.parseInt(tableJar.getValueAt(tableJar.getSelectedRow(), 0).toString()));
+					FinancialManagement.deletePot(
+							Integer.parseInt(tableJar.getValueAt(tableJar.getSelectedRow(), 0).toString()));
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1582,8 +1582,10 @@ public class GUIFinanceManagement {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					 FinancialManagement.addRegister(
-							 //dummy
-							 );
+							 textFieldcashRegisterName.getText(), 
+							 Double.parseDouble(textFieldcashRegisterActualStock.getText()),
+							 Double.parseDouble(textFieldcashRegisterEstimatedStock.getText()),  
+							 comboBoxCashRegisterType.getSelectedIndex());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1591,7 +1593,11 @@ public class GUIFinanceManagement {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				refreshTableJar();
+				refreshTableCashRegister();
+				textFieldcashRegisterName.setText("");
+				textFieldcashRegisterActualStock.setText("");
+				textFieldcashRegisterEstimatedStock.setText("");
+				comboBoxCashRegisterType.setSelectedIndex(0);
 			}
 		});
 		btnaddcashRegister.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1607,8 +1613,11 @@ public class GUIFinanceManagement {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					 FinancialManagement.modifyRegister(
-							 //dummy
-							 );
+							 Integer.parseInt(textFieldCashRegisterIDModify.getText()),
+							 Double.parseDouble(textFieldcashRegisterEstimatedStockModify.getText()), 
+							 Double.parseDouble(textFieldcashRegisterActualStockModify.getText()),
+							 textFieldCashRegisterNameModify.getText(),  
+							 comboBoxCashRegisterType.getSelectedIndex());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1616,7 +1625,12 @@ public class GUIFinanceManagement {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				refreshTableJar();
+				refreshTableCashRegister();
+				textFieldCashRegisterIDModify.setText("");
+				textFieldCashRegisterNameModify.setText("");
+				textFieldcashRegisterActualStockModify.setText("");
+				textFieldcashRegisterEstimatedStockModify.setText("");
+				comboBoxCashRegisterTypeModify.setSelectedIndex(0);
 			}
 		});
 		btncashRegisterSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 15));
