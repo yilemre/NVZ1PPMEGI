@@ -322,7 +322,7 @@ public class SQLManager {
 
 	public void modifyOrder(int id, String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
 		Statement stmt = c.createStatement();
-		String sql ="UPDATE Orders SET titel='"+title+"',type="+type+",projectedCosts="+projectedCosts+" ,realCosts="+realCosts+" ,idCustomer="+idCustomer+" ,idAdvisor="+idAdvisor+" ,idSecondaryAdvisor ="+idSecondaryAdvisor+",fileName='"+fileName+",fileLocation='"+fileLocation+"',note='"+note+"' WHERE idOrder="+id+";";
+		String sql ="UPDATE Orders SET titel='"+title+"',type="+type+",projectedCosts="+projectedCosts+" ,realCosts="+realCosts+" ,idCustomer="+idCustomer+" ,idAdvisor="+idAdvisor+" ,idSecondaryAdvisor ="+idSecondaryAdvisor+",fileName='"+fileName+"',fileLocation='"+fileLocation+"',note='"+note+"' WHERE idOrder="+id+";";
 		stmt.executeUpdate(sql);
 		stmt.close();
 	}
