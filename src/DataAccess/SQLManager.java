@@ -480,7 +480,7 @@ public class SQLManager {
 	public int addPottoDB(double actualAmount, double debitAmount, String name, int idRegister) throws SQLException{
 		int result = 0;
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO Pots (debitAmount, actualAmount, name, idRegister) VALUES ('"+debitAmount+"','"+actualAmount+"','"+name+"','"+idRegister+"')";
+		String sql ="INSERT INTO Pots (debitAmount, actualAmount, name, idRegister) VALUES ("+debitAmount+","+actualAmount+",'"+name+"',"+idRegister+")";
 		stmt.executeUpdate(sql);
 		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Registers");
 		rs.next();
@@ -492,7 +492,8 @@ public class SQLManager {
 		
 	public void modifyPot(int id, double actualAmount, double debitAmount, String name, int idRegister) throws SQLException{
 		Statement stmt = c.createStatement();
-		stmt.executeUpdate("UPDATE Pots SET debitAmount = '"+debitAmount+"', actualAmount = '"+actualAmount+"', name ='"+name+"', idRegister ='"+idRegister+"' WHERE idPots='"+id);
+		String sql = "UPDATE Pots SET debitAmount = "+debitAmount+", actualAmount = "+actualAmount+", name ='"+name+"', idRegister ="+idRegister+" WHERE idPots="+id; 
+		stmt.executeUpdate(sql); 
 		stmt.close();
 	}
 	
@@ -510,7 +511,7 @@ public class SQLManager {
 	
 	public int deletePotFromDB(int id) throws SQLException{
 		Statement stmt = c.createStatement();
-		String sql ="DELETE FROM Pots WHERE idPot="+id;
+		String sql ="DELETE FROM Pots WHERE idPots="+id+";";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		return id;

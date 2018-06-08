@@ -48,6 +48,7 @@ import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
@@ -1278,7 +1279,7 @@ public class GUIFinanceManagement {
 					 FinancialManagement.addPot(
 							 textFieldjarName.getText(), 
 							 Double.parseDouble(textFieldjarActualStock.getText()),
-							 Double.parseDouble(textFieldjarEstimatedStock.getText()),  
+							 Double.parseDouble(textFieldjarEstimatedStock.getText()), 
 							 SQLManager.getInstance().getRegisterArray().get(comboBoxPotRegisterID.getSelectedIndex()).getId());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
@@ -1311,7 +1312,8 @@ public class GUIFinanceManagement {
 								 Double.parseDouble(textFieldjarActualStockModify.getText()),
 								 Double.parseDouble(textFieldjarEstimatedStockModify.getText()), 
 								 textFieldjarNameModify.getText(),  
-								 SQLManager.getInstance().getRegisterArray().get(comboBoxPotRegisterIDModify.getSelectedIndex()).getId());
+								 FinancialManagement.getRegisterArray().get(comboBoxPotRegisterIDModify.getSelectedIndex()).getId());
+								 //SQLManager.getInstance().getRegisterArray().get(comboBoxPotRegisterIDModify.getSelectedIndex()).getId());
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -1324,7 +1326,7 @@ public class GUIFinanceManagement {
 					textFieldjarNameModify.setText("");
 					textFieldjarActualStockModify.setText("");
 					textFieldjarEstimatedStockModify.setText("");
-					comboBoxPotRegisterIDModify.setSelectedIndex(0);
+					comboBoxPotRegisterIDModify.setSelectedIndex(-1);
 				}
 			});
 		btnjarSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1342,6 +1344,8 @@ public class GUIFinanceManagement {
 			textFieldjarName.setText("");
 			textFieldjarActualStock.setText("");
 			textFieldjarEstimatedStock.setText("");
+			comboBoxPotRegisterID.setSelectedIndex(0);
+			
 			}
 		});
 		btnjarClearInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1385,14 +1389,14 @@ public class GUIFinanceManagement {
 		JButton btnjarDelete = new JButton("Topf löschen");
 		btnjarDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					FinancialManagement.deletePot(
-							Integer.parseInt(tableJar.getValueAt(tableJar.getSelectedRow(), 0).toString()));
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				refreshTableJar();
+			    try {
+				FinancialManagement.deletePot(
+					Integer.parseInt(tableJar.getValueAt(tableJar.getSelectedRow(), 0).toString()));
+			    } catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			    }
+			    refreshTableJar();
 			}
 		});
 		
@@ -1596,6 +1600,17 @@ public class GUIFinanceManagement {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				}
+				
+				//Emre+
+				comboBoxPotRegisterID.removeAll();
+				try {
+				    for(int i = 0; i<FinancialManagement.getRegisterArray().size(); i++) {
+				        comboBoxPotRegisterID.addItem(FinancialManagement.getRegisterArray().get(i));
+				    }
+				} catch (SQLException e1) {
+				    // TODO Auto-generated catch block
+				    e1.printStackTrace();
 				}
 				refreshTableCashRegister();
 				textFieldcashRegisterName.setText("");
@@ -1820,16 +1835,14 @@ public class GUIFinanceManagement {
 	    int x = Integer.parseInt(value); 
 	    try {
 		for(int i = 0; i<FinancialManagement.getRegisterArray().size();i++) {
-		if(FinancialManagement.getRegisterArray().get(i).getId()== x) {
-		    return i; 
-		}
-		
+		    if(FinancialManagement.getRegisterArray().get(i).getId()== x) {
+			return i; 
+		    }
 		}
 	    } catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	    }
-	    
+	    }   
 	    
 	    return -1;
 	}
@@ -1942,7 +1955,7 @@ public class GUIFinanceManagement {
 	
 	protected void refreshTableJar() {
 		try {
-			tableJar.setModel(new OrderTableModel(FinancialManagement.getOrders()));
+			tableJar.setModel(new PotTableModel(FinancialManagement.getPotArray()));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -1952,7 +1965,7 @@ public class GUIFinanceManagement {
 	
 	protected void refreshTableCashRegister() {
 		try {
-			tableCashRegister.setModel(new OrderTableModel(FinancialManagement.getOrders()));
+			tableCashRegister.setModel(new CashRegisterTableModel(FinancialManagement.getRegisterArray()));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
