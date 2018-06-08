@@ -63,6 +63,11 @@ public class SQLManager {
 		stmt.close();
 
 	}		
+	public ResultSet getPersonByID(int id) throws SQLException {
+	    Statement stmt = c.createStatement(); 
+	    String sql = "SELECT idPerson, firstname, surname FROM Persons WHERE idPerson="+id+";"; 
+	    return stmt.executeQuery(sql);	    
+	}
 	//Emre end
 
 	public List<Person> getPersons() throws SQLException {
@@ -334,7 +339,13 @@ public class SQLManager {
 		stmt.executeUpdate(sql); 
 		stmt.close();
 	}
-	
+	//Emre+
+	public ResultSet getOrderByID(int id) throws SQLException {
+	    Statement stmt= c.createStatement(); 
+	    String sql = "SELECT * FROM Orders WHERE idOrder ="+id+";"; 
+	    return stmt.executeQuery(sql); 
+	}
+	//Emre- 
 
 	// search methods
 	public List<Order> getOrdersByTitle(String titel) throws SQLException {

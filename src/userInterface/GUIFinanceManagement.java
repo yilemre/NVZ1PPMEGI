@@ -16,6 +16,7 @@ import java.awt.BorderLayout;
 import javax.swing.JTextArea;
 import javax.swing.JInternalFrame;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
@@ -58,6 +59,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Frame;
+import java.awt.event.ItemEvent;
 
 public class GUIFinanceManagement {
 
@@ -214,6 +216,36 @@ public class GUIFinanceManagement {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		comboBoxrelatedOrder.addItemListener(new ItemListener() {
+			//Emre +
+		    public void itemStateChanged(ItemEvent arg0) {
+			    try {
+				//get idCustomer from selected OrderId, and get firstname and surname with this idCustomer 
+				
+				textFieldcustomerID.setText("ID: "+ 
+					FinancialManagement.getPersonByID((FinancialManagement.getOrderByID(FinancialManagement.getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId()).getInt(6))).getString(1)+
+					", "+ 
+					FinancialManagement.getPersonByID((FinancialManagement.getOrderByID(FinancialManagement.getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId()).getInt(6))).getString(2)
+					+ ", " + 
+					FinancialManagement.getPersonByID((FinancialManagement.getOrderByID(FinancialManagement.getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId()).getInt(6))).getString(3));
+				//see comment above, same with idAdvisor
+				textresponsiblePerson.setText("ID: " + 
+					FinancialManagement.getPersonByID((FinancialManagement.getOrderByID(FinancialManagement.getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId()).getInt(7))).getString(1)+ 
+					",  " + 
+					FinancialManagement.getPersonByID((FinancialManagement.getOrderByID(FinancialManagement.getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId()).getInt(7))).getString(2)+
+					", " + 
+					FinancialManagement.getPersonByID((FinancialManagement.getOrderByID(FinancialManagement.getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId()).getInt(7))).getString(3) 
+					);
+			    } catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			    } 
+				
+			}
+		});
+			//Emre -
+		
 		comboBoxrelatedOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxrelatedOrder = new GridBagConstraints();
 		gbc_comboBoxrelatedOrder.insets = new Insets(0, 0, 5, 0);
@@ -260,7 +292,7 @@ public class GUIFinanceManagement {
 		panelcreateBill.add(textFieldhouseNumber, gbc_textFieldhouseNumber);
 		textFieldhouseNumber.setColumns(10);
 		
-		JLabel lblcustomerID = new JLabel("Kundennummer");
+		JLabel lblcustomerID = new JLabel("Kunde");
 		lblcustomerID.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblcustomerID = new GridBagConstraints();
 		gbc_lblcustomerID.anchor = GridBagConstraints.EAST;
@@ -1559,7 +1591,7 @@ public class GUIFinanceManagement {
 		
 		JComboBox comboBoxCashRegisterType = new JComboBox();
 		comboBoxCashRegisterType.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBoxCashRegisterType.setModel(new DefaultComboBoxModel(new String[] {"Typ-1", "Typ-2", "Typ-3"}));
+		comboBoxCashRegisterType.setModel(new DefaultComboBoxModel(new String[] {"Barkasse", "Konto", "Kostenstelle"}));
 		GridBagConstraints gbc_comboBoxCashRegisterType = new GridBagConstraints();
 		gbc_comboBoxCashRegisterType.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxCashRegisterType.insets = new Insets(0, 0, 5, 5);
@@ -1826,7 +1858,7 @@ public class GUIFinanceManagement {
 			textFieldCashRegisterNameModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 1).toString());
 			textFieldcashRegisterActualStockModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 2).toString());
 			textFieldcashRegisterEstimatedStockModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 3).toString());
-			//comboBoxCashRegisterTypeModify.setSelectedIndex(tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 4).toString());
+			//comboBoxCashRegisterTypeModify.setSelectedIndex(Integer.parseInt(tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 4).toString()));
 		}
 	}
 	
