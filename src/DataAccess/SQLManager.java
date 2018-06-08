@@ -229,7 +229,7 @@ public class SQLManager {
 	public List<Component> getComponentsByArticlenumber(String articlenumber) throws SQLException {
 	    List<Component> result = new ArrayList<Component>(); 
 	    Statement stmt = c.createStatement(); 
-	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts WHERE articlenumber LIKE '" + articlenumber + "';"); 
+	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts WHERE articlenumber LIKE '%" + articlenumber + "%';"); 
 	    
 	    while (rs.next()) {
 		Component c = new Component(rs.getInt("idPart"),rs.getString("articlenumber"), rs.getString("name"), rs.getString("productlink"), rs.getDouble("price"), rs.getInt("storing"), rs.getInt("plannedAmount"), rs.getInt("orderedAmount"), rs.getString("storageLocation"),rs.getInt("idCategory"));
@@ -340,7 +340,7 @@ public class SQLManager {
 	public List<Order> getOrdersByTitle(String titel) throws SQLException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
-		String sql = "SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder HAVING titel='"+titel+"';";
+		String sql = "SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder HAVING titel LIKE'%"+titel+"%';";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
 			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"),rs.getInt("status"), rs.getString("timestamp"));

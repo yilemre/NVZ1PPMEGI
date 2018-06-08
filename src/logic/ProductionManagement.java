@@ -71,12 +71,12 @@ public class ProductionManagement {
 	}
 
 	public static List<Order> getOrdersByType(String searchValue) throws SQLException{
-		switch(searchValue){
-		case "3D-Druck":
+		switch(searchValue.toLowerCase()){
+		case "3d-druck":
 			return SQLManager.getInstance().getOrdersByType(0);
-		case "Leiterplatte":
+		case "leiterplatte":
 			return SQLManager.getInstance().getOrdersByType(1);
-		case "Sonstiges":
+		case "sonstiges":
 			return SQLManager.getInstance().getOrdersByType(2);
 		default:
 			return null;
@@ -84,22 +84,22 @@ public class ProductionManagement {
 	}
 
 	public static List<Order> getOrdersByStatus(String searchValues) throws SQLException {
-		switch(searchValues){
-		case "Angenommen":
+		switch(searchValues.toLowerCase()){
+		case "angenommen":
 			return SQLManager.getInstance().getOrdersByStatus(0);
-		case "Gefertigt":
+		case "gefertigt":
 			return SQLManager.getInstance().getOrdersByStatus(1);
-		case "Kosten kalkuliert":
+		case "kosten kalkuliert":
 			return SQLManager.getInstance().getOrdersByStatus(2);
-		case "Abgeholt":
+		case "abgeholt":
 			return SQLManager.getInstance().getOrdersByStatus(3);
-		case "Abgerechnet":
+		case "abgerechnet":
 			return SQLManager.getInstance().getOrdersByStatus(4);
-		case "Warten auf Material":
+		case "warten auf material":
 			return SQLManager.getInstance().getOrdersByStatus(5);
-		case "Fertigung unterbrochen/defekt":
+		case "fertigung unterbrochen/defekt":
 			return SQLManager.getInstance().getOrdersByStatus(6);
-		case "Rechnung erzeugt":
+		case "rechnung erzeugt":
 			return SQLManager.getInstance().getOrdersByStatus(7);
 		default:
 			return null;
