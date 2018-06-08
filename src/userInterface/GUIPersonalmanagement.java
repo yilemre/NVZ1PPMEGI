@@ -740,6 +740,7 @@ public class GUIPersonalmanagement{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					table.setModel(new PersonTableModel(PersonManagement.getPersons()));
+					textFieldsearchModifyPerson.setText("");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -861,6 +862,7 @@ public class GUIPersonalmanagement{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					TableDeletePerson.setModel(new PersonTableModel(PersonManagement.getPersons()));
+					textFieldsearchDeletePerson.setText("");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

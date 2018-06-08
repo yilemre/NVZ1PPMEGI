@@ -680,6 +680,7 @@ public class GUIFabricationmanagement {
 		panelmodify.add(lblactualCostsModify, gbc_lblactualCostsModify);
 
 		textFieldactualCostsModify = new JTextField();
+		textFieldactualCostsModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldactualCostsModify.setEditable(false);
 		GridBagConstraints gbc_textFieldactualCostsModify = new GridBagConstraints();
 		gbc_textFieldactualCostsModify.insets = new Insets(0, 0, 5, 5);
@@ -898,6 +899,7 @@ public class GUIFabricationmanagement {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					table.setModel(new OrderTableModel(ProductionManagement.getOrders()));
+					textFieldorderSearchModify.setText("");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1047,6 +1049,7 @@ public class GUIFabricationmanagement {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					TableDeleteOrder.setModel(new OrderTableModel(ProductionManagement.getOrders()));
+					textFieldorderSearchDelete.setText("");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

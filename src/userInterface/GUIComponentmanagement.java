@@ -710,6 +710,7 @@ public class GUIComponentmanagement  {
 
 				try {
 					ComponentTableModify.setModel(new ComponentTableModel(ComponentManagement.getComponents()));
+					textFieldsearchModifyPart.setText("");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -884,6 +885,7 @@ public class GUIComponentmanagement  {
 				//Emre begin, reset table to all components from db 
 				try {
 					ComponentTableDelete.setModel(new ComponentTableModel(ComponentManagement.getComponents()));
+					textFieldpartNumberSearch.setText("");
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
