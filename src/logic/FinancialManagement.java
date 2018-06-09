@@ -127,5 +127,9 @@ public class FinancialManagement {
 	public static ResultSet getPersonByID(int id) throws SQLException {
 	    return SQLManager.getInstance().getPersonByID(id); 
 	}
+	public static List<Pot> getPotArrayByRegisterID(int id) throws SQLException {
+	    return SQLManager.getInstance().getPotArrayByCashRegisterID(id); 
+	}
+	//Emre -
 	
 }

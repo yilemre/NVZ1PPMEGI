@@ -341,7 +341,20 @@ public class GUIFinanceManagement {
 		gbc_lblrelatedCashRegister.gridy = 7;
 		panelcreateBill.add(lblrelatedCashRegister, gbc_lblrelatedCashRegister);
 		
+		JComboBox comboBoxrelatedJar = new JComboBox();
+		
+		comboBoxrelatedJar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_comboBoxrelatedJar = new GridBagConstraints();
+		gbc_comboBoxrelatedJar.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxrelatedJar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxrelatedJar.gridx = 1;
+		gbc_comboBoxrelatedJar.gridy = 8;
+		panelcreateBill.add(comboBoxrelatedJar, gbc_comboBoxrelatedJar);
+
+		//Emre begin 
+		// if Register is selected, fill pot combobox with pots that belong to register  
 		JComboBox comboBoxrelatedCashRegister = new JComboBox();
+		
 		try {
 			for(CashRegister c : SQLManager.getInstance().getRegisterArray()){
 				comboBoxrelatedCashRegister.addItem(c.toString());
@@ -350,6 +363,24 @@ public class GUIFinanceManagement {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		comboBoxrelatedCashRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			    comboBoxrelatedJar.removeAllItems();;
+				   int selectedRegisterID;
+				try {
+				    selectedRegisterID = SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegister.getSelectedIndex()).getId();
+				    for(Pot p : FinancialManagement.getPotArrayByRegisterID(selectedRegisterID)) {
+					       comboBoxrelatedJar.addItem(p.toString());
+					   }
+				} catch (SQLException e) {
+				    // TODO Auto-generated catch block
+				    e.printStackTrace();
+				}
+			}
+		});
+		//Emre end
+
 		comboBoxrelatedCashRegister.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxrelatedCashRegister = new GridBagConstraints();
 		gbc_comboBoxrelatedCashRegister.insets = new Insets(0, 0, 5, 0);
@@ -366,23 +397,6 @@ public class GUIFinanceManagement {
 		gbc_lblrelatedJar.gridx = 0;
 		gbc_lblrelatedJar.gridy = 8;
 		panelcreateBill.add(lblrelatedJar, gbc_lblrelatedJar);
-		
-		JComboBox comboBoxrelatedJar = new JComboBox();
-		try {
-			for(Pot p : SQLManager.getInstance().getPotArray()){
-				comboBoxrelatedJar.addItem(p.toString());
-			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		comboBoxrelatedJar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_comboBoxrelatedJar = new GridBagConstraints();
-		gbc_comboBoxrelatedJar.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBoxrelatedJar.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxrelatedJar.gridx = 1;
-		gbc_comboBoxrelatedJar.gridy = 8;
-		panelcreateBill.add(comboBoxrelatedJar, gbc_comboBoxrelatedJar);
 		
 		JLabel BillStatus = new JLabel("Status");
 		BillStatus.setFont(new Font("Tahoma", Font.PLAIN, 15));

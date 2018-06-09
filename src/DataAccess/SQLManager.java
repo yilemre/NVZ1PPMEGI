@@ -519,7 +519,20 @@ public class SQLManager {
 		   }
 		   return result; 
 		}
-	
+	//Emre+
+	public List<Pot> getPotArrayByCashRegisterID(int idRegister) throws SQLException {
+	    List<Pot> result = new ArrayList<Pot>(); 
+	    Statement stmt = c.createStatement(); 
+	    String sql = "SELECT * FROM Pots WHERE idRegister= "+ idRegister; 
+	    ResultSet rs = stmt.executeQuery(sql);
+	    while(rs.next()) {
+		Pot temp = new Pot(rs.getInt("idPots"), rs.getString("name"), rs.getDouble("debitAmount"), rs.getDouble("actualAmount"), rs.getInt("idRegister")); 
+		result.add(temp); 
+	    }
+	    return result; 
+	    
+	}
+	//Emre- 
 	public int deletePotFromDB(int id) throws SQLException{
 		Statement stmt = c.createStatement();
 		String sql ="DELETE FROM Pots WHERE idPots="+id+";";
