@@ -17,8 +17,17 @@ import Exceptions.ELabException;
 
 public class FinancialManagement {
 
-	public static int addBill(int idOrder, int idPot, int idRegister, int CustomerId, int AdvisorId, String name, int payKind, double amount) throws SQLException {
-		return SQLManager.getInstance().addBilltoDB(idOrder, idPot, idRegister, CustomerId, AdvisorId, name, payKind, amount);
+	/**
+	 * @param idOrder
+	 * @param idPot
+	 * @param name
+	 * @param payKind
+	 * @param amount
+	 * @return
+	 * @throws SQLException
+	 */
+	public static int addBill(int idOrder, int idPot, String name, int payKind, double amount) throws SQLException {
+		return SQLManager.getInstance().addBilltoDB(idOrder, idPot, name, payKind, amount);
 	}
 	
 	public static void addBillStatus(int idBill, int status) throws SQLException {

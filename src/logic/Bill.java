@@ -4,24 +4,58 @@ import java.sql.Timestamp;
 
 public class Bill {
     private int id;
-    private String name;
-    private int status;
-    private int payKind;
-    private double amount;
-    private int idOrder;
     private int idPot;
-    private int idRegister;
+    private int idOrder;
+    private String name;
+    private int methodOfPayment;
+    private double figure;
+    private int status;
+    private String timestamp;
     
-    public Bill(int id, int idOrder, int idPot, int idRegister, String name, int payKind, double amount, int status){
+    public Bill(int id, int idPot, int idOrder, String name, int methodOfPayment, double figure, int status, String timestamp){
     this.id = id;
+    this.idPot = idPot;
+    this.idOrder = idOrder;
 	this.name = name; 
-	this.status = status; 
-	this.payKind = payKind; 
-	this.amount = amount; 
+	this.methodOfPayment = methodOfPayment; 
+	this.figure = figure; 
 	this.status = status;
+	this.timestamp = timestamp;
     }
     
-    public Bill(){
+    public int getIdOrder() {
+		return idOrder;
+	}
+
+	public void setIdOrder(int idOrder) {
+		this.idOrder = idOrder;
+	}
+
+	public int getMethodOfPayment() {
+		return methodOfPayment;
+	}
+
+	public void setMethodOfPayment(int methodOfPayment) {
+		this.methodOfPayment = methodOfPayment;
+	}
+
+	public double getFigure() {
+		return figure;
+	}
+
+	public void setFigure(double figure) {
+		this.figure = figure;
+	}
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Bill(){
     	
     }
     
@@ -45,44 +79,12 @@ public class Bill {
         this.status = status;
     }
 
-    public int getPayKind() {
-        return payKind;
-    }
-
-    public void setPayKind(int payKind) {
-        this.payKind = payKind;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-	public int getIdOrder() {
-		return idOrder;
-	}
-
-	public void setIdOrder(int idOrder) {
-		this.idOrder = idOrder;
-	}
-
 	public int getIdPot() {
 		return idPot;
 	}
 
 	public void setIdPot(int idPot) {
 		this.idPot = idPot;
-	}
-
-	public int getIdRegister() {
-		return idRegister;
-	}
-
-	public void setIdRegister(int idRegister) {
-		this.idRegister = idRegister;
 	}
    
 	public String getReadableStatus(int status) {

@@ -39,7 +39,7 @@ public class BillTableModel extends AbstractTableModel{
 			case 1:
 				return Integer.class;
 			case 2:
-				return Integer.class;
+				return String.class;
 			case 3:
 				return Integer.class;
 			case 4:
@@ -65,7 +65,7 @@ public class BillTableModel extends AbstractTableModel{
 		case 2:
 			return list.get(rowIndex).getIdPot();
 		case 3:
-			return list.get(rowIndex).getIdRegister();
+			return list.get(rowIndex).get;
 		case 4:
 			return list.get(rowIndex).getName();
 		case 5:

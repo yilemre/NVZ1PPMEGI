@@ -1151,13 +1151,10 @@ public class GUIFabricationmanagement {
 			textFieldpredictedCostsModify.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
 			textFieldactualCostsModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
 			comboBoxModifyStatus.setSelectedIndex(comboBoxStatusEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
-
-			//Emre begin
 			comboBoxorderCustomerModify.setSelectedIndex(getCorrectCustomerIndex(table.getValueAt(table.getSelectedRow(), 5).toString()));
 			comboBoxResponsiblePersonModify.setSelectedIndex(getCorrectResponsibleIndex(table.getValueAt(table.getSelectedRow(), 6).toString())); 
 			comboBoxStandinResponsiblePersonModify.setSelectedIndex(getCorrectResponsibleIndex(table.getValueAt(table.getSelectedRow(), 7).toString()));
-			
-			//Emre end
+
 		}
 
 	}

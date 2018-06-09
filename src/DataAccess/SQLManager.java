@@ -541,10 +541,10 @@ public class SQLManager {
 		return id;
 	}
 	
-	public int addBilltoDB(int idOrder, int idPot, int idRegister, int CustomerId, int AdvisorId, String name, int payKind, double amount) throws SQLException {
+	public int addBilltoDB(int idOrder, int idPot, String name, int payKind, double amount) throws SQLException {
 		int result=0;
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO Bills (idOrder, idPot, idRegister, idCustomer, idAdvisor, name, methodOfPayment, figure) VALUES ('"+idOrder+"', '"+idPot+"', '"+idRegister+"' , '"+CustomerId+"', '"+AdvisorId+"', '"+name+"', '"+payKind+"', '"+amount+"');";
+		String sql ="INSERT INTO Bills (idOrder, idPot, name, methodOfPayment, figure) VALUES ("+idOrder+", "+idPot+", '"+name+"', "+payKind+", "+amount+");";
 		stmt.executeUpdate(sql);
 		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Bills");
 		rs.next();
@@ -557,7 +557,7 @@ public class SQLManager {
 	public int addBillStatustoDB(int idBill, int status, String datetime) throws SQLException {
 		int result = 0;
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO BillStatus (idOrder, status, timestamp) VALUES ("+idBill+ ", "+status+", '"+datetime+"');";
+		String sql ="INSERT INTO BillStatus (idBill, status, timestamp) VALUES ("+idBill+ ", "+status+", '"+datetime+"');";
 		stmt.executeUpdate(sql);
 		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM BillStatus");
 		rs.next();
@@ -592,10 +592,10 @@ public class SQLManager {
 	public List<Bill> getBills() throws SQLException {
 		List<Bill> result = new ArrayList<Bill>();
 		Statement stmt = c.createStatement();
-		String sql = "SELECT * FROM Bills, BillStatus WHERE Bills.idBill = BillStatus.idBill";
+		String sql = "SELECT idBill, idOrder, idPot, name, methodOfPayment, figure, MAX(status) as status, timestamp FROM Bills NATURAL JOIN BillStatus GROUP BY idBill";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idRegiser"), rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
+			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getString("name"), rs.getInt("methodOfPayment"),rs.getDouble("figure"),rs.getInt("status"), rs.getString("timestamp"));
 			result.add(temp);			
 		}
 
@@ -605,9 +605,9 @@ public class SQLManager {
 	public List<Bill> getBillByName(String name) throws SQLException {
 		List<Bill> result = new ArrayList<Bill>();
 		Statement stmt = c.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Bills, BillStatus WHERE Bill.idBill = BillStatus.idBill AND titel LIKE '"+name+"'");
+		ResultSet rs = stmt.executeQuery("SELECT idBill, idOrder, idPot, name, methodOfPayment, figure, MAX(status) as status, timestamp FROM Bills NATURAL JOIN BillStatus GROUP BY idBill HAVING name LIKE '%"+name+"%'");
 		while (rs.next()){
-			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idRegister") ,rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
+			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getString("name"), rs.getInt("methodOfPayment"),rs.getDouble("figure"),rs.getInt("status"), rs.getString("timestamp"));
 			result.add(temp);			
 		}
 
@@ -620,10 +620,10 @@ public class SQLManager {
 	public List<Bill> getBillsByStatus(int status) throws SQLException {
 		List<Bill> result = new ArrayList<Bill>();
 		Statement stmt = c.createStatement();
-		String sql = "SELECT * FROM Bills, BillStatus WHERE Bills.idBill = BillStatus.idBill AND status='"+status+"'";
+		String sql = "SELECT idBill, idOrder, idPot, name, methodOfPayment, figure, MAX(status) as status, timestamp FROM Bills NATURAL JOIN BillStatus GROUP BY idBill HAVING status LIKE "+status+";";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idRegister") ,rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
+			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getString("name"), rs.getInt("methodOfPayment"),rs.getDouble("figure"),rs.getInt("status"), rs.getString("timestamp"));
 			result.add(temp);			
 		}
 		
@@ -635,10 +635,10 @@ public class SQLManager {
 	public List<Bill> getBillsByDate(String date) throws SQLException {
 		List<Bill> result = new ArrayList<Bill>();
 		Statement stmt = c.createStatement();
-		String sql = "SELECT * FROM Bills, BillStatus WHERE Bills.idBill = BillStatus.idBill AND timestamp='"+date+"'";
+		String sql = "SELECT idBill, idOrder, idPot, name, methodOfPayment, figure, MAX(status) as status, timestamp FROM Bills NATURAL JOIN BillStatus GROUP BY idBill HAVING timestamp LIKE '%"+date+"%';";
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()){
-			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idRegister") ,rs.getString("name"),rs.getInt("methodOfPayment"),rs.getDouble("figure"), rs.getInt("status"));
+			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getString("name"), rs.getInt("methodOfPayment"),rs.getDouble("figure"),rs.getInt("status"), rs.getString("timestamp"));
 			result.add(temp);			
 		}
 		

@@ -99,11 +99,11 @@ public class GUIFinanceManagement {
 	private JTable tableJar;
 	
 	private JComboBox comboBoxrelatedOrder;
-	
-	JComboBox comboBoxpaymentTypModify = new JComboBox();
-	JComboBox comboBoxpaymentTyp = new JComboBox();
-	JComboBox comboBoxCashRegisterTypeModify = new JComboBox();
-	JComboBox comboBoxPotRegisterIDModify = new JComboBox();
+	private JComboBox comboBoxpaymentTypModify;
+	private JComboBox comboBoxpaymentTyp;
+	private JComboBox comboBoxCashRegisterTypeModify;
+	private JComboBox comboBoxPotRegisterIDModify;
+	private JComboBox comboBoxrelatedCashRegister;
 	
 	private List<String> comboBoxEntries;
 	private List<String> comboBoxStatusEntries;
@@ -207,7 +207,7 @@ public class GUIFinanceManagement {
 		gbc_lblrelatedOrder.gridx = 0;
 		panelcreateBill.add(lblrelatedOrder, gbc_lblrelatedOrder);
 		
-		JComboBox comboBoxrelatedOrder = new JComboBox();
+		comboBoxrelatedOrder = new JComboBox();
 		try {
 			for(Order o : SQLManager.getInstance().getOrders()){
 				comboBoxrelatedOrder.addItem(o.toString());
@@ -216,35 +216,6 @@ public class GUIFinanceManagement {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		comboBoxrelatedOrder.addItemListener(new ItemListener() {
-			//Emre +
-		    public void itemStateChanged(ItemEvent arg0) {
-			    try {
-				//get idCustomer from selected OrderId, and get firstname and surname with this idCustomer 
-				
-				textFieldcustomerID.setText("ID: "+ 
-					FinancialManagement.getPersonByID((FinancialManagement.getOrderByID(FinancialManagement.getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId()).getInt(6))).getString(1)+
-					", "+ 
-					FinancialManagement.getPersonByID((FinancialManagement.getOrderByID(FinancialManagement.getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId()).getInt(6))).getString(2)
-					+ ", " + 
-					FinancialManagement.getPersonByID((FinancialManagement.getOrderByID(FinancialManagement.getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId()).getInt(6))).getString(3));
-				//see comment above, same with idAdvisor
-				textresponsiblePerson.setText("ID: " + 
-					FinancialManagement.getPersonByID((FinancialManagement.getOrderByID(FinancialManagement.getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId()).getInt(7))).getString(1)+ 
-					",  " + 
-					FinancialManagement.getPersonByID((FinancialManagement.getOrderByID(FinancialManagement.getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId()).getInt(7))).getString(2)+
-					", " + 
-					FinancialManagement.getPersonByID((FinancialManagement.getOrderByID(FinancialManagement.getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId()).getInt(7))).getString(3) 
-					);
-			    } catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			    } 
-				
-			}
-		});
-			//Emre -
 		
 		comboBoxrelatedOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxrelatedOrder = new GridBagConstraints();
@@ -353,8 +324,7 @@ public class GUIFinanceManagement {
 
 		//Emre begin 
 		// if Register is selected, fill pot combobox with pots that belong to register  
-		JComboBox comboBoxrelatedCashRegister = new JComboBox(); 
-		
+		comboBoxrelatedCashRegister = new JComboBox(); 
 		try {
 			for(CashRegister c : SQLManager.getInstance().getRegisterArray()){
 				comboBoxrelatedCashRegister.addItem(c.toString());
@@ -425,22 +395,19 @@ public class GUIFinanceManagement {
 						(FinancialManagement.addBill(
 						SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 
 						SQLManager.getInstance().getPotArray().get(comboBoxrelatedJar.getSelectedIndex()).getId(),
-						SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegister.getSelectedIndex()).getId(),
-						Integer.parseInt(textFieldcustomerID.getText()),
-						Integer.parseInt(textresponsiblePerson.getText()), 
 						textFieldbillName.getText(),
 						comboBoxpaymentTyp.getSelectedIndex(),
 						Double.parseDouble(textFieldhouseNumber.getText())
 						))
 						,comboBoxBillStatus.getSelectedIndex());
 
-					
+					ProductionManagement.addOrderStatus(SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 7);
 					refreshTableNewBill();
 					
 					textFieldbillName.setText("");
 					comboBoxrelatedOrder.setSelectedIndex(-1);
 					comboBoxrelatedJar.setSelectedIndex(-1);
-					comboBoxrelatedCashRegister.setSelectedIndex(-1);
+					comboBoxrelatedCashRegister.setSelectedIndex(0);
 					textFieldcustomerID.setText("");
 					textresponsiblePerson.setText("");
 					comboBoxpaymentTyp.setSelectedIndex(-1);
@@ -1854,6 +1821,7 @@ public class GUIFinanceManagement {
 			comboBoxrelatedOrder.setSelectedIndex(getCorrectOrderIndex(tableNewBill.getValueAt(tableNewBill.getSelectedRow(), 0).toString()));
 			textFieldcustomerID.setText((String) tableNewBill.getValueAt(tableNewBill.getSelectedRow(), 5).toString());
 			textresponsiblePerson.setText((String) tableNewBill.getValueAt(tableNewBill.getSelectedRow(), 6).toString());
+			
 		}
 		if(tableBillModify.getSelectedRow() > -1) {
 			textFieldBillIDModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 0).toString());
