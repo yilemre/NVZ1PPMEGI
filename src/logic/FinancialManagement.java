@@ -120,7 +120,7 @@ public class FinancialManagement {
 		return SQLManager.getInstance().getOrders(); 
 	}
 	
-	//Emre+
+	//Emre+ 
 	public static ResultSet getOrderByID(int id) throws SQLException {
 	    return SQLManager.getInstance().getOrderByID(id); 
 	}

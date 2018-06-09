@@ -353,7 +353,7 @@ public class GUIFinanceManagement {
 
 		//Emre begin 
 		// if Register is selected, fill pot combobox with pots that belong to register  
-		JComboBox comboBoxrelatedCashRegister = new JComboBox();
+		JComboBox comboBoxrelatedCashRegister = new JComboBox(); 
 		
 		try {
 			for(CashRegister c : SQLManager.getInstance().getRegisterArray()){

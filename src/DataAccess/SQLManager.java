@@ -532,7 +532,7 @@ public class SQLManager {
 	    return result; 
 	    
 	}
-	//Emre- 
+	//Emre-
 	public int deletePotFromDB(int id) throws SQLException{
 		Statement stmt = c.createStatement();
 		String sql ="DELETE FROM Pots WHERE idPots="+id+";";
