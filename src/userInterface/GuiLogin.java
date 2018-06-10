@@ -16,10 +16,16 @@ import java.awt.BorderLayout;
 import javax.swing.JTextArea;
 import javax.swing.JInternalFrame;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+
+import Exceptions.UsernameNotInDBException;
+import Exceptions.WrongPasswordException;
+import logic.LoginManagement;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -113,9 +119,26 @@ public class GuiLogin {
 		frmElabVerwaltungsprogramm.getContentPane().add(passwordField, gbc_passwordField);
 		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
+		btnLogin.addActionListener((e)-> {
+			try {
+				LoginManagement.checkLoginCredentials(textFielduserName.getText(), new String(passwordField.getPassword()));
+				if(LoginManagement.checkRights(textFielduserName.getText())) {
+					GuiMenue menue = new GuiMenue();
+					frmElabVerwaltungsprogramm.dispose();
+				}
+				else {
+					GUIComponentUserInterface cmpui = new GUIComponentUserInterface();
+					frmElabVerwaltungsprogramm.dispose();
+				}
+			} catch (UsernameNotInDBException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (WrongPasswordException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		});
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -130,7 +153,6 @@ public class GuiLogin {
 		btnregister = new JButton("Registrieren");
 		btnregister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				GUIRegisterCustomer regcu= new GUIRegisterCustomer();
 				frmElabVerwaltungsprogramm.dispose();
 			}

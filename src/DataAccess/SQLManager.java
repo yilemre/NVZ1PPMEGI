@@ -114,6 +114,22 @@ public class SQLManager {
 		return result;
 	}
 	
+	//Maybe you could consider throwing an ambiguousPersonException but that can't happen
+	public Person getPersonByUsername(String username) throws SQLException, UsernameNotInDBException {
+		Person result;
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Persons WHERE username LIKE'"+username+"'";
+		ResultSet rs = stmt.executeQuery(sql);
+		if (rs.next()) {
+			result = new Person (rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getString("timestamp"),rs.getString("username"),rs.getString("password"),rs.getInt("rights"));
+			return result;
+		}
+		else {
+			throw new UsernameNotInDBException();
+		}
+		
+	}
+	
 	public List<Person> getPersonsByRights(int rights) throws SQLException {
 		List<Person> result = new ArrayList<Person>();
 		Statement stmt = c.createStatement();
