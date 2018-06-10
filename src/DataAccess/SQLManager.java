@@ -85,7 +85,7 @@ public class SQLManager {
 		return result;
 	}
 	
-	public List<Person> getPersonsByFirstname(String firstname) throws SQLException {
+	public List<Person> getPersonsByFirstname(String firstname) throws SQLException, FirstnameNotInDBException {
 		List<Person> result = new ArrayList<Person>();
 		Statement stmt = c.createStatement();
 		String sql = "SELECT * FROM Persons WHERE firstname LIKE'"+firstname+"'";
@@ -95,11 +95,11 @@ public class SQLManager {
 
 			result.add(temp);			
 		}
-
+		if (result.isEmpty()) throw new FirstnameNotInDBException();
 		return result;
 	}
 	
-	public List<Person> getPersonsByLastname(String surname) throws SQLException {
+	public List<Person> getPersonsByLastname(String surname) throws SQLException, LastnameNotInDBException {
 		List<Person> result = new ArrayList<Person>();
 
 		Statement stmt = c.createStatement();
@@ -110,7 +110,7 @@ public class SQLManager {
 
 			result.add(temp);			
 		}
-
+		if (result.isEmpty()) throw new LastnameNotInDBException();
 		return result;
 	}
 	
@@ -130,7 +130,7 @@ public class SQLManager {
 		
 	}
 	
-	public List<Person> getPersonsByRights(int rights) throws SQLException {
+	public List<Person> getPersonsByRights(int rights) throws SQLException, PersonStatusNotInDBException {
 		List<Person> result = new ArrayList<Person>();
 		Statement stmt = c.createStatement();
 		String sql = "SELECT * FROM Persons WHERE rights="+rights+"";
@@ -140,7 +140,7 @@ public class SQLManager {
 
 			result.add(temp);			
 		}
-
+		if (result.isEmpty()) throw new PersonStatusNotInDBException();
 		return result;
 	}
 
@@ -171,7 +171,7 @@ public class SQLManager {
 	    stmt.close();
 		}
 	
-	public List<Category> getCategories () throws SQLException {
+	public List<Category> getCategories () throws SQLException, CategoryNotInDBException {
 	    List<Category> category = new ArrayList<Category>();
 	    Statement stmt = c.createStatement(); 
 	    ResultSet rs = stmt.executeQuery("SELECT * FROM Categorys;"); 
@@ -181,6 +181,7 @@ public class SQLManager {
 		category.add(temp);
 	    }
 	    stmt.close();
+	    if (category.isEmpty()) throw new CategoryNotInDBException();
 	    return category; 
 	    
 	}
@@ -247,7 +248,7 @@ public class SQLManager {
 	    return result; 
 	}
 	
-	public List<Component> getComponentsByArticlenumber(String articlenumber) throws SQLException {
+	public List<Component> getComponentsByArticlenumber(String articlenumber) throws SQLException, ArticlenumberNotInDBException {
 	    List<Component> result = new ArrayList<Component>(); 
 	    Statement stmt = c.createStatement(); 
 	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts WHERE articlenumber LIKE '%" + articlenumber + "%';"); 
@@ -256,10 +257,11 @@ public class SQLManager {
 		Component c = new Component(rs.getInt("idPart"),rs.getString("articlenumber"), rs.getString("name"), rs.getString("productlink"), rs.getDouble("price"), rs.getInt("storing"), rs.getInt("plannedAmount"), rs.getInt("orderedAmount"), rs.getString("storageLocation"),rs.getInt("idCategory"));
 		result.add(c); 
 	    }
+	    if (result.isEmpty()) throw new ArticlenumberNotInDBException();
 	    return result; 
 	}
 	
-	public List<Component> getComponentsByName(String name) throws SQLException {
+	public List<Component> getComponentsByName(String name) throws SQLException, ComponentNameNotInDBException {
 	    List<Component> result = new ArrayList<Component>(); 
 	    Statement stmt = c.createStatement(); 
 	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts WHERE name LIKE '" + name+ "';"); 
@@ -268,6 +270,7 @@ public class SQLManager {
 		Component c = new Component(rs.getInt("idPart"),rs.getString("articlenumber"), rs.getString("name"), rs.getString("productlink"), rs.getDouble("price"), rs.getInt("storing"), rs.getInt("plannedAmount"), rs.getInt("orderedAmount"), rs.getString("storageLocation"),rs.getInt("idCategory"));
 		result.add(c); 
 	    }
+	    if (result.isEmpty()) throw new ComponentNameNotInDBException();
 	    return result; 
 	}
 	
@@ -364,7 +367,7 @@ public class SQLManager {
 	//Emre- 
 
 	// search methods
-	public List<Order> getOrdersByTitle(String titel) throws SQLException {
+	public List<Order> getOrdersByTitle(String titel) throws SQLException, OrderTitleNotInDBException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
 		String sql = "SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder HAVING titel LIKE'%"+titel+"%';";
@@ -373,14 +376,14 @@ public class SQLManager {
 			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"),rs.getInt("status"), rs.getString("timestamp"));
 			result.add(temp);			
 		}
-
+		
 		rs.close();
 		stmt.close();
-
+		if (result.isEmpty()) throw new OrderTitleNotInDBException();
 		return result;
 	}
 
-	public List<Order> getOrdersByType(int type) throws SQLException {
+	public List<Order> getOrdersByType(int type) throws SQLException, OrderTypeNotInDBException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
 		String sql = "SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder HAVING type="+type+";";
@@ -392,7 +395,7 @@ public class SQLManager {
 
 		rs.close();
 		stmt.close();
-
+		if (result.isEmpty()) throw new OrderTypeNotInDBException();
 		return result;
 	}
 	
@@ -425,7 +428,7 @@ public class SQLManager {
 	}
 	
 	//
-	public List<Order> getOrdersByStatus(int status) throws SQLException {
+	public List<Order> getOrdersByStatus(int status) throws SQLException, OrderStatusNotInDBException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
 		String sql = "SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder HAVING status="+status+";";
@@ -437,7 +440,7 @@ public class SQLManager {
 		
 		rs.close();
 		stmt.close();
-		
+		if (result.isEmpty()) throw new OrderStatusNotInDBException();
 		return result;
 	}
 	
@@ -640,7 +643,7 @@ public class SQLManager {
 		return result;
 	}
 	
-	public List<Bill> getBillByName(String name) throws SQLException {
+	public List<Bill> getBillByName(String name) throws SQLException, BillTitleNotInDBException {
 		List<Bill> result = new ArrayList<Bill>();
 		Statement stmt = c.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT idBill, idOrder, idPot, idRegister, name, methodOfPayment, figure, MAX(status) as status, timestamp FROM Bills NATURAL JOIN BillStatus GROUP BY idBill HAVING name LIKE '%"+name+"%'");
@@ -651,11 +654,11 @@ public class SQLManager {
 
 		rs.close();
 		stmt.close();
-
+		if (result.isEmpty()) throw new BillTitleNotInDBException();
 		return result;
 	}
 	
-	public List<Bill> getBillsByStatus(int status) throws SQLException {
+	public List<Bill> getBillsByStatus(int status) throws SQLException, BillStatusNotInDBException {
 		List<Bill> result = new ArrayList<Bill>();
 		Statement stmt = c.createStatement();
 		String sql = "SELECT idBill, idOrder, idPot, idRegister, name, methodOfPayment, figure, MAX(status) as status, timestamp FROM Bills NATURAL JOIN BillStatus GROUP BY idBill HAVING status LIKE "+status+";";
@@ -667,10 +670,11 @@ public class SQLManager {
 		
 		rs.close();
 		stmt.close();
+		if (result.isEmpty()) throw new BillStatusNotInDBException();
 		return result;
 	}
 	
-	public List<Bill> getBillsByDate(String date) throws SQLException {
+	public List<Bill> getBillsByDate(String date) throws SQLException, BillDateNotInDBException {
 		List<Bill> result = new ArrayList<Bill>();
 		Statement stmt = c.createStatement();
 		String sql = "SELECT idBill, idOrder, idPot, idRegister, name, methodOfPayment, figure, MAX(status) as status, timestamp FROM Bills NATURAL JOIN BillStatus GROUP BY idBill HAVING timestamp LIKE '%"+date+"%';";
@@ -682,6 +686,7 @@ public class SQLManager {
 		
 		rs.close();
 		stmt.close();
+		if (result.isEmpty()) throw new BillDateNotInDBException();
 		return result;
 	}
 	// Nico End*/

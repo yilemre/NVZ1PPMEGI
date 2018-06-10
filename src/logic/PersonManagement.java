@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import DataAccess.SQLManager;
+import Exceptions.*;
 
 
 public class PersonManagement {
@@ -74,15 +75,15 @@ public class PersonManagement {
 	SQLManager.getInstance().modifyPerson(id, AttributeTypesPerson.password, newValue);
     }*/
 
-	public static List<Person> getPersonsByName(String searchValue) throws SQLException{
+	public static List<Person> getPersonsByName(String searchValue) throws SQLException, ELabException {
 		return SQLManager.getInstance().getPersonsByFirstname(searchValue);
 	}
 
-	public static List<Person> getPersonsByLastname(String searchValue) throws SQLException {
+	public static List<Person> getPersonsByLastname(String searchValue) throws SQLException, ELabException {
 		return SQLManager.getInstance().getPersonsByLastname(searchValue);
 	}
 
-	public static List<Person> getPersonsByRights(String searchValue) throws SQLException{
+	public static List<Person> getPersonsByRights(String searchValue) throws SQLException, ELabException {
 		switch(searchValue.toLowerCase()){
 			case "kunde":
 				return SQLManager.getInstance().getPersonsByRights(0);
@@ -91,7 +92,7 @@ public class PersonManagement {
 			case "lehrstuhlmitglied":
 				return SQLManager.getInstance().getPersonsByRights(2);
 			default:
-				return null;
+				throw new PersonStatusNotInDBException();
 		}
 	}	
 }

@@ -13,7 +13,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import DataAccess.SQLManager;
-import Exceptions.ELabException;
+import Exceptions.*;
+
 
 public class ProductionManagement {
 
@@ -65,12 +66,12 @@ public class ProductionManagement {
     
 	//search methods
 
-	public static List<Order> getOrderByTitle(String searchValue) throws SQLException {
+	public static List<Order> getOrderByTitle(String searchValue) throws SQLException, ELabException {
 		List<Order> result = SQLManager.getInstance().getOrdersByTitle(searchValue);
 		return result;
 	}
 
-	public static List<Order> getOrdersByType(String searchValue) throws SQLException{
+	public static List<Order> getOrdersByType(String searchValue) throws SQLException, ELabException{
 		switch(searchValue.toLowerCase()){
 		case "3d-druck":
 			return SQLManager.getInstance().getOrdersByType(0);
@@ -79,11 +80,11 @@ public class ProductionManagement {
 		case "sonstiges":
 			return SQLManager.getInstance().getOrdersByType(2);
 		default:
-			return null;
+			throw new OrderTypeNotInDBException();
 		}
 	}
 
-	public static List<Order> getOrdersByStatus(String searchValues) throws SQLException {
+	public static List<Order> getOrdersByStatus(String searchValues) throws SQLException, ELabException {
 		switch(searchValues.toLowerCase()){
 		case "angenommen":
 			return SQLManager.getInstance().getOrdersByStatus(0);
@@ -102,7 +103,7 @@ public class ProductionManagement {
 		case "rechnung erzeugt":
 			return SQLManager.getInstance().getOrdersByStatus(7);
 		default:
-			return null;
+			throw new OrderStatusNotInDBException();
 		}
 	}
 }

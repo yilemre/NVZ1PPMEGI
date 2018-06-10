@@ -36,6 +36,7 @@ import logic.ProductionManagement;
 import logic.Order;
 import logic.Person;
 import DataAccess.SQLManager;
+import Exceptions.ELabException;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -838,7 +839,7 @@ public class GUIFabricationmanagement {
 				case 0:
 					try {
 						table.setModel(new OrderTableModel(ProductionManagement.getOrderByTitle(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -846,7 +847,7 @@ public class GUIFabricationmanagement {
 				case 1:
 					try {
 						table.setModel(new OrderTableModel(ProductionManagement.getOrdersByType(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -858,6 +859,9 @@ public class GUIFabricationmanagement {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -1013,7 +1017,7 @@ public class GUIFabricationmanagement {
 					try {
 						TableDeleteOrder
 								.setModel(new OrderTableModel(ProductionManagement.getOrderByTitle(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -1022,7 +1026,7 @@ public class GUIFabricationmanagement {
 					try {
 						TableDeleteOrder
 								.setModel(new OrderTableModel(ProductionManagement.getOrdersByType(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -1035,6 +1039,9 @@ public class GUIFabricationmanagement {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}

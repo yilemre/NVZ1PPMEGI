@@ -30,6 +30,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import Exceptions.ELabException;
 import logic.PersonManagement;
 
 import javax.swing.JTextField;
@@ -727,7 +728,7 @@ public class GUIPersonalmanagement{
 				case 0:
 					try {
 						table.setModel(new PersonTableModel(PersonManagement.getPersonsByName(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -735,7 +736,7 @@ public class GUIPersonalmanagement{
 				case 1:
 					try {
 						table.setModel(new PersonTableModel(PersonManagement.getPersonsByLastname(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -747,6 +748,9 @@ public class GUIPersonalmanagement{
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -851,7 +855,7 @@ public class GUIPersonalmanagement{
 				case 0:
 					try {
 						TableDeletePerson.setModel(new PersonTableModel(PersonManagement.getPersonsByName(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -859,7 +863,7 @@ public class GUIPersonalmanagement{
 				case 1:
 					try {
 						TableDeletePerson.setModel(new PersonTableModel(PersonManagement.getPersonsByLastname(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -871,6 +875,9 @@ public class GUIPersonalmanagement{
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}

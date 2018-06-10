@@ -31,6 +31,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import Exceptions.ELabException;
 import logic.Category;
 import logic.ComponentManagement;
 import logic.PersonManagement;
@@ -752,7 +753,7 @@ public class GUIComponentmanagement  {
 				case 0: 
 					try {
 						ComponentTableModify.setModel(new ComponentTableModel(ComponentManagement.getComponentByArticlenumber(textFieldsearchModifyPart.getText())));
-					} catch (SQLException a) {
+					} catch (SQLException | ELabException a) {
 						// TODO Auto-generated catch block
 						a.printStackTrace();
 					}
@@ -760,7 +761,7 @@ public class GUIComponentmanagement  {
 				case 1: 
 					try {
 						ComponentTableModify.setModel(new ComponentTableModel(ComponentManagement.getComponentByName(textFieldsearchModifyPart.getText())));
-					} catch (SQLException a1) {
+					} catch (SQLException | ELabException a1) {
 						// TODO Auto-generated catch block
 						a1.printStackTrace();
 					}
@@ -857,7 +858,7 @@ public class GUIComponentmanagement  {
 				case 0: 
 					try {
 						ComponentTableDelete.setModel(new ComponentTableModel(ComponentManagement.getComponentByArticlenumber(textFieldpartNumberSearch.getText())));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -865,7 +866,7 @@ public class GUIComponentmanagement  {
 				case 1: 
 					try {
 						ComponentTableDelete.setModel((new ComponentTableModel(ComponentManagement.getComponentByName(textFieldpartNumberSearch.getText()))));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -1124,7 +1125,7 @@ public class GUIComponentmanagement  {
 		CategoryTable.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		try {
 			CategoryTable.setModel(new CategoryTableModel(ComponentManagement.getCategories()));																										    
-		} catch (SQLException e1) {
+		} catch (SQLException | ELabException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}		
@@ -1240,7 +1241,7 @@ public class GUIComponentmanagement  {
 		// TODO Auto-generated method stub
 		try {
 			CategoryTable.setModel(new CategoryTableModel(ComponentManagement.getCategories()));																										    
-		} catch (SQLException e1) {
+		} catch (SQLException | ELabException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}		

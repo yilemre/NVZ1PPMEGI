@@ -25,6 +25,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import DataAccess.SQLManager;
+import Exceptions.ELabException;
 import logic.CashRegister;
 import logic.FinancialManagement;
 import logic.Order;
@@ -505,7 +506,7 @@ public class GUIFinanceManagement {
 				case 0:
 					try {
 						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrderByTitle(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -513,7 +514,7 @@ public class GUIFinanceManagement {
 				case 1:
 					try {
 						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrdersByType(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -525,6 +526,9 @@ public class GUIFinanceManagement {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -890,7 +894,7 @@ public class GUIFinanceManagement {
 				case 0:
 					try {
 						tableBillModify.setModel(new BillTableModel(FinancialManagement.getBillByName(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -898,7 +902,7 @@ public class GUIFinanceManagement {
 				case 1:
 					try {
 						tableBillModify.setModel(new BillTableModel(FinancialManagement.getBillsByDate(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -910,6 +914,9 @@ public class GUIFinanceManagement {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -1020,7 +1027,7 @@ public class GUIFinanceManagement {
 				case 0:
 					try {
 						tableDeleteBill.setModel(new BillTableModel(FinancialManagement.getBillByName(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -1028,7 +1035,7 @@ public class GUIFinanceManagement {
 				case 1:
 					try {
 						tableDeleteBill.setModel(new BillTableModel(FinancialManagement.getBillsByDate(searchValue)));
-					} catch (SQLException e1) {
+					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
@@ -1040,6 +1047,9 @@ public class GUIFinanceManagement {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
