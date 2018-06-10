@@ -18,6 +18,8 @@ import java.awt.GridLayout;
 //import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JTextArea;
 import javax.swing.JInternalFrame;
 import java.awt.event.ActionListener;
@@ -348,13 +350,24 @@ public class GUIComponentmanagement  {
 			public void actionPerformed(ActionEvent e) {
 				//Emre begin
 				try {
+					textFieldpartPrize.setBackground(Color.WHITE);
+					textFieldquantityOrdered.setBackground(Color.WHITE);
+					textFieldquantityPlanned.setBackground(Color.WHITE);
+					textFieldquantityStoring.setBackground(Color.WHITE);
+					
 					ComponentManagement.addPart(tfArticleNo.getText(), textFieldpartLink.getText(), textFieldpartName.getText(),
 							Double.parseDouble(textFieldpartPrize.getText()), Integer.parseInt(textFieldquantityStoring.getText()),
 							Integer.parseInt(textFieldquantityPlanned.getText()), Integer.parseInt(textFieldquantityOrdered.getText()),
 							textFieldstorageLocation.getText(),getCategoryId(comboBoxcategory.getSelectedIndex()));
 				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					
+					textFieldpartPrize.setBackground(Color.red);
+					textFieldquantityOrdered.setBackground(Color.red);
+					textFieldquantityPlanned.setBackground(Color.red);
+					textFieldquantityStoring.setBackground(Color.red);
+					
+					
+					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -623,14 +636,24 @@ public class GUIComponentmanagement  {
 				//Emre begin Button for modify the Component/Part
 
 				try {
+					tfComponentModifyID.setBackground(Color.WHITE);
+					textFieldpartPrizeModify.setBackground(Color.WHITE);
+					tfStoring.setBackground(Color.WHITE);
+					tfPlannedAmount.setBackground(Color.WHITE);
+					tfOrderedAmount.setBackground(Color.WHITE);
 					ComponentManagement.modifyPart(Integer.parseInt(tfComponentModifyID.getText()),tfArticleNoModify.getText(), 
-							textFieldpartLinkModify.getText(), textFieldpartNameModify.getText(),
-							Double.parseDouble(textFieldpartPrizeModify.getText()),Integer.parseInt(tfStoring.getText()), 
-							Integer.parseInt(tfPlannedAmount.getText()), Integer.parseInt(tfOrderedAmount.getText()),tfStorageLocationModify.getText(), 
-							ComponentManagement.getCategoryArray()[comboBoxcategoryModify.getSelectedIndex()].getId());
+					textFieldpartLinkModify.getText(), textFieldpartNameModify.getText(),
+					Double.parseDouble(textFieldpartPrizeModify.getText()),Integer.parseInt(tfStoring.getText()), 
+					Integer.parseInt(tfPlannedAmount.getText()), Integer.parseInt(tfOrderedAmount.getText()),tfStorageLocationModify.getText(), 
+					ComponentManagement.getCategoryArray()[comboBoxcategoryModify.getSelectedIndex()].getId());
 
 				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
+					tfComponentModifyID.setBackground(Color.red);
+					textFieldpartPrizeModify.setBackground(Color.red);
+					tfStoring.setBackground(Color.red);
+					tfPlannedAmount.setBackground(Color.red);
+					tfOrderedAmount.setBackground(Color.red);
+					
 					e1.printStackTrace();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

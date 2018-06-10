@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JTextArea;
 import javax.swing.JInternalFrame;
 import java.awt.event.ActionListener;
@@ -43,6 +45,7 @@ import java.awt.Toolkit;
 import java.awt.Window.Type;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Frame;
@@ -326,6 +329,8 @@ public class GUIRegisterCustomer {
 					
 					
 				}
+					textFieldhouseNumber.setBackground(Color.white);
+					textFieldzipCode.setBackground(Color.white);
 					PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
 							Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), index);
 			
@@ -334,11 +339,19 @@ public class GUIRegisterCustomer {
 				 frmElabVerwaltungsprogramm.dispose();
 				
 				} 
-				catch (Exception a) {
+				catch (SQLException a) {
 					a.printStackTrace();
 
 				}
 			
+				catch (NumberFormatException a1) {
+					
+					textFieldhouseNumber.setBackground(Color.red);
+					textFieldzipCode.setBackground(Color.red);
+					
+					
+				}
+				
 			}
 		});
 		btnaddPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));

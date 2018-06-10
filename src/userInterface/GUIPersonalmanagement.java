@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JTextArea;
 import javax.swing.JInternalFrame;
 import java.awt.event.ActionListener;
@@ -346,6 +348,9 @@ public class GUIPersonalmanagement{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					textFieldhouseNumber.setBackground(Color.white);
+					textFieldzipCode.setBackground(Color.white);
+					
 					PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
 							Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
 					refreshTable();
@@ -363,10 +368,21 @@ public class GUIPersonalmanagement{
 				
 				
 				} 
-				catch (Exception a) {
+				catch (SQLException a) {
 					a.printStackTrace();
 
 				}
+				catch (NumberFormatException a1) {
+					
+					
+					
+					textFieldhouseNumber.setBackground(Color.red);			
+					textFieldzipCode.setBackground(Color.red);
+				
+				
+				}
+			
+			
 			}
 		});
 
@@ -615,16 +631,27 @@ public class GUIPersonalmanagement{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					
+					
+					textFieldhouseNumberModify.setBackground(Color.white);
+					textFieldzipCodeModify.setBackground(Color.white);
 					PersonManagement.modifyPerson(Integer.parseInt(textFieldIDModify.getText()), textFieldnameModify.getText(), textFieldlastNameModify.getText(), textFieldstreetModify.getText(), Integer.parseInt(textFieldhouseNumberModify.getText()), Integer.parseInt(textFieldzipCodeModify.getText()), textFieldeMailModify.getText(), textFielduserNameModify.getText(), new String(passwordFieldModify.getPassword()), comboBoxTypeModify.getSelectedIndex());
+					
+					
+					refreshTable();
+					refreshTableDeletePerson();
+				
 				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				
+					textFieldhouseNumberModify.setBackground(Color.red);
+					textFieldzipCodeModify.setBackground(Color.red);
+					
+					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				refreshTable();
-				refreshTableDeletePerson();
+				
 			}
 		});
 
