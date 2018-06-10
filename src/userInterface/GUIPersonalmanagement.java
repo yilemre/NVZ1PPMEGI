@@ -631,25 +631,27 @@ public class GUIPersonalmanagement{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+				    textFieldhouseNumberModify.setBackground(Color.white);
+				    textFieldzipCodeModify.setBackground(Color.white);
+				    PersonManagement.modifyPerson(Integer.parseInt(textFieldIDModify.getText()), textFieldnameModify.getText(),
+					    textFieldlastNameModify.getText(), textFieldstreetModify.getText(), 
+					    Integer.parseInt(textFieldhouseNumberModify.getText()), Integer.parseInt(textFieldzipCodeModify.getText()), 
+					    textFieldeMailModify.getText(), textFielduserNameModify.getText(), new String(passwordFieldModify.getPassword()), 
+					    comboBoxTypeModify.getSelectedIndex());
 					
 					
-					textFieldhouseNumberModify.setBackground(Color.white);
-					textFieldzipCodeModify.setBackground(Color.white);
-					PersonManagement.modifyPerson(Integer.parseInt(textFieldIDModify.getText()), textFieldnameModify.getText(), textFieldlastNameModify.getText(), textFieldstreetModify.getText(), Integer.parseInt(textFieldhouseNumberModify.getText()), Integer.parseInt(textFieldzipCodeModify.getText()), textFieldeMailModify.getText(), textFielduserNameModify.getText(), new String(passwordFieldModify.getPassword()), comboBoxTypeModify.getSelectedIndex());
-					
-					
-					refreshTable();
-					refreshTableDeletePerson();
+				    refreshTable();
+				    refreshTableDeletePerson();
 				
 				} catch (NumberFormatException e1) {
 				
-					textFieldhouseNumberModify.setBackground(Color.red);
-					textFieldzipCodeModify.setBackground(Color.red);
+				    textFieldhouseNumberModify.setBackground(Color.red);
+				    textFieldzipCodeModify.setBackground(Color.red);
 					
 					
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				    // TODO Auto-generated catch block
+				    e1.printStackTrace();
 				}
 				
 			}

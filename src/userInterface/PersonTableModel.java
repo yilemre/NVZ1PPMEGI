@@ -74,7 +74,7 @@ public class PersonTableModel extends AbstractTableModel {
 		case 4:
 			return list.get(rowIndex).getHousenumber();
 		case 5:
-			return list.get(rowIndex).getHousenumber();
+			return list.get(rowIndex).getPlz();
 		case 6:
 			return list.get(rowIndex).getEmail();
 		case 7:
