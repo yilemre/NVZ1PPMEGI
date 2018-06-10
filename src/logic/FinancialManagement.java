@@ -26,8 +26,8 @@ public class FinancialManagement {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static int addBill(int idOrder, int idPot, String name, int payKind, double amount) throws SQLException {
-		return SQLManager.getInstance().addBilltoDB(idOrder, idPot, name, payKind, amount);
+	public static int addBill(int idOrder, int idPot, int idRegister, String name, int payKind, double amount) throws SQLException {
+		return SQLManager.getInstance().addBilltoDB(idOrder, idPot, idRegister, name, payKind, amount);
 	}
 	
 	public static void addBillStatus(int idBill, int status) throws SQLException {
@@ -125,8 +125,8 @@ public class FinancialManagement {
     return result;
     }
     
-	public static List<Order> getOrders() throws SQLException {
-		return SQLManager.getInstance().getOrders(); 
+	public static List<Order> getOrdersWhereBillIsNotCreatedYet() throws SQLException {
+		return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYet(); 
 	}
 	
 	//Emre+ 

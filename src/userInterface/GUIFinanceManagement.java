@@ -66,7 +66,7 @@ public class GUIFinanceManagement {
 	private JFrame frmElabVerwaltungsprogramm;
 	
 	private JTextField textFieldbillName;
-	private JTextField textFieldhouseNumber;
+	private JTextField textFieldestimatedFigure;
 	private JTextField textFieldcustomerID;
 	private JTextField textresponsiblePerson;
 	private JTextField textFielddeleteBillSearch;
@@ -253,15 +253,15 @@ public class GUIFinanceManagement {
 		gbc_lblsumBill.gridy = 4;
 		panelcreateBill.add(lblsumBill, gbc_lblsumBill);
 		
-		textFieldhouseNumber = new JTextField("");
-		textFieldhouseNumber.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_textFieldhouseNumber = new GridBagConstraints();
-		gbc_textFieldhouseNumber.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldhouseNumber.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldhouseNumber.gridx = 1;
-		gbc_textFieldhouseNumber.gridy = 4;
-		panelcreateBill.add(textFieldhouseNumber, gbc_textFieldhouseNumber);
-		textFieldhouseNumber.setColumns(10);
+		textFieldestimatedFigure = new JTextField("");
+		textFieldestimatedFigure.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_textFieldestimatedFigure = new GridBagConstraints();
+		gbc_textFieldestimatedFigure.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldestimatedFigure.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldestimatedFigure.gridx = 1;
+		gbc_textFieldestimatedFigure.gridy = 4;
+		panelcreateBill.add(textFieldestimatedFigure, gbc_textFieldestimatedFigure);
+		textFieldestimatedFigure.setColumns(10);
 		
 		JLabel lblcustomerID = new JLabel("Kunde");
 		lblcustomerID.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -395,13 +395,14 @@ public class GUIFinanceManagement {
 						(FinancialManagement.addBill(
 						SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 
 						SQLManager.getInstance().getPotArray().get(comboBoxrelatedJar.getSelectedIndex()).getId(),
+						SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegister.getSelectedIndex()).getId(),
 						textFieldbillName.getText(),
 						comboBoxpaymentTyp.getSelectedIndex(),
-						Double.parseDouble(textFieldhouseNumber.getText())
+						Double.parseDouble(textFieldestimatedFigure.getText())
 						))
 						,comboBoxBillStatus.getSelectedIndex());
 
-					ProductionManagement.addOrderStatus(SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 7);
+					ProductionManagement.addOrderStatus(SQLManager.getInstance().getOrdersWhereBillisNotCreatedYet().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 7);
 					refreshTableNewBill();
 					
 					textFieldbillName.setText("");
@@ -410,6 +411,7 @@ public class GUIFinanceManagement {
 					comboBoxrelatedCashRegister.setSelectedIndex(0);
 					textFieldcustomerID.setText("");
 					textresponsiblePerson.setText("");
+					textFieldestimatedFigure.setText("");
 					comboBoxpaymentTyp.setSelectedIndex(-1);
 					comboBoxBillStatus.setSelectedIndex(0);
 				} catch (Exception a) {
@@ -432,7 +434,7 @@ public class GUIFinanceManagement {
 			public void actionPerformed(ActionEvent e) {
 				
 				comboBoxpaymentTyp.setSelectedIndex(0);
-				textFieldhouseNumber.setText("");
+				textFieldestimatedFigure.setText("");
 				textFieldbillName.setText("");
 			}
 		});
@@ -458,7 +460,7 @@ public class GUIFinanceManagement {
 		tableNewBill = new JTable();
 		tableNewBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		try {
-			tableNewBill.setModel(new OrderTableModel(FinancialManagement.getOrders()));
+			tableNewBill.setModel(new OrderTableModel(FinancialManagement.getOrdersWhereBillIsNotCreatedYet()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -789,7 +791,7 @@ public class GUIFinanceManagement {
 								SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegister.getSelectedIndex()).getId(),
 								textFieldbillName.getText(),
 								comboBoxpaymentTyp.getSelectedIndex(),
-								Double.parseDouble(textFieldhouseNumber.getText())
+								Double.parseDouble(textFieldestimatedFigure.getText())
 								);
 					FinancialManagement.changeBillStatus(Integer.parseInt(textFieldBillIDModify.getText()), comboBoxBillStatusModify.getSelectedIndex());
 				} catch (NumberFormatException e1) {
@@ -1884,8 +1886,8 @@ public class GUIFinanceManagement {
 	    // TODO Auto-generated method stub
 	    int x = Integer.parseInt(value); 
 	    try {
-		for(int i = 0; i<FinancialManagement.getOrders().size();i++) {
-		if(FinancialManagement.getOrders().get(i).getOrderId()== x) {
+		for(int i = 0; i<FinancialManagement.getOrdersWhereBillIsNotCreatedYet().size();i++) {
+		if(FinancialManagement.getOrdersWhereBillIsNotCreatedYet().get(i).getOrderId()== x) {
 		    return i; 
 		}
 		
@@ -1939,7 +1941,7 @@ public class GUIFinanceManagement {
 
 	protected void refreshTableNewBill() {
 		try {
-			tableNewBill.setModel(new OrderTableModel(FinancialManagement.getOrders()));
+			tableNewBill.setModel(new OrderTableModel(FinancialManagement.getOrdersWhereBillIsNotCreatedYet()));
 
 		} catch (SQLException e) {
 			e.printStackTrace();

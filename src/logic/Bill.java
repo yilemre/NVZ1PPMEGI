@@ -6,16 +6,18 @@ public class Bill {
     private int id;
     private int idPot;
     private int idOrder;
+    private int idRegister;
     private String name;
     private int methodOfPayment;
     private double figure;
     private int status;
     private String timestamp;
     
-    public Bill(int id, int idPot, int idOrder, String name, int methodOfPayment, double figure, int status, String timestamp){
+    public Bill(int id, int idPot, int idOrder, int idRegister, String name, int methodOfPayment, double figure, int status, String timestamp){
     this.id = id;
     this.idPot = idPot;
     this.idOrder = idOrder;
+    this.idRegister = idRegister;
 	this.name = name; 
 	this.methodOfPayment = methodOfPayment; 
 	this.figure = figure; 

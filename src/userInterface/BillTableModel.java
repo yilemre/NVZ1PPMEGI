@@ -9,7 +9,7 @@ import logic.*;
 public class BillTableModel extends AbstractTableModel{
 	
 	private List<Bill> list = new ArrayList<Bill>();
-	private String[] columns = {"ID", "ID Auftrag", "Pot", "Kasse" , "Name", "Bezahlmethode", "Zahl", "Status"};
+	private String[] columns = {"ID", "ID Auftrag", "Pot", "Name", "Bezahlmethode", "Zahl", "Status"};
 
 	public BillTableModel(List<Bill> list) {
 		this.list=list;
@@ -23,7 +23,7 @@ public class BillTableModel extends AbstractTableModel{
 
 	@Override
 	public int getColumnCount() {
-		return 8;
+		return 7;
 	}
 
 	@Override
@@ -39,16 +39,14 @@ public class BillTableModel extends AbstractTableModel{
 			case 1:
 				return Integer.class;
 			case 2:
-				return String.class;
+				return Integer.class;
 			case 3:
-				return Integer.class;
-			case 4:
 				return String.class;
-			case 5:
+			case 4:
 				return Integer.class;
-			case 6:
+			case 5:
 				return Double.class;
-			case 7:
+			case 6:
 				return String.class;
 			default:
 				return null; //should not happen
@@ -65,14 +63,12 @@ public class BillTableModel extends AbstractTableModel{
 		case 2:
 			return list.get(rowIndex).getIdPot();
 		case 3:
-			return list.get(rowIndex).get;
-		case 4:
 			return list.get(rowIndex).getName();
+		case 4:
+			return list.get(rowIndex).getMethodOfPayment();
 		case 5:
-			return list.get(rowIndex).getPayKind();
+			return list.get(rowIndex).getFigure();
 		case 6:
-			return list.get(rowIndex).getAmount();
-		case 7:
 			return list.get(rowIndex).getReadableStatus(list.get(rowIndex).getStatus());
 		default: 
 			return null; //can not happen
