@@ -1272,9 +1272,10 @@ public class GUIFinanceManagement {
 		
 		JComboBox comboBoxPotRegisterIDModify = new JComboBox();
 		try {
-			for(CashRegister c : SQLManager.getInstance().getRegisterArray()){
-				comboBoxPotRegisterIDModify.addItem(c.toString());
-			}
+		    for(int i =0; i<FinancialManagement.getRegisterArray().size();i++) {
+			comboBoxPotRegisterIDModify.addItem(FinancialManagement.getRegisterArray().get(i));			
+		    }
+			
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -1290,6 +1291,7 @@ public class GUIFinanceManagement {
 		JButton btnaddJar = new JButton("Topf hinzufügen");
 		btnaddJar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			    //Emre+
 				try {
 					 FinancialManagement.addPot(
 							 textFieldjarName.getText(), 
@@ -1308,7 +1310,7 @@ public class GUIFinanceManagement {
 				textFieldjarActualStock.setText("");
 				textFieldjarEstimatedStock.setText("");
 				comboBoxPotRegisterID.setSelectedIndex(0);
-			}
+			}//Emre -
 		});
 		btnaddJar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnaddJar = new GridBagConstraints();
@@ -1328,7 +1330,6 @@ public class GUIFinanceManagement {
 								 Double.parseDouble(textFieldjarEstimatedStockModify.getText()), 
 								 textFieldjarNameModify.getText(),  
 								 FinancialManagement.getRegisterArray().get(comboBoxPotRegisterIDModify.getSelectedIndex()).getId());
-								 //SQLManager.getInstance().getRegisterArray().get(comboBoxPotRegisterIDModify.getSelectedIndex()).getId());
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -1592,7 +1593,7 @@ public class GUIFinanceManagement {
 		
 		JComboBox comboBoxCashRegisterTypeModify = new JComboBox();
 		comboBoxCashRegisterTypeModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBoxCashRegisterTypeModify.setModel(new DefaultComboBoxModel(new String[] {"Typ-1", "Typ-2", "Typ-3"}));
+		comboBoxCashRegisterTypeModify.setModel(new DefaultComboBoxModel(new String[] {"Barkasse", "Konto", "Kostenstelle"}));
 		GridBagConstraints gbc_comboBoxCashRegisterTypeModify = new GridBagConstraints();
 		gbc_comboBoxCashRegisterTypeModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxCashRegisterTypeModify.insets = new Insets(0, 0, 5, 5);
@@ -1618,10 +1619,12 @@ public class GUIFinanceManagement {
 				}
 				
 				//Emre+
-				comboBoxPotRegisterID.removeAll();
+				comboBoxPotRegisterID.removeAllItems();
+				comboBoxPotRegisterIDModify.removeAllItems();
 				try {
 				    for(int i = 0; i<FinancialManagement.getRegisterArray().size(); i++) {
 				        comboBoxPotRegisterID.addItem(FinancialManagement.getRegisterArray().get(i));
+				        comboBoxPotRegisterIDModify.addItem(FinancialManagement.getRegisterArray().get(i)); 
 				    }
 				} catch (SQLException e1) {
 				    // TODO Auto-generated catch block
@@ -1632,7 +1635,7 @@ public class GUIFinanceManagement {
 				textFieldcashRegisterActualStock.setText("");
 				textFieldcashRegisterEstimatedStock.setText("");
 				comboBoxCashRegisterType.setSelectedIndex(0);
-			}
+			}	//Emre -
 		});
 		btnaddcashRegister.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnaddcashRegister = new GridBagConstraints();
@@ -1651,7 +1654,7 @@ public class GUIFinanceManagement {
 							 Double.parseDouble(textFieldcashRegisterEstimatedStockModify.getText()), 
 							 Double.parseDouble(textFieldcashRegisterActualStockModify.getText()),
 							 textFieldCashRegisterNameModify.getText(),  
-							 comboBoxCashRegisterType.getSelectedIndex());
+							 comboBoxCashRegisterTypeModify.getSelectedIndex());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1664,7 +1667,7 @@ public class GUIFinanceManagement {
 				textFieldCashRegisterNameModify.setText("");
 				textFieldcashRegisterActualStockModify.setText("");
 				textFieldcashRegisterEstimatedStockModify.setText("");
-				comboBoxCashRegisterTypeModify.setSelectedIndex(0);
+				comboBoxCashRegisterTypeModify.setSelectedIndex(-1);
 			}
 		});
 		btncashRegisterSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1729,11 +1732,14 @@ public class GUIFinanceManagement {
 				try {
 					FinancialManagement.deleteCashRegister(Integer
 							.parseInt(tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 0).toString()));
+					FinancialManagement.deletePotByCashRegister(Integer
+							.parseInt(tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 0).toString()));
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				refreshTableCashRegister();
+				refreshTableJar(); 
 			}
 		});
 		
@@ -1842,7 +1848,7 @@ public class GUIFinanceManagement {
 			textFieldCashRegisterNameModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 1).toString());
 			textFieldcashRegisterActualStockModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 2).toString());
 			textFieldcashRegisterEstimatedStockModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 3).toString());
-			//comboBoxCashRegisterTypeModify.setSelectedIndex(Integer.parseInt(tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 4).toString()));
+			//comboBoxCashRegisterTypeModify.setSelectedIndex(Integer.parseInt(tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 4).toString())); 
 		}
 	}
 	

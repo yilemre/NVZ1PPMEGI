@@ -1,7 +1,7 @@
 package logic; 
 
 public class CashRegister {
-	private int id;
+    private int id;
     private String name;
     private double debitAmount;
     private double actualAmount;

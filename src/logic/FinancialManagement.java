@@ -92,6 +92,9 @@ public class FinancialManagement {
 	public static void deletePot(int id) throws SQLException {
 		SQLManager.getInstance().deletePotFromDB(id);
 	}
+	public static void deletePotByCashRegister(int id) throws SQLException {
+	    SQLManager.getInstance().deletePotByChashRegisterID(id);	    
+	}
 	
 	public static List<Pot> getPotArray() throws SQLException {
 		List<Pot> result = SQLManager.getInstance().getPotArray();

@@ -478,7 +478,7 @@ public class SQLManager {
 		
 	public void modifyRegister(int id, double actualAmount, double debitAmount, String name, int type) throws SQLException{
 		Statement stmt = c.createStatement();
-		stmt.executeUpdate("UPDATE Registers SET debitAmount = '"+debitAmount+"', actualAmount = '"+actualAmount+"', name ='"+name+"', type ='"+type+"' WHERE idRegister='"+id);
+		stmt.executeUpdate("UPDATE Registers SET debitAmount = "+debitAmount+", actualAmount = "+actualAmount+", name ='"+name+"', type ="+type+" WHERE idRegister="+id);
 		stmt.close();
 	}
 	
@@ -496,7 +496,7 @@ public class SQLManager {
 	
 	public int deleteCashRegisterFromDB(int id) throws SQLException{
 		Statement stmt = c.createStatement();
-		String sql ="DELETE FROM Register WHERE idRegister="+id;
+		String sql ="DELETE FROM Registers WHERE idRegister="+id;
 		stmt.executeUpdate(sql);
 		stmt.close();
 		return id;
@@ -546,6 +546,14 @@ public class SQLManager {
 	    return result; 
 	    
 	}
+	public void deletePotByChashRegisterID(int id ) throws SQLException {
+	    Statement stmt = c.createStatement(); 
+	    String sql = "DELETE FROM Pots WHERE idRegister="+ id;
+	    stmt.executeUpdate(sql); 
+	    stmt.close();
+	        
+	}
+	
 	//Emre-
 	public int deletePotFromDB(int id) throws SQLException{
 		Statement stmt = c.createStatement();
