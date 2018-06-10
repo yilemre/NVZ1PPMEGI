@@ -94,7 +94,7 @@ public class GUIFinanceManagement {
 	
 	private JTable tableCashRegister;
 	private JTable tableBillModify;
-	private JTable tableNewBill;
+	private JTable TableNewBillWhereBillIsNotCreatedYet;
 	private JTable tableDeleteBill;
 	private JTable tableJar;
 	
@@ -403,7 +403,7 @@ public class GUIFinanceManagement {
 						,comboBoxBillStatus.getSelectedIndex());
 
 					ProductionManagement.addOrderStatus(SQLManager.getInstance().getOrdersWhereBillisNotCreatedYet().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 7);
-					refreshTableNewBill();
+					refreshTableNewBillWhereBillIsNotCreatedYet();
 					
 					textFieldbillName.setText("");
 					comboBoxrelatedOrder.setSelectedIndex(-1);
@@ -457,16 +457,16 @@ public class GUIFinanceManagement {
 		gbc_scrollPane_1.gridy = 12;
 		panelcreateBill.add(scrollPane_1, gbc_scrollPane_1);
 		
-		tableNewBill = new JTable();
-		tableNewBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		TableNewBillWhereBillIsNotCreatedYet = new JTable();
+		TableNewBillWhereBillIsNotCreatedYet.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		try {
-			tableNewBill.setModel(new OrderTableModel(FinancialManagement.getOrdersWhereBillIsNotCreatedYet()));
+			TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(FinancialManagement.getOrdersWhereBillIsNotCreatedYet()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		tableNewBill.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane_1.setViewportView(tableNewBill);
-		tableNewBill.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+		TableNewBillWhereBillIsNotCreatedYet.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_1.setViewportView(TableNewBillWhereBillIsNotCreatedYet);
+		TableNewBillWhereBillIsNotCreatedYet.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
@@ -474,7 +474,7 @@ public class GUIFinanceManagement {
 
 			}
 		});
-		tableNewBill.clearSelection();
+		TableNewBillWhereBillIsNotCreatedYet.clearSelection();
 		
 		
 		JComboBox comboBoxOrderSearch = new JComboBox();
@@ -504,7 +504,7 @@ public class GUIFinanceManagement {
 				switch(comboBoxOrderSearch.getSelectedIndex()) {
 				case 0:
 					try {
-						tableNewBill.setModel(new OrderTableModel(ProductionManagement.getOrderByTitle(searchValue)));
+						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrderByTitle(searchValue)));
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -512,7 +512,7 @@ public class GUIFinanceManagement {
 					break;
 				case 1:
 					try {
-						tableNewBill.setModel(new OrderTableModel(ProductionManagement.getOrdersByType(searchValue)));
+						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrdersByType(searchValue)));
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -520,7 +520,7 @@ public class GUIFinanceManagement {
 					break;
 				case 2:
 					try {
-						tableNewBill.setModel(new OrderTableModel(ProductionManagement.getOrdersByStatus(searchValue)));
+						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrdersByStatus(searchValue)));
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -1819,10 +1819,10 @@ public class GUIFinanceManagement {
 	
 	protected void handleEditOrderSelectionEvent(ListSelectionEvent e) {
 		// TODO Auto-generated method stub
-		if (tableNewBill.getSelectedRow() > -1) {
-			comboBoxrelatedOrder.setSelectedIndex(getCorrectOrderIndex(tableNewBill.getValueAt(tableNewBill.getSelectedRow(), 0).toString()));
-			textFieldcustomerID.setText((String) tableNewBill.getValueAt(tableNewBill.getSelectedRow(), 5).toString());
-			textresponsiblePerson.setText((String) tableNewBill.getValueAt(tableNewBill.getSelectedRow(), 6).toString());
+		if (TableNewBillWhereBillIsNotCreatedYet.getSelectedRow() > -1) {
+			comboBoxrelatedOrder.setSelectedIndex(getCorrectOrderIndex(TableNewBillWhereBillIsNotCreatedYet.getValueAt(TableNewBillWhereBillIsNotCreatedYet.getSelectedRow(), 0).toString()));
+			textFieldcustomerID.setText((String) TableNewBillWhereBillIsNotCreatedYet.getValueAt(TableNewBillWhereBillIsNotCreatedYet.getSelectedRow(), 5).toString());
+			textresponsiblePerson.setText((String) TableNewBillWhereBillIsNotCreatedYet.getValueAt(TableNewBillWhereBillIsNotCreatedYet.getSelectedRow(), 6).toString());
 			
 		}
 		if(tableBillModify.getSelectedRow() > -1) {
@@ -1941,12 +1941,22 @@ public class GUIFinanceManagement {
 
 	protected void refreshTableNewBill() {
 		try {
-			tableNewBill.setModel(new OrderTableModel(FinancialManagement.getOrdersWhereBillIsNotCreatedYet()));
+			TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(FinancialManagement.getOrders()));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		tableNewBill.clearSelection();
+		TableNewBillWhereBillIsNotCreatedYet.clearSelection();
+	}
+
+	protected void refreshTableNewBillWhereBillIsNotCreatedYet() {
+		try {
+			TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(FinancialManagement.getOrdersWhereBillIsNotCreatedYet()));
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		TableNewBillWhereBillIsNotCreatedYet.clearSelection();
 	}
 
 	protected void refreshTableDeleteBill() {

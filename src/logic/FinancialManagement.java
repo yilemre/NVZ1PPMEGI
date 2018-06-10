@@ -128,6 +128,10 @@ public class FinancialManagement {
 	public static List<Order> getOrdersWhereBillIsNotCreatedYet() throws SQLException {
 		return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYet(); 
 	}
+    
+	public static List<Order> getOrders() throws SQLException {
+		return SQLManager.getInstance().getOrders(); 
+	}
 	
 	//Emre+ 
 	public static ResultSet getOrderByID(int id) throws SQLException {
