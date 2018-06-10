@@ -8,7 +8,7 @@ public class LastnameNotInDBException extends ELabException{
 
 	@Override
 	public String getMessage(){
-		return "No Person with specified lastname in database!";
+		return "Keine Person mit diesem Nachnamen vorhanden!";
 	}
 
 	@Override

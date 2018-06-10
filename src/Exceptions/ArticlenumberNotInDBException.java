@@ -8,7 +8,7 @@ public class ArticlenumberNotInDBException extends ELabException {
 
 	@Override
 	public String getMessage(){
-		return "No Component with specified name in database!";
+		return "Kein Bauteil mit dieser Nummer vorhanden!";
 	}
 
 	@Override

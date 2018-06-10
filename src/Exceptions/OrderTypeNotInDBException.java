@@ -1,14 +1,14 @@
 package Exceptions;
 
-public class StatusNotInDBException extends ELabException {
+public class OrderTypeNotInDBException extends ELabException {
 
-	public StatusNotInDBException(){
+	public OrderTypeNotInDBException(){
 
 	}
 
 	@Override
 	public String getMessage(){
-		return "No Assignment with specified status in database!";
+		return "Kein Auftrag dieser Art vorhanden!";
 	}
 
 	@Override
