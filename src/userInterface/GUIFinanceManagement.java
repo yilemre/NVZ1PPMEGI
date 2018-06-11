@@ -222,8 +222,7 @@ public class GUIFinanceManagement {
 		
 		comboBoxrelatedOrder = new JComboBox();
 		try {
-			comboBoxrelatedOrder.removeAllItems();
-			for(Order o : SQLManager.getInstance().getOrdersWhereBillisNotCreatedYet()){
+			for(Order o : SQLManager.getInstance().getOrders()){
 				comboBoxrelatedOrder.addItem(o.toString());
 			}
 		} catch (SQLException e1) {
@@ -416,7 +415,7 @@ public class GUIFinanceManagement {
 					currentDate.setAlignment(Element.ALIGN_RIGHT);
 					document.add(currentDate);
 
-					Paragraph Titel = new Paragraph("Rechnung" + "        " + SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).toString());
+					Paragraph Titel = new Paragraph("Rechnung:" + "        " + SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).toString());
 					Titel.setAlignment(Element.ALIGN_CENTER);
 					
 					document.add(Titel);
@@ -498,9 +497,11 @@ public class GUIFinanceManagement {
 					document.add(Chunk.NEWLINE);
 					Paragraph orderObject = new Paragraph("Auftragname" +"            " + SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).toString());
 					orderObject.setAlignment(Element.ALIGN_LEFT);
-					
 					document.add(orderObject);
-
+					
+					
+					
+					
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
@@ -510,17 +511,22 @@ public class GUIFinanceManagement {
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
-				
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
 					Paragraph sum = new Paragraph("Endbetrag:  "+"          "+ textFieldestimatedFigure.getText());
 					sum.setAlignment(Element.ALIGN_LEFT);
 					document.add(sum);
+					
+					
 					
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
 
 					Paragraph signature = new Paragraph(
-							"Unterschrift Kunde: " + "__________" + "               " + "Unterschrift elab: " + "__________");
+							"Unterschrift Kunde: " + "__________" + "               " + "Unterschrift ELab: " + "__________");
 					signature.setAlignment(Element.ALIGN_LEFT);
 				
 					document.add(signature);
@@ -535,8 +541,6 @@ public class GUIFinanceManagement {
 						SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 
 						SQLManager.getInstance().getPotArray().get(comboBoxrelatedJar.getSelectedIndex()).getId(),
 						SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegister.getSelectedIndex()).getId(),
-						Integer.parseInt(textFieldcustomerID.getText()),
-						Integer.parseInt(textresponsiblePerson.getText()),
 						textFieldbillName.getText(),
 						comboBoxpaymentTyp.getSelectedIndex(),
 						Double.parseDouble(textFieldestimatedFigure.getText())
@@ -548,23 +552,15 @@ public class GUIFinanceManagement {
 					
 					ProductionManagement.addOrderStatus(SQLManager.getInstance().getOrdersWhereBillisNotCreatedYet().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 7);
 					refreshTableNewBillWhereBillIsNotCreatedYet();
+					
 					textFieldbillName.setText("");
-					try {
-						comboBoxrelatedOrder.removeAllItems();
-						for(Order o : SQLManager.getInstance().getOrdersWhereBillisNotCreatedYet()){
-							comboBoxrelatedOrder.addItem(o.toString());
-						}
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					comboBoxrelatedOrder.setSelectedIndex(0);
-					comboBoxrelatedJar.setSelectedIndex(0);
+					comboBoxrelatedOrder.setSelectedIndex(-1);
+					comboBoxrelatedJar.setSelectedIndex(-1);
 					comboBoxrelatedCashRegister.setSelectedIndex(0);
 					textFieldcustomerID.setText("");
 					textresponsiblePerson.setText("");
 					textFieldestimatedFigure.setText("");
-					comboBoxpaymentTyp.setSelectedIndex(0);
+					comboBoxpaymentTyp.setSelectedIndex(-1);
 					comboBoxBillStatus.setSelectedIndex(0);
 				} catch (SQLException a) {
 					a.printStackTrace();
@@ -949,6 +945,7 @@ public class GUIFinanceManagement {
 		JButton btnsaveBillModify = new JButton("Rechnung ändern");
 		btnsaveBillModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				com.itextpdf.text.Document document = new com.itextpdf.text.Document();
 				try {
 					 FinancialManagement.modifyBill(
 							 	Integer.parseInt(textFieldBillIDModify.getText()),
@@ -960,10 +957,145 @@ public class GUIFinanceManagement {
 								Double.parseDouble(textFieldestimatedFigure.getText())
 								);
 					FinancialManagement.changeBillStatus(Integer.parseInt(textFieldBillIDModify.getText()), comboBoxBillStatusModify.getSelectedIndex());
+		
+					PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(textFieldbillNameModify.getText()+".pdf"));
+					document.open();
+				
+
+					Paragraph currentDate = new Paragraph();
+					currentDate.setAlignment(Element.ALIGN_RIGHT);
+					document.add(currentDate);
+
+					Paragraph Titel = new Paragraph("Rechnung:" + "        " + SQLManager.getInstance().getOrders().get(comboBoxrelatedOrderModify.getSelectedIndex()).toString());
+					Titel.setAlignment(Element.ALIGN_CENTER);
+					
+					document.add(Titel);
+
+					document.add(Chunk.NEWLINE);
+
+					Paragraph company = new Paragraph("Rechnungssteller :");
+					company.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(company);
+
+					Paragraph elab = new Paragraph("Elab");
+					elab.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(elab);
+					Paragraph street = new Paragraph("Hölderlinstraße 3");
+					street.setAlignment(Element.ALIGN_LEFT);
+				
+					document.add(street);
+					Paragraph room = new Paragraph("Raum H-H 002");
+					room.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(room);
+					Paragraph city = new Paragraph("57068 Siegen");
+					city.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(city);
+
+					document.add(Chunk.NEWLINE);
+
+					//placeholder for real Variables
+					
+					Paragraph customer = new Paragraph("Kunde:");
+					customer.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(customer);
+
+					Paragraph name = new Paragraph("Vorname:" );
+					name.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(name);
+
+					Paragraph surname = new Paragraph("Nachname");
+					surname.setAlignment(Element.ALIGN_LEFT);
+				
+					document.add(surname);
+
+					Paragraph streetCustomer = new Paragraph("Straße");
+					streetCustomer.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(streetCustomer);
+
+					Paragraph houseNumber = new Paragraph("Hausnummer");
+					houseNumber.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(houseNumber);
+
+					Paragraph zipCode = new Paragraph("Postleitzahl");
+					zipCode.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(zipCode);
+
+					Paragraph cityCustomer = new Paragraph("Stadt");
+					cityCustomer.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(cityCustomer);
+
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+
+					// Insert orderNumber after Auftrag
+					Paragraph orderName = new Paragraph("Auftrag");
+					orderName.setAlignment(Element.ALIGN_CENTER);
+				
+					document.add(orderName);
+
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					Paragraph orderObject = new Paragraph("Auftragname" +"            " + SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).toString());
+					orderObject.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(orderObject);
+
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					Paragraph sum = new Paragraph("Endbetrag:  "+"          "+ textFieldestimatedFigure.getText());
+					sum.setAlignment(Element.ALIGN_LEFT);
+					document.add(sum);
+					
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+
+					Paragraph signature = new Paragraph(
+							"Unterschrift Kunde: " + "__________" + "               " + "Unterschrift elab: " + "__________");
+					signature.setAlignment(Element.ALIGN_LEFT);
+				
+					document.add(signature);
+
+					document.close();
+					writer.close();
+			
+				
+				
+				
+				
+				
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (DocumentException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -1037,7 +1169,7 @@ public class GUIFinanceManagement {
 		gbc_comboBoxBillSearch.gridx = 0;
 		gbc_comboBoxBillSearch.gridy = 13;
 		panel.add(comboBoxBillSearch, gbc_comboBoxBillSearch);
-
+		
 		textField_7 = new JTextField();
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_7.setColumns(10);
@@ -2005,7 +2137,6 @@ public class GUIFinanceManagement {
 		}
 		if(tableBillModify.getSelectedRow() > -1) {
 			textFieldBillIDModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 0).toString());
-			textFieldbillNameModify.setText((String)tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 6));
 			textFieldcustomerIDModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 5).toString());
 			textFieldrelatedPersonModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 6).toString());
 		}
