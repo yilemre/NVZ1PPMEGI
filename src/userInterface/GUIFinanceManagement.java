@@ -540,6 +540,8 @@ public class GUIFinanceManagement {
 						(FinancialManagement.addBill(
 						SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 
 						SQLManager.getInstance().getPotArray().get(comboBoxrelatedJar.getSelectedIndex()).getId(),
+						Integer.parseInt(textFieldcustomerID.getText()),
+						Integer.parseInt(textresponsiblePerson.getText()),
 						SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegister.getSelectedIndex()).getId(),
 						textFieldbillName.getText(),
 						comboBoxpaymentTyp.getSelectedIndex(),

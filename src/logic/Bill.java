@@ -15,6 +15,19 @@ public class Bill {
     private int status;
     private String timestamp;
     
+    /**
+     * @param id
+     * @param idOrder
+     * @param idPot
+     * @param idCustomer
+     * @param idAdvisor
+     * @param idRegister
+     * @param name
+     * @param methodOfPayment
+     * @param figure
+     * @param status
+     * @param timestamp
+     */
     public Bill(int id, int idOrder, int idPot, int idCustomer, int idAdvisor, int idRegister, String name, int methodOfPayment, double figure, int status, String timestamp){
     this.id = id;
     this.idPot = idPot;
