@@ -68,6 +68,12 @@ public class SQLManager {
 	    String sql = "SELECT idPerson, firstname, surname FROM Persons WHERE idPerson="+id+";"; 
 	    return stmt.executeQuery(sql);	    
 	}
+	public void changePassword(String username, String password) throws SQLException {
+	    Statement statement = c.createStatement(); 
+	    String sql = "UPDATE Persons SET password= '"+password + "' WHERE username ='"+ username+"'; "; 
+	    statement.executeUpdate(sql); 
+	    statement.close();
+	}
 	//Emre end
 
 	public List<Person> getPersons() throws SQLException {

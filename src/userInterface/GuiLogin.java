@@ -127,7 +127,7 @@ public class GuiLogin {
 					frmElabVerwaltungsprogramm.dispose();
 				}
 				else {
-					GUIComponentUserInterface cmpui = new GUIComponentUserInterface();
+					GUIComponentUserInterface cmpui = new GUIComponentUserInterface(textFielduserName.getText());
 					frmElabVerwaltungsprogramm.dispose();
 				}
 			} catch (UsernameNotInDBException e1) {

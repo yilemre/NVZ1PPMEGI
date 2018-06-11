@@ -399,6 +399,7 @@ public class GUIComponentmanagement  {
 				textFieldquantityPlanned.setText("");
 				textFieldquantityOrdered.setText("");
 				textFieldstorageLocation.setText("");
+				comboBoxcategory.setSelectedIndex(-1);
 			}
 			//Emre end
 		});

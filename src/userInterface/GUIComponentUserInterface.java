@@ -21,6 +21,9 @@ import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
+import DataAccess.SQLManager;
+import Exceptions.WrongRepeatedPassword;
+import logic.ComponentManagement;
 import sun.rmi.log.LogOutputStream;
 
 import javax.swing.JTextField;
@@ -48,6 +51,7 @@ import javax.swing.JTable;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
+import java.sql.SQLException;
 import java.awt.Window.Type;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Frame;
@@ -59,8 +63,8 @@ public class GUIComponentUserInterface implements ActionListener {
 	private JTextField textFieldUsername;
 	private JPasswordField passwordFieldnewPassword;
 	private JPasswordField passwordFieldnewPasswordRepeat;
-	private JTable tablesallParts;
-	private JTable tableshoppingCart;
+	private JTable tableAllParts;
+	private JTable tableShoppingCard;
    
 	
 	
@@ -77,7 +81,7 @@ public class GUIComponentUserInterface implements ActionListener {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	public GUIComponentUserInterface() {
+	public GUIComponentUserInterface(String username) {
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setUndecorated(true);
@@ -128,9 +132,19 @@ public class GUIComponentUserInterface implements ActionListener {
 		gbc_scrollPaneallParts.gridy = 0;
 		panelshoppingCart.add(scrollPaneallParts, gbc_scrollPaneallParts);
 		
-		tablesallParts = new JTable();
-		tablesallParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		scrollPaneallParts.setViewportView(tablesallParts);
+		tableAllParts = new JTable();
+		tableAllParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		scrollPaneallParts.setViewportView(tableAllParts);
+		
+		//Emre+
+		
+		try {
+		    tableAllParts.setModel(new ComponentTableModel(ComponentManagement.getComponents()));
+		} catch (SQLException e1) {
+		    // TODO Auto-generated catch block
+		    e1.printStackTrace();
+		}
+		//Emre-
 		
 		JScrollPane scrollPaneshoppingCart = new JScrollPane();
 		scrollPaneshoppingCart.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -143,8 +157,8 @@ public class GUIComponentUserInterface implements ActionListener {
 		gbc_scrollPaneshoppingCart.gridy = 1;
 		panelshoppingCart.add(scrollPaneshoppingCart, gbc_scrollPaneshoppingCart);
 		
-		tableshoppingCart = new JTable();
-		scrollPaneshoppingCart.setViewportView(tableshoppingCart);
+		tableShoppingCard = new JTable();
+		scrollPaneshoppingCart.setViewportView(tableShoppingCard);
 		
 		JComboBox comboBoxcategoryPartSearch = new JComboBox();
 		comboBoxcategoryPartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -260,6 +274,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		panelChangePassword.add(lbluserName, gbc_lbluserName);
 		
 		textFieldUsername = new JTextField();
+		textFieldUsername.setText(username);
 		textFieldUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldUsername.setEditable(false);
 		GridBagConstraints gbc_textFieldUsername = new GridBagConstraints();
@@ -332,7 +347,23 @@ public class GUIComponentUserInterface implements ActionListener {
 		JButton btnsaveChange = new JButton("Änderung speichern");
 		btnsaveChange.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
+			    //Emre+
+			    if(passwordFieldnewPassword.getText().equals(passwordFieldnewPasswordRepeat.getText())) {
+				try {
+				    SQLManager.getInstance().changePassword(textFieldUsername.getText(), passwordFieldnewPassword.getText());
+				} catch (SQLException e1) {
+				    // TODO Auto-generated catch block
+				    e1.printStackTrace();
+				}
+			    } else
+				try {
+				    throw new WrongRepeatedPassword();
+				} catch (WrongRepeatedPassword e1) {
+				    // TODO Auto-generated catch block
+				    e1.printStackTrace();
+				} 
+			    
+			}//Emre-
 		});
 		btnsaveChange.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
