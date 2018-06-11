@@ -59,6 +59,7 @@ public class GUIComponentUserInterface implements ActionListener {
 	private JTextField textFieldUsername;
 	private JPasswordField passwordFieldnewPassword;
 	private JPasswordField passwordFieldnewPasswordRepeat;
+	private JTable tablesallParts;
 	private JTable tableshoppingCart;
    
 	
@@ -78,8 +79,8 @@ public class GUIComponentUserInterface implements ActionListener {
 	 */
 	public GUIComponentUserInterface() {
 		frmElabVerwaltungsprogramm = new JFrame();
-		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
+		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
 		frmElabVerwaltungsprogramm.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -111,24 +112,38 @@ public class GUIComponentUserInterface implements ActionListener {
 		tabbedPane.addTab("Bauteil kaufen", null, panelshoppingCart, null);
 		GridBagLayout gbl_panelshoppingCart = new GridBagLayout();
 		gbl_panelshoppingCart.columnWidths = new int[]{268, 570, 570, 0};
-		gbl_panelshoppingCart.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_panelshoppingCart.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gbl_panelshoppingCart.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_panelshoppingCart.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelshoppingCart.rowWeights = new double[]{1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelshoppingCart.setLayout(gbl_panelshoppingCart);
+		
+		JScrollPane scrollPaneallParts = new JScrollPane();
+		scrollPaneallParts.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneallParts.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		GridBagConstraints gbc_scrollPaneallParts = new GridBagConstraints();
+		gbc_scrollPaneallParts.gridwidth = 3;
+		gbc_scrollPaneallParts.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPaneallParts.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneallParts.gridx = 0;
+		gbc_scrollPaneallParts.gridy = 0;
+		panelshoppingCart.add(scrollPaneallParts, gbc_scrollPaneallParts);
+		
+		tablesallParts = new JTable();
+		tablesallParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		scrollPaneallParts.setViewportView(tablesallParts);
 		
 		JScrollPane scrollPaneshoppingCart = new JScrollPane();
 		scrollPaneshoppingCart.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneshoppingCart.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPaneshoppingCart = new GridBagConstraints();
 		gbc_scrollPaneshoppingCart.gridwidth = 3;
-		gbc_scrollPaneshoppingCart.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPaneshoppingCart.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPaneshoppingCart.fill = GridBagConstraints.BOTH;
 		gbc_scrollPaneshoppingCart.gridx = 0;
-		gbc_scrollPaneshoppingCart.gridy = 0;
+		gbc_scrollPaneshoppingCart.gridy = 1;
 		panelshoppingCart.add(scrollPaneshoppingCart, gbc_scrollPaneshoppingCart);
 		
 		tableshoppingCart = new JTable();
-		tableshoppingCart.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		scrollPaneshoppingCart.setViewportView(tableshoppingCart);
 		
 		JComboBox comboBoxcategoryPartSearch = new JComboBox();
@@ -139,7 +154,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		gbc_comboBoxcategoryPartSearch.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxcategoryPartSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxcategoryPartSearch.gridx = 0;
-		gbc_comboBoxcategoryPartSearch.gridy = 1;
+		gbc_comboBoxcategoryPartSearch.gridy = 2;
 		panelshoppingCart.add(comboBoxcategoryPartSearch, gbc_comboBoxcategoryPartSearch);
 		
 		textFieldpartSearch = new JTextField();
@@ -149,7 +164,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		gbc_textFieldpartSearch.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldpartSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldpartSearch.gridx = 1;
-		gbc_textFieldpartSearch.gridy = 1;
+		gbc_textFieldpartSearch.gridy = 2;
 		panelshoppingCart.add(textFieldpartSearch, gbc_textFieldpartSearch);
 		textFieldpartSearch.setColumns(10);
 		
@@ -165,7 +180,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		gbc_btnpartSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnpartSearch.insets = new Insets(0, 0, 5, 0);
 		gbc_btnpartSearch.gridx = 1;
-		gbc_btnpartSearch.gridy = 2;
+		gbc_btnpartSearch.gridy = 3;
 		panelshoppingCart.add(btnpartSearch, gbc_btnpartSearch);
 		
 		JLabel lblpartQuantity = new JLabel("Anzahl");
@@ -174,7 +189,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		gbc_lblpartQuantity.insets = new Insets(0, 0, 5, 5);
 		gbc_lblpartQuantity.anchor = GridBagConstraints.EAST;
 		gbc_lblpartQuantity.gridx = 0;
-		gbc_lblpartQuantity.gridy = 3;
+		gbc_lblpartQuantity.gridy = 4;
 		panelshoppingCart.add(lblpartQuantity, gbc_lblpartQuantity);
 		
 		JSpinner spinnerdekrementParts = new JSpinner();
@@ -184,7 +199,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		gbc_spinnerdekrementParts.fill = GridBagConstraints.HORIZONTAL;
 		gbc_spinnerdekrementParts.insets = new Insets(0, 0, 5, 5);
 		gbc_spinnerdekrementParts.gridx = 1;
-		gbc_spinnerdekrementParts.gridy = 3;
+		gbc_spinnerdekrementParts.gridy = 4;
 		panelshoppingCart.add(spinnerdekrementParts, gbc_spinnerdekrementParts);
 		
 		JSpinner spinnerincrementParts = new JSpinner();
@@ -194,7 +209,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		gbc_spinnerincrementParts.fill = GridBagConstraints.HORIZONTAL;
 		gbc_spinnerincrementParts.insets = new Insets(0, 0, 5, 0);
 		gbc_spinnerincrementParts.gridx = 2;
-		gbc_spinnerincrementParts.gridy = 3;
+		gbc_spinnerincrementParts.gridy = 4;
 		panelshoppingCart.add(spinnerincrementParts, gbc_spinnerincrementParts);
 		
 		JButton btndekrementParts = new JButton("Dem Warenkorb hinzufügen");
@@ -209,7 +224,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		gbc_btndekrementParts.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndekrementParts.insets = new Insets(0, 0, 0, 5);
 		gbc_btndekrementParts.gridx = 1;
-		gbc_btndekrementParts.gridy = 4;
+		gbc_btndekrementParts.gridy = 5;
 		panelshoppingCart.add(btndekrementParts, gbc_btndekrementParts);
 		
 		JButton btnincrementParts = new JButton("Aus Warenkorb entfernen");
@@ -223,7 +238,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		GridBagConstraints gbc_btnincrementParts = new GridBagConstraints();
 		gbc_btnincrementParts.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnincrementParts.gridx = 2;
-		gbc_btnincrementParts.gridy = 4;
+		gbc_btnincrementParts.gridy = 5;
 		panelshoppingCart.add(btnincrementParts, gbc_btnincrementParts);
 		
 		JPanel panelChangePassword = new JPanel();
