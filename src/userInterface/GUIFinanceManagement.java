@@ -24,6 +24,13 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import DataAccess.SQLManager;
 import Exceptions.ELabException;
 import logic.CashRegister;
@@ -56,7 +63,12 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.sql.Date;
+import java.sql.SQLData;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Frame;
@@ -392,7 +404,132 @@ public class GUIFinanceManagement {
 		JButton btnaddBill = new JButton("Rechnung hinzufügen");
 		btnaddBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				com.itextpdf.text.Document document = new com.itextpdf.text.Document();
+
 				try {
+					PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(textFieldbillName.getText()+".pdf"));
+					document.open();
+				
+
+					Paragraph currentDate = new Paragraph();
+					currentDate.setAlignment(Element.ALIGN_RIGHT);
+					document.add(currentDate);
+
+					Paragraph Titel = new Paragraph("Rechnung" + "        " + SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).toString());
+					Titel.setAlignment(Element.ALIGN_CENTER);
+					
+					document.add(Titel);
+
+					document.add(Chunk.NEWLINE);
+
+					Paragraph company = new Paragraph("Rechnungssteller :");
+					company.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(company);
+
+					Paragraph elab = new Paragraph("Elab");
+					elab.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(elab);
+					Paragraph street = new Paragraph("Hölderlinstraße 3");
+					street.setAlignment(Element.ALIGN_LEFT);
+				
+					document.add(street);
+					Paragraph room = new Paragraph("Raum H-H 002");
+					room.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(room);
+					Paragraph city = new Paragraph("57068 Siegen");
+					city.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(city);
+
+					document.add(Chunk.NEWLINE);
+
+					//placeholder for real Variables
+					
+					Paragraph customer = new Paragraph("Kunde:");
+					customer.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(customer);
+
+					Paragraph name = new Paragraph("Vorname:" );
+					name.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(name);
+
+					Paragraph surname = new Paragraph("Nachname");
+					surname.setAlignment(Element.ALIGN_LEFT);
+				
+					document.add(surname);
+
+					Paragraph streetCustomer = new Paragraph("Straße");
+					streetCustomer.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(streetCustomer);
+
+					Paragraph houseNumber = new Paragraph("Hausnummer");
+					houseNumber.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(houseNumber);
+
+					Paragraph zipCode = new Paragraph("Postleitzahl");
+					zipCode.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(zipCode);
+
+					Paragraph cityCustomer = new Paragraph("Stadt");
+					cityCustomer.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(cityCustomer);
+
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+
+					// Insert orderNumber after Auftrag
+					Paragraph orderName = new Paragraph("Auftrag");
+					orderName.setAlignment(Element.ALIGN_CENTER);
+				
+					document.add(orderName);
+
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					Paragraph orderObject = new Paragraph("Auftragname" +"            " + SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).toString());
+					orderObject.setAlignment(Element.ALIGN_LEFT);
+					
+					document.add(orderObject);
+
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+				
+					Paragraph sum = new Paragraph("Endbetrag:  "+"          "+ textFieldestimatedFigure.getText());
+					sum.setAlignment(Element.ALIGN_LEFT);
+					document.add(sum);
+					
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+
+					Paragraph signature = new Paragraph(
+							"Unterschrift Kunde: " + "__________" + "               " + "Unterschrift elab: " + "__________");
+					signature.setAlignment(Element.ALIGN_LEFT);
+				
+					document.add(signature);
+
+					document.close();
+					writer.close();
+			
+					
+					
 					FinancialManagement.addBillStatus(
 						(FinancialManagement.addBill(
 						SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 
@@ -405,7 +542,10 @@ public class GUIFinanceManagement {
 						Double.parseDouble(textFieldestimatedFigure.getText())
 						))
 						,comboBoxBillStatus.getSelectedIndex());
-
+			
+					
+					
+					
 					ProductionManagement.addOrderStatus(SQLManager.getInstance().getOrdersWhereBillisNotCreatedYet().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 7);
 					refreshTableNewBillWhereBillIsNotCreatedYet();
 					textFieldbillName.setText("");
@@ -426,11 +566,22 @@ public class GUIFinanceManagement {
 					textFieldestimatedFigure.setText("");
 					comboBoxpaymentTyp.setSelectedIndex(0);
 					comboBoxBillStatus.setSelectedIndex(0);
-				} catch (Exception a) {
+				} catch (SQLException a) {
 					a.printStackTrace();
 				}
+			
+				catch (DocumentException e1) {
+
+					e1.printStackTrace();
+
+				} catch (FileNotFoundException ex) {
+
+					ex.printStackTrace();
+				}
+			
+				
 			}
-		}); 
+				}); 
 		
 
 		btnaddBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -547,6 +698,7 @@ public class GUIFinanceManagement {
 				}
 			}
 		});
+		
 		btnnewbillOrderSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnnewbillOrderSearch = new GridBagConstraints();
 		gbc_btnnewbillOrderSearch.insets = new Insets(0, 0, 5, 0);
@@ -556,18 +708,6 @@ public class GUIFinanceManagement {
 		panelcreateBill.add(btnnewbillOrderSearch, gbc_btnnewbillOrderSearch);
 		
 		JButton btnclearSearchBillNew = new JButton("Suche aufheben");
-		btnclearSearchBillNew.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(FinancialManagement.getOrdersWhereBillIsNotCreatedYet()));
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-			}
-		});
 		btnclearSearchBillNew.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnclearSearchBillNew = new GridBagConstraints();
 		gbc_btnclearSearchBillNew.fill = GridBagConstraints.HORIZONTAL;
@@ -897,6 +1037,16 @@ public class GUIFinanceManagement {
 		gbc_comboBoxBillSearch.gridx = 0;
 		gbc_comboBoxBillSearch.gridy = 13;
 		panel.add(comboBoxBillSearch, gbc_comboBoxBillSearch);
+
+		textField_7 = new JTextField();
+		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textField_7.setColumns(10);
+		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
+		gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_7.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_7.gridx = 1;
+		gbc_textField_7.gridy = 13;
+		panel.add(textField_7, gbc_textField_7);
 		
 		JButton btnSearchBillModify = new JButton("Rechnung suchen");
 		btnSearchBillModify.addActionListener(new ActionListener() {
@@ -963,7 +1113,7 @@ public class GUIFinanceManagement {
 		gbc_btnSearchBillModify.gridy = 15;
 		panel.add(btnSearchBillModify, gbc_btnSearchBillModify);
 		
-		JButton btnclearSearchbillModify = new JButton("Suche aufheben");
+		JButton btnclearSearchbillModify = new JButton("Suche aufgeben");
 		btnclearSearchbillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnclearSearchbillModify = new GridBagConstraints();
 		gbc_btnclearSearchbillModify.fill = GridBagConstraints.HORIZONTAL;
