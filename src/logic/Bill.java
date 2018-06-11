@@ -6,6 +6,8 @@ public class Bill {
     private int id;
     private int idPot;
     private int idOrder;
+    private int idCustomer;
+    private int idAdvisor;
     private int idRegister;
     private String name;
     private int methodOfPayment;
@@ -13,10 +15,12 @@ public class Bill {
     private int status;
     private String timestamp;
     
-    public Bill(int id, int idPot, int idOrder, int idRegister, String name, int methodOfPayment, double figure, int status, String timestamp){
+    public Bill(int id, int idOrder, int idPot, int idCustomer, int idAdvisor, int idRegister, String name, int methodOfPayment, double figure, int status, String timestamp){
     this.id = id;
     this.idPot = idPot;
     this.idOrder = idOrder;
+    this.idCustomer = idCustomer;
+    this.idAdvisor = idAdvisor;
     this.idRegister = idRegister;
 	this.name = name; 
 	this.methodOfPayment = methodOfPayment; 
@@ -25,7 +29,31 @@ public class Bill {
 	this.timestamp = timestamp;
     }
     
-    public int getIdOrder() {
+    public int getIdCustomer() {
+		return idCustomer;
+	}
+
+	public void setIdCustomer(int idCustomer) {
+		this.idCustomer = idCustomer;
+	}
+
+	public int getIdAdvisor() {
+		return idAdvisor;
+	}
+
+	public void setIdAdvisor(int idAdvisor) {
+		this.idAdvisor = idAdvisor;
+	}
+
+	public int getIdRegister() {
+		return idRegister;
+	}
+
+	public void setIdRegister(int idRegister) {
+		this.idRegister = idRegister;
+	}
+
+	public int getIdOrder() {
 		return idOrder;
 	}
 
