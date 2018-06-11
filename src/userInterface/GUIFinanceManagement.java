@@ -1576,7 +1576,7 @@ public class GUIFinanceManagement {
 		gbc_lblPotRegisterIDModify.gridy = 4;
 		panelJarManagement.add(lblPotRegisterIDModify, gbc_lblPotRegisterIDModify);
 		
-		JComboBox comboBoxPotRegisterIDModify = new JComboBox();
+		comboBoxPotRegisterIDModify = new JComboBox();
 		try {
 		    for(int i =0; i<FinancialManagement.getRegisterArray().size();i++) {
 			comboBoxPotRegisterIDModify.addItem(FinancialManagement.getRegisterArray().get(i));			
@@ -1897,7 +1897,7 @@ public class GUIFinanceManagement {
 		gbc_lblcashRegisterTypeModify.gridy = 4;
 		panelcashRegisterManagement.add(lblcashRegisterTypeModify, gbc_lblcashRegisterTypeModify);
 		
-		JComboBox comboBoxCashRegisterTypeModify = new JComboBox();
+		comboBoxCashRegisterTypeModify = new JComboBox();
 		comboBoxCashRegisterTypeModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxCashRegisterTypeModify.setModel(new DefaultComboBoxModel(new String[] {"Barkasse", "Konto", "Kostenstelle"}));
 		GridBagConstraints gbc_comboBoxCashRegisterTypeModify = new GridBagConstraints();
@@ -2147,14 +2147,14 @@ public class GUIFinanceManagement {
 			textFieldjarNameModify.setText((String) tableJar.getValueAt(tableJar.getSelectedRow(), 1).toString());
 			textFieldjarActualStockModify.setText((String) tableJar.getValueAt(tableJar.getSelectedRow(), 2).toString());
 			textFieldjarEstimatedStockModify.setText((String) tableJar.getValueAt(tableJar.getSelectedRow(), 3).toString());
-			//comboBoxPotRegisterIDModify.setSelectedIndex(getCorrectCashRegisterIndex(tableJar.getValueAt(tableJar.getSelectedRow(), 4).toString()));
+			comboBoxPotRegisterIDModify.setSelectedIndex(getCorrectCashRegisterIndex(tableJar.getValueAt(tableJar.getSelectedRow(), 4).toString()));
 		}
 		if(tableCashRegister.getSelectedRow() > -1) {
 			textFieldCashRegisterIDModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 0).toString());
 			textFieldCashRegisterNameModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 1).toString());
 			textFieldcashRegisterActualStockModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 2).toString());
 			textFieldcashRegisterEstimatedStockModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 3).toString());
-			//comboBoxCashRegisterTypeModify.setSelectedIndex(Integer.parseInt(tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 4).toString())); 
+			comboBoxCashRegisterTypeModify.setSelectedIndex(Integer.parseInt(tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 4).toString())); 
 		}
 	}
 	
