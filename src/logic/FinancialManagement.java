@@ -13,7 +13,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import DataAccess.SQLManager;
-import Exceptions.ELabException;
+import Exceptions.*;
+
 
 public class FinancialManagement {
 
@@ -55,23 +56,23 @@ public class FinancialManagement {
 		return SQLManager.getInstance().getBills(); 
 	}
 	
-	public static List<Bill> getBillByName(String searchValue) throws SQLException {
+	public static List<Bill> getBillByName(String searchValue) throws SQLException, ELabException {
 		List<Bill> result = SQLManager.getInstance().getBillByName(searchValue);
 		return result;
 	}
 	
-	public static List<Bill> getBillsByStatus(String searchValues) throws SQLException {
-		switch(searchValues){
-		case "Nicht bezahlt":
+	public static List<Bill> getBillsByStatus(String searchValues) throws SQLException, ELabException {
+		switch(searchValues.toLowerCase()){
+		case "nicht bezahlt":
 			return SQLManager.getInstance().getBillsByStatus(0);
-		case "Bezahlt":
+		case "bezahlt":
 			return SQLManager.getInstance().getBillsByStatus(1);
 		default:
-			return null;
+			throw new BillStatusNotInDBException();
 		}
 	}
 	
-	public static List<Bill> getBillsByDate(String searchValues) throws SQLException {
+	public static List<Bill> getBillsByDate(String searchValues) throws SQLException, ELabException {
 		List<Bill> result = SQLManager.getInstance().getBillsByDate(searchValues);
 		return result;
 	}

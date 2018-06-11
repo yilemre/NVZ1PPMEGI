@@ -8,7 +8,7 @@ public class UsernameNotInDBException extends ELabException {
 
 	@Override
 	public String getMessage(){
-		return "Username not in database!";
+		return "Username nicht vergeben!";
 	}
 
 	@Override

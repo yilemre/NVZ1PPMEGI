@@ -8,7 +8,7 @@ public class WrongPasswordException extends ELabException {
 
 	@Override
 	public String getMessage(){
-		return "Password is wrong, please try again!";
+		return "Falsches Passwort! Bitte erneut versuchen.";
 	}
 
 	@Override

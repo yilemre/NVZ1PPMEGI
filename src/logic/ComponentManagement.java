@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import DataAccess.SQLManager;
+import Exceptions.*;
 
 public class ComponentManagement {
     
@@ -23,7 +24,7 @@ public class ComponentManagement {
 	return SQLManager.getInstance().getCategoryArray(); 
     }
     
-    public static List<Category> getCategories() throws SQLException {
+    public static List<Category> getCategories() throws SQLException, ELabException {
    	return SQLManager.getInstance().getCategories(); 
        }
     
@@ -34,10 +35,10 @@ public class ComponentManagement {
     public static List<Component> getComponents() throws SQLException {
 	return SQLManager.getInstance().getComponents(); 
     }
-    public static List<Component> getComponentByArticlenumber(String articlenumber) throws SQLException {
+    public static List<Component> getComponentByArticlenumber(String articlenumber) throws SQLException, ELabException {
 	return SQLManager.getInstance().getComponentsByArticlenumber(articlenumber); 
     }
-    public static List<Component> getComponentByName(String name) throws SQLException {
+    public static List<Component> getComponentByName(String name) throws SQLException, ELabException {
 	return SQLManager.getInstance().getComponentsByName(name); 
     }
     public static void deletePart(int id) throws SQLException {
