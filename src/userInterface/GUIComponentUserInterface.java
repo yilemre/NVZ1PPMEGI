@@ -20,7 +20,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import DataAccess.SQLManager;
+import Exceptions.ELabException;
+import Exceptions.NotEnoughParts;
+import Exceptions.WrongRepeatedPassword;
+import logic.ComponentManagement;
 import sun.rmi.log.LogOutputStream;
 
 import javax.swing.JTextField;
@@ -48,6 +55,7 @@ import javax.swing.JTable;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
+import java.sql.SQLException;
 import java.awt.Window.Type;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Frame;
@@ -59,8 +67,9 @@ public class GUIComponentUserInterface implements ActionListener {
 	private JTextField textFieldUsername;
 	private JPasswordField passwordFieldnewPassword;
 	private JPasswordField passwordFieldnewPasswordRepeat;
-	private JTable tablesallParts;
-	private JTable tableshoppingCart;
+	private JTable tableAllParts;
+	private JTable tableShoppingCard;
+	//int idPart; 
    
 	
 	
@@ -77,7 +86,7 @@ public class GUIComponentUserInterface implements ActionListener {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	public GUIComponentUserInterface() {
+	public GUIComponentUserInterface(String username) {
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setUndecorated(true);
@@ -111,40 +120,58 @@ public class GUIComponentUserInterface implements ActionListener {
 		JPanel panelshoppingCart = new JPanel();
 		tabbedPane.addTab("Bauteil kaufen", null, panelshoppingCart, null);
 		GridBagLayout gbl_panelshoppingCart = new GridBagLayout();
-		gbl_panelshoppingCart.columnWidths = new int[]{268, 570, 570, 0};
-		gbl_panelshoppingCart.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_panelshoppingCart.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_panelshoppingCart.rowWeights = new double[]{1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelshoppingCart.columnWidths = new int[]{268, 570, 0, 570, 0};
+		gbl_panelshoppingCart.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panelshoppingCart.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panelshoppingCart.rowWeights = new double[]{1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelshoppingCart.setLayout(gbl_panelshoppingCart);
 		
 		JScrollPane scrollPaneallParts = new JScrollPane();
 		scrollPaneallParts.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneallParts.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPaneallParts = new GridBagConstraints();
-		gbc_scrollPaneallParts.gridwidth = 3;
+		gbc_scrollPaneallParts.gridwidth = 4;
 		gbc_scrollPaneallParts.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPaneallParts.fill = GridBagConstraints.BOTH;
 		gbc_scrollPaneallParts.gridx = 0;
 		gbc_scrollPaneallParts.gridy = 0;
 		panelshoppingCart.add(scrollPaneallParts, gbc_scrollPaneallParts);
 		
-		tablesallParts = new JTable();
-		tablesallParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		scrollPaneallParts.setViewportView(tablesallParts);
+		tableAllParts = new JTable();
+		tableAllParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		scrollPaneallParts.setViewportView(tableAllParts);
+		
+		//Emre+
+		
+		try {
+		    tableAllParts.setModel(new ComponentTableModel(ComponentManagement.getComponents()));
+		} catch (SQLException e1) {
+		    // TODO Auto-generated catch block
+		    e1.printStackTrace();
+		}
+		tableAllParts.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableAllParts.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+		    @Override
+		    public void valueChanged(ListSelectionEvent arg0) {
+			// TODO Auto-generated method stub
+		    }
+		});
+		
+		//Emre- 
 		
 		JScrollPane scrollPaneshoppingCart = new JScrollPane();
 		scrollPaneshoppingCart.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPaneshoppingCart.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPaneshoppingCart = new GridBagConstraints();
-		gbc_scrollPaneshoppingCart.gridwidth = 3;
-		gbc_scrollPaneshoppingCart.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPaneshoppingCart.gridwidth = 4;
+		gbc_scrollPaneshoppingCart.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPaneshoppingCart.fill = GridBagConstraints.BOTH;
 		gbc_scrollPaneshoppingCart.gridx = 0;
 		gbc_scrollPaneshoppingCart.gridy = 1;
 		panelshoppingCart.add(scrollPaneshoppingCart, gbc_scrollPaneshoppingCart);
 		
-		tableshoppingCart = new JTable();
-		scrollPaneshoppingCart.setViewportView(tableshoppingCart);
+		tableShoppingCard = new JTable();
+		scrollPaneshoppingCart.setViewportView(tableShoppingCard);
 		
 		JComboBox comboBoxcategoryPartSearch = new JComboBox();
 		comboBoxcategoryPartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -160,7 +187,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		textFieldpartSearch = new JTextField();
 		textFieldpartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldpartSearch = new GridBagConstraints();
-		gbc_textFieldpartSearch.gridwidth = 2;
+		gbc_textFieldpartSearch.gridwidth = 3;
 		gbc_textFieldpartSearch.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldpartSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldpartSearch.gridx = 1;
@@ -171,17 +198,63 @@ public class GUIComponentUserInterface implements ActionListener {
 		JButton btnpartSearch = new JButton("Nach Bauteil suchen");
 		btnpartSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			    //Emre+
+			    switch(comboBoxcategoryPartSearch.getSelectedIndex()) {
+			    case 0: 
+				try {
+				    tableAllParts.setModel(new ComponentTableModel(ComponentManagement.getComponentByName(textFieldpartSearch.getText())));
+				} catch (SQLException e1) {
+				    // TODO Auto-generated catch block
+				    e1.printStackTrace();
+				} catch (ELabException e1) {
+				    // TODO Auto-generated catch block
+				    e1.printStackTrace();
+				}
+				break; 
+			    case 1: 
+				try {
+				    tableAllParts.setModel(new ComponentTableModel(ComponentManagement.getComponentByArticlenumber(textFieldpartSearch.getText())));
+				} catch (SQLException e1) {
+				    // TODO Auto-generated catch block
+				    e1.printStackTrace();
+				} catch (ELabException e1) {
+				    // TODO Auto-generated catch block
+				    e1.printStackTrace();
+				}
+				break; 
+			    }//Emre -
 			}
 		});
 		btnpartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		GridBagConstraints gbc_btnpartSearch = new GridBagConstraints();
-		gbc_btnpartSearch.gridwidth = 2;
+		gbc_btnpartSearch.gridwidth = 3;
 		gbc_btnpartSearch.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnpartSearch.insets = new Insets(0, 0, 5, 0);
 		gbc_btnpartSearch.gridx = 1;
 		gbc_btnpartSearch.gridy = 3;
 		panelshoppingCart.add(btnpartSearch, gbc_btnpartSearch);
+		
+		JButton btnResetSearch = new JButton("Suche aufheben");
+		btnResetSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			    //Emre+
+			    try {
+				tableAllParts.setModel(new ComponentTableModel(ComponentManagement.getComponents()));
+			    } catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			    }
+			    textFieldpartSearch.setText("");
+			}//Emre -
+		});
+		btnResetSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_btnResetSearch = new GridBagConstraints();
+		gbc_btnResetSearch.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnResetSearch.insets = new Insets(0, 0, 5, 5);
+		gbc_btnResetSearch.gridx = 2;
+		gbc_btnResetSearch.gridy = 4;
+		panelshoppingCart.add(btnResetSearch, gbc_btnResetSearch);
 		
 		JLabel lblpartQuantity = new JLabel("Anzahl");
 		lblpartQuantity.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -189,32 +262,50 @@ public class GUIComponentUserInterface implements ActionListener {
 		gbc_lblpartQuantity.insets = new Insets(0, 0, 5, 5);
 		gbc_lblpartQuantity.anchor = GridBagConstraints.EAST;
 		gbc_lblpartQuantity.gridx = 0;
-		gbc_lblpartQuantity.gridy = 4;
+		gbc_lblpartQuantity.gridy = 5;
 		panelshoppingCart.add(lblpartQuantity, gbc_lblpartQuantity);
 		
-		JSpinner spinnerdekrementParts = new JSpinner();
+		JTextField spinnerdekrementParts = new JTextField();
 		spinnerdekrementParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		spinnerdekrementParts.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+		//spinnerdekrementParts.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		GridBagConstraints gbc_spinnerdekrementParts = new GridBagConstraints();
 		gbc_spinnerdekrementParts.fill = GridBagConstraints.HORIZONTAL;
 		gbc_spinnerdekrementParts.insets = new Insets(0, 0, 5, 5);
 		gbc_spinnerdekrementParts.gridx = 1;
-		gbc_spinnerdekrementParts.gridy = 4;
+		gbc_spinnerdekrementParts.gridy = 5;
 		panelshoppingCart.add(spinnerdekrementParts, gbc_spinnerdekrementParts);
 		
-		JSpinner spinnerincrementParts = new JSpinner();
+		JTextField spinnerincrementParts = new JTextField();
 		spinnerincrementParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		spinnerincrementParts.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+		//spinnerincrementParts.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		GridBagConstraints gbc_spinnerincrementParts = new GridBagConstraints();
 		gbc_spinnerincrementParts.fill = GridBagConstraints.HORIZONTAL;
 		gbc_spinnerincrementParts.insets = new Insets(0, 0, 5, 0);
-		gbc_spinnerincrementParts.gridx = 2;
-		gbc_spinnerincrementParts.gridy = 4;
+		gbc_spinnerincrementParts.gridx = 3;
+		gbc_spinnerincrementParts.gridy = 5;
 		panelshoppingCart.add(spinnerincrementParts, gbc_spinnerincrementParts);
 		
 		JButton btndekrementParts = new JButton("Dem Warenkorb hinzufügen");
 		btndekrementParts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			    try {
+				if(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 5).toString())>=  Integer.parseInt(spinnerdekrementParts.getText())) {
+				    SQLManager.getInstance().addPartToShoppingCard(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(textFieldUsername.getText()), Integer.parseInt(spinnerdekrementParts.getText()));
+				} else
+				    try {
+					throw new NotEnoughParts();
+				    } catch (NotEnoughParts e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				    }  
+				
+			    } catch (NumberFormatException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			    } catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			    }
 			}
 		});
 		btndekrementParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -222,9 +313,9 @@ public class GUIComponentUserInterface implements ActionListener {
 		btndekrementParts.setToolTipText("Das entnommene Bauteil wird ihrer Rechnung hinzugefügt");
 		GridBagConstraints gbc_btndekrementParts = new GridBagConstraints();
 		gbc_btndekrementParts.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btndekrementParts.insets = new Insets(0, 0, 0, 5);
+		gbc_btndekrementParts.insets = new Insets(0, 0, 5, 5);
 		gbc_btndekrementParts.gridx = 1;
-		gbc_btndekrementParts.gridy = 5;
+		gbc_btndekrementParts.gridy = 6;
 		panelshoppingCart.add(btndekrementParts, gbc_btndekrementParts);
 		
 		JButton btnincrementParts = new JButton("Aus Warenkorb entfernen");
@@ -236,9 +327,10 @@ public class GUIComponentUserInterface implements ActionListener {
 	
 		btnincrementParts.setToolTipText("Das Bauteil wird in der angegebenen Menge \r\naus ihrem Warenkorb entfernt.");
 		GridBagConstraints gbc_btnincrementParts = new GridBagConstraints();
+		gbc_btnincrementParts.insets = new Insets(0, 0, 5, 0);
 		gbc_btnincrementParts.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnincrementParts.gridx = 2;
-		gbc_btnincrementParts.gridy = 5;
+		gbc_btnincrementParts.gridx = 3;
+		gbc_btnincrementParts.gridy = 6;
 		panelshoppingCart.add(btnincrementParts, gbc_btnincrementParts);
 		
 		JPanel panelChangePassword = new JPanel();
@@ -260,6 +352,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		panelChangePassword.add(lbluserName, gbc_lbluserName);
 		
 		textFieldUsername = new JTextField();
+		textFieldUsername.setText(username);
 		textFieldUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldUsername.setEditable(false);
 		GridBagConstraints gbc_textFieldUsername = new GridBagConstraints();
@@ -332,7 +425,23 @@ public class GUIComponentUserInterface implements ActionListener {
 		JButton btnsaveChange = new JButton("Änderung speichern");
 		btnsaveChange.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
+			    //Emre+
+			    if(passwordFieldnewPassword.getText().equals(passwordFieldnewPasswordRepeat.getText())) {
+				try {
+				    SQLManager.getInstance().changePassword(textFieldUsername.getText(), passwordFieldnewPassword.getText());
+				} catch (SQLException e1) {
+				    // TODO Auto-generated catch block
+				    e1.printStackTrace();
+				}
+			    } else
+				try {
+				    throw new WrongRepeatedPassword();
+				} catch (WrongRepeatedPassword e1) {
+				    // TODO Auto-generated catch block
+				    e1.printStackTrace();
+				} 
+			    
+			}//Emre-
 		});
 		btnsaveChange.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
