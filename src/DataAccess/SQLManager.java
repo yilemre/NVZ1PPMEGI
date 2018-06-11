@@ -359,10 +359,18 @@ public class SQLManager {
 		stmt.close();
 	}
 	//Emre+
-	public ResultSet getOrderByID(int id) throws SQLException {
+	public Order getOrderByID(int id) throws SQLException, OrderNotInDBException {
 	    Statement stmt= c.createStatement(); 
-	    String sql = "SELECT * FROM Orders WHERE idOrder ="+id+";"; 
-	    return stmt.executeQuery(sql); 
+	    Order result=null;
+	    String sql = "SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder HAVING idOrder="+id+";";
+	    ResultSet rs= stmt.executeQuery(sql);
+	    if(rs.next()) {
+	    	result = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"),rs.getInt("status"), rs.getString("timestamp"));
+	    }
+	    else {
+	    	throw new OrderNotInDBException();
+	    }
+	    return result;
 	}
 	//Emre- 
 
@@ -565,6 +573,21 @@ public class SQLManager {
 	    return result; 
 	    
 	}
+	
+	public Pot getPotByID(int idPot) throws SQLException, PotNotInDBException {
+	    Pot result = null; 
+	    Statement stmt = c.createStatement(); 
+	    String sql = "SELECT * FROM Pots WHERE idPot= "+idPot; 
+	    ResultSet rs = stmt.executeQuery(sql);
+	    if(rs.next()) {
+	    result = new Pot(rs.getInt("idPots"), rs.getString("name"), rs.getDouble("debitAmount"), rs.getDouble("actualAmount"), rs.getInt("idRegister")); 
+	    }
+	    else {
+	    	throw new PotNotInDBException();
+	    }
+	    return result; 
+	}
+	
 	public void deletePotByChashRegisterID(int id ) throws SQLException {
 	    Statement stmt = c.createStatement(); 
 	    String sql = "DELETE FROM Pots WHERE idRegister="+ id;

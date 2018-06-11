@@ -929,12 +929,9 @@ public class GUIFabricationmanagement {
 							textFieldorderTitelModify.getText(), comboBoxTypeModify.getSelectedIndex(),
 							Double.parseDouble(textFieldpredictedCostsModify.getText()),
 							Double.parseDouble(textFieldactualCostsModify.getText()),
-							SQLManager.getInstance().getCustomerArray()
-									.get(comboBoxorderCustomerModify.getSelectedIndex()).getId(),
-							SQLManager.getInstance().getAdvisorArray()
-									.get(comboBoxResponsiblePersonModify.getSelectedIndex()).getId(),
-							SQLManager.getInstance().getAdvisorArray()
-									.get(comboBoxStandinResponsiblePersonModify.getSelectedIndex()).getId(),
+							SQLManager.getInstance().getCustomerArray().get(comboBoxorderCustomerModify.getSelectedIndex()).getId(),
+							SQLManager.getInstance().getAdvisorArray().get(comboBoxResponsiblePersonModify.getSelectedIndex()).getId(),
+							SQLManager.getInstance().getAdvisorArray().get(comboBoxStandinResponsiblePersonModify.getSelectedIndex()).getId(),
 							textFieldfileNameModify.getText(), textFieldfilePathModify.getText(),
 							textFieldnoteOtherModify.getText());
 					ProductionManagement.addOrderStatus(Integer.parseInt(textFieldorderIDModify.getText()),
@@ -1212,23 +1209,18 @@ public class GUIFabricationmanagement {
 		if (table.getSelectedRow() > -1) {
 			textFieldorderIDModify.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
 			textFieldorderTitelModify.setText((String) table.getValueAt(table.getSelectedRow(), 1).toString());
-			comboBoxTypeModify
-					.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 2)));
+			comboBoxTypeModify.setSelectedIndex(comboBoxEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 2)));
 			textFieldnoteOtherModify.setText((String) table.getValueAt(table.getSelectedRow(), 10).toString());
 			textFieldfilePathModify.setText((String) table.getValueAt(table.getSelectedRow(), 9).toString());
 			textFieldfileNameModify.setText((String) table.getValueAt(table.getSelectedRow(), 8).toString());
 			textFieldpredictedCostsModify.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
 			textFieldactualCostsModify.setText(table.getValueAt(table.getSelectedRow(), 4).toString());
-			comboBoxModifyStatus.setSelectedIndex(
-					comboBoxStatusEntries.indexOf((String) table.getValueAt(table.getSelectedRow(), 11)));
+			comboBoxModifyStatus.setSelectedIndex(comboBoxStatusEntries.indexOf((String)table.getValueAt(table.getSelectedRow(), 11)));
 
 			// Emre begin
-			comboBoxorderCustomerModify
-					.setSelectedIndex(getCorrectCustomerIndex(table.getValueAt(table.getSelectedRow(), 5).toString()));
-			comboBoxResponsiblePersonModify.setSelectedIndex(
-					getCorrectResponsibleIndex(table.getValueAt(table.getSelectedRow(), 6).toString()));
-			comboBoxStandinResponsiblePersonModify.setSelectedIndex(
-					getCorrectResponsibleIndex(table.getValueAt(table.getSelectedRow(), 7).toString()));
+			comboBoxorderCustomerModify.setSelectedIndex(getCorrectCustomerIndex(table.getValueAt(table.getSelectedRow(), 5).toString()));
+			comboBoxResponsiblePersonModify.setSelectedIndex(getCorrectResponsibleIndex(table.getValueAt(table.getSelectedRow(), 6).toString()));
+			comboBoxStandinResponsiblePersonModify.setSelectedIndex(getCorrectResponsibleIndex(table.getValueAt(table.getSelectedRow(), 7).toString()));
 
 			// Emre end
 		}

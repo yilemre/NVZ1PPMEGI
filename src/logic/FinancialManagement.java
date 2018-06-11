@@ -138,7 +138,7 @@ public class FinancialManagement {
 	}
 	
 	//Emre+ 
-	public static ResultSet getOrderByID(int id) throws SQLException {
+	public static Order getOrderByID(int id) throws SQLException, OrderNotInDBException {
 	    return SQLManager.getInstance().getOrderByID(id); 
 	}
 	public static ResultSet getPersonByID(int id) throws SQLException {

@@ -34,6 +34,7 @@ import com.sun.org.apache.bcel.internal.generic.Type;
 
 import DataAccess.SQLManager;
 import Exceptions.ELabException;
+import Exceptions.OrderNotInDBException;
 import logic.CashRegister;
 import logic.FinancialManagement;
 import logic.Order;
@@ -106,6 +107,8 @@ public class GUIFinanceManagement {
 	private JTextField textFieldBillIDModify;
 	private JTextField textFieldCashRegisterIDModify;
 	private JTextField textFieldPotIDModify;
+	private JTextField textFieldrelatedOrder;
+	private JTextField textFieldrelatedOrderModify;
 	
 	private JTable tableCashRegister;
 	private JTable tableBillModify;
@@ -113,13 +116,17 @@ public class GUIFinanceManagement {
 	private JTable tableDeleteBill;
 	private JTable tableJar;
 	
-	private JComboBox comboBoxrelatedOrder;
+	
 	private JComboBox comboBoxpaymentTypModify;
 	private JComboBox comboBoxpaymentTyp;
 	private JComboBox comboBoxCashRegisterTypeModify;
 	private JComboBox comboBoxPotRegisterIDModify;
 	private JComboBox comboBoxrelatedCashRegister;
 	private JComboBox comboBoxPotRegisterID;
+	private JComboBox comboBoxCashRegisterType;
+	private JComboBox comboBoxrelatedCashRegisterModify;
+	private JComboBox comboBoxrelatedJarModify;
+	private JComboBox comboBoxBillStatusModify;
 	
 	private List<String> comboBoxEntries;
 	private List<String> comboBoxStatusEntries;
@@ -150,6 +157,7 @@ public class GUIFinanceManagement {
 		
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setUndecorated(true);
+		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 	
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
@@ -222,23 +230,15 @@ public class GUIFinanceManagement {
 		gbc_lblrelatedOrder.gridx = 0;
 		panelcreateBill.add(lblrelatedOrder, gbc_lblrelatedOrder);
 		
-		comboBoxrelatedOrder = new JComboBox();
-		try {
-			for(Order o : SQLManager.getInstance().getOrders()){
-				comboBoxrelatedOrder.addItem(o.toString());
-			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		comboBoxrelatedOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldrelatedOrder = new JTextField();
+		textFieldrelatedOrder.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldrelatedOrder.setEditable(false);
 		GridBagConstraints gbc_comboBoxrelatedOrder = new GridBagConstraints();
 		gbc_comboBoxrelatedOrder.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxrelatedOrder.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxrelatedOrder.gridx = 1;
 		gbc_comboBoxrelatedOrder.gridy = 2;
-		panelcreateBill.add(comboBoxrelatedOrder, gbc_comboBoxrelatedOrder);
+		panelcreateBill.add(textFieldrelatedOrder, gbc_comboBoxrelatedOrder);
 		
 		JLabel lblpaymentTyp = new JLabel("Bezahlart");
 		lblpaymentTyp.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -417,7 +417,7 @@ public class GUIFinanceManagement {
 					currentDate.setAlignment(Element.ALIGN_RIGHT);
 					document.add(currentDate);
 
-					Paragraph Titel = new Paragraph("Rechnung:" + "        " + SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).toString());
+					Paragraph Titel = new Paragraph("Rechnung:" + "        " + textFieldbillName.getText());
 					Titel.setAlignment(Element.ALIGN_CENTER);
 					
 					document.add(Titel);
@@ -497,7 +497,7 @@ public class GUIFinanceManagement {
 
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
-					Paragraph orderObject = new Paragraph("Auftragname" +"            " + SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).toString());
+					Paragraph orderObject = new Paragraph("Auftragsname" +"            " + SQLManager.getInstance().getOrderByID(Integer.parseInt(textFieldrelatedOrder.getText())));
 					orderObject.setAlignment(Element.ALIGN_LEFT);
 					document.add(orderObject);
 					
@@ -538,27 +538,26 @@ public class GUIFinanceManagement {
 			
 					
 					
-				/*	FinancialManagement.addBillStatus(
+				FinancialManagement.addBillStatus(
 						(FinancialManagement.addBill(
-						SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 
+						Integer.parseInt(textFieldrelatedOrder.getText()), 
 						SQLManager.getInstance().getPotArray().get(comboBoxrelatedJar.getSelectedIndex()).getId(),
+						SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegister.getSelectedIndex()).getId(),
 						Integer.parseInt(textFieldcustomerID.getText()),
 						Integer.parseInt(textresponsiblePerson.getText()),
-						SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegister.getSelectedIndex()).getId(),
 						textFieldbillName.getText(),
 						comboBoxpaymentTyp.getSelectedIndex(),
 						Double.parseDouble(textFieldestimatedFigure.getText())
 						))
 						,comboBoxBillStatus.getSelectedIndex());
-			*/
 					
 					
 					
-					ProductionManagement.addOrderStatus(SQLManager.getInstance().getOrdersWhereBillisNotCreatedYet().get(comboBoxrelatedOrder.getSelectedIndex()).getOrderId(), 7);
+					ProductionManagement.addOrderStatus(Integer.parseInt(textFieldrelatedOrder.getText()), 7);
 					refreshTableNewBillWhereBillIsNotCreatedYet();
 					
 					textFieldbillName.setText("");
-					comboBoxrelatedOrder.setSelectedIndex(-1);
+					textFieldrelatedOrder.setText("");
 					comboBoxrelatedJar.setSelectedIndex(-1);
 					comboBoxrelatedCashRegister.setSelectedIndex(0);
 					textFieldcustomerID.setText("");
@@ -577,6 +576,12 @@ public class GUIFinanceManagement {
 				} catch (FileNotFoundException ex) {
 
 					ex.printStackTrace();
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (OrderNotInDBException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			
 				
@@ -779,22 +784,15 @@ public class GUIFinanceManagement {
 		gbc_lblrelatedOrderModify.gridy = 3;
 		panel.add(lblrelatedOrderModify, gbc_lblrelatedOrderModify);
 		
-		JComboBox comboBoxrelatedOrderModify = new JComboBox();
-		try {
-			for(Order o : SQLManager.getInstance().getOrders()){
-				comboBoxrelatedOrderModify.addItem(o.toString());
-			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		comboBoxrelatedOrderModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldrelatedOrderModify = new JTextField();
+		textFieldrelatedOrderModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldrelatedOrderModify.setEditable(false);
 		GridBagConstraints gbc_comboBoxrelatedOrderModify = new GridBagConstraints();
 		gbc_comboBoxrelatedOrderModify.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxrelatedOrderModify.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxrelatedOrderModify.gridx = 1;
 		gbc_comboBoxrelatedOrderModify.gridy = 3;
-		panel.add(comboBoxrelatedOrderModify, gbc_comboBoxrelatedOrderModify);
+		panel.add(textFieldrelatedOrderModify, gbc_comboBoxrelatedOrderModify);
 		
 		JLabel lblpaymentTypModify = new JLabel("Bezahlart");
 		lblpaymentTypModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -805,7 +803,7 @@ public class GUIFinanceManagement {
 		gbc_lblpaymentTypModify.gridy = 4;
 		panel.add(lblpaymentTypModify, gbc_lblpaymentTypModify);
 		
-		JComboBox comboBoxpaymentTypModify = new JComboBox();
+		comboBoxpaymentTypModify = new JComboBox();
 		comboBoxpaymentTypModify.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
 		comboBoxpaymentTypModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxpaymentTypModify = new GridBagConstraints();
@@ -883,7 +881,7 @@ public class GUIFinanceManagement {
 		gbc_lblrelatedCashRegisterModify.gridy = 8;
 		panel.add(lblrelatedCashRegisterModify, gbc_lblrelatedCashRegisterModify);
 		
-		JComboBox comboBoxrelatedCashRegisterModify = new JComboBox();
+		comboBoxrelatedCashRegisterModify = new JComboBox();
 		try {
 			for(CashRegister c : SQLManager.getInstance().getRegisterArray()){
 				comboBoxrelatedCashRegisterModify.addItem(c.toString());
@@ -892,6 +890,10 @@ public class GUIFinanceManagement {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		comboBoxrelatedCashRegisterModify.addActionListener(e -> {
+			refreshPotComboBoxModify();
+		});
 		comboBoxrelatedCashRegisterModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxrelatedCashRegisterModify = new GridBagConstraints();
 		gbc_comboBoxrelatedCashRegisterModify.insets = new Insets(0, 0, 5, 0);
@@ -900,6 +902,7 @@ public class GUIFinanceManagement {
 		gbc_comboBoxrelatedCashRegisterModify.gridy = 8;
 		panel.add(comboBoxrelatedCashRegisterModify, gbc_comboBoxrelatedCashRegisterModify);
 		
+			
 		JLabel lblrelatedJarModify = new JLabel("zugehöriger Topf");
 		lblrelatedJarModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblrelatedJarModify = new GridBagConstraints();
@@ -909,15 +912,15 @@ public class GUIFinanceManagement {
 		gbc_lblrelatedJarModify.gridy = 9;
 		panel.add(lblrelatedJarModify, gbc_lblrelatedJarModify);
 		
-		JComboBox comboBoxrelatedJarModify = new JComboBox();
-		try {
+		comboBoxrelatedJarModify = new JComboBox();
+		/*try {
 			for(Pot p : SQLManager.getInstance().getPotArray()){
 				comboBoxrelatedJarModify.addItem(p.toString());
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 		comboBoxrelatedJarModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxrelatedJarModify = new GridBagConstraints();
 		gbc_comboBoxrelatedJarModify.insets = new Insets(0, 0, 5, 0);
@@ -936,7 +939,7 @@ public class GUIFinanceManagement {
 		panel.add(BillStatusModify, gbc_BillStatusModify);
 		
 
-		JComboBox comboBoxBillStatusModify = new JComboBox();
+		comboBoxBillStatusModify = new JComboBox();
 		comboBoxBillStatusModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxBillStatusModify.setModel(new DefaultComboBoxModel(comboBoxStatusEntries.toArray()));
 		GridBagConstraints gbc_comboBoxBillStatusModify = new GridBagConstraints();
@@ -953,12 +956,12 @@ public class GUIFinanceManagement {
 				try {
 					 FinancialManagement.modifyBill(
 							 	Integer.parseInt(textFieldBillIDModify.getText()),
-							 	SQLManager.getInstance().getOrders().get(comboBoxrelatedOrderModify.getSelectedIndex()).getOrderId(), 
-								SQLManager.getInstance().getPotArray().get(comboBoxrelatedJar.getSelectedIndex()).getId(),
-								SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegister.getSelectedIndex()).getId(),
-								textFieldbillName.getText(),
-								comboBoxpaymentTyp.getSelectedIndex(),
-								Double.parseDouble(textFieldestimatedFigure.getText())
+							 	Integer.parseInt(textFieldrelatedOrderModify.getText()),
+								SQLManager.getInstance().getPotArray().get(comboBoxrelatedJarModify.getSelectedIndex()).getId(),
+								SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegisterModify.getSelectedIndex()).getId(),
+								textFieldbillNameModify.getText(),
+								comboBoxpaymentTypModify.getSelectedIndex(),
+								Double.parseDouble(textFieldsumBillModify.getText())
 								);
 					FinancialManagement.changeBillStatus(Integer.parseInt(textFieldBillIDModify.getText()), comboBoxBillStatusModify.getSelectedIndex());
 		
@@ -970,7 +973,7 @@ public class GUIFinanceManagement {
 					currentDate.setAlignment(Element.ALIGN_RIGHT);
 					document.add(currentDate);
 
-					Paragraph Titel = new Paragraph("Rechnung:" + "        " + SQLManager.getInstance().getOrders().get(comboBoxrelatedOrderModify.getSelectedIndex()).toString());
+					Paragraph Titel = new Paragraph("Rechnung:" + "        " + textFieldbillNameModify.getText());
 					Titel.setAlignment(Element.ALIGN_CENTER);
 					
 					document.add(Titel);
@@ -1050,7 +1053,7 @@ public class GUIFinanceManagement {
 
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
-					Paragraph orderObject = new Paragraph("Auftragname" +"            " + SQLManager.getInstance().getOrders().get(comboBoxrelatedOrder.getSelectedIndex()).toString());
+					Paragraph orderObject = new Paragraph("Auftragname" +"            " + SQLManager.getInstance().getOrderByID(Integer.parseInt(textFieldrelatedOrderModify.getText())).getTitle());
 					orderObject.setAlignment(Element.ALIGN_LEFT);
 					
 					document.add(orderObject);
@@ -1101,6 +1104,9 @@ public class GUIFinanceManagement {
 					e1.printStackTrace();
 				} catch (DocumentException e1) {
 					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				catch (OrderNotInDBException e1) {
 					e1.printStackTrace();
 				}
 				refreshTableBillModify();
@@ -1544,7 +1550,7 @@ public class GUIFinanceManagement {
 		gbc_lblcashRegisterType.gridy = 3;
 		panelcashRegisterManagement.add(lblcashRegisterType, gbc_lblcashRegisterType);
 		
-		JComboBox comboBoxCashRegisterType = new JComboBox();
+		comboBoxCashRegisterType = new JComboBox();
 		comboBoxCashRegisterType.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxCashRegisterType.setModel(new DefaultComboBoxModel(new String[] {"Barkasse", "Konto", "Kostenstelle"}));
 		GridBagConstraints gbc_comboBoxCashRegisterType = new GridBagConstraints();
@@ -1907,7 +1913,7 @@ public class GUIFinanceManagement {
 		gbc_lblPotRegisterID.gridy = 3;
 		panelJarManagement.add(lblPotRegisterID, gbc_lblPotRegisterID);
 		
-		JComboBox comboBoxPotRegisterID = new JComboBox();
+		comboBoxPotRegisterID = new JComboBox();
 		try {
 			for(CashRegister c : SQLManager.getInstance().getRegisterArray()){
 				comboBoxPotRegisterID.addItem(c.toString());
@@ -1932,7 +1938,7 @@ public class GUIFinanceManagement {
 		gbc_lblPotRegisterIDModify.gridy = 4;
 		panelJarManagement.add(lblPotRegisterIDModify, gbc_lblPotRegisterIDModify);
 		
-		JComboBox comboBoxPotRegisterIDModify = new JComboBox();
+		comboBoxPotRegisterIDModify = new JComboBox();
 		try {
 		    for(int i =0; i<FinancialManagement.getRegisterArray().size();i++) {
 			comboBoxPotRegisterIDModify.addItem(FinancialManagement.getRegisterArray().get(i));			
@@ -2158,17 +2164,24 @@ public class GUIFinanceManagement {
 	}
 	
 	protected void handleEditOrderSelectionEvent(ListSelectionEvent e) {
-		// TODO Auto-generated method stub
 		if (TableNewBillWhereBillIsNotCreatedYet.getSelectedRow() > -1) {
-			comboBoxrelatedOrder.setSelectedIndex(getCorrectOrderIndex(TableNewBillWhereBillIsNotCreatedYet.getValueAt(TableNewBillWhereBillIsNotCreatedYet.getSelectedRow(), 0).toString()));
-			textFieldcustomerID.setText((String) TableNewBillWhereBillIsNotCreatedYet.getValueAt(TableNewBillWhereBillIsNotCreatedYet.getSelectedRow(), 5).toString());
-			textresponsiblePerson.setText((String) TableNewBillWhereBillIsNotCreatedYet.getValueAt(TableNewBillWhereBillIsNotCreatedYet.getSelectedRow(), 6).toString());
+			textFieldrelatedOrder.setText(TableNewBillWhereBillIsNotCreatedYet.getValueAt(TableNewBillWhereBillIsNotCreatedYet.getSelectedRow(), 0).toString());
+			textFieldcustomerID.setText(TableNewBillWhereBillIsNotCreatedYet.getValueAt(TableNewBillWhereBillIsNotCreatedYet.getSelectedRow(), 5).toString());
+			textresponsiblePerson.setText(TableNewBillWhereBillIsNotCreatedYet.getValueAt(TableNewBillWhereBillIsNotCreatedYet.getSelectedRow(), 6).toString());
 			
 		}
 		if(tableBillModify.getSelectedRow() > -1) {
-			textFieldBillIDModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 0).toString());
-			textFieldcustomerIDModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 5).toString());
-			textFieldrelatedPersonModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 6).toString());
+			textFieldBillIDModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 0).toString());
+			textFieldbillNameModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(),6).toString());
+			textFieldrelatedOrderModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(),1).toString());
+			textFieldcustomerIDModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 3).toString());
+			comboBoxpaymentTypModify.setSelectedIndex((int)tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 7));
+			textFieldsumBillModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(),8).toString());
+			textFieldrelatedPersonModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 4).toString());
+			comboBoxrelatedCashRegisterModify.setSelectedIndex(getCorrectCashRegisterIndex(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 5).toString()));
+			refreshPotComboBoxModify();
+			comboBoxBillStatusModify.setSelectedIndex(comboBoxStatusEntries.indexOf(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 9)));
+			//comboBoxrelatedJarModify.setSelectedIndex(getCorrectPotIndex(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 2).toString()));
 		}
 		if(tableJar.getSelectedRow() > -1) {
 			textFieldPotIDModify.setText((String) tableJar.getValueAt(tableJar.getSelectedRow(), 0).toString());
@@ -2236,8 +2249,6 @@ public class GUIFinanceManagement {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
-	    
-	    
 	    return -1;
 	}
 
@@ -2337,6 +2348,20 @@ public class GUIFinanceManagement {
 			e.printStackTrace();
 		}
 		tableCashRegister.clearSelection();
+	}
+	
+	private void refreshPotComboBoxModify() {
+		comboBoxrelatedJarModify.removeAllItems();
+		   int selectedRegisterID;
+		try {
+		    selectedRegisterID = SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegisterModify.getSelectedIndex()).getId();
+		    for(Pot p : FinancialManagement.getPotArrayByRegisterID(selectedRegisterID)) {
+			       comboBoxrelatedJarModify.addItem(p.toString());
+			   }
+		} catch (SQLException e1) {
+		    // TODO Auto-generated catch block
+		    e1.printStackTrace();
+		}
 	}
 	
 }
