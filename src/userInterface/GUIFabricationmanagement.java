@@ -19,6 +19,8 @@ import java.awt.Color;
 import javax.swing.JTextArea;
 import javax.swing.JInternalFrame;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -236,6 +238,22 @@ public class GUIFabricationmanagement {
 		gbc_lblorderTyp.gridx = 0;
 		gbc_lblorderTyp.gridy = 4;
 		paneladdOrder.add(lblorderTyp, gbc_lblorderTyp);
+		comboBoxorderTyp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+				if (comboBoxorderTyp.getSelectedIndex()==2) {
+					
+					textFieldnoteOther.setEditable(true);
+					
+					
+				}
+				else {
+					textFieldnoteOther.setEditable(false);
+				}
+			
+			
+			}
+		});
 
 		comboBoxorderTyp.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxorderTyp.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
@@ -257,6 +275,8 @@ public class GUIFabricationmanagement {
 
 		textFieldnoteOther = new JTextField();
 		textFieldnoteOther.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldnoteOther.setEditable(false);
+		
 		GridBagConstraints gbc_textFieldnoteOther = new GridBagConstraints();
 		gbc_textFieldnoteOther.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldnoteOther.fill = GridBagConstraints.HORIZONTAL;
@@ -593,6 +613,23 @@ public class GUIFabricationmanagement {
 		panelmodify.add(lblorderTypModify, gbc_lblorderTypModify);
 
 		comboBoxTypeModify = new JComboBox();
+		comboBoxTypeModify.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+			
+				if (comboBoxTypeModify.getSelectedIndex()==2) {
+					
+					textFieldnoteOtherModify.setEditable(true);
+					
+					
+				}
+				else {
+					textFieldnoteOtherModify.setEditable(false);
+				}
+			
+			
+			}
+		});
 		comboBoxTypeModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxTypeModify.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
 		GridBagConstraints gbc_comboBoxTypeModify = new GridBagConstraints();
@@ -614,6 +651,7 @@ public class GUIFabricationmanagement {
 
 		textFieldnoteOtherModify = new JTextField();
 		textFieldnoteOtherModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldnoteOtherModify.setEditable(false);
 		GridBagConstraints gbc_textFieldnoteOtherModify = new GridBagConstraints();
 		gbc_textFieldnoteOtherModify.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldnoteOtherModify.fill = GridBagConstraints.HORIZONTAL;
