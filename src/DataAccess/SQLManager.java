@@ -75,6 +75,19 @@ public class SQLManager {
 	    statement.close();
 	    
 	}
+	public int getPersonIDByUsername(String username) throws SQLException {
+	    Statement stmt = c.createStatement(); 
+	    String sql = "SELECT idPerson FROM Persons WHERE username='"+ username+"'"; 
+	    return stmt.executeQuery(sql).getInt(1); 
+	}
+	
+	public void addToShoppingCard(int personID, int partID, int amount) throws SQLException {
+	    Statement stmt = c.createStatement(); 
+	    String sql = "INSERT INTO ShoppingCardParts (idPerson, idPart, amount) VALUES " + personID + ", " + partID + ", " + amount ; 
+	    stmt.executeUpdate(sql); 
+	    stmt.close();
+	}
+	
 	//Emre end
 
 	public List<Person> getPersons() throws SQLException {
@@ -254,6 +267,7 @@ public class SQLManager {
 	    }
 	    return result; 
 	}
+	
 	
 	public List<Component> getComponentsByArticlenumber(String articlenumber) throws SQLException, ArticlenumberNotInDBException {
 	    List<Component> result = new ArrayList<Component>(); 
