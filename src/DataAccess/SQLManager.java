@@ -73,6 +73,7 @@ public class SQLManager {
 	    String sql = "UPDATE Persons SET password= '"+password + "' WHERE username ='"+ username+"'; "; 
 	    statement.executeUpdate(sql); 
 	    statement.close();
+	    
 	}
 	//Emre end
 

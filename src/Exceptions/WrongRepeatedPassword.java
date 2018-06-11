@@ -5,8 +5,7 @@ public class WrongRepeatedPassword extends ELabException {
 	
     }
     public String getMessage() {
-	return "Die Passwörter stimmen nicht überein! Wiederholen Sie diesen Vorgang!"; 
-	
+	return "Die Passwörter stimmen nicht überein! Wiederholen Sie diesen Vorgang!"; 	
     }
     public String toString () {
 	return getMessage(); 

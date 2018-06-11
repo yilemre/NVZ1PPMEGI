@@ -128,7 +128,7 @@ public class GuiLogin {
 				}
 				else {
 					GUIComponentUserInterface cmpui = new GUIComponentUserInterface(textFielduserName.getText());
-					frmElabVerwaltungsprogramm.dispose();
+					frmElabVerwaltungsprogramm.dispose(); 
 				}
 			} catch (UsernameNotInDBException e1) {
 				// TODO Auto-generated catch block

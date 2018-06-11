@@ -144,7 +144,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		    // TODO Auto-generated catch block
 		    e1.printStackTrace();
 		}
-		//Emre-
+		//Emre- 
 		
 		JScrollPane scrollPaneshoppingCart = new JScrollPane();
 		scrollPaneshoppingCart.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
