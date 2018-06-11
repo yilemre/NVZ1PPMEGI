@@ -532,7 +532,6 @@ public class GUIFinanceManagement {
 				}
 			}
 		});
-		
 		btnnewbillOrderSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnnewbillOrderSearch = new GridBagConstraints();
 		gbc_btnnewbillOrderSearch.insets = new Insets(0, 0, 5, 0);
@@ -542,6 +541,18 @@ public class GUIFinanceManagement {
 		panelcreateBill.add(btnnewbillOrderSearch, gbc_btnnewbillOrderSearch);
 		
 		JButton btnclearSearchBillNew = new JButton("Suche aufheben");
+		btnclearSearchBillNew.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(FinancialManagement.getOrdersWhereBillIsNotCreatedYet()));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		btnclearSearchBillNew.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnclearSearchBillNew = new GridBagConstraints();
 		gbc_btnclearSearchBillNew.fill = GridBagConstraints.HORIZONTAL;
@@ -872,7 +883,7 @@ public class GUIFinanceManagement {
 		gbc_comboBoxBillSearch.gridy = 13;
 		panel.add(comboBoxBillSearch, gbc_comboBoxBillSearch);
 		
-		textField_7 = new JTextField();
+		/*textField_7 = new JTextField();
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_7.setColumns(10);
 		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
@@ -880,7 +891,7 @@ public class GUIFinanceManagement {
 		gbc_textField_7.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_7.gridx = 1;
 		gbc_textField_7.gridy = 13;
-		panel.add(textField_7, gbc_textField_7);
+		panel.add(textField_7, gbc_textField_7);*/
 		
 		JButton btnSearchBillModify = new JButton("Rechnung suchen");
 		btnSearchBillModify.addActionListener(new ActionListener() {
@@ -944,7 +955,7 @@ public class GUIFinanceManagement {
 		gbc_btnSearchBillModify.gridy = 15;
 		panel.add(btnSearchBillModify, gbc_btnSearchBillModify);
 		
-		JButton btnclearSearchbillModify = new JButton("Suche aufgeben");
+		JButton btnclearSearchbillModify = new JButton("Suche aufheben");
 		btnclearSearchbillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnclearSearchbillModify = new GridBagConstraints();
 		gbc_btnclearSearchbillModify.fill = GridBagConstraints.HORIZONTAL;
