@@ -497,7 +497,7 @@ public class GUIFinanceManagement {
 				
 					document.add(surname);
 
-					Paragraph streetCustomer = new Paragraph(PersonManagement.getPersonsByID(Integer.parseInt(textFieldcustomerID.getText())).getStreet()+PersonManagement.getPersonsByID(Integer.parseInt(textFieldcustomerID.getText())).getHousenumber());
+					Paragraph streetCustomer = new Paragraph(PersonManagement.getPersonsByID(Integer.parseInt(textFieldcustomerID.getText())).getStreet()+" "+PersonManagement.getPersonsByID(Integer.parseInt(textFieldcustomerID.getText())).getHousenumber());
 					streetCustomer.setAlignment(Element.ALIGN_LEFT);
 					
 					document.add(streetCustomer);
