@@ -15,7 +15,7 @@ public class ShoppingObjects {
 	this.name = name;
 	this.amount = amount;
 	this.price = price;
-	this.sumPrice = amount *price;
+	this.sumPrice = amount *price; 
     }
 
     public String getArticlenumber() {

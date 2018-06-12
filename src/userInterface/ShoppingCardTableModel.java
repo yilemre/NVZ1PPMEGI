@@ -12,7 +12,7 @@ public class ShoppingCardTableModel extends AbstractTableModel {
     private String[] columns = {"ID", "Artikelnummer", "Name", "Menge", "Preis", "Betrag"}; 
     
     public ShoppingCardTableModel(List<ShoppingObjects> list) {
-	this.list =list; 
+	this.list =list;  
     }
 
     @Override

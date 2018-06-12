@@ -310,7 +310,7 @@ public class GUIComponentUserInterface implements ActionListener {
 					SQLManager.getInstance().addPartToShoppingCard(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(textFieldUsername.getText()), Integer.parseInt(spinnerdekrementParts.getText()));
 					SQLManager.getInstance().updatePartQuantityAfterShopping(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), Integer.parseInt(spinnerdekrementParts.getText()));
 				    } else
-					try {
+					try { 
 					    throw new NotEnoughParts();
 					} catch (NotEnoughParts e1) {
 					    // TODO Auto-generated catch block

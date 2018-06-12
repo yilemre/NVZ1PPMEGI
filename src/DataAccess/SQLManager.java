@@ -340,7 +340,7 @@ public class SQLManager {
 		    sql = "INSERT INTO ShoppingCardParts (idPerson, idPart, amount) VALUES (" + idPerson + ", "+ idPart+ ", " + amount+ ")";
 		    stmt.executeUpdate(sql); 
 		}
-		stmt.close();
+		stmt.close(); 
 	}
 	//Emre end
 
