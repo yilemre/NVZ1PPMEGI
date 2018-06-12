@@ -62,12 +62,23 @@ public class SQLManager {
 		stmt.executeUpdate(sql); 
 		stmt.close();
 
-	}		
-	public ResultSet getPersonByID(int id) throws SQLException {
-	    Statement stmt = c.createStatement(); 
-	    String sql = "SELECT idPerson, firstname, surname FROM Persons WHERE idPerson="+id+";"; 
-	    return stmt.executeQuery(sql);	    
 	}
+	
+	public Person getPersonByID(int id) throws SQLException, PersonWithSpecifiedIDNotInDBException {
+		Person result=null;
+	    Statement stmt = c.createStatement(); 
+	    String sql = "SELECT * FROM Persons WHERE idPerson="+id+";"; 
+		ResultSet rs = stmt.executeQuery(sql);
+		if (rs.next()) {
+			result = new Person (rs.getInt("idPerson"),rs.getString("firstname"),rs.getString("surname"),rs.getString("street"),rs.getInt("housenumber"),rs.getInt("zipcode"),rs.getString("email"),rs.getString("timestamp"),rs.getString("username"),rs.getString("password"),rs.getInt("rights"));
+			return result;
+		}
+		else {
+			throw new PersonWithSpecifiedIDNotInDBException();
+		}
+		
+	}
+	
 	public void changePassword(String username, String password) throws SQLException {
 	    Statement statement = c.createStatement(); 
 	    String sql = "UPDATE Persons SET password= '"+password + "' WHERE username ='"+ username+"'; "; 
@@ -456,6 +467,60 @@ public class SQLManager {
 		return result;
 	}
 	
+	public List<Order> getOrdersWhereBillisNotCreatedYetByTitle(String title) throws SQLException, OrderNoBillWithThisTitleNotInDBException {
+		List<Order> result = new ArrayList<Order>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM (SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder) WHERE status!=7 AND titel LIKE '%"+title+"%';";
+		ResultSet rs = stmt.executeQuery(sql);
+		if(rs.next()==false) {
+			throw new OrderNoBillWithThisTitleNotInDBException();
+		}
+		else {
+			while (rs.next()){
+				Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
+
+				result.add(temp);			
+			}
+		}
+		return result;
+	}
+	
+	public List<Order> getOrdersWhereBillisNotCreatedYetByType(int type) throws SQLException, OrderNoBillWithThisTypeNotInDBException {
+		List<Order> result = new ArrayList<Order>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM (SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder) WHERE status!=7 AND type="+type+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		if(rs.next()==false) {
+			throw new OrderNoBillWithThisTypeNotInDBException();
+		}
+		else {
+			while (rs.next()){
+				Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
+
+				result.add(temp);			
+			}
+		}
+		return result;
+	}
+	
+	public List<Order> getOrdersWhereBillisNotCreatedYetByStatus(int status) throws SQLException, OrderNoBillWithThisStatusNotInDBException {
+		List<Order> result = new ArrayList<Order>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM (SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder) WHERE status!=7 AND status="+status+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		if(rs.next()==false) {
+			throw new OrderNoBillWithThisStatusNotInDBException();
+		}
+		else {
+			while (rs.next()){
+				Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
+
+				result.add(temp);			
+			}
+		}
+		return result;
+	}
+	
 	//
 	public List<Order> getOrdersByStatus(int status) throws SQLException, OrderStatusNotInDBException {
 		List<Order> result = new ArrayList<Order>();
@@ -734,4 +799,19 @@ public class SQLManager {
 		return result;
 	}
 	// Nico End*/
+	
+	public Billinformation getBillinformationByID(int idBill) throws SQLException, CantGenerateBillinformationException {
+		Billinformation result = null;
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Bills JOIN Persons ON Bills.idCustomer=Persons.idPerson WHERE idBill="+idBill+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		if (rs.next()){
+			result = new Billinformation (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idCustomer"), rs.getInt("idAdvisor"), rs.getInt("idRegister"), rs.getString("name"), rs.getInt("methodOfPayment"),rs.getDouble("figure"),rs.getInt("status"), rs.getString("timestamp"), rs.getString("firstname"), rs.getString("surname"), rs.getString("street"), rs.getInt("housenumber"), rs.getInt("zipcode"), rs.getString("email"));			
+		}
+		else {
+			throw new CantGenerateBillinformationException();
+		}
+		return result;
+	}
+	
 }

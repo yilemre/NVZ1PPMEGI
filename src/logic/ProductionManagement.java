@@ -48,6 +48,59 @@ public class ProductionManagement {
 		return SQLManager.getInstance().getOrders(); 
 	}
 
+	public static List<Order> getOrdersWhereBillIsNotCreatedYetByTitle(String title) throws SQLException, OrderNoBillWithThisTitleNotInDBException {
+		return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByTitle(title); 
+	}
+	
+	/*type: 0 for "3D-Prints", 1 for "circuit board", 2 for "other"
+	every order is going to be inserted with the status 0 which is "accepted"!
+	Values for all the other status:
+		0 accepted
+		1 made
+		2 costs calculated
+		3 picked up
+		4 billed
+		5 waiting for material
+		6 production interrupted
+		7 bill generated
+	*/
+	
+	public static List<Order> getOrdersWhereBillIsNotCreatedYetByStatus(String type) throws SQLException, OrderNoBillWithThisStatusNotInDBException {
+		switch(type.toLowerCase()){
+		case "angenommen":
+			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByStatus(0);
+		case "gefertigt":
+			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByStatus(1);
+		case "kosten kalkuliert":
+			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByStatus(2);
+		case "abgeholt":
+			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByStatus(3);
+		case "abgerechnet":
+			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByStatus(4);
+		case "warten auf material":
+			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByStatus(5);
+		case "fertigung unterbrochen/defekt":
+			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByStatus(6);
+		case "rechnung erzeugt":
+			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByStatus(7);
+		default:
+			throw new OrderNoBillWithThisStatusNotInDBException();
+		} 
+	}
+	
+	public static List<Order> getOrdersWhereBillIsNotCreatedYetByType(String status) throws SQLException, OrderNoBillWithThisTypeNotInDBException {
+		switch(status.toLowerCase()){
+		case "3d-druck":
+			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByType(0);
+		case "leiterplatte":
+			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByType(1);
+		case "sonstiges":
+			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByType(2);
+		default:
+			throw new OrderNoBillWithThisTypeNotInDBException();
+		}
+	}
+	
     public static List<Person> getCustomerArray() throws SQLException {
 		return SQLManager.getInstance().getCustomerArray();
 	
@@ -69,6 +122,10 @@ public class ProductionManagement {
 	public static List<Order> getOrderByTitle(String searchValue) throws SQLException, ELabException {
 		List<Order> result = SQLManager.getInstance().getOrdersByTitle(searchValue);
 		return result;
+	}
+	
+	public static Order getOrderByID(int id) throws SQLException, OrderNotInDBException {
+		return SQLManager.getInstance().getOrderByID(id);
 	}
 
 	public static List<Order> getOrdersByType(String searchValue) throws SQLException, ELabException{
@@ -105,5 +162,9 @@ public class ProductionManagement {
 		default:
 			throw new OrderStatusNotInDBException();
 		}
+	}
+	
+	public static Billinformation getBillinformations(int idBill) throws CantGenerateBillinformationException, SQLException {
+		return SQLManager.getInstance().getBillinformationByID(idBill);
 	}
 }

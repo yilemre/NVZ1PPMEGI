@@ -33,8 +33,11 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.sun.org.apache.bcel.internal.generic.Type;
 
 import DataAccess.SQLManager;
+import Exceptions.CantGenerateBillinformationException;
 import Exceptions.ELabException;
 import Exceptions.OrderNotInDBException;
+import Exceptions.PersonStatusNotInDBException;
+import Exceptions.PersonWithSpecifiedIDNotInDBException;
 import logic.CashRegister;
 import logic.FinancialManagement;
 import logic.Order;
@@ -127,6 +130,7 @@ public class GUIFinanceManagement {
 	private JComboBox comboBoxrelatedCashRegisterModify;
 	private JComboBox comboBoxrelatedJarModify;
 	private JComboBox comboBoxBillStatusModify;
+	private JComboBox comboBoxrelatedJar;
 	
 	private List<String> comboBoxEntries;
 	private List<String> comboBoxStatusEntries;
@@ -327,8 +331,7 @@ public class GUIFinanceManagement {
 		gbc_lblrelatedCashRegister.gridy = 7;
 		panelcreateBill.add(lblrelatedCashRegister, gbc_lblrelatedCashRegister);
 		
-		JComboBox comboBoxrelatedJar = new JComboBox();
-		
+		comboBoxrelatedJar = new JComboBox();
 		comboBoxrelatedJar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_comboBoxrelatedJar = new GridBagConstraints();
 		gbc_comboBoxrelatedJar.insets = new Insets(0, 0, 5, 0);
@@ -409,6 +412,35 @@ public class GUIFinanceManagement {
 				com.itextpdf.text.Document document = new com.itextpdf.text.Document();
 
 				try {
+	
+					FinancialManagement.addBillStatus(
+							(FinancialManagement.addBill(
+								Integer.parseInt(textFieldrelatedOrder.getText()), 
+								SQLManager.getInstance().getPotArray().get(comboBoxrelatedJar.getSelectedIndex()).getId(),
+								SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegister.getSelectedIndex()).getId(),
+								Integer.parseInt(textFieldcustomerID.getText()),
+								Integer.parseInt(textresponsiblePerson.getText()),
+								textFieldbillName.getText(),
+								comboBoxpaymentTyp.getSelectedIndex(),
+								Double.parseDouble(textFieldestimatedFigure.getText())
+								))
+							,comboBoxBillStatus.getSelectedIndex());
+						
+					ProductionManagement.addOrderStatus(Integer.parseInt(textFieldrelatedOrder.getText()), 7);
+					
+/*					ProductionManagement.getBillinformations((FinancialManagement.addBill(
+								Integer.parseInt(textFieldrelatedOrder.getText()), 
+								SQLManager.getInstance().getPotArray().get(comboBoxrelatedJar.getSelectedIndex()).getId(),
+								SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegister.getSelectedIndex()).getId(),
+								Integer.parseInt(textFieldcustomerID.getText()),
+								Integer.parseInt(textresponsiblePerson.getText()),
+								textFieldbillName.getText(),
+								comboBoxpaymentTyp.getSelectedIndex(),
+								Double.parseDouble(textFieldestimatedFigure.getText())
+								)));*/
+					
+					refreshTableNewBillWhereBillIsNotCreatedYet();
+						
 					PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(textFieldbillName.getText()+".pdf"));
 					document.open();
 				
@@ -424,7 +456,7 @@ public class GUIFinanceManagement {
 
 					document.add(Chunk.NEWLINE);
 
-					Paragraph company = new Paragraph("Rechnungssteller :");
+					Paragraph company = new Paragraph("Zuständiger Mitarbeiter : "+PersonManagement.getPersonsByID(Integer.parseInt(textresponsiblePerson.getText())).getFirstname()+" "+PersonManagement.getPersonsByID(Integer.parseInt(textresponsiblePerson.getText())).getLastname());
 					company.setAlignment(Element.ALIGN_LEFT);
 					
 					document.add(company);
@@ -455,49 +487,45 @@ public class GUIFinanceManagement {
 					
 					document.add(customer);
 
-					Paragraph name = new Paragraph("Vorname:" );
+					Paragraph name = new Paragraph(PersonManagement.getPersonsByID(Integer.parseInt(textFieldcustomerID.getText())).getFirstname());
 					name.setAlignment(Element.ALIGN_LEFT);
 					
 					document.add(name);
 
-					Paragraph surname = new Paragraph("Nachname");
+					Paragraph surname = new Paragraph(PersonManagement.getPersonsByID(Integer.parseInt(textFieldcustomerID.getText())).getLastname());
 					surname.setAlignment(Element.ALIGN_LEFT);
 				
 					document.add(surname);
 
-					Paragraph streetCustomer = new Paragraph("Straße");
+					Paragraph streetCustomer = new Paragraph(PersonManagement.getPersonsByID(Integer.parseInt(textFieldcustomerID.getText())).getStreet()+PersonManagement.getPersonsByID(Integer.parseInt(textFieldcustomerID.getText())).getHousenumber());
 					streetCustomer.setAlignment(Element.ALIGN_LEFT);
 					
 					document.add(streetCustomer);
 
-					Paragraph houseNumber = new Paragraph("Hausnummer");
-					houseNumber.setAlignment(Element.ALIGN_LEFT);
-					
-					document.add(houseNumber);
-
-					Paragraph zipCode = new Paragraph("Postleitzahl");
+					Paragraph zipCode = new Paragraph(PersonManagement.getPersonsByID(Integer.parseInt(textFieldcustomerID.getText())).getPlz());
 					zipCode.setAlignment(Element.ALIGN_LEFT);
 					
 					document.add(zipCode);
 
+/*					We don't have a town for a person so we pretty much can't use this here with no big effort
 					Paragraph cityCustomer = new Paragraph("Stadt");
 					cityCustomer.setAlignment(Element.ALIGN_LEFT);
 					
 					document.add(cityCustomer);
-
+*/
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
 
 					// Insert orderNumber after Auftrag
-					Paragraph orderName = new Paragraph("Auftrag");
+					Paragraph orderName = new Paragraph("Auftragsnummer: "+ProductionManagement.getOrderByID(Integer.parseInt(textFieldrelatedOrder.getText())).getOrderId());
 					orderName.setAlignment(Element.ALIGN_CENTER);
 				
 					document.add(orderName);
 
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
-					Paragraph orderObject = new Paragraph("Auftragsname" +"            " + SQLManager.getInstance().getOrderByID(Integer.parseInt(textFieldrelatedOrder.getText())));
+					Paragraph orderObject = new Paragraph("Auftragsname:" +ProductionManagement.getOrderByID(Integer.parseInt(textFieldrelatedOrder.getText())).getTitle());
 					orderObject.setAlignment(Element.ALIGN_LEFT);
 					document.add(orderObject);
 					
@@ -517,7 +545,7 @@ public class GUIFinanceManagement {
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
-					Paragraph sum = new Paragraph("Endbetrag:  "+"          "+ textFieldestimatedFigure.getText());
+					Paragraph sum = new Paragraph("Endbetrag: "+textFieldestimatedFigure.getText());
 					sum.setAlignment(Element.ALIGN_LEFT);
 					document.add(sum);
 					
@@ -528,33 +556,14 @@ public class GUIFinanceManagement {
 					document.add(Chunk.NEWLINE);
 
 					Paragraph signature = new Paragraph(
-							"Unterschrift Kunde: " + "__________" + "               " + "Unterschrift ELab: " + "__________");
+							"Unterschrift Kunde: " + "________________________" + " " + "Unterschrift eLab: " + "________________________");
 					signature.setAlignment(Element.ALIGN_LEFT);
 				
 					document.add(signature);
 
 					document.close();
 					writer.close();
-			
-					
-					
-				FinancialManagement.addBillStatus(
-						(FinancialManagement.addBill(
-						Integer.parseInt(textFieldrelatedOrder.getText()), 
-						SQLManager.getInstance().getPotArray().get(comboBoxrelatedJar.getSelectedIndex()).getId(),
-						SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegister.getSelectedIndex()).getId(),
-						Integer.parseInt(textFieldcustomerID.getText()),
-						Integer.parseInt(textresponsiblePerson.getText()),
-						textFieldbillName.getText(),
-						comboBoxpaymentTyp.getSelectedIndex(),
-						Double.parseDouble(textFieldestimatedFigure.getText())
-						))
-						,comboBoxBillStatus.getSelectedIndex());
-					
-					
-					
-					ProductionManagement.addOrderStatus(Integer.parseInt(textFieldrelatedOrder.getText()), 7);
-					refreshTableNewBillWhereBillIsNotCreatedYet();
+
 					
 					textFieldbillName.setText("");
 					textFieldrelatedOrder.setText("");
@@ -580,6 +589,12 @@ public class GUIFinanceManagement {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (OrderNotInDBException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+/*				} catch (CantGenerateBillinformationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();*/
+				} catch (PersonWithSpecifiedIDNotInDBException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -672,7 +687,7 @@ public class GUIFinanceManagement {
 				switch(comboBoxOrderSearch.getSelectedIndex()) {
 				case 0:
 					try {
-						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrderByTitle(searchValue)));
+						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrdersWhereBillIsNotCreatedYetByTitle(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -680,7 +695,7 @@ public class GUIFinanceManagement {
 					break;
 				case 1:
 					try {
-						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrdersByType(searchValue)));
+						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrdersWhereBillIsNotCreatedYetByType(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -1080,7 +1095,7 @@ public class GUIFinanceManagement {
 					document.add(Chunk.NEWLINE);
 
 					Paragraph signature = new Paragraph(
-							"Unterschrift Kunde: " + "__________" + "               " + "Unterschrift elab: " + "__________");
+							"Unterschrift Kunde: " + "__________________________" + "               " + "Unterschrift eLab: " + "__________________________");
 					signature.setAlignment(Element.ALIGN_LEFT);
 				
 					document.add(signature);

@@ -69,11 +69,11 @@ public class GUIComponentUserInterface implements ActionListener {
 	private JPasswordField passwordFieldnewPasswordRepeat;
 	private JTable tableAllParts;
 	private JTable tableShoppingCard;
+	
+	private JComboBox comboBoxcategoryPartSearch;
+	
 	//int idPart; 
-   
-	
-	
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -173,7 +173,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		tableShoppingCard = new JTable();
 		scrollPaneshoppingCart.setViewportView(tableShoppingCard);
 		
-		JComboBox comboBoxcategoryPartSearch = new JComboBox();
+		comboBoxcategoryPartSearch = new JComboBox();
 		comboBoxcategoryPartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxcategoryPartSearch.setToolTipText("Suchkategorie auswählen");
 		comboBoxcategoryPartSearch.setModel(new DefaultComboBoxModel(new String[] {"Name", "Artikelnummer"}));

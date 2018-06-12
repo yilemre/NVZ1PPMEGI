@@ -141,9 +141,10 @@ public class FinancialManagement {
 	public static Order getOrderByID(int id) throws SQLException, OrderNotInDBException {
 	    return SQLManager.getInstance().getOrderByID(id); 
 	}
-	public static ResultSet getPersonByID(int id) throws SQLException {
+	public static Person getPersonByID(int id) throws SQLException, PersonWithSpecifiedIDNotInDBException {
 	    return SQLManager.getInstance().getPersonByID(id); 
 	}
+	
 	public static List<Pot> getPotArrayByRegisterID(int id) throws SQLException {
 	    return SQLManager.getInstance().getPotArrayByCashRegisterID(id); 
 	}

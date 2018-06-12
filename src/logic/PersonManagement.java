@@ -78,6 +78,10 @@ public class PersonManagement {
 	public static List<Person> getPersonsByName(String searchValue) throws SQLException, ELabException {
 		return SQLManager.getInstance().getPersonsByFirstname(searchValue);
 	}
+	
+	public static Person getPersonsByID(int id) throws SQLException, PersonWithSpecifiedIDNotInDBException {
+		return SQLManager.getInstance().getPersonByID(id);
+	}
 
 	public static List<Person> getPersonsByLastname(String searchValue) throws SQLException, ELabException {
 		return SQLManager.getInstance().getPersonsByLastname(searchValue);
