@@ -46,6 +46,7 @@ import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JSplitPane;
 import javax.swing.ButtonGroup;
@@ -88,7 +89,6 @@ public class GUIComponentUserInterface implements ActionListener {
 	 */
 	public GUIComponentUserInterface(String username) {
 		frmElabVerwaltungsprogramm = new JFrame();
-		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
@@ -250,9 +250,10 @@ public class GUIComponentUserInterface implements ActionListener {
 		});
 		btnResetSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnResetSearch = new GridBagConstraints();
+		gbc_btnResetSearch.gridwidth = 3;
 		gbc_btnResetSearch.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnResetSearch.insets = new Insets(0, 0, 5, 5);
-		gbc_btnResetSearch.gridx = 2;
+		gbc_btnResetSearch.insets = new Insets(0, 0, 5, 0);
+		gbc_btnResetSearch.gridx = 1;
 		gbc_btnResetSearch.gridy = 4;
 		panelshoppingCart.add(btnResetSearch, gbc_btnResetSearch);
 		
@@ -332,6 +333,25 @@ public class GUIComponentUserInterface implements ActionListener {
 		gbc_btnincrementParts.gridx = 3;
 		gbc_btnincrementParts.gridy = 6;
 		panelshoppingCart.add(btnincrementParts, gbc_btnincrementParts);
+		
+		JButton btnpayShoppingCart = new JButton("Warenkorb bezahlen");
+		btnpayShoppingCart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			
+				JOptionPane.showMessageDialog(null, "Das System beruht auf Vertrauen-Bitte das Geld in die Kasse legen!");
+			
+				
+			}
+		});
+		btnpayShoppingCart.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_btnpayShoppingCart = new GridBagConstraints();
+		gbc_btnpayShoppingCart.gridwidth = 3;
+		gbc_btnpayShoppingCart.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnpayShoppingCart.insets = new Insets(0, 0, 0, 5);
+		gbc_btnpayShoppingCart.gridx = 1;
+		gbc_btnpayShoppingCart.gridy = 7;
+		panelshoppingCart.add(btnpayShoppingCart, gbc_btnpayShoppingCart);
 		
 		JPanel panelChangePassword = new JPanel();
 		tabbedPane.addTab("Passwort ändern", null, panelChangePassword, null);
