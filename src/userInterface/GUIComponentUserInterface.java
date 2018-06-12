@@ -1,6 +1,7 @@
 package userInterface;
 
-//author Nils 
+//GUI author: Nils
+//author who fills the functions: Emre 
 
 import java.awt.EventQueue;
 
@@ -171,7 +172,18 @@ public class GUIComponentUserInterface implements ActionListener {
 		panelshoppingCart.add(scrollPaneshoppingCart, gbc_scrollPaneshoppingCart);
 		
 		tableShoppingCard = new JTable();
+		tableShoppingCard.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		scrollPaneshoppingCart.setViewportView(tableShoppingCard);
+		//Emre+
+		try {
+		    tableShoppingCard.setModel(new ShoppingCardTableModel(SQLManager.getInstance().getPartsByShoppingCard(SQLManager.getInstance().getPersonIDByUsername(username))));
+		} catch (SQLException e2) {
+		    // TODO Auto-generated catch block
+		    e2.printStackTrace();
+		}
+		//Emre -
+		
+		
 		
 		comboBoxcategoryPartSearch = new JComboBox();
 		comboBoxcategoryPartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -289,25 +301,47 @@ public class GUIComponentUserInterface implements ActionListener {
 		JButton btndekrementParts = new JButton("Dem Warenkorb hinzufügen");
 		btndekrementParts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			    try {
-				if(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 5).toString())>=  Integer.parseInt(spinnerdekrementParts.getText())) {
-				    SQLManager.getInstance().addPartToShoppingCard(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(textFieldUsername.getText()), Integer.parseInt(spinnerdekrementParts.getText()));
-				} else
-				    try {
-					throw new NotEnoughParts();
-				    } catch (NotEnoughParts e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				    }  
+			    if(tableAllParts.getSelectedRow() > -1) {
 				
-			    } catch (NumberFormatException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			    } catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			    int n = JOptionPane.showConfirmDialog(null, "Wollen Sie den Artikel "+ tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 2).toString()+ " zu Ihrem Warenkorb hinzufügen?"); 
+			    if(n == JOptionPane.YES_OPTION ) { 
+				try {
+				    if(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 5).toString())>=  Integer.parseInt(spinnerdekrementParts.getText())) {
+					SQLManager.getInstance().addPartToShoppingCard(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(textFieldUsername.getText()), Integer.parseInt(spinnerdekrementParts.getText()));
+					SQLManager.getInstance().updatePartQuantityAfterShopping(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), Integer.parseInt(spinnerdekrementParts.getText()));
+				    } else
+					try {
+					    throw new NotEnoughParts();
+					} catch (NotEnoughParts e1) {
+					    // TODO Auto-generated catch block
+					    e1.printStackTrace();
+					}  
+				
+				} catch (NumberFormatException e1) {
+				    // TODO Auto-generated catch block
+				    e1.printStackTrace();
+				} catch (SQLException e1) {
+				    // TODO Auto-generated catch block
+				    e1.printStackTrace();
+				}
 			    }
+			    }
+			    refreshShoppingCardTable(); 
+			    refreshPartTable(); 
+			
+
 			}
+
+			private void refreshShoppingCardTable() {
+			    // TODO Auto-generated method stub
+			    try {
+				    tableShoppingCard.setModel(new ShoppingCardTableModel(SQLManager.getInstance().getPartsByShoppingCard(SQLManager.getInstance().getPersonIDByUsername(username))));
+				} catch (SQLException e2) {
+				    // TODO Auto-generated catch block
+				    e2.printStackTrace();
+				}
+			    
+			}	
 		});
 		btndekrementParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
@@ -518,6 +552,17 @@ public class GUIComponentUserInterface implements ActionListener {
 		
 		
 		frmElabVerwaltungsprogramm.setVisible(true);
+	}
+
+	protected void refreshPartTable() {
+	    // TODO Auto-generated method stub
+	    try {
+		    tableAllParts.setModel(new ComponentTableModel(ComponentManagement.getComponents()));
+		} catch (SQLException e1) {
+		    // TODO Auto-generated catch block
+		    e1.printStackTrace();
+		}
+	    
 	}
 
 	@Override

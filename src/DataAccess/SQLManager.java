@@ -302,20 +302,47 @@ public class SQLManager {
 		Component c = new Component(rs.getInt("idPart"),rs.getString("articlenumber"), rs.getString("name"), rs.getString("productlink"), rs.getDouble("price"), rs.getInt("storing"), rs.getInt("plannedAmount"), rs.getInt("orderedAmount"), rs.getString("storageLocation"),rs.getInt("idCategory"));
 		result.add(c); 
 	    }
-	    if (result.isEmpty()) throw new ComponentNameNotInDBException();
+	    //if (result.isEmpty()) throw new ComponentNameNotInDBException();
 	    return result; 
 	}
+	public List<ShoppingObjects> getPartsByShoppingCard(int id) throws SQLException {
+	    List<ShoppingObjects> result = new ArrayList<ShoppingObjects>(); 
+	    Statement stmt = c.createStatement(); 
+	    String sql = "SELECT idPart, articlenumber, name, amount, price FROM Parts NATURAL JOIN ShoppingCardParts WHERE idPerson ="+ id; 
+	    ResultSet rs = stmt.executeQuery(sql); 
+	    while (rs.next()) {
+		ShoppingObjects temp = new ShoppingObjects(rs.getInt("idPart"), rs.getString("articlenumber"), rs.getString("name"),rs.getInt("amount"), rs.getDouble("price") );
+		result.add(temp); 
+	    }
+	    return result; 
+	}
+	public void updatePartQuantityAfterShopping(int idPart, int minusValue) throws SQLException {
+	    Statement stmt = c.createStatement(); 
+	    String sql ="UPDATE Parts SET storing = storing -"+ minusValue + " WHERE idPart="+ idPart;
+	    stmt.executeUpdate(sql); 
+	    stmt.close();
+	}
 	
-	//Emre end
+
 	
 	
 	//You need to check whether or not there are already parts with ID x for Person Y in Card! If so: Increase amount and don't add new row!
 	public void addPartToShoppingCard(int idPart, int idPerson, int amount) throws SQLException {
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO ShoppingCardParts (idPerson, idPart, amount) VALUES((SELECT idPerson FROM Persons WHERE idPerson="+idPerson+"), (SELECT idPart FROM Parts WHERE idPart="+idPart+"),"+amount+");";
-		stmt.executeUpdate(sql);
+		String sql = "SELECT COUNT(*) FROM ShoppingCardParts WHERE idPerson ="+ idPerson +  " AND idPart =" + idPart; 
+		//String sql ="INSERT INTO ShoppingCardParts (idPerson, idPart, amount) VALUES((SELECT idPerson FROM Persons WHERE idPerson="+idPerson+"), (SELECT idPart FROM Parts WHERE idPart="+idPart+"),"+amount+");";
+		//stmt.executeUpdate(sql); 
+		ResultSet rs = stmt.executeQuery(sql);
+		if (rs.getInt(1)== 1) {
+		    sql = "UPDATE ShoppingCardParts SET amount = amount + "+ amount + " WHERE idPart="+ idPart+ " AND idPerson ="+ idPerson; 
+		    stmt.executeUpdate(sql); 
+		} else {
+		    sql = "INSERT INTO ShoppingCardParts (idPerson, idPart, amount) VALUES (" + idPerson + ", "+ idPart+ ", " + amount+ ")";
+		    stmt.executeUpdate(sql); 
+		}
 		stmt.close();
 	}
+	//Emre end
 
 	public void deletePartFromShoppingCard(int idPart, int idPerson) throws SQLException{
 		Statement stmt = c.createStatement();
