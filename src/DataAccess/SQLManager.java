@@ -316,12 +316,19 @@ public class SQLManager {
 	    }
 	    return result; 
 	}
-	public void updatePartQuantityAfterShopping(int idPart, int minusValue) throws SQLException {
+	public void updatePartQuantityAfterShoppingMinus(int idPart, int minusValue) throws SQLException {
 	    Statement stmt = c.createStatement(); 
 	    String sql ="UPDATE Parts SET storing = storing -"+ minusValue + " WHERE idPart="+ idPart;
 	    stmt.executeUpdate(sql); 
 	    stmt.close();
 	}
+	public void updatePartQuantityAfterShoppingPlus(int idPart, int plusValue) throws SQLException {
+	    Statement stmt = c.createStatement(); 
+	    String sql ="UPDATE Parts SET storing = storing +"+ plusValue + " WHERE idPart="+ idPart;
+	    stmt.executeUpdate(sql); 
+	    stmt.close();
+	}
+	
 	
 
 	
@@ -342,6 +349,21 @@ public class SQLManager {
 		}
 		stmt.close(); 
 	}
+	public void updateShoppingCardPartMinus(int idPart, int idPerson, int minusValue) throws SQLException {
+	    Statement stmt = c.createStatement();
+	    stmt.executeUpdate("UPDATE ShoppingCardParts SET amount = amount - "+ minusValue + " WHERE idPart="+ idPart +" AND idPerson=" +idPerson); 
+	    ResultSet rs = stmt.executeQuery("SELECT amount FROM ShoppingCardParts WHERE idPart ="+ idPart+ " AND idPerson = "+ idPerson); 
+	    if (rs.getInt(1) == 0) {
+		stmt.executeUpdate("DELETE FROM ShoppingCardParts WHERE idPart = "+idPart+ " AND idPerson="+ idPerson); 
+	    }
+	    
+	}
+	public void payPartFromShoppingCard(int idPart, int idPerson) throws SQLException {
+	    Statement stmt = c.createStatement(); 
+	    stmt.executeUpdate("DELETE FROM ShoppingCardParts WHERE idPart = "+ idPart + " AND idPerson = " + idPerson); 
+	    stmt.close();
+	}
+	
 	//Emre end
 
 	public void deletePartFromShoppingCard(int idPart, int idPerson) throws SQLException{

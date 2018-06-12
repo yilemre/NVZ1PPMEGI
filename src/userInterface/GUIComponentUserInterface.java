@@ -73,6 +73,7 @@ public class GUIComponentUserInterface implements ActionListener {
 	private JTable tableShoppingCard;
 	
 	private JComboBox comboBoxcategoryPartSearch;
+	String username; 
 	
 	//int idPart; 
 
@@ -89,6 +90,7 @@ public class GUIComponentUserInterface implements ActionListener {
 	 * Initialize the contents of the frame.
 	 */
 	public GUIComponentUserInterface(String username) {
+	    	this.username = username; 
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
@@ -181,6 +183,14 @@ public class GUIComponentUserInterface implements ActionListener {
 		    // TODO Auto-generated catch block
 		    e2.printStackTrace();
 		}
+		
+		tableShoppingCard.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableShoppingCard.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+		    @Override
+		    public void valueChanged(ListSelectionEvent arg0) {
+			// TODO Auto-generated method stub
+		    }
+		});
 		//Emre -
 		
 		
@@ -308,7 +318,7 @@ public class GUIComponentUserInterface implements ActionListener {
 				try {
 				    if(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 5).toString())>=  Integer.parseInt(spinnerdekrementParts.getText())) {
 					SQLManager.getInstance().addPartToShoppingCard(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(textFieldUsername.getText()), Integer.parseInt(spinnerdekrementParts.getText()));
-					SQLManager.getInstance().updatePartQuantityAfterShopping(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), Integer.parseInt(spinnerdekrementParts.getText()));
+					SQLManager.getInstance().updatePartQuantityAfterShoppingMinus(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), Integer.parseInt(spinnerdekrementParts.getText()));
 				    } else
 					try { 
 					    throw new NotEnoughParts();
@@ -326,6 +336,7 @@ public class GUIComponentUserInterface implements ActionListener {
 				}
 			    }
 			    }
+			    spinnerdekrementParts.setText("");
 			    refreshShoppingCardTable(); 
 			    refreshPartTable(); 
 			
@@ -345,7 +356,7 @@ public class GUIComponentUserInterface implements ActionListener {
 		});
 		btndekrementParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		btndekrementParts.setToolTipText("Das entnommene Bauteil wird ihrer Rechnung hinzugefügt");
+		//btndekrementParts.setToolTipText("Das entnommene Bauteil wird ihrer Rechnung hinzugefügt");
 		GridBagConstraints gbc_btndekrementParts = new GridBagConstraints();
 		gbc_btndekrementParts.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndekrementParts.insets = new Insets(0, 0, 5, 5);
@@ -356,6 +367,22 @@ public class GUIComponentUserInterface implements ActionListener {
 		JButton btnincrementParts = new JButton("Aus Warenkorb entfernen");
 		btnincrementParts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			    try {
+				SQLManager.getInstance().updateShoppingCardPartMinus(Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(username), Integer.parseInt(spinnerincrementParts.getText()));
+				
+				SQLManager.getInstance().updatePartQuantityAfterShoppingPlus((Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString())),  (Integer.parseInt(spinnerincrementParts.getText())));
+				
+			    } catch (NumberFormatException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			    } catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			    }
+			    spinnerincrementParts.setText("");
+			    refreshShoppingCardTable2();
+			    refreshPartTable();
+			    
 			}
 		});
 		btnincrementParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -371,9 +398,17 @@ public class GUIComponentUserInterface implements ActionListener {
 		JButton btnpayShoppingCart = new JButton("Warenkorb bezahlen");
 		btnpayShoppingCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-			
-				JOptionPane.showMessageDialog(null, "Das System beruht auf Vertrauen-Bitte das Geld in die Kasse legen!");
+			    JOptionPane.showMessageDialog(null, "Das System beruht auf Vertrauen-Bitte das Geld in die Kasse legen!");
+			    try {
+				SQLManager.getInstance().payPartFromShoppingCard(Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(username));
+			    } catch (NumberFormatException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			    } catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			    }
+			    refreshShoppingCardTable2(); 
 			
 				
 			}
@@ -552,6 +587,18 @@ public class GUIComponentUserInterface implements ActionListener {
 		
 		
 		frmElabVerwaltungsprogramm.setVisible(true);
+		
+		
+	}
+
+	protected void refreshShoppingCardTable2() {
+	    // TODO Auto-generated method stub
+	    try {
+		    tableShoppingCard.setModel(new ShoppingCardTableModel(SQLManager.getInstance().getPartsByShoppingCard(SQLManager.getInstance().getPersonIDByUsername(username))));
+		} catch (SQLException e2) {
+		    // TODO Auto-generated catch block
+		    e2.printStackTrace();
+		}
 	}
 
 	protected void refreshPartTable() {
