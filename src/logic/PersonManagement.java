@@ -32,7 +32,7 @@ public class PersonManagement {
 	}
     }
 
-    public static void deletePerson(int ID) throws SQLException {
+    public static void deletePerson(int ID) throws SQLException, BillIDNotInDBException {
     	for(int i:SQLManager.getInstance().getBillIDsByCustomerID(ID)) {
     		FinancialManagement.deleteBill(i);
     	}

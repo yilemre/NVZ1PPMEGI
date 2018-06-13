@@ -35,6 +35,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.sun.org.apache.bcel.internal.generic.Type;
 
 import DataAccess.SQLManager;
+import Exceptions.BillIDNotInDBException;
 import Exceptions.CantGenerateBillinformationException;
 import Exceptions.ELabException;
 import Exceptions.OrderNotInDBException;
@@ -441,7 +442,6 @@ public class GUIFinanceManagement {
 									comboBoxBillStatus.getSelectedIndex());
 
 					ProductionManagement.addOrderStatus(Integer.parseInt(textFieldrelatedOrder.getText()), 7);
-					FinancialManagement.setTargetAmountPot((FinancialManagement.getPotArray().get(comboBoxrelatedJar.getSelectedIndex())).getId(), Double.parseDouble(textFieldestimatedFigure.getText()));
 
 					refreshTableNewBillWhereBillIsNotCreatedYet();
 					refreshTableBillModify();
@@ -967,9 +967,12 @@ public class GUIFinanceManagement {
 						FinancialManagement.getRegisterArray().get(comboBoxrelatedCashRegisterModify.getSelectedIndex()).getId(),
 						textFieldbillNameModify.getText(), 
 						comboBoxpaymentTypModify.getSelectedIndex(),
-						Double.parseDouble(textFieldsumBillModify.getText()));
+						Double.parseDouble(textFieldsumBillModify.getText()),
+						comboBoxBillStatusModify.getSelectedIndex());
+					
+					refreshTableJar();
+					refreshTableCashRegister();
 				
-					FinancialManagement.changeBillStatus(Integer.parseInt(textFieldBillIDModify.getText()),comboBoxBillStatusModify.getSelectedIndex());
 
 					PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("./Rechnungen/"+textFieldbillNameModify.getText() + ".pdf"));
 			
@@ -1088,6 +1091,9 @@ public class GUIFinanceManagement {
 				} catch (OrderNotInDBException e1) {
 					e1.printStackTrace();
 				} catch (PersonWithSpecifiedIDNotInDBException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (BillIDNotInDBException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -1345,6 +1351,12 @@ public class GUIFinanceManagement {
 					FinancialManagement.deleteBill(Integer
 							.parseInt(tableDeleteBill.getValueAt(tableDeleteBill.getSelectedRow(), 0).toString()));
 				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (BillIDNotInDBException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

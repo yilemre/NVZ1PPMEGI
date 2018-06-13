@@ -871,6 +871,20 @@ public class SQLManager {
 		return result;
 	}
 	
+	public Bill getBillByID(int id) throws SQLException, BillIDNotInDBException {
+		Bill result = null;
+		Statement stmt = c.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT idBill, idOrder, idPot, idCustomer, idAdvisor, idRegister, name, methodOfPayment, figure, MAX(status) as status, timestamp FROM Bills NATURAL JOIN BillStatus GROUP BY idBill HAVING idBill="+id+";");
+		while (rs.next()){
+			result = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idCustomer"), rs.getInt("idAdvisor"), rs.getInt("idRegister"), rs.getString("name"), rs.getInt("methodOfPayment"),rs.getDouble("figure"),rs.getInt("status"), rs.getString("timestamp"));			
+		}
+
+		rs.close();
+		stmt.close();
+		if (result == null) throw new BillIDNotInDBException();
+		return result;
+	}
+	
 	public List<Bill> getBillsByStatus(int status) throws SQLException, BillStatusNotInDBException {
 		List<Bill> result = new ArrayList<Bill>();
 		Statement stmt = c.createStatement();
@@ -918,16 +932,16 @@ public class SQLManager {
 		return result;
 	}
 	
-	public void setActualAmountPot(int idPot, double newActualAmount) throws SQLException{
+	public void updateActualAmountPotByAmount(int idPot, double amount) throws SQLException{
 		Statement stmt = c.createStatement();
-		String sql = "UPDATE Pots SET actualAmount=actualAmount+"+newActualAmount+" WHERE idPots="+idPot;
+		String sql = "UPDATE Pots SET actualAmount=actualAmount+"+amount+" WHERE idPots="+idPot;
 		stmt.executeUpdate(sql); 
 		stmt.close();
 	}
 	
-	public void setTargetAmountPot(int idPot, double newDebitAmount) throws SQLException{
+	public void updateTargetAmountPotByAmount(int idPot, double amount) throws SQLException{
 		Statement stmt = c.createStatement();
-		String sql = "UPDATE Pots SET debitAmount=debitAmount+"+newDebitAmount+" WHERE idPots="+idPot;
+		String sql = "UPDATE Pots SET debitAmount=debitAmount+"+amount+" WHERE idPots="+idPot;
 		stmt.executeUpdate(sql); 
 		stmt.close();
 	}
@@ -959,5 +973,19 @@ public class SQLManager {
 		}
 		return result;
 	}	
+	
+	public void setSIBRegisterViaPots(int id) throws SQLException{
+		Statement stmt = c.createStatement();
+		String sql = "SELECT sum(debitAmount), sum(actualAmount) FROM Pots GROUP BY idRegister HAVING idRegister="+id+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		
+		if (rs.next()) {
+			Statement updateStatement = c.createStatement();
+			String update = "UPDATE Registers SET debitAmount="+rs.getDouble(1)+" WHERE idRegister="+id+";";
+			String update2 = "UPDATE Registers SET actualAmount="+rs.getDouble(2)+" WHERE idRegister="+id+";";
+			updateStatement.executeUpdate(update);
+			updateStatement.executeUpdate(update2);
+		}
+	}
 	
 }
