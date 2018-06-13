@@ -31,6 +31,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import Exceptions.ELabException;
+import Exceptions.PersonWithSpecifiedIDNotInDBException;
+import Exceptions.UsernameNotAvailableException;
 import logic.PersonManagement;
 
 import javax.swing.JTextField;
@@ -382,6 +384,8 @@ public class GUIPersonalmanagement{
 					textFieldzipCode.setBackground(Color.red);
 				
 				
+				} catch (UsernameNotAvailableException e1) {
+					JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, e1.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
 				}
 			
 			
@@ -654,6 +658,11 @@ public class GUIPersonalmanagement{
 				} catch (SQLException e1) {
 				    // TODO Auto-generated catch block
 				    e1.printStackTrace();
+				} catch (UsernameNotAvailableException e1) {
+					JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, e1.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+				} catch (PersonWithSpecifiedIDNotInDBException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 				
 			}

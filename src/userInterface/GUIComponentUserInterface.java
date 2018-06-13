@@ -26,11 +26,12 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import DataAccess.SQLManager;
 import Exceptions.ELabException;
 import Exceptions.NotEnoughParts;
 import Exceptions.WrongRepeatedPassword;
+import Exceptions.noMorePartsLeftException;
 import logic.ComponentManagement;
+import logic.PersonManagement;
 import sun.rmi.log.LogOutputStream;
 
 import javax.swing.JTextField;
@@ -93,8 +94,9 @@ public class GUIComponentUserInterface {
 	 * Initialize the contents of the frame.
 	 */
 	public GUIComponentUserInterface(String username) {
-	    	this.username = username; 
+	    this.username = username; 
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
@@ -181,7 +183,7 @@ public class GUIComponentUserInterface {
 		scrollPaneshoppingCart.setViewportView(tableShoppingCard);
 		//Emre+
 		try {
-		    tableShoppingCard.setModel(new ShoppingCardTableModel(SQLManager.getInstance().getPartsByShoppingCard(SQLManager.getInstance().getPersonIDByUsername(username))));
+		    tableShoppingCard.setModel(new ShoppingCardTableModel(ComponentManagement.getPartsByShoppingCard(PersonManagement.getPersonIDByUsername(username))));
 		} catch (SQLException e2) {
 		    // TODO Auto-generated catch block
 		    e2.printStackTrace();
@@ -319,18 +321,9 @@ public class GUIComponentUserInterface {
 				int n = JOptionPane.showConfirmDialog(null, "Wollen Sie den Artikel "+ tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 2).toString()+ " zu Ihrem Warenkorb hinzufügen?"); 
 				if(n == JOptionPane.YES_OPTION ) { 
 				    try {
-					if(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 5).toString())>=  Integer.parseInt(spinnerdekrementParts.getText())) {
-					    SQLManager.getInstance().addPartToShoppingCard(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(textFieldUsername.getText()), Integer.parseInt(spinnerdekrementParts.getText()));
-					    SQLManager.getInstance().updatePartQuantityAfterShoppingMinus(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), Integer.parseInt(spinnerdekrementParts.getText()));
+					    ComponentManagement.addPartToShoppingCard(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), PersonManagement.getPersonIDByUsername(textFieldUsername.getText()), Integer.parseInt(spinnerdekrementParts.getText()));
+					    ComponentManagement.updatePartQuantityAfterShoppingMinus(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), Integer.parseInt(spinnerdekrementParts.getText()));
 					    spinnerdekrementParts.setBackground(Color.WHITE);
-					} else
-					    try { 
-						throw new NotEnoughParts();
-					    } catch (NotEnoughParts e1) {
-						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null,e1.getMessage());
-					    }  
-					
 				    } catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					//e1.printStackTrace();
@@ -339,7 +332,9 @@ public class GUIComponentUserInterface {
 				    } catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				    }
+				    } catch (noMorePartsLeftException e1) {
+				    	JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, e1.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			    } else {
 				JOptionPane.showMessageDialog(null,"Wählen Sie eine Artikelzeile aus!");
@@ -354,7 +349,7 @@ public class GUIComponentUserInterface {
 			private void refreshShoppingCardTable() {
 			    // TODO Auto-generated method stub
 			    try {
-				    tableShoppingCard.setModel(new ShoppingCardTableModel(SQLManager.getInstance().getPartsByShoppingCard(SQLManager.getInstance().getPersonIDByUsername(username))));
+				    tableShoppingCard.setModel(new ShoppingCardTableModel(ComponentManagement.getPartsByShoppingCard(PersonManagement.getPersonIDByUsername(username))));
 				} catch (SQLException e2) {
 				    // TODO Auto-generated catch block
 				    e2.printStackTrace();
@@ -379,8 +374,8 @@ public class GUIComponentUserInterface {
 				if(tableShoppingCard.getSelectedRow()>-1) {
 				    if(Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 3).toString()) >= Integer.parseInt(spinnerincrementParts.getText())) {
     			    			try {
-    			    			    SQLManager.getInstance().updateShoppingCardPartMinus(Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(username), Integer.parseInt(spinnerincrementParts.getText()));    				
-    			    			    SQLManager.getInstance().updatePartQuantityAfterShoppingPlus((Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString())),  (Integer.parseInt(spinnerincrementParts.getText())));
+    			    				ComponentManagement.updateShoppingCardPartMinus(Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString()), PersonManagement.getPersonIDByUsername(username), Integer.parseInt(spinnerincrementParts.getText()));    				
+    			    			    ComponentManagement.updatePartQuantityAfterShoppingPlus((Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString())),  (Integer.parseInt(spinnerincrementParts.getText())));
     			    			    spinnerincrementParts.setBackground(Color.WHITE);
     			    			} catch (NumberFormatException e1) {
     			    			    // TODO Auto-generated catch block
@@ -421,7 +416,7 @@ public class GUIComponentUserInterface {
 			public void actionPerformed(ActionEvent e) {
 			    JOptionPane.showMessageDialog(null, "Das System beruht auf Vertrauen-Bitte das Geld in die Kasse legen!");
 			    try {
-				SQLManager.getInstance().payPartFromShoppingCard(Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(username));
+				ComponentManagement.payPartFromShoppingCard(Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString()), PersonManagement.getPersonIDByUsername(username));
 			    } catch (NumberFormatException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -538,7 +533,7 @@ public class GUIComponentUserInterface {
 			    //Emre+
 			    if(passwordFieldnewPassword.getText().equals(passwordFieldnewPasswordRepeat.getText())) {
 				try {
-				    SQLManager.getInstance().changePassword(textFieldUsername.getText(), passwordFieldnewPassword.getText());
+				    PersonManagement.changePassword(textFieldUsername.getText(), passwordFieldnewPassword.getText());
 				} catch (SQLException e1) {
 				    // TODO Auto-generated catch block
 				    e1.printStackTrace();
@@ -625,7 +620,7 @@ public class GUIComponentUserInterface {
 	protected void refreshShoppingCardTable2() {
 	    // TODO Auto-generated method stub
 	    try {
-		    tableShoppingCard.setModel(new ShoppingCardTableModel(SQLManager.getInstance().getPartsByShoppingCard(SQLManager.getInstance().getPersonIDByUsername(username))));
+		    tableShoppingCard.setModel(new ShoppingCardTableModel(ComponentManagement.getPartsByShoppingCard(PersonManagement.getPersonIDByUsername(username))));
 		} catch (SQLException e2) {
 		    // TODO Auto-generated catch block
 		    e2.printStackTrace();

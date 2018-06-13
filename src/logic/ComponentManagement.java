@@ -48,7 +48,33 @@ public class ComponentManagement {
 	    int plannedAmount, int orderedAmount, String storageLocation, int idCategory) throws SQLException {
 		SQLManager.getInstance().modifyPart(id, articlenumber, productlink, name, price, storing, plannedAmount, orderedAmount, storageLocation, idCategory);
     }
+    
+    public static void addPartToShoppingCard(int idPart, int idPerson, int amount) throws SQLException, noMorePartsLeftException{
+    	if(!SQLManager.getInstance().checkIfEnoughPartsAreAvailable(idPart, amount)) {
+    		throw new noMorePartsLeftException();
+    	}
+    	else {
+        	SQLManager.getInstance().addPartToShoppingCard(idPart, idPerson, amount);
+    	}
+    }
 		
-		
-		
+	public static List<ShoppingObject> getPartsByShoppingCard(int id) throws SQLException{
+		return SQLManager.getInstance().getPartsByShoppingCard(id);
+	}
+	
+	public static void updatePartQuantityAfterShoppingMinus(int idPart, int minusValue) throws SQLException {
+		SQLManager.getInstance().updatePartQuantityAfterShoppingMinus(idPart, minusValue);
+	}
+	
+	public static void updateShoppingCardPartMinus(int idPart, int idPerson, int minusValue) throws SQLException {
+		SQLManager.getInstance().updateShoppingCardPartMinus(idPart, idPerson, minusValue);
+	}
+	
+	public static void updatePartQuantityAfterShoppingPlus(int idPart, int plusValue) throws SQLException {
+		SQLManager.getInstance().updatePartQuantityAfterShoppingPlus(idPart, plusValue);
+	}
+	
+	public static void payPartFromShoppingCard(int idPart, int idPerson) throws SQLException {
+		SQLManager.getInstance().payPartFromShoppingCard(idPart, idPerson);
+	}
 }

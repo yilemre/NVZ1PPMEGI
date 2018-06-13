@@ -18,15 +18,18 @@ import Exceptions.*;
 
 public class PersonManagement {
     
-    public static void addPerson(String firstname, String surname, String street, int housenumber, int zipcode, String email, String username, String password, int rights) throws SQLException  {
-	//Marius start
+    public static void addPerson(String firstname, String surname, String street, int housenumber, int zipcode, String email, String username, String password, int rights) throws SQLException, UsernameNotAvailableException  {
 	String dateTimeString = null;
 	DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 	Calendar cal = Calendar.getInstance();
 	Date     time = cal.getTime();
 	dateTimeString = df.format(time);
-	//Marius end 
+	if(!SQLManager.getInstance().isUsernameAvailable(username)) {
+		throw new UsernameNotAvailableException();
+	}
+	else {
     	SQLManager.getInstance().insertPersonIntoDB(firstname, surname, street, housenumber, zipcode, email, dateTimeString, username, password, rights);
+	}
     }
 
     public static void deletePerson(int ID) throws SQLException {
@@ -39,14 +42,28 @@ public class PersonManagement {
 	SQLManager.getInstance().deletePersonFromDB(ID); 
     }
 
-    public static void modifyPerson(int id, String firstname, String surname, String street, int housenumber,
-	int zipcode,String email, String username, String password, int rights) throws SQLException {
-    String dateTimeString = null;
-    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-    Calendar cal = Calendar.getInstance();
-    Date     time = cal.getTime();
-    dateTimeString = df.format(time); 
-	SQLManager.getInstance().modifyPerson(id, firstname, surname,street,housenumber,zipcode,email,dateTimeString,username,password, rights);
+    public static void modifyPerson(int id, String firstname, String surname, String street, int housenumber, int zipcode,String email, String username, String password, int rights) throws SQLException, UsernameNotAvailableException, PersonWithSpecifiedIDNotInDBException {
+    	
+    	Person temp = SQLManager.getInstance().getPersonByID(id);
+    	
+	    String dateTimeString = null;
+	    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+	    Calendar cal = Calendar.getInstance();
+	    Date     time = cal.getTime();
+	    dateTimeString = df.format(time); 
+	    
+	    if(temp.getUsername().equals(username)) {
+	    	SQLManager.getInstance().modifyPerson(id, firstname, surname,street,housenumber,zipcode,email,dateTimeString,username,password, rights);
+	    }
+	    else {
+		    if(!SQLManager.getInstance().isUsernameAvailable(username)) {
+		    	throw new UsernameNotAvailableException();
+		    }
+		    else {
+		    	SQLManager.getInstance().modifyPerson(id, firstname, surname,street,housenumber,zipcode,email,dateTimeString,username,password, rights);
+		    }
+	    }
+
     }
     
     public static List<Person> getPersons() throws SQLException {
@@ -104,5 +121,13 @@ public class PersonManagement {
 			default:
 				throw new PersonStatusNotInDBException();
 		}
-	}	
+	}
+	
+	public static int getPersonIDByUsername(String username) throws SQLException{
+		return SQLManager.getInstance().getPersonIDByUsername(username);
+	}
+	
+	public static void changePassword(String username, String password) throws SQLException {
+		SQLManager.getInstance().changePassword(username, password);
+	}
 }

@@ -1,8 +1,8 @@
 package Exceptions;
 
-public class UsernameNotAvailable extends ELabException {
+public class UsernameNotAvailableException extends ELabException {
 	
-	public UsernameNotAvailable() {
+	public UsernameNotAvailableException() {
 		
 	}
 	

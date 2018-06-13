@@ -8,10 +8,10 @@ import logic.*;
 import javax.swing.table.AbstractTableModel;
 
 public class ShoppingCardTableModel extends AbstractTableModel {
-    private List<ShoppingObjects> list = new ArrayList<ShoppingObjects>(); 
+    private List<ShoppingObject> list = new ArrayList<ShoppingObject>(); 
     private String[] columns = {"ID", "Artikelnummer", "Name", "Menge", "Preis", "Betrag"}; 
     
-    public ShoppingCardTableModel(List<ShoppingObjects> list) {
+    public ShoppingCardTableModel(List<ShoppingObject> list) {
 	this.list =list;  
     }
 

@@ -1,6 +1,6 @@
 package logic;
 
-public class ShoppingObjects {
+public class ShoppingObject {
     private final int idPart; 
     private String articlenumber;
     private String name; 
@@ -8,7 +8,7 @@ public class ShoppingObjects {
     private double price; 
     private double sumPrice; 
     
-    public ShoppingObjects(int idPart, String articlenumber, String name, int amount, double price) {
+    public ShoppingObject(int idPart, String articlenumber, String name, int amount, double price) {
 	
 	this.idPart = idPart;
 	this.articlenumber = articlenumber;

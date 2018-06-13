@@ -45,6 +45,20 @@ public class SQLManager {
 		stmt.close();	
 		return result;
 	}
+	
+	public boolean isUsernameAvailable(String username) throws SQLException{
+		boolean result = true;
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Persons WHERE username='"+username+"';";
+		ResultSet rs = stmt.executeQuery(sql);
+		if(rs.next()) {
+			result = false;
+		}
+		else {
+			result = true;
+		}
+		return result;
+	}
 
 	public int deletePersonFromDB(int id) throws SQLException{
 		Statement stmt = c.createStatement();
@@ -327,33 +341,32 @@ public class SQLManager {
 	    //if (result.isEmpty()) throw new ComponentNameNotInDBException();
 	    return result; 
 	}
-	public List<ShoppingObjects> getPartsByShoppingCard(int id) throws SQLException {
-	    List<ShoppingObjects> result = new ArrayList<ShoppingObjects>(); 
+	
+	public List<ShoppingObject> getPartsByShoppingCard(int id) throws SQLException {
+	    List<ShoppingObject> result = new ArrayList<ShoppingObject>(); 
 	    Statement stmt = c.createStatement(); 
 	    String sql = "SELECT idPart, articlenumber, name, amount, price FROM Parts NATURAL JOIN ShoppingCardParts WHERE idPerson ="+ id; 
 	    ResultSet rs = stmt.executeQuery(sql); 
 	    while (rs.next()) {
-		ShoppingObjects temp = new ShoppingObjects(rs.getInt("idPart"), rs.getString("articlenumber"), rs.getString("name"),rs.getInt("amount"), rs.getDouble("price") );
+		ShoppingObject temp = new ShoppingObject(rs.getInt("idPart"), rs.getString("articlenumber"), rs.getString("name"),rs.getInt("amount"), rs.getDouble("price") );
 		result.add(temp); 
 	    }
 	    return result; 
 	}
+	
 	public void updatePartQuantityAfterShoppingMinus(int idPart, int minusValue) throws SQLException {
 	    Statement stmt = c.createStatement(); 
 	    String sql ="UPDATE Parts SET storing = storing -"+ minusValue + " WHERE idPart="+ idPart;
 	    stmt.executeUpdate(sql); 
 	    stmt.close();
 	}
+	
 	public void updatePartQuantityAfterShoppingPlus(int idPart, int plusValue) throws SQLException {
 	    Statement stmt = c.createStatement(); 
 	    String sql ="UPDATE Parts SET storing = storing +"+ plusValue + " WHERE idPart="+ idPart;
 	    stmt.executeUpdate(sql); 
 	    stmt.close();
 	}
-	
-	
-
-	
 	
 	//You need to check whether or not there are already parts with ID x for Person Y in Card! If so: Increase amount and don't add new row!
 	public void addPartToShoppingCard(int idPart, int idPerson, int amount) throws SQLException {
@@ -371,6 +384,21 @@ public class SQLManager {
 		}
 		stmt.close(); 
 	}
+	
+	public boolean checkIfEnoughPartsAreAvailable(int idPart, int amount) throws SQLException, noMorePartsLeftException {
+		boolean result = false;
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Parts WHERE storing>="+amount+" AND idPart="+idPart;
+		ResultSet rs = stmt.executeQuery(sql);
+		if (rs.next()){
+			result = true;			
+		}
+		else {
+			result = false;
+		}
+		return result;
+	}
+	
 	public void updateShoppingCardPartMinus(int idPart, int idPerson, int minusValue) throws SQLException {
 	    Statement stmt = c.createStatement();
 	    stmt.executeUpdate("UPDATE ShoppingCardParts SET amount = amount - "+ minusValue + " WHERE idPart="+ idPart +" AND idPerson=" +idPerson); 

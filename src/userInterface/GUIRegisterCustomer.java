@@ -23,6 +23,7 @@ import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
+import Exceptions.UsernameNotAvailableException;
 import logic.PersonManagement;
 
 import javax.swing.JTextField;
@@ -41,6 +42,8 @@ import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.Toolkit;
 import java.awt.Window.Type;
 import java.awt.event.WindowAdapter;
@@ -368,6 +371,8 @@ public class GUIRegisterCustomer {
 					textFieldzipCode.setBackground(Color.red);
 					
 					
+				} catch (UsernameNotAvailableException e1) {
+					JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, e1.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}

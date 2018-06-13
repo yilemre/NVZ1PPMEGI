@@ -734,7 +734,6 @@ public class GUIFabricationmanagement {
 
 		textFieldactualCostsModify = new JTextField();
 		textFieldactualCostsModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textFieldactualCostsModify.setEditable(false);
 		GridBagConstraints gbc_textFieldactualCostsModify = new GridBagConstraints();
 		gbc_textFieldactualCostsModify.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldactualCostsModify.fill = GridBagConstraints.HORIZONTAL;
