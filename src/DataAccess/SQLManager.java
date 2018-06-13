@@ -53,6 +53,28 @@ public class SQLManager {
 		stmt.close();	
 		return id;
 	}
+	
+	public List<Integer> getBillIDsByCustomerID(int idCustomer) throws SQLException{
+		List<Integer> result = new ArrayList<Integer>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT idBill FROM Bills WHERE idCustomer="+idCustomer;
+		ResultSet rs = stmt.executeQuery(sql);
+		while(rs.next()) {
+			result.add(rs.getInt(0));
+		}
+		return result;
+	}
+	
+	public List<Integer> getOrderIDsByCustomerID(int idCustomer) throws SQLException{
+		List<Integer> result = new ArrayList<Integer>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT idOrder FROM Orders WHERE idCustomer="+idCustomer;
+		ResultSet rs = stmt.executeQuery(sql);
+		while(rs.next()) {
+			result.add(rs.getInt(0));
+		}
+		return result;
+	}
 
 	//Emre begin 
 	public void modifyPerson(int id, String firstname, String surname, String street, int housenumber,

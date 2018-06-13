@@ -30,6 +30,12 @@ public class PersonManagement {
     }
 
     public static void deletePerson(int ID) throws SQLException {
+    	for(int i:SQLManager.getInstance().getBillIDsByCustomerID(ID)) {
+    		FinancialManagement.deleteBill(i);
+    	}
+    	for(int i:SQLManager.getInstance().getOrderIDsByCustomerID(ID)) {
+    		ProductionManagement.deleteOrder(i);
+    	}
 	SQLManager.getInstance().deletePersonFromDB(ID); 
     }
 
