@@ -158,7 +158,6 @@ public class GUIFinanceManagement {
 		comboBoxStatusEntries.add("Bezahlt");
 
 		frmElabVerwaltungsprogramm = new JFrame();
-		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setUndecorated(true);
 
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
@@ -722,6 +721,10 @@ public class GUIFinanceManagement {
 		panelcreateBill.add(btnnewbillOrderSearch, gbc_btnnewbillOrderSearch);
 
 		JButton btnclearSearchBillNew = new JButton("Suche aufheben");
+		btnclearSearchBillNew.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnclearSearchBillNew.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnclearSearchBillNew = new GridBagConstraints();
 		gbc_btnclearSearchBillNew.fill = GridBagConstraints.HORIZONTAL;
@@ -1246,7 +1249,11 @@ public class GUIFinanceManagement {
 		gbc_btnSearchBillModify.gridy = 15;
 		panel.add(btnSearchBillModify, gbc_btnSearchBillModify);
 
-		JButton btnclearSearchbillModify = new JButton("Suche aufgeben");
+		JButton btnclearSearchbillModify = new JButton("Suche aufheben");
+		btnclearSearchbillModify.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnclearSearchbillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnclearSearchbillModify = new GridBagConstraints();
 		gbc_btnclearSearchbillModify.fill = GridBagConstraints.HORIZONTAL;
@@ -1258,9 +1265,9 @@ public class GUIFinanceManagement {
 		tabbedPane.addTab("Rechnung löschen", null, paneldeleteBill, null);
 		GridBagLayout gbl_paneldeleteBill = new GridBagLayout();
 		gbl_paneldeleteBill.columnWidths = new int[] { 0, 0, 0, 0 };
-		gbl_paneldeleteBill.rowHeights = new int[] { 0, 0, 0, 0, 0 };
+		gbl_paneldeleteBill.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
 		gbl_paneldeleteBill.columnWeights = new double[] { 0.0, 1.0, 1.0, Double.MIN_VALUE };
-		gbl_paneldeleteBill.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_paneldeleteBill.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		paneldeleteBill.setLayout(gbl_paneldeleteBill);
 
 		JScrollPane scrollPane_3 = new JScrollPane();
@@ -1268,7 +1275,7 @@ public class GUIFinanceManagement {
 		scrollPane_3.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPane_3 = new GridBagConstraints();
 		gbc_scrollPane_3.gridwidth = 3;
-		gbc_scrollPane_3.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_3.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane_3.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_3.gridx = 0;
 		gbc_scrollPane_3.gridy = 0;
@@ -1375,13 +1382,32 @@ public class GUIFinanceManagement {
 				refreshTableDeleteBill();
 			}
 		});
+		
+		JButton btnclearSeachbillDelete = new JButton("Suche aufheben");
+		btnclearSeachbillDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			
+			
+			
+			
+			}
+		});
+		btnclearSeachbillDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_btnclearSeachbillDelete = new GridBagConstraints();
+		gbc_btnclearSeachbillDelete.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnclearSeachbillDelete.gridwidth = 2;
+		gbc_btnclearSeachbillDelete.insets = new Insets(0, 0, 5, 5);
+		gbc_btnclearSeachbillDelete.gridx = 1;
+		gbc_btnclearSeachbillDelete.gridy = 3;
+		paneldeleteBill.add(btnclearSeachbillDelete, gbc_btnclearSeachbillDelete);
 
 		btndeleteBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteBill = new GridBagConstraints();
 		gbc_btndeleteBill.gridwidth = 2;
 		gbc_btndeleteBill.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteBill.gridx = 1;
-		gbc_btndeleteBill.gridy = 3;
+		gbc_btndeleteBill.gridy = 4;
 		paneldeleteBill.add(btndeleteBill, gbc_btndeleteBill);
 
 		JPanel panelcashRegister_JarManagement = new JPanel();
