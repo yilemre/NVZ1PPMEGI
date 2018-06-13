@@ -133,6 +133,9 @@ public class GUIFinanceManagement {
 	private JComboBox comboBoxrelatedJarModify;
 	private JComboBox comboBoxBillStatusModify;
 	private JComboBox comboBoxrelatedJar;
+	private JComboBox comboBoxsearchBillModify;
+	private JComboBox comboBoxOrderSearch;
+	private JComboBox comboBoxBillStatus;
 
 	private List<String> comboBoxEntries;
 	private List<String> comboBoxStatusEntries;
@@ -399,7 +402,7 @@ public class GUIFinanceManagement {
 		gbc_BillStatus.gridy = 9;
 		panelcreateBill.add(BillStatus, gbc_BillStatus);
 
-		JComboBox comboBoxBillStatus = new JComboBox();
+		comboBoxBillStatus = new JComboBox();
 		comboBoxBillStatus.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxBillStatus.setModel(new DefaultComboBoxModel(comboBoxStatusEntries.toArray()));
 		GridBagConstraints gbc_comboBoxBillStatus = new GridBagConstraints();
@@ -649,7 +652,7 @@ public class GUIFinanceManagement {
 		});
 		TableNewBillWhereBillIsNotCreatedYet.clearSelection();
 
-		JComboBox comboBoxOrderSearch = new JComboBox();
+		comboBoxOrderSearch = new JComboBox();
 		comboBoxOrderSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxOrderSearch.setModel(new DefaultComboBoxModel(new String[] { "Titel", "Art", "Status" }));
 		GridBagConstraints gbc_comboBoxOrderSearch = new GridBagConstraints();
@@ -676,8 +679,7 @@ public class GUIFinanceManagement {
 				switch (comboBoxOrderSearch.getSelectedIndex()) {
 				case 0:
 					try {
-						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(
-								ProductionManagement.getOrdersWhereBillIsNotCreatedYetByTitle(searchValue)));
+						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrdersWhereBillIsNotCreatedYetByTitle(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -685,8 +687,7 @@ public class GUIFinanceManagement {
 					break;
 				case 1:
 					try {
-						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(
-								ProductionManagement.getOrdersWhereBillIsNotCreatedYetByType(searchValue)));
+						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrdersWhereBillIsNotCreatedYetByType(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -694,8 +695,7 @@ public class GUIFinanceManagement {
 					break;
 				case 2:
 					try {
-						TableNewBillWhereBillIsNotCreatedYet
-								.setModel(new OrderTableModel(ProductionManagement.getOrdersByStatus(searchValue)));
+						TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrdersByStatus(searchValue)));
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -967,8 +967,11 @@ public class GUIFinanceManagement {
 		JButton btnsaveBillModify = new JButton("Rechnung ändern");
 		btnsaveBillModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				com.itextpdf.text.Document document = new com.itextpdf.text.Document();
+				
 				try {
+					System.out.println(Integer.parseInt(textFieldBillIDModify.getText()));
 					FinancialManagement.modifyBill(
 							 	Integer.parseInt(textFieldBillIDModify.getText()),
 							 	Integer.parseInt(textFieldrelatedOrderModify.getText()),
@@ -979,9 +982,9 @@ public class GUIFinanceManagement {
 								Double.parseDouble(textFieldsumBillModify.getText())
 								);
 					
-					textFieldsumBillModify.setBackground(Color.white);
-					
 					FinancialManagement.changeBillStatus(Integer.parseInt(textFieldBillIDModify.getText()), comboBoxBillStatusModify.getSelectedIndex());
+					
+					textFieldsumBillModify.setBackground(Color.white);
 		
 					PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(textFieldbillNameModify.getText()+".pdf"));
 
@@ -1165,7 +1168,7 @@ public class GUIFinanceManagement {
 		});
 		tableBillModify.clearSelection();
 
-		JComboBox comboBoxsearchBillModify = new JComboBox();
+		comboBoxsearchBillModify = new JComboBox();
 		comboBoxsearchBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBoxsearchBillModify.setModel(new DefaultComboBoxModel(new String[] { "Name", "Datum", "Status" }));
 		GridBagConstraints gbc_comboBoxsearchBillModify = new GridBagConstraints();

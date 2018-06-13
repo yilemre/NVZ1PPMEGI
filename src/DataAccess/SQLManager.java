@@ -771,8 +771,10 @@ public class SQLManager {
 	
 	public int deleteBillFromDB(int id) throws SQLException{
 		Statement stmt = c.createStatement();
-		String sql ="DELETE FROM Bills, BillStatus WHERE Bills.idBill = BillStatus.idBill AND idBill ="+id;
+		String sql ="DELETE FROM Bills WHERE idBill="+id;
+		String sql2 ="DELETE FROM BillStatus WHERE idBill="+id;
 		stmt.executeUpdate(sql);
+		stmt.executeUpdate(sql2);
 		stmt.close();
 		return id;
 	}
