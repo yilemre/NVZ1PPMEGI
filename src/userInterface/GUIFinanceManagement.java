@@ -969,8 +969,6 @@ public class GUIFinanceManagement {
 			public void actionPerformed(ActionEvent e) {
 				com.itextpdf.text.Document document = new com.itextpdf.text.Document();
 				try {
-
-					
 					FinancialManagement.modifyBill(
 							 	Integer.parseInt(textFieldBillIDModify.getText()),
 							 	Integer.parseInt(textFieldrelatedOrderModify.getText()),
@@ -981,23 +979,13 @@ public class GUIFinanceManagement {
 								Double.parseDouble(textFieldsumBillModify.getText())
 								);
 					
+					textFieldsumBillModify.setBackground(Color.white);
+					
 					FinancialManagement.changeBillStatus(Integer.parseInt(textFieldBillIDModify.getText()), comboBoxBillStatusModify.getSelectedIndex());
 		
 					PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(textFieldbillNameModify.getText()+".pdf"));
 
 					textFieldsumBillModify.setBackground(Color.white);
-					FinancialManagement.modifyBill(Integer.parseInt(textFieldBillIDModify.getText()),
-							Integer.parseInt(textFieldrelatedOrderModify.getText()),
-							SQLManager.getInstance().getPotArray().get(comboBoxrelatedJarModify.getSelectedIndex())
-									.getId(),
-							SQLManager.getInstance().getRegisterArray()
-									.get(comboBoxrelatedCashRegisterModify.getSelectedIndex()).getId(),
-							textFieldbillNameModify.getText(), comboBoxpaymentTypModify.getSelectedIndex(),
-							Double.parseDouble(textFieldsumBillModify.getText()));
-					FinancialManagement.changeBillStatus(Integer.parseInt(textFieldBillIDModify.getText()),
-							comboBoxBillStatusModify.getSelectedIndex());
-
-					writer = PdfWriter.getInstance(document,new FileOutputStream(textFieldbillNameModify.getText() + ".pdf"));
 
 					document.open();
 
