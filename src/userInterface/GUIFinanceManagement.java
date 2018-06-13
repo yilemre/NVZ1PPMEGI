@@ -1153,21 +1153,21 @@ public class GUIFinanceManagement {
 		});
 		tableBillModify.clearSelection();
 
-		JComboBox comboBoxBillSearch = new JComboBox();
-		comboBoxBillSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBoxBillSearch.setModel(new DefaultComboBoxModel(new String[] { "Name", "Datum", "Status" }));
-		GridBagConstraints gbc_comboBoxBillSearch = new GridBagConstraints();
-		gbc_comboBoxBillSearch.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxBillSearch.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxBillSearch.gridx = 0;
-		gbc_comboBoxBillSearch.gridy = 13;
-		panel.add(comboBoxBillSearch, gbc_comboBoxBillSearch);
+		JComboBox comboBoxsearchBillModify = new JComboBox();
+		comboBoxsearchBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxsearchBillModify.setModel(new DefaultComboBoxModel(new String[] { "Name", "Datum", "Status" }));
+		GridBagConstraints gbc_comboBoxsearchBillModify = new GridBagConstraints();
+		gbc_comboBoxsearchBillModify.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxsearchBillModify.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxsearchBillModify.gridx = 0;
+		gbc_comboBoxsearchBillModify.gridy = 14;
+		panel.add(comboBoxsearchBillModify, gbc_comboBoxsearchBillModify);
 
 		JButton btnSearchBillModify = new JButton("Rechnung suchen");
 		btnSearchBillModify.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String searchValue = textFieldOrderSearch.getText();
-				switch (comboBoxOrderSearch.getSelectedIndex()) {
+				String searchValue = textField.getText();
+				switch (comboBoxsearchBillModify.getSelectedIndex()) {
 				case 0:
 					try {
 						tableBillModify.setModel(new BillTableModel(FinancialManagement.getBillByName(searchValue)));
@@ -1202,15 +1202,6 @@ public class GUIFinanceManagement {
 			}
 		});
 
-		JComboBox comboBoxsearchBillModify = new JComboBox();
-		comboBoxsearchBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBoxsearchBillModify.setModel(new DefaultComboBoxModel(new String[] { "Name", "Datum", "Status" }));
-		GridBagConstraints gbc_comboBoxsearchBillModify = new GridBagConstraints();
-		gbc_comboBoxsearchBillModify.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxsearchBillModify.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxsearchBillModify.gridx = 0;
-		gbc_comboBoxsearchBillModify.gridy = 14;
-		panel.add(comboBoxsearchBillModify, gbc_comboBoxsearchBillModify);
 
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 15));

@@ -48,7 +48,7 @@ public class ProductionManagement {
 		return SQLManager.getInstance().getOrders(); 
 	}
 
-	public static List<Order> getOrdersWhereBillIsNotCreatedYetByTitle(String title) throws SQLException, OrderNoBillWithThisTitleNotInDBException {
+	public static List<Order> getOrdersWhereBillIsNotCreatedYetByTitle(String title) throws SQLException, ELabException {
 		return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByTitle(title); 
 	}
 	
@@ -65,7 +65,7 @@ public class ProductionManagement {
 		7 bill generated
 	*/
 	
-	public static List<Order> getOrdersWhereBillIsNotCreatedYetByStatus(String type) throws SQLException, OrderNoBillWithThisStatusNotInDBException {
+	public static List<Order> getOrdersWhereBillIsNotCreatedYetByStatus(String type) throws SQLException, ELabException {
 		switch(type.toLowerCase()){
 		case "angenommen":
 			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByStatus(0);
@@ -88,7 +88,7 @@ public class ProductionManagement {
 		} 
 	}
 	
-	public static List<Order> getOrdersWhereBillIsNotCreatedYetByType(String status) throws SQLException, OrderNoBillWithThisTypeNotInDBException {
+	public static List<Order> getOrdersWhereBillIsNotCreatedYetByType(String status) throws SQLException, ELabException {
 		switch(status.toLowerCase()){
 		case "3d-druck":
 			return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByType(0);
