@@ -14,6 +14,8 @@ import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JTextArea;
 import javax.swing.JInternalFrame;
 import java.awt.event.ActionListener;
@@ -63,7 +65,7 @@ import java.awt.Window.Type;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Frame;
 
-public class GUIComponentUserInterface implements ActionListener {
+public class GUIComponentUserInterface {
 
 	private JFrame frmElabVerwaltungsprogramm;
 	private JTextField textFieldpartSearch;
@@ -75,14 +77,24 @@ public class GUIComponentUserInterface implements ActionListener {
 	
 	private JComboBox comboBoxcategoryPartSearch;
 	String username; 
+	
+	//int idPart; 
 
+	/**
+	 * Launch the application.
+	 */
+
+
+	/**
+	 * Create the application.
+	 */
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	public GUIComponentUserInterface(String username) {
 	    	this.username = username; 
 		frmElabVerwaltungsprogramm = new JFrame();
-		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
@@ -304,28 +316,33 @@ public class GUIComponentUserInterface implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 			    if(tableAllParts.getSelectedRow() > -1) {
 				
-			    int n = JOptionPane.showConfirmDialog(null, "Wollen Sie den Artikel "+ tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 2).toString()+ " zu Ihrem Warenkorb hinzufügen?"); 
-			    if(n == JOptionPane.YES_OPTION ) { 
-				try {
-				    if(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 5).toString())>=  Integer.parseInt(spinnerdekrementParts.getText())) {
-					SQLManager.getInstance().addPartToShoppingCard(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(textFieldUsername.getText()), Integer.parseInt(spinnerdekrementParts.getText()));
-					SQLManager.getInstance().updatePartQuantityAfterShoppingMinus(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), Integer.parseInt(spinnerdekrementParts.getText()));
-				    } else
-					try { 
-					    throw new NotEnoughParts();
-					} catch (NotEnoughParts e1) {
-					    // TODO Auto-generated catch block
-					    e1.printStackTrace();
-					}  
-				
-				} catch (NumberFormatException e1) {
-				    // TODO Auto-generated catch block
-				    e1.printStackTrace();
-				} catch (SQLException e1) {
-				    // TODO Auto-generated catch block
-				    e1.printStackTrace();
+				int n = JOptionPane.showConfirmDialog(null, "Wollen Sie den Artikel "+ tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 2).toString()+ " zu Ihrem Warenkorb hinzufügen?"); 
+				if(n == JOptionPane.YES_OPTION ) { 
+				    try {
+					if(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 5).toString())>=  Integer.parseInt(spinnerdekrementParts.getText())) {
+					    SQLManager.getInstance().addPartToShoppingCard(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(textFieldUsername.getText()), Integer.parseInt(spinnerdekrementParts.getText()));
+					    SQLManager.getInstance().updatePartQuantityAfterShoppingMinus(Integer.parseInt(tableAllParts.getValueAt(tableAllParts.getSelectedRow(), 0).toString()), Integer.parseInt(spinnerdekrementParts.getText()));
+					    spinnerdekrementParts.setBackground(Color.WHITE);
+					} else
+					    try { 
+						throw new NotEnoughParts();
+					    } catch (NotEnoughParts e1) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null,e1.getMessage());
+					    }  
+					
+				    } catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					//e1.printStackTrace();
+					spinnerdekrementParts.setBackground(Color.red);
+				    
+				    } catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				    }
 				}
-			    }
+			    } else {
+				JOptionPane.showMessageDialog(null,"Wählen Sie eine Artikelzeile aus!");
 			    }
 			    spinnerdekrementParts.setText("");
 			    refreshShoppingCardTable(); 
@@ -359,16 +376,29 @@ public class GUIComponentUserInterface implements ActionListener {
 		btnincrementParts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			    try {
-				SQLManager.getInstance().updateShoppingCardPartMinus(Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(username), Integer.parseInt(spinnerincrementParts.getText()));
-				
-				SQLManager.getInstance().updatePartQuantityAfterShoppingPlus((Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString())),  (Integer.parseInt(spinnerincrementParts.getText())));
-				
-			    } catch (NumberFormatException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			    } catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				if(tableShoppingCard.getSelectedRow()>-1) {
+				    if(Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 3).toString()) >= Integer.parseInt(spinnerincrementParts.getText())) {
+    			    			try {
+    			    			    SQLManager.getInstance().updateShoppingCardPartMinus(Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString()), SQLManager.getInstance().getPersonIDByUsername(username), Integer.parseInt(spinnerincrementParts.getText()));    				
+    			    			    SQLManager.getInstance().updatePartQuantityAfterShoppingPlus((Integer.parseInt(tableShoppingCard.getValueAt(tableShoppingCard.getSelectedRow(), 0).toString())),  (Integer.parseInt(spinnerincrementParts.getText())));
+    			    			    spinnerincrementParts.setBackground(Color.WHITE);
+    			    			} catch (NumberFormatException e1) {
+    			    			    // TODO Auto-generated catch block
+    			    			    //e1.printStackTrace();
+    			    			    spinnerincrementParts.setBackground(Color.red);
+    				
+    			    			} catch (SQLException e1) {
+    			    			    // TODO Auto-generated catch block
+    			    			    e1.printStackTrace();
+    			    			}
+				    } else {
+					JOptionPane.showMessageDialog(null,"In Ihrem Warenkorb befinden sich nicht so viele Exemplare von diesem Artikel" + "\n"+"Korrigieren Sie Ihre Eingaben!");
+				    }
+				} else { 
+				    JOptionPane.showMessageDialog(null,"Wählen Sie einen Artikel aus Ihrem Warenkorb aus!");
+				}
+			    } catch (NumberFormatException e2) {
+		    		    spinnerincrementParts.setBackground(Color.red);
 			    }
 			    spinnerincrementParts.setText("");
 			    refreshShoppingCardTable2();
@@ -513,15 +543,15 @@ public class GUIComponentUserInterface implements ActionListener {
 				    // TODO Auto-generated catch block
 				    e1.printStackTrace();
 				}
-			    } else
+			    } else  
 				try {
 				    throw new WrongRepeatedPassword();
 				} catch (WrongRepeatedPassword e1) {
-				    // TODO Auto-generated catch block
-				    e1.printStackTrace();
+				    // TODO Auto-generated catch block 
+				    JOptionPane.showMessageDialog(null,e1.getMessage());
 				} 
 			    
-			}//Emre-
+			}//Emre- 
 		});
 		btnsaveChange.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
@@ -611,53 +641,5 @@ public class GUIComponentUserInterface implements ActionListener {
 		    e1.printStackTrace();
 		}
 	    
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		String command = e.getActionCommand();
-		
-		
-		if (command=="Nach Bauteil suchen") {
-			
-			
-		}
-		
-
-		if (command=="Dem Warenkorb hinzufügen") {
-			
-			
-		}
-		
-
-		if (command=="Aus Warenkorb entfernen") {
-			
-			
-		}
-		
-
-		if (command=="Eingaben löschen") {
-			passwordFieldnewPassword.setText("");	
-			passwordFieldnewPasswordRepeat.setText("");
-			
-		}
-
-		if (command=="�nderung speichern") {
-			
-			
-		}
-		if (command=="Ausloggen") {
-			
-		GuiLogin logout = new GuiLogin();
-		frmElabVerwaltungsprogramm.dispose();
-			
-			
-		}
-		if (command=="Anleitung anzeigen") {
-			
-			
-		}
-	
 	}
 }
