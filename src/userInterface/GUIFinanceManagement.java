@@ -1017,71 +1017,50 @@ public class GUIFinanceManagement {
 
 					Paragraph customer = new Paragraph("Kunde:");
 					customer.setAlignment(Element.ALIGN_LEFT);
-
 					document.add(customer);
 
-					Paragraph name = new Paragraph("Vorname:");
+					Paragraph name = new Paragraph(PersonManagement
+							.getPersonsByID(Integer.parseInt(textFieldcustomerIDModify.getText())).getFirstname());
 					name.setAlignment(Element.ALIGN_LEFT);
-
 					document.add(name);
 
-					Paragraph surname = new Paragraph("Nachname");
+					Paragraph surname = new Paragraph(PersonManagement
+							.getPersonsByID(Integer.parseInt(textFieldcustomerIDModify.getText())).getLastname());
 					surname.setAlignment(Element.ALIGN_LEFT);
-
 					document.add(surname);
 
-					Paragraph streetCustomer = new Paragraph("Straße");
+					Paragraph streetCustomer = new Paragraph(PersonManagement
+							.getPersonsByID(Integer.parseInt(textFieldcustomerIDModify.getText())).getStreet()+ " "+ PersonManagement.getPersonsByID(Integer.parseInt(textFieldcustomerIDModify.getText())).getHousenumber());
 					streetCustomer.setAlignment(Element.ALIGN_LEFT);
-
 					document.add(streetCustomer);
 
-					Paragraph houseNumber = new Paragraph("Hausnummer");
-					houseNumber.setAlignment(Element.ALIGN_LEFT);
-
-					document.add(houseNumber);
-
-					Paragraph zipCode = new Paragraph("Postleitzahl");
+					Paragraph zipCode = new Paragraph(PersonManagement.getPersonsByID(Integer.parseInt(textFieldcustomerIDModify.getText())).getPlz());
 					zipCode.setAlignment(Element.ALIGN_LEFT);
-
 					document.add(zipCode);
 
-					Paragraph cityCustomer = new Paragraph("Stadt");
-					cityCustomer.setAlignment(Element.ALIGN_LEFT);
-
-					document.add(cityCustomer);
-
-					document.add(Chunk.NEWLINE);
-					document.add(Chunk.NEWLINE);
-					document.add(Chunk.NEWLINE);
-
-					// Insert orderNumber after Auftrag
-					Paragraph orderName = new Paragraph("Auftrag");
+					Paragraph orderName = new Paragraph("Auftragsnummer: " + ProductionManagement.getOrderByID(Integer.parseInt(textFieldrelatedOrderModify.getText())).getOrderId());
 					orderName.setAlignment(Element.ALIGN_CENTER);
-
 					document.add(orderName);
 
-					document.add(Chunk.NEWLINE);
-					document.add(Chunk.NEWLINE);
-					Paragraph orderObject = new Paragraph("Auftragname" + "            " + SQLManager.getInstance()
+					Paragraph orderObject = new Paragraph("Auftragsname:" + ProductionManagement
 							.getOrderByID(Integer.parseInt(textFieldrelatedOrderModify.getText())).getTitle());
 					orderObject.setAlignment(Element.ALIGN_LEFT);
-
 					document.add(orderObject);
 
+					/*document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);
+					document.add(Chunk.NEWLINE);*/
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
-					document.add(Chunk.NEWLINE);
-					document.add(Chunk.NEWLINE);
-					document.add(Chunk.NEWLINE);
-					document.add(Chunk.NEWLINE);
-					document.add(Chunk.NEWLINE);
-					document.add(Chunk.NEWLINE);
-					document.add(Chunk.NEWLINE);
-					Paragraph sum = new Paragraph("Endbetrag:  " + "          " + textFieldestimatedFigure.getText());
+					Paragraph sum = new Paragraph("Endbetrag:  " + "          " + textFieldsumBillModify.getText());
 					sum.setAlignment(Element.ALIGN_LEFT);
 					document.add(sum);
 
@@ -1089,8 +1068,7 @@ public class GUIFinanceManagement {
 					document.add(Chunk.NEWLINE);
 					document.add(Chunk.NEWLINE);
 
-					Paragraph signature = new Paragraph("Unterschrift Kunde: " + "__________________________"
-							+ "               " + "Unterschrift eLab: " + "__________________________");
+					Paragraph signature = new Paragraph("Unterschrift Kunde: " + "__________" + "   " + "Unterschrift eLab: " + "__________");
 					signature.setAlignment(Element.ALIGN_LEFT);
 
 					document.add(signature);
@@ -1111,6 +1089,9 @@ public class GUIFinanceManagement {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (OrderNotInDBException e1) {
+					e1.printStackTrace();
+				} catch (PersonWithSpecifiedIDNotInDBException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				refreshTableBillModify();
