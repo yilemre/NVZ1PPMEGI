@@ -57,6 +57,7 @@ import javax.swing.JTable;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.awt.Window.Type;
 import java.awt.Dialog.ModalExclusionType;
@@ -579,6 +580,16 @@ public class GUIComponentUserInterface implements ActionListener {
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
 		mntmNewMenuItemshowManual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+		
+				try {
+					Runtime.getRuntime().exec("cmd /c Start ./Anleitungen/Anleitung_für_Kunden_und_Lehrstuhlbezogene_Personen.pdf");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
+			
+			
 			}
 		});
 		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
