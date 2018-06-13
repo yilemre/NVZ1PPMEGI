@@ -74,24 +74,14 @@ public class GUIComponentUserInterface implements ActionListener {
 	
 	private JComboBox comboBoxcategoryPartSearch;
 	String username; 
-	
-	//int idPart; 
 
-	/**
-	 * Launch the application.
-	 */
-
-
-	/**
-	 * Create the application.
-	 */
-	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	public GUIComponentUserInterface(String username) {
 	    	this.username = username; 
 		frmElabVerwaltungsprogramm = new JFrame();
+		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmElabVerwaltungsprogramm.setUndecorated(true);
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);

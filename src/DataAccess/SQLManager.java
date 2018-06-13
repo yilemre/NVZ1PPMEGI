@@ -781,7 +781,7 @@ public class SQLManager {
 	
 	public void modifyBill(int id, int idOrder, int idPot, int idRegister, String name, int methodOfPayment, double amount) throws SQLException {
 		Statement stmt = c.createStatement();
-		String sql = "UPDATE Bills SET idOrder='"+idOrder+"', idPot='"+idPot+"', idRegister='"+idRegister+"', name='"+name+"' , methodOfPayment='"+methodOfPayment+"' , figure='"+amount+"' WHERE idOrder="+id+";";
+		String sql = "UPDATE Bills SET idOrder="+idOrder+", idPot="+idPot+", idRegister="+idRegister+", name='"+name+"' , methodOfPayment="+methodOfPayment+" , figure="+amount+" WHERE idBill="+id+";";
 		stmt.executeUpdate(sql);
 		stmt.close();
 	}
@@ -809,7 +809,7 @@ public class SQLManager {
 	public List<Bill> getBillByName(String name) throws SQLException, BillTitleNotInDBException {
 		List<Bill> result = new ArrayList<Bill>();
 		Statement stmt = c.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT idBill, idOrder, idPot, idRegister, name, methodOfPayment, figure, MAX(status) as status, timestamp FROM Bills NATURAL JOIN BillStatus GROUP BY idBill HAVING name LIKE '%"+name+"%'");
+		ResultSet rs = stmt.executeQuery("SELECT idBill, idOrder, idPot, idCustomer, idAdvisor, idRegister, name, methodOfPayment, figure, MAX(status) as status, timestamp FROM Bills NATURAL JOIN BillStatus GROUP BY idBill HAVING name LIKE '%"+name+"%'");
 		while (rs.next()){
 			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idCustomer"), rs.getInt("idAdvisor"), rs.getInt("idRegister"), rs.getString("name"), rs.getInt("methodOfPayment"),rs.getDouble("figure"),rs.getInt("status"), rs.getString("timestamp"));
 			result.add(temp);			
@@ -867,5 +867,47 @@ public class SQLManager {
 		}
 		return result;
 	}
+	
+	public void setActualAmountPot(int idPot, double newActualAmount) throws SQLException{
+		Statement stmt = c.createStatement();
+		String sql = "UPDATE Pots SET actualAmount=actualAmount+"+newActualAmount+" WHERE idPots="+idPot;
+		stmt.executeUpdate(sql); 
+		stmt.close();
+	}
+	
+	public void setTargetAmountPot(int idPot, double newDebitAmount) throws SQLException{
+		Statement stmt = c.createStatement();
+		String sql = "UPDATE Pots SET debitAmount=debitAmount+"+newDebitAmount+" WHERE idPots="+idPot;
+		stmt.executeUpdate(sql); 
+		stmt.close();
+	}
+	
+	public boolean isRegisterReferenced(int idRegister) throws SQLException{
+		boolean result = false;
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Pots WHERE idRegister="+idRegister+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		if (rs.next()){
+			result = true;			
+		}
+		else {
+			result = false;
+		}
+		return result;
+	}
+	
+	public boolean isPotReferenced(int idPot) throws SQLException{
+		boolean result = false;
+		Statement stmt = c.createStatement();
+		String sql = "SELECT * FROM Bills WHERE idPot="+idPot+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		if (rs.next()){
+			result = true;			
+		}
+		else {
+			result = false;
+		}
+		return result;
+	}	
 	
 }

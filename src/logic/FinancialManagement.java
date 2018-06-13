@@ -90,9 +90,15 @@ public class FinancialManagement {
 		SQLManager.getInstance().modifyPot(id, actualAmount, debitAmount, name, idRegister);
 	}
 	
-	public static void deletePot(int id) throws SQLException {
-		SQLManager.getInstance().deletePotFromDB(id);
+	public static void deletePot(int id) throws SQLException, PotIsReferencedException {
+		if(!SQLManager.getInstance().isPotReferenced(id)) {
+			SQLManager.getInstance().deletePotFromDB(id);
+		}
+		else{
+			throw new PotIsReferencedException();
+		}
 	}
+	
 	public static void deletePotByCashRegister(int id) throws SQLException {
 	    SQLManager.getInstance().deletePotByChashRegisterID(id);	    
 	}
@@ -110,8 +116,13 @@ public class FinancialManagement {
 		SQLManager.getInstance().modifyRegister(id, actualAmount, debitAmount, name, type);
 	}
 	
-	public static void deleteCashRegister(int id) throws SQLException {
-		SQLManager.getInstance().deleteCashRegisterFromDB(id);
+	public static void deleteCashRegister(int id) throws SQLException, registerIsReferencedException {
+		if(!SQLManager.getInstance().isRegisterReferenced(id)) {
+			SQLManager.getInstance().deleteCashRegisterFromDB(id);
+		}
+		else {
+			throw new registerIsReferencedException();
+		}
 	}
 	
 	public static List<CashRegister> getRegisterArray() throws SQLException {
@@ -137,7 +148,14 @@ public class FinancialManagement {
 		return SQLManager.getInstance().getOrders(); 
 	}
 	
-	//Emre+ 
+	public static void setActualAmountPot(int idPot, double newActualAmount) throws SQLException {
+		SQLManager.getInstance().setActualAmountPot(idPot, newActualAmount);
+	}
+	
+	public static void setTargetAmountPot(int idPot, double newTargetAmount) throws SQLException {
+		SQLManager.getInstance().setTargetAmountPot(idPot, newTargetAmount);
+	}
+	
 	public static Order getOrderByID(int id) throws SQLException, OrderNotInDBException {
 	    return SQLManager.getInstance().getOrderByID(id); 
 	}
@@ -148,6 +166,6 @@ public class FinancialManagement {
 	public static List<Pot> getPotArrayByRegisterID(int id) throws SQLException {
 	    return SQLManager.getInstance().getPotArrayByCashRegisterID(id); 
 	}
-	//Emre -
+	
 	
 }
