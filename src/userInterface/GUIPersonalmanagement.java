@@ -30,6 +30,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import Exceptions.BillIDNotInDBException;
 import Exceptions.ELabException;
 import logic.PersonManagement;
 
@@ -923,6 +924,12 @@ public class GUIPersonalmanagement{
 						try {
 							PersonManagement.deletePerson(Integer.parseInt(TableDeletePerson.getValueAt(TableDeletePerson.getSelectedRow(), 0).toString()));
 						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (NumberFormatException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (BillIDNotInDBException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}

@@ -29,7 +29,7 @@ public class PersonManagement {
     	SQLManager.getInstance().insertPersonIntoDB(firstname, surname, street, housenumber, zipcode, email, dateTimeString, username, password, rights);
     }
 
-    public static void deletePerson(int ID) throws SQLException {
+    public static void deletePerson(int ID) throws SQLException, BillIDNotInDBException {
     	for(int i:SQLManager.getInstance().getBillIDsByCustomerID(ID)) {
     		FinancialManagement.deleteBill(i);
     	}

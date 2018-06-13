@@ -28,7 +28,14 @@ public class FinancialManagement {
 	 * @throws SQLException
 	 */
 	public static int addBill(int idOrder, int idPot, int idRegister, int idCustomer, int idAdvisor, String name, int payKind, double amount) throws SQLException {
-		return SQLManager.getInstance().addBilltoDB(idOrder, idPot, idRegister, idCustomer, idAdvisor, name, payKind, amount);
+		int result = SQLManager.getInstance().addBilltoDB(idOrder, idPot, idRegister, idCustomer, idAdvisor, name, payKind, amount);
+		setTargetAmountPot(idPot, amount);
+		
+		
+		
+		
+		return result;
+		
 	}
 	
 	public static void addBillStatus(int idBill, int status) throws SQLException {
@@ -40,16 +47,93 @@ public class FinancialManagement {
 		SQLManager.getInstance().addBillStatustoDB(idBill, status, dateTimeString);
 	}
 	
-	public static void deleteBill(int id) throws SQLException {
+	public static void deleteBill(int id) throws SQLException, BillIDNotInDBException {
+		Bill temp = SQLManager.getInstance().getBillByID(id);
 		SQLManager.getInstance().deleteBillFromDB(id);
+		SQLManager.getInstance().updateTargetAmountPotByAmount(temp.getIdPot(), - temp.getFigure());
+		SQLManager.getInstance().setSIBRegisterViaPots(temp.getIdRegister());
 	}
 	
-	public static void modifyBill(int id, int idOrder, int idPot, int idRegister, String name, int payKind, double amount) throws SQLException {
+	public static void modifyBill(int id, int idOrder, int idPot, int idRegister, String name, int payKind, double amount, int status) throws SQLException, BillIDNotInDBException {
+		Bill temp = SQLManager.getInstance().getBillByID(id);
 		SQLManager.getInstance().modifyBill(id, idOrder, idPot, idRegister, name, payKind, amount);
+		if (temp.getStatus() == 0 && status == 1) {
+			
+			if (temp.getIdPot() == idPot) {
+				double difference = amount - temp.getFigure();
+				SQLManager.getInstance().updateTargetAmountPotByAmount(temp.getIdPot(), difference);
+				SQLManager.getInstance().setSIBRegisterViaPots(temp.getIdRegister());
+			}
+			else {
+				SQLManager.getInstance().updateTargetAmountPotByAmount(temp.getIdPot(), -temp.getFigure());
+				SQLManager.getInstance().updateTargetAmountPotByAmount(idPot, temp.getFigure());
+				SQLManager.getInstance().setSIBRegisterViaPots(temp.getIdRegister());
+				SQLManager.getInstance().setSIBRegisterViaPots(idRegister);
+			}
+			changeBillStatus(id, status);
+		}
+		
+		
+		if (temp.getStatus() == 1 && status == 0) {
+			changeBillStatus(id, status);
+			if (temp.getIdPot() == idPot) {
+				double difference = amount - temp.getFigure();
+				SQLManager.getInstance().updateTargetAmountPotByAmount(temp.getIdPot(), difference);
+				SQLManager.getInstance().setSIBRegisterViaPots(temp.getIdRegister());
+			}
+			else {
+				SQLManager.getInstance().updateTargetAmountPotByAmount(temp.getIdPot(), -temp.getFigure());
+				SQLManager.getInstance().updateTargetAmountPotByAmount(idPot, temp.getFigure());
+				SQLManager.getInstance().setSIBRegisterViaPots(temp.getIdRegister());
+				SQLManager.getInstance().setSIBRegisterViaPots(idRegister);
+			}
+		}
+		
+		if (temp.getStatus() == 1 && status == 1) {
+			if (temp.getIdPot() == idPot) {
+				double difference = amount - temp.getFigure();
+				SQLManager.getInstance().updateTargetAmountPotByAmount(temp.getIdPot(), difference);
+				SQLManager.getInstance().updateActualAmountPotByAmount(temp.getIdPot(), difference);
+				SQLManager.getInstance().setSIBRegisterViaPots(temp.getIdRegister());
+			}
+			else {
+				SQLManager.getInstance().updateTargetAmountPotByAmount(temp.getIdPot(), -temp.getFigure());
+				SQLManager.getInstance().updateTargetAmountPotByAmount(idPot, temp.getFigure());
+				SQLManager.getInstance().updateActualAmountPotByAmount(temp.getIdPot(), -temp.getFigure());
+				SQLManager.getInstance().updateActualAmountPotByAmount(idPot, temp.getFigure());
+				SQLManager.getInstance().setSIBRegisterViaPots(temp.getIdRegister());
+				SQLManager.getInstance().setSIBRegisterViaPots(idRegister);
+			}
+		}
+		
+		if (temp.getStatus() == 0 && status == 0) {
+			if (temp.getIdPot() == idPot) {
+				double difference = amount - temp.getFigure();
+				SQLManager.getInstance().updateTargetAmountPotByAmount(temp.getIdPot(), difference);
+				SQLManager.getInstance().setSIBRegisterViaPots(temp.getIdRegister());
+			}
+			else {
+				SQLManager.getInstance().updateTargetAmountPotByAmount(temp.getIdPot(), -temp.getFigure());
+				SQLManager.getInstance().updateTargetAmountPotByAmount(idPot, temp.getFigure());
+				SQLManager.getInstance().setSIBRegisterViaPots(temp.getIdRegister());
+				SQLManager.getInstance().setSIBRegisterViaPots(idRegister);
+			}
+		}
 	}
 	
-	public static void changeBillStatus(int id, int status) throws SQLException{
-		SQLManager.getInstance().changeBillStatus(id, status);
+	public static void changeBillStatus(int id, int status) throws SQLException, BillIDNotInDBException{
+		Bill temp = SQLManager.getInstance().getBillByID(id);
+		if (temp.getStatus() == 0 && status == 1) {
+			SQLManager.getInstance().updateActualAmountPotByAmount(temp.getIdPot(), temp.getFigure());
+			SQLManager.getInstance().changeBillStatus(id, status);
+		}
+		
+		if (temp.getStatus() == 1 && status == 0) {
+			SQLManager.getInstance().updateActualAmountPotByAmount(temp.getIdPot(), -temp.getFigure());
+			SQLManager.getInstance().changeBillStatus(id, status);
+		}
+		SQLManager.getInstance().setSIBRegisterViaPots(temp.getIdRegister());
+		
 	}
 	
 	public static List<Bill> getBills() throws SQLException {
@@ -148,12 +232,12 @@ public class FinancialManagement {
 		return SQLManager.getInstance().getOrders(); 
 	}
 	
-	public static void setActualAmountPot(int idPot, double newActualAmount) throws SQLException {
-		SQLManager.getInstance().setActualAmountPot(idPot, newActualAmount);
+	public static void setActualAmountPot(int idPot, double additionalAmount) throws SQLException {
+		SQLManager.getInstance().updateActualAmountPotByAmount(idPot, additionalAmount);
 	}
 	
-	public static void setTargetAmountPot(int idPot, double newTargetAmount) throws SQLException {
-		SQLManager.getInstance().setTargetAmountPot(idPot, newTargetAmount);
+	public static void setTargetAmountPot(int idPot, double additionalAmount) throws SQLException {
+		SQLManager.getInstance().updateTargetAmountPotByAmount(idPot, additionalAmount);
 	}
 	
 	public static Order getOrderByID(int id) throws SQLException, OrderNotInDBException {
