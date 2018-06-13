@@ -8,7 +8,7 @@ public class OrderTitleNotInDBException extends ELabException {
 
 	@Override
 	public String getMessage(){
-		return "Kein Auftrag mit diesem Namen vorhaden!";
+		return "Kein Auftrag mit diesem Namen vorhanden!";
 	}
 
 	@Override

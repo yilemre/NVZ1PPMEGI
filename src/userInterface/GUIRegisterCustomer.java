@@ -260,6 +260,23 @@ public class GUIRegisterCustomer {
 		gbc_comboBoxType.gridy = 7;
 		paneladdPerson.add(comboBoxType, gbc_comboBoxType);
 		
+		comboBoxType.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+				if (comboBoxType.getSelectedIndex()==1) {
+					
+					textFieldprofessorShip.setEditable(true);
+					
+					
+				}
+				else {
+					textFieldprofessorShip.setEditable(false);
+				}
+			
+			
+			}
+		});
+		
 		JLabel lblprofessorShip = new JLabel("Lehrstuhl");
 		lblprofessorShip.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblprofessorShip = new GridBagConstraints();
@@ -271,6 +288,7 @@ public class GUIRegisterCustomer {
 		
 		textFieldprofessorShip = new JTextField();
 		textFieldprofessorShip.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldprofessorShip.setEditable(false);
 		GridBagConstraints gbc_textFieldprofessorShip = new GridBagConstraints();
 		gbc_textFieldprofessorShip.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldprofessorShip.fill = GridBagConstraints.HORIZONTAL;

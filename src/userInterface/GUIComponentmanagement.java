@@ -53,6 +53,7 @@ import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JSplitPane;
 import javax.swing.JSpinner;
@@ -756,7 +757,7 @@ public class GUIComponentmanagement  {
 						ComponentTableModify.setModel(new ComponentTableModel(ComponentManagement.getComponentByArticlenumber(textFieldsearchModifyPart.getText())));
 					} catch (SQLException | ELabException a) {
 						// TODO Auto-generated catch block
-						a.printStackTrace();
+						JOptionPane.showMessageDialog(null, a.getMessage());
 					}
 					break; 
 				case 1: 
@@ -764,7 +765,7 @@ public class GUIComponentmanagement  {
 						ComponentTableModify.setModel(new ComponentTableModel(ComponentManagement.getComponentByName(textFieldsearchModifyPart.getText())));
 					} catch (SQLException | ELabException a1) {
 						// TODO Auto-generated catch block
-						a1.printStackTrace();
+						JOptionPane.showMessageDialog(null, a1.getMessage());
 					}
 					break; 
 				}
@@ -861,7 +862,7 @@ public class GUIComponentmanagement  {
 						ComponentTableDelete.setModel(new ComponentTableModel(ComponentManagement.getComponentByArticlenumber(textFieldpartNumberSearch.getText())));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 1: 
@@ -869,7 +870,7 @@ public class GUIComponentmanagement  {
 						ComponentTableDelete.setModel((new ComponentTableModel(ComponentManagement.getComponentByName(textFieldpartNumberSearch.getText()))));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break; 
 
