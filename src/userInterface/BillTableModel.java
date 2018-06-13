@@ -79,7 +79,7 @@ public class BillTableModel extends AbstractTableModel{
 		case 6:
 			return list.get(rowIndex).getName();
 		case 7:
-			return list.get(rowIndex).getMethodOfPayment();
+			return list.get(rowIndex).getReadableMethodOfPayment(list.get(rowIndex).getMethodOfPayment());
 		case 8:
 			return list.get(rowIndex).getFigure();
 		case 9:

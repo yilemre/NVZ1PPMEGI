@@ -728,6 +728,18 @@ public class GUIFinanceManagement {
 		panelcreateBill.add(btnnewbillOrderSearch, gbc_btnnewbillOrderSearch);
 		
 		JButton btnclearSearchBillNew = new JButton("Suche aufheben");
+		btnclearSearchBillNew.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrdersWhereBillIsNotCreatedYet()));
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		btnclearSearchBillNew.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnclearSearchBillNew = new GridBagConstraints();
 		gbc_btnclearSearchBillNew.fill = GridBagConstraints.HORIZONTAL;
@@ -969,7 +981,8 @@ public class GUIFinanceManagement {
 			public void actionPerformed(ActionEvent e) {
 				com.itextpdf.text.Document document = new com.itextpdf.text.Document();
 				try {
-					 FinancialManagement.modifyBill(
+					
+					FinancialManagement.modifyBill(
 							 	Integer.parseInt(textFieldBillIDModify.getText()),
 							 	Integer.parseInt(textFieldrelatedOrderModify.getText()),
 								SQLManager.getInstance().getPotArray().get(comboBoxrelatedJarModify.getSelectedIndex()).getId(),
@@ -978,6 +991,7 @@ public class GUIFinanceManagement {
 								comboBoxpaymentTypModify.getSelectedIndex(),
 								Double.parseDouble(textFieldsumBillModify.getText())
 								);
+					
 					FinancialManagement.changeBillStatus(Integer.parseInt(textFieldBillIDModify.getText()), comboBoxBillStatusModify.getSelectedIndex());
 		
 					PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(textFieldbillNameModify.getText()+".pdf"));
@@ -1261,7 +1275,7 @@ public class GUIFinanceManagement {
 		gbc_btnSearchBillModify.gridy = 15;
 		panel.add(btnSearchBillModify, gbc_btnSearchBillModify);
 		
-		JButton btnclearSearchbillModify = new JButton("Suche aufgeben");
+		JButton btnclearSearchbillModify = new JButton("Suche aufheben");
 		btnclearSearchbillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnclearSearchbillModify = new GridBagConstraints();
 		gbc_btnclearSearchbillModify.fill = GridBagConstraints.HORIZONTAL;
@@ -2190,7 +2204,7 @@ public class GUIFinanceManagement {
 			textFieldbillNameModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(),6).toString());
 			textFieldrelatedOrderModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(),1).toString());
 			textFieldcustomerIDModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 3).toString());
-			comboBoxpaymentTypModify.setSelectedIndex((int)tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 7));
+			comboBoxpaymentTypModify.setSelectedIndex(comboBoxEntries.indexOf(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 7)));
 			textFieldsumBillModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(),8).toString());
 			textFieldrelatedPersonModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 4).toString());
 			comboBoxrelatedCashRegisterModify.setSelectedIndex(getCorrectCashRegisterIndex(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 5).toString()));

@@ -472,15 +472,16 @@ public class SQLManager {
 		Statement stmt = c.createStatement();
 		String sql = "SELECT * FROM (SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder) WHERE status!=7 AND titel LIKE '%"+title+"%';";
 		ResultSet rs = stmt.executeQuery(sql);
-		if(rs.next()==false) {
-			throw new OrderNoBillWithThisTitleNotInDBException();
+		if(rs.next()) {
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
+			result.add(temp);
+			while(rs.next()) {
+				Order temp1 = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
+				result.add(temp1);	
+			}
 		}
 		else {
-			while (rs.next()){
-				Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
-
-				result.add(temp);			
-			}
+			throw new OrderNoBillWithThisTitleNotInDBException();
 		}
 		return result;
 	}
@@ -490,34 +491,36 @@ public class SQLManager {
 		Statement stmt = c.createStatement();
 		String sql = "SELECT * FROM (SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder) WHERE status!=7 AND type="+type+";";
 		ResultSet rs = stmt.executeQuery(sql);
-		if(rs.next()==false) {
-			throw new OrderNoBillWithThisTypeNotInDBException();
-		}
-		else {
+		if(rs.next()) {
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
+				result.add(temp);
 			while (rs.next()){
-				Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
-
-				result.add(temp);			
+				Order temp1 = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
+					result.add(temp1);			
 			}
 		}
+		else {
+			throw new OrderNoBillWithThisTypeNotInDBException();
+			}
 		return result;
 	}
 	
 	public List<Order> getOrdersWhereBillisNotCreatedYetByStatus(int status) throws SQLException, OrderNoBillWithThisStatusNotInDBException {
 		List<Order> result = new ArrayList<Order>();
 		Statement stmt = c.createStatement();
-		String sql = "SELECT * FROM (SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder) WHERE status!=7 AND status="+status+";";
+		String sql = "SELECT * FROM (SELECT idOrder, titel, type, projectedCosts, realCosts, idCustomer, idAdvisor, idSecondaryAdvisor, fileName, fileLocation, note, MAX(status) as status, timestamp FROM Orders NATURAL JOIN OrderStatus GROUP BY idOrder) WHERE status="+status+";";
 		ResultSet rs = stmt.executeQuery(sql);
-		if(rs.next()==false) {
-			throw new OrderNoBillWithThisStatusNotInDBException();
-		}
-		else {
+		if(rs.next()) {
+			Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
+			result.add(temp);
 			while (rs.next()){
-				Order temp = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
-
-				result.add(temp);			
+				Order temp1 = new Order (rs.getInt("idOrder"),rs.getString("titel"),rs.getInt("type"),rs.getDouble("projectedCosts"),rs.getDouble("realCosts"),rs.getInt("idCustomer"),rs.getInt("idAdvisor"),rs.getInt("idSecondaryAdvisor"),rs.getString("fileName"),rs.getString("fileLocation"),rs.getString("note"), rs.getInt("status"), rs.getString("timestamp"));
+				result.add(temp1);			
 			}
 		}
+		else {
+			throw new OrderNoBillWithThisStatusNotInDBException();
+			}
 		return result;
 	}
 	

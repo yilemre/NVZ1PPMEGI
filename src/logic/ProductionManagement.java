@@ -52,19 +52,6 @@ public class ProductionManagement {
 		return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYetByTitle(title); 
 	}
 	
-	/*type: 0 for "3D-Prints", 1 for "circuit board", 2 for "other"
-	every order is going to be inserted with the status 0 which is "accepted"!
-	Values for all the other status:
-		0 accepted
-		1 made
-		2 costs calculated
-		3 picked up
-		4 billed
-		5 waiting for material
-		6 production interrupted
-		7 bill generated
-	*/
-	
 	public static List<Order> getOrdersWhereBillIsNotCreatedYetByStatus(String type) throws SQLException, OrderNoBillWithThisStatusNotInDBException {
 		switch(type.toLowerCase()){
 		case "angenommen":
@@ -99,6 +86,10 @@ public class ProductionManagement {
 		default:
 			throw new OrderNoBillWithThisTypeNotInDBException();
 		}
+	}
+	
+	public static List<Order> getOrdersWhereBillIsNotCreatedYet() throws SQLException{
+		return SQLManager.getInstance().getOrdersWhereBillisNotCreatedYet();
 	}
 	
     public static List<Person> getCustomerArray() throws SQLException {

@@ -137,7 +137,20 @@ public class Bill {
 		case 1:
 			return "Bezahlt";
 		default:
-			return "Das passiert nicht!";
+			return null;
 		}
 	}
+	
+	public String getReadableMethodOfPayment(int methodOfPayment) {
+		switch(methodOfPayment) {
+		case 0:
+			return "Bar";
+		case 1:
+			return "Konto";
+		case 2:
+			return "Kostenstelle";
+		default:
+			return null;
+	}
+}
 }
