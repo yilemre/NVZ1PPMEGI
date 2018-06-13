@@ -8,7 +8,7 @@ public class PersonStatusNotInDBException extends ELabException {
 
 	@Override
 	public String getMessage(){
-		return "Keine Person mit diesem Status vorhanden";
+		return "Keine Person mit diesem Status vorhanden!";
 	}
 
 	@Override

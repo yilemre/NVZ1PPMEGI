@@ -49,6 +49,7 @@ import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -730,7 +731,7 @@ public class GUIPersonalmanagement{
 						table.setModel(new PersonTableModel(PersonManagement.getPersonsByName(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						 JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 1:
@@ -738,7 +739,7 @@ public class GUIPersonalmanagement{
 						table.setModel(new PersonTableModel(PersonManagement.getPersonsByLastname(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 2:
@@ -752,7 +753,7 @@ public class GUIPersonalmanagement{
 						e1.printStackTrace();
 					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				}
@@ -857,7 +858,7 @@ public class GUIPersonalmanagement{
 						TableDeletePerson.setModel(new PersonTableModel(PersonManagement.getPersonsByName(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 1:
@@ -865,7 +866,7 @@ public class GUIPersonalmanagement{
 						TableDeletePerson.setModel(new PersonTableModel(PersonManagement.getPersonsByLastname(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 2:
@@ -879,7 +880,7 @@ public class GUIPersonalmanagement{
 						e1.printStackTrace();
 					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				}

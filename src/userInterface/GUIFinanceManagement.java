@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JTextArea;
 import javax.swing.JInternalFrame;
 import java.awt.event.ActionListener;
@@ -413,7 +415,7 @@ public class GUIFinanceManagement {
 				com.itextpdf.text.Document document = new com.itextpdf.text.Document();
 
 				try {
-
+					textFieldestimatedFigure.setBackground(Color.white);
 					FinancialManagement.addBillStatus(
 							(FinancialManagement.addBill(Integer.parseInt(textFieldrelatedOrder.getText()),
 									SQLManager.getInstance().getPotArray().get(comboBoxrelatedJar.getSelectedIndex())
@@ -568,17 +570,13 @@ public class GUIFinanceManagement {
 				} catch (SQLException a) {
 					a.printStackTrace();
 				}
-
 				catch (DocumentException e1) {
-
 					e1.printStackTrace();
-
 				} catch (FileNotFoundException ex) {
-
 					ex.printStackTrace();
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					textFieldestimatedFigure.setBackground(Color.red);
 				} catch (OrderNotInDBException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -681,7 +679,7 @@ public class GUIFinanceManagement {
 								ProductionManagement.getOrdersWhereBillIsNotCreatedYetByTitle(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 1:
@@ -690,7 +688,7 @@ public class GUIFinanceManagement {
 								ProductionManagement.getOrdersWhereBillIsNotCreatedYetByType(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 2:
@@ -705,7 +703,7 @@ public class GUIFinanceManagement {
 						e1.printStackTrace();
 					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				}
@@ -963,6 +961,7 @@ public class GUIFinanceManagement {
 			public void actionPerformed(ActionEvent e) {
 				com.itextpdf.text.Document document = new com.itextpdf.text.Document();
 				try {
+					textFieldsumBillModify.setBackground(Color.white);
 					FinancialManagement.modifyBill(Integer.parseInt(textFieldBillIDModify.getText()),
 							Integer.parseInt(textFieldrelatedOrderModify.getText()),
 							SQLManager.getInstance().getPotArray().get(comboBoxrelatedJarModify.getSelectedIndex())
@@ -1100,7 +1099,7 @@ public class GUIFinanceManagement {
 
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					textFieldsumBillModify.setBackground(Color.red);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1193,7 +1192,7 @@ public class GUIFinanceManagement {
 						tableBillModify.setModel(new BillTableModel(FinancialManagement.getBillByName(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 1:
@@ -1201,7 +1200,7 @@ public class GUIFinanceManagement {
 						tableBillModify.setModel(new BillTableModel(FinancialManagement.getBillsByDate(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 2:
@@ -1215,7 +1214,7 @@ public class GUIFinanceManagement {
 						e1.printStackTrace();
 					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				}
@@ -1224,6 +1223,7 @@ public class GUIFinanceManagement {
 
 		JComboBox comboBoxsearchBillModify = new JComboBox();
 		comboBoxsearchBillModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxsearchBillModify.setModel(new DefaultComboBoxModel(new String[] { "Name", "Datum", "Status" }));
 		GridBagConstraints gbc_comboBoxsearchBillModify = new GridBagConstraints();
 		gbc_comboBoxsearchBillModify.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxsearchBillModify.fill = GridBagConstraints.HORIZONTAL;
@@ -1331,7 +1331,7 @@ public class GUIFinanceManagement {
 						tableDeleteBill.setModel(new BillTableModel(FinancialManagement.getBillByName(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 1:
@@ -1339,7 +1339,7 @@ public class GUIFinanceManagement {
 						tableDeleteBill.setModel(new BillTableModel(FinancialManagement.getBillsByDate(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 2:
@@ -1353,7 +1353,7 @@ public class GUIFinanceManagement {
 						e1.printStackTrace();
 					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				}
@@ -1569,8 +1569,7 @@ public class GUIFinanceManagement {
 		gbc_textFieldcashRegisterEstimatedStockModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldcashRegisterEstimatedStockModify.gridx = 5;
 		gbc_textFieldcashRegisterEstimatedStockModify.gridy = 3;
-		panelcashRegisterManagement.add(textFieldcashRegisterEstimatedStockModify,
-				gbc_textFieldcashRegisterEstimatedStockModify);
+		panelcashRegisterManagement.add(textFieldcashRegisterEstimatedStockModify, gbc_textFieldcashRegisterEstimatedStockModify);
 
 		JLabel lblcashRegisterType = new JLabel("Kassen-Typ");
 		lblcashRegisterType.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1582,29 +1581,18 @@ public class GUIFinanceManagement {
 
 		comboBoxCashRegisterType = new JComboBox();
 		comboBoxCashRegisterType.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-		if (comboBoxCashRegisterType.getSelectedIndex()==2) {
-					
-					formattedTextFieldcostCenter.setEditable(true);
-					
-					
+		public void actionPerformed(ActionEvent e) {
+		if (comboBoxCashRegisterType.getSelectedIndex()==2) {	
+				formattedTextFieldcostCenter.setEditable(true);	
 				}
-				else {
-					formattedTextFieldcostCenter.setEditable(false);
+		else {
+				formattedTextFieldcostCenter.setEditable(false);
 				}
-			
-			
-			}
-			
-			
-			
+			}	
 		});
 		
-			
 		comboBoxCashRegisterType.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBoxCashRegisterType
-				.setModel(new DefaultComboBoxModel(new String[] { "Barkasse", "Konto", "Kostenstelle" }));
+		comboBoxCashRegisterType.setModel(new DefaultComboBoxModel(new String[] { "Barkasse", "Konto", "Kostenstelle" }));
 		GridBagConstraints gbc_comboBoxCashRegisterType = new GridBagConstraints();
 		gbc_comboBoxCashRegisterType.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxCashRegisterType.insets = new Insets(0, 0, 5, 5);
@@ -1660,25 +1648,16 @@ public class GUIFinanceManagement {
 		JComboBox comboBoxCashRegisterTypeModify_1 = new JComboBox();
 		comboBoxCashRegisterTypeModify_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				if (comboBoxCashRegisterTypeModify_1.getSelectedIndex()==2) {
-					
 					formattedTextFieldcostCenterModify.setEditable(true);
-					
-					
 				}
 				else {
 					formattedTextFieldcostCenterModify.setEditable(false);
 				}
-			
-			
-			
-			
 			}
 		});
 		comboBoxCashRegisterTypeModify_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBoxCashRegisterTypeModify_1
-				.setModel(new DefaultComboBoxModel(new String[] { "Barkasse", "Konto", "Kostenstelle" }));
+		comboBoxCashRegisterTypeModify_1.setModel(new DefaultComboBoxModel(new String[] { "Barkasse", "Konto", "Kostenstelle" }));
 		GridBagConstraints gbc_comboBoxCashRegisterTypeModify_1 = new GridBagConstraints();
 		gbc_comboBoxCashRegisterTypeModify_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxCashRegisterTypeModify_1.insets = new Insets(0, 0, 5, 0);
@@ -1690,13 +1669,17 @@ public class GUIFinanceManagement {
 		btnaddcashRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					textFieldcashRegisterActualStock.setBackground(Color.white);
+					textFieldcashRegisterEstimatedStock.setBackground(Color.white);
+					
 					FinancialManagement.addRegister(textFieldcashRegisterName.getText(),
 							Double.parseDouble(textFieldcashRegisterActualStock.getText()),
 							Double.parseDouble(textFieldcashRegisterEstimatedStock.getText()),
 							comboBoxCashRegisterType.getSelectedIndex());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					textFieldcashRegisterActualStock.setBackground(Color.red);
+					textFieldcashRegisterEstimatedStock.setBackground(Color.red);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1733,6 +1716,8 @@ public class GUIFinanceManagement {
 		btncashRegisterSaveChanges.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					textFieldcashRegisterActualStockModify.setBackground(Color.white);
+					textFieldcashRegisterEstimatedStockModify.setBackground(Color.white);
 					FinancialManagement.modifyRegister(Integer.parseInt(textFieldCashRegisterIDModify.getText()),
 							Double.parseDouble(textFieldcashRegisterEstimatedStockModify.getText()),
 							Double.parseDouble(textFieldcashRegisterActualStockModify.getText()),
@@ -1740,7 +1725,8 @@ public class GUIFinanceManagement {
 							comboBoxCashRegisterTypeModify_1.getSelectedIndex());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					textFieldcashRegisterActualStockModify.setBackground(Color.red);
+					textFieldcashRegisterEstimatedStockModify.setBackground(Color.red);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

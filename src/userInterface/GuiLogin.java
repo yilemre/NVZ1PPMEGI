@@ -37,6 +37,7 @@ import java.awt.Frame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class GuiLogin {
 
@@ -132,10 +133,10 @@ public class GuiLogin {
 				}
 			} catch (UsernameNotInDBException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null, e1.getMessage());
 			} catch (WrongPasswordException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null, e1.getMessage());
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

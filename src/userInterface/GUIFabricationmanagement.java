@@ -56,6 +56,7 @@ import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 import java.awt.event.WindowAdapter;
@@ -879,7 +880,7 @@ public class GUIFabricationmanagement {
 						table.setModel(new OrderTableModel(ProductionManagement.getOrderByTitle(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 1:
@@ -887,7 +888,7 @@ public class GUIFabricationmanagement {
 						table.setModel(new OrderTableModel(ProductionManagement.getOrdersByType(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 2:
@@ -895,13 +896,13 @@ public class GUIFabricationmanagement {
 						table.setModel(new OrderTableModel(ProductionManagement.getOrdersByStatus(searchValue)));
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				}
@@ -1054,7 +1055,7 @@ public class GUIFabricationmanagement {
 								.setModel(new OrderTableModel(ProductionManagement.getOrderByTitle(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 1:
@@ -1063,7 +1064,7 @@ public class GUIFabricationmanagement {
 								.setModel(new OrderTableModel(ProductionManagement.getOrdersByType(searchValue)));
 					} catch (SQLException | ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				case 2:
@@ -1072,13 +1073,13 @@ public class GUIFabricationmanagement {
 								.setModel(new OrderTableModel(ProductionManagement.getOrdersByStatus(searchValue)));
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					} catch (ELabException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
 					break;
 				}
