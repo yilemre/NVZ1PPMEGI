@@ -164,7 +164,6 @@ public class GUIFinanceManagement {
 
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setUndecorated(true);
-		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
@@ -453,7 +452,7 @@ public class GUIFinanceManagement {
 					refreshTableNewBillWhereBillIsNotCreatedYet();
 
 					PdfWriter writer = PdfWriter.getInstance(document,
-							new FileOutputStream(textFieldbillName.getText() + ".pdf"));
+							new FileOutputStream("./Rechnungen/"+ textFieldbillName.getText() + ".pdf"));
 					document.open();
 
 					Paragraph currentDate = new Paragraph();
@@ -721,16 +720,9 @@ public class GUIFinanceManagement {
 
 		JButton btnclearSearchBillNew = new JButton("Suche aufheben");
 		btnclearSearchBillNew.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					TableNewBillWhereBillIsNotCreatedYet.setModel(new OrderTableModel(ProductionManagement.getOrdersWhereBillIsNotCreatedYet()));
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
 			}
-		}
-				);
+		});
 		btnclearSearchBillNew.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnclearSearchBillNew = new GridBagConstraints();
 		gbc_btnclearSearchBillNew.fill = GridBagConstraints.HORIZONTAL;
@@ -971,25 +963,21 @@ public class GUIFinanceManagement {
 				com.itextpdf.text.Document document = new com.itextpdf.text.Document();
 				
 				try {
-					System.out.println(Integer.parseInt(textFieldBillIDModify.getText()));
-					FinancialManagement.modifyBill(
-							 	Integer.parseInt(textFieldBillIDModify.getText()),
-							 	Integer.parseInt(textFieldrelatedOrderModify.getText()),
-								SQLManager.getInstance().getPotArray().get(comboBoxrelatedJarModify.getSelectedIndex()).getId(),
-								SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegisterModify.getSelectedIndex()).getId(),
-								textFieldbillNameModify.getText(),
-								comboBoxpaymentTypModify.getSelectedIndex(),
-								Double.parseDouble(textFieldsumBillModify.getText())
-								);
+				textFieldsumBillModify.setBackground(Color.white);
+				
+					FinancialManagement.modifyBill(Integer.parseInt(textFieldBillIDModify.getText()),
+							Integer.parseInt(textFieldrelatedOrderModify.getText()),
+							SQLManager.getInstance().getPotArray().get(comboBoxrelatedJarModify.getSelectedIndex()).getId(),
+							SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegisterModify.getSelectedIndex()).getId(),
+							textFieldbillNameModify.getText(), 
+							comboBoxpaymentTypModify.getSelectedIndex(),
+							Double.parseDouble(textFieldsumBillModify.getText()));
 					
-					FinancialManagement.changeBillStatus(Integer.parseInt(textFieldBillIDModify.getText()), comboBoxBillStatusModify.getSelectedIndex());
-					
-					textFieldsumBillModify.setBackground(Color.white);
-		
-					PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(textFieldbillNameModify.getText()+".pdf"));
+							FinancialManagement.changeBillStatus(Integer.parseInt(textFieldBillIDModify.getText()),
+							comboBoxBillStatusModify.getSelectedIndex());
 
-					textFieldsumBillModify.setBackground(Color.white);
-
+					PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("./Rechnungen/"+textFieldbillNameModify.getText() + ".pdf"));
+			
 					document.open();
 
 					Paragraph currentDate = new Paragraph();
@@ -2221,15 +2209,21 @@ public class GUIFinanceManagement {
 		}
 		if (tableBillModify.getSelectedRow() > -1) {
 			textFieldBillIDModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 0).toString());
-			textFieldbillNameModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(),6).toString());
-			textFieldrelatedOrderModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(),1).toString());
-			textFieldcustomerIDModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 3).toString());
-			comboBoxpaymentTypModify.setSelectedIndex(comboBoxEntries.indexOf(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 7)));
-			textFieldsumBillModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(),8).toString());
-			textFieldrelatedPersonModify.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 4).toString());
-			comboBoxrelatedCashRegisterModify.setSelectedIndex(getCorrectCashRegisterIndex(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 5).toString()));
-			comboBoxrelatedCashRegisterModify.setSelectedIndex(getCorrectCashRegisterIndex(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 5).toString()));
-			refreshPotComboBoxModify();comboBoxBillStatusModify.setSelectedIndex(comboBoxStatusEntries.indexOf(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 9)));
+			textFieldbillNameModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 6).toString());
+			textFieldrelatedOrderModify
+					.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 1).toString());
+			textFieldcustomerIDModify
+					.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 3).toString());
+			comboBoxpaymentTypModify
+					.setSelectedIndex((int) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 7));
+			textFieldsumBillModify.setText(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 8).toString());
+			textFieldrelatedPersonModify
+					.setText((String) tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 4).toString());
+			comboBoxrelatedCashRegisterModify.setSelectedIndex(getCorrectCashRegisterIndex(
+					tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 5).toString()));
+			refreshPotComboBoxModify();
+			comboBoxBillStatusModify.setSelectedIndex(
+					comboBoxStatusEntries.indexOf(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 9)));
 			// comboBoxrelatedJarModify.setSelectedIndex(getCorrectPotIndex(tableBillModify.getValueAt(tableBillModify.getSelectedRow(),
 			// 2).toString()));
 		}
