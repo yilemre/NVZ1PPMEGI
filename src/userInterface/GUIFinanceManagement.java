@@ -1990,6 +1990,8 @@ public class GUIFinanceManagement {
 			public void actionPerformed(ActionEvent e) {
 				// Emre+
 				try {
+					textFieldjarActualStock.setBackground(Color.white);
+					textFieldjarEstimatedStock.setBackground(Color.white);
 					FinancialManagement.addPot(textFieldjarName.getText(),
 							Double.parseDouble(textFieldjarActualStock.getText()),
 							Double.parseDouble(textFieldjarEstimatedStock.getText()), SQLManager.getInstance()
@@ -1997,6 +1999,8 @@ public class GUIFinanceManagement {
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					textFieldjarActualStock.setBackground(Color.red);
+					textFieldjarEstimatedStock.setBackground(Color.red);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -2020,6 +2024,8 @@ public class GUIFinanceManagement {
 		btnjarSaveChanges.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					textFieldjarActualStockModify.setBackground(Color.white);
+					textFieldjarEstimatedStockModify.setBackground(Color.white);
 					FinancialManagement.modifyPot(Integer.parseInt(textFieldPotIDModify.getText()),
 							Double.parseDouble(textFieldjarActualStockModify.getText()),
 							Double.parseDouble(textFieldjarEstimatedStockModify.getText()),
@@ -2027,6 +2033,8 @@ public class GUIFinanceManagement {
 									.get(comboBoxPotRegisterIDModify.getSelectedIndex()).getId());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
+					textFieldjarActualStockModify.setBackground(Color.red);
+					textFieldjarEstimatedStockModify.setBackground(Color.red);
 					e1.printStackTrace();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
