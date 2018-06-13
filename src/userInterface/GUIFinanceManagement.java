@@ -161,6 +161,7 @@ public class GUIFinanceManagement {
 
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setUndecorated(true);
+		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
 
 		frmElabVerwaltungsprogramm.setTitle("Elab Verwaltungsprogramm");
 		frmElabVerwaltungsprogramm.setBounds(100, 100, 1036, 727);
@@ -719,8 +720,7 @@ public class GUIFinanceManagement {
 		panelcreateBill.add(btnnewbillOrderSearch, gbc_btnnewbillOrderSearch);
 
 		JButton btnclearSearchBillNew = new JButton("Suche aufheben");
-/*		btnclearSearchBillNew.addActionListener(new ActionListener() {
-
+		btnclearSearchBillNew.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -728,11 +728,9 @@ public class GUIFinanceManagement {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-
-			public void actionPerformed(ActionEvent e) {
-
 			}
-		});*/
+		}
+				);
 		btnclearSearchBillNew.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnclearSearchBillNew = new GridBagConstraints();
 		gbc_btnclearSearchBillNew.fill = GridBagConstraints.HORIZONTAL;
@@ -999,8 +997,7 @@ public class GUIFinanceManagement {
 					FinancialManagement.changeBillStatus(Integer.parseInt(textFieldBillIDModify.getText()),
 							comboBoxBillStatusModify.getSelectedIndex());
 
-					PdfWriter writer = PdfWriter.getInstance(document,
-							new FileOutputStream(textFieldbillNameModify.getText() + ".pdf"));
+					writer = PdfWriter.getInstance(document,new FileOutputStream(textFieldbillNameModify.getText() + ".pdf"));
 
 					document.open();
 
