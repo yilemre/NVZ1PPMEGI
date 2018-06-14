@@ -6,7 +6,7 @@ public class GUItest {
 		// TODO Auto-generated method stub
 
 		
-		GuiMenue gui = new GuiMenue();
+		GuiLogin gui = new GuiLogin();
 		
 		//GUIRegisterCustomer gui = new GUIRegisterCustomer();
 		
