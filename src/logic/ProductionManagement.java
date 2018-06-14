@@ -32,7 +32,14 @@ public class ProductionManagement {
 		SQLManager.getInstance().insertOrderStatusIntoDB(idOrder, status, dateTimeString);
 	}
 	
-	public static void deleteOrder(int ID) throws SQLException {
+	public static boolean isBillCreatedForOrder(int idOrder) throws SQLException{
+		return SQLManager.getInstance().isBillCreatedForOrder(idOrder);
+	}
+	
+	public static void deleteOrder(int ID) throws SQLException, BillIDNotInDBException {
+		if(SQLManager.getInstance().isBillCreatedForOrder(ID)==true) {
+			FinancialManagement.deleteBill(SQLManager.getInstance().getBillByOrderID(ID).getId());
+		}
 		SQLManager.getInstance().deleteOrderFromDB(ID);
 	}
 

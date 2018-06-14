@@ -368,7 +368,7 @@ public class GUIComponentmanagement  {
 					}
 					catch(NumberFormatException e1) {
 						textFieldpartPrize.setBackground(Color.RED);
-						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Einzelpreis!", "Fehler", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					try {
@@ -376,7 +376,7 @@ public class GUIComponentmanagement  {
 					}
 					catch(NumberFormatException e1) {
 						textFieldquantityStoring.setBackground(Color.RED);
-						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Menge (lagernd)!", "Fehler", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					try {
@@ -384,7 +384,7 @@ public class GUIComponentmanagement  {
 					}
 					catch(NumberFormatException e1) {
 						textFieldquantityPlanned.setBackground(Color.RED);
-						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Menge (erwartet)!", "Fehler", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					try {
@@ -392,7 +392,7 @@ public class GUIComponentmanagement  {
 					}
 					catch(NumberFormatException e1) {
 						textFieldquantityOrdered.setBackground(Color.RED);
-						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Menge (bestellt)!", "Fehler", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 

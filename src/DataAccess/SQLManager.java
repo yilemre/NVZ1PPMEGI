@@ -330,7 +330,6 @@ public class SQLManager {
 	    	stmt.executeUpdate("UPDATE Parts SET articlenumber = '"+ articlenumber+"', productlink='"+productlink+"',name='"+name+"', price="+
 	    	price+", storing="+ storing+", plannedAmount="+ plannedAmount+", orderedAmount="+ orderedAmount+",storageLocation='"+storageLocation+"',idCategory="+idCategory+" WHERE idPart= "+ id);
     		stmt.close();
-		    
 	} 
 	
 	public List<Component> getComponents() throws SQLException {
@@ -503,6 +502,20 @@ public class SQLManager {
 		stmt.executeUpdate(sql);
 		stmt.close();
 		return id;
+	}
+	
+	public boolean isBillCreatedForOrder(int idOrder) throws SQLException{
+		boolean result = false;
+		Statement stmt = c.createStatement();
+		String sql = "SELECT idBill FROM Bills WHERE idOrder="+idOrder;
+		ResultSet rs = stmt.executeQuery(sql);
+		if(rs.next()) {
+			result = true;
+		}
+		else {
+			result = false;
+		}
+		return result;
 	}
 
 	public void modifyOrder(int id, String title, int type, double projectedCosts, double realCosts, int idCustomer, int idAdvisor, int idSecondaryAdvisor, String fileName, String fileLocation, String note) throws SQLException {
@@ -708,10 +721,10 @@ public class SQLManager {
 	
 	//Financial SQL by Nico
 	
-	public int addRegistertoDB(double actualAmount, double debitAmount, String name, int type) throws SQLException{
+	public int addRegistertoDB(double actualAmount, double debitAmount, String name, int type, String costCentreNumber) throws SQLException{
 		int result = 0;
 		Statement stmt = c.createStatement();
-		String sql ="INSERT INTO Registers (debitAmount, actualAmount, name, type) VALUES ('"+debitAmount+"','"+actualAmount+"','"+name+"','"+type+"')";
+		String sql ="INSERT INTO Registers (debitAmount, actualAmount, name, type, costCentreNumber) VALUES ('"+debitAmount+"','"+actualAmount+"','"+name+"','"+type+"', '"+costCentreNumber+"')";
 		stmt.executeUpdate(sql);
 		ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid() FROM Registers");
 		rs.next();
@@ -721,9 +734,9 @@ public class SQLManager {
 		return result;
 	}
 		
-	public void modifyRegister(int id, double actualAmount, double debitAmount, String name, int type) throws SQLException{
+	public void modifyRegister(int id, double actualAmount, double debitAmount, String name, int type, String costCentreNumber) throws SQLException{
 		Statement stmt = c.createStatement();
-		stmt.executeUpdate("UPDATE Registers SET debitAmount = "+debitAmount+", actualAmount = "+actualAmount+", name ='"+name+"', type ="+type+" WHERE idRegister="+id);
+		stmt.executeUpdate("UPDATE Registers SET debitAmount = "+debitAmount+", actualAmount = "+actualAmount+", name ='"+name+"', type ="+type+", costCentreNumber='"+costCentreNumber+"' WHERE idRegister="+id);
 		stmt.close();
 	}
 	
@@ -733,7 +746,7 @@ public class SQLManager {
 		   String sql = "SELECT * FROM Registers";
 		   ResultSet rs = stmt.executeQuery(sql);
 		   while(rs.next()){
-			   	CashRegister temp = new CashRegister(rs.getInt("idRegister"), rs.getDouble("debitAmount"), rs.getDouble("actualAmount"), rs.getString("name"), rs.getInt("type"));
+			   	CashRegister temp = new CashRegister(rs.getInt("idRegister"), rs.getDouble("debitAmount"), rs.getDouble("actualAmount"), rs.getString("name"), rs.getInt("type"), rs.getString("costCentreNumber"));
 				result.add(temp);	   
 		   }
 		   return result; 
@@ -928,6 +941,20 @@ public class SQLManager {
 		rs.close();
 		stmt.close();
 		if (result.isEmpty()) throw new BillStatusNotInDBException();
+		return result;
+	}
+	
+	public Bill getBillByOrderID(int idOrder) throws SQLException {
+		Bill result = null;
+		Statement stmt = c.createStatement();
+		String sql = "SELECT idBill, idOrder, idPot, idRegister, idCustomer, idAdvisor, name, methodOfPayment, figure, MAX(status) as status, timestamp FROM Bills NATURAL JOIN BillStatus GROUP BY idBill HAVING idOrder="+idOrder+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		while(rs.next()) {
+			Bill temp = new Bill (rs.getInt("idBill"),rs.getInt("idOrder"),rs.getInt("idPot"), rs.getInt("idCustomer"), rs.getInt("idAdvisor"), rs.getInt("idRegister"), rs.getString("name"), rs.getInt("methodOfPayment"),rs.getDouble("figure"),rs.getInt("status"), rs.getString("timestamp"));
+			result = temp;
+		}
+		rs.close();
+		stmt.close();
 		return result;
 	}
 	

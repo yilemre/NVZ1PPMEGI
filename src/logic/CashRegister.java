@@ -6,17 +6,27 @@ public class CashRegister {
     private double debitAmount;
     private double actualAmount;
     private int type;
+    private String costCentreNumber;
     
     
-    public CashRegister(int id, double debitAmount, double actualAmount, String name, int type) {
+    public CashRegister(int id, double debitAmount, double actualAmount, String name, int type, String costCentreNumber) {
 		this.id = id;
 		this.debitAmount = debitAmount;
 		this.actualAmount = actualAmount;
 		this.name = name;
 		this.type = type;
+		this.costCentreNumber = costCentreNumber;
 	}
     
-    public CashRegister() {
+    public String getCostCentreNumber() {
+		return costCentreNumber;
+	}
+
+	public void setCostCentreNumber(String costCentreNumber) {
+		this.costCentreNumber = costCentreNumber;
+	}
+
+	public CashRegister() {
     	
     }
 

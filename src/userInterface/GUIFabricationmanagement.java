@@ -12,6 +12,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -38,6 +40,7 @@ import logic.ProductionManagement;
 import logic.Order;
 import logic.Person;
 import DataAccess.SQLManager;
+import Exceptions.BillIDNotInDBException;
 import Exceptions.ELabException;
 
 import javax.swing.JTextField;
@@ -1137,16 +1140,59 @@ public class GUIFabricationmanagement {
 		btndeleteOrder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					ProductionManagement.deleteOrder(Integer
-							.parseInt(TableDeleteOrder.getValueAt(TableDeleteOrder.getSelectedRow(), 0).toString()));
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(TableDeleteOrder.getSelectedRow()>-1) {
+					try {
+						if(ProductionManagement.isBillCreatedForOrder(Integer.parseInt(TableDeleteOrder.getValueAt(TableDeleteOrder.getSelectedRow(), 0).toString()))==true){
+							
+							int n = JOptionPane.showConfirmDialog(null, "Zu diesem Auftrag wurde bereits eine Rechnung erzeugt! Wollen Sie diesen Auftrag wirklich löschen? Die zugehörige Rechnung wird gelöscht!");
+							if(n == JOptionPane.YES_OPTION) {
+								try {
+									ProductionManagement.deleteOrder(Integer.parseInt(TableDeleteOrder.getValueAt(TableDeleteOrder.getSelectedRow(), 0).toString()));
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (NumberFormatException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (BillIDNotInDBException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} 
+								refreshTableDeleteOrder();
+								refreshTable();
+								}
+							}
+						else {
+							try {
+								ProductionManagement.deleteOrder(Integer.parseInt(TableDeleteOrder.getValueAt(TableDeleteOrder.getSelectedRow(), 0).toString()));
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (NumberFormatException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (BillIDNotInDBException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							refreshTableDeleteOrder();
+							refreshTable();
+							}
+					}
+					catch(NumberFormatException e1){
+						e1.printStackTrace();
+					} catch (HeadlessException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
-				refreshTableDeleteOrder();
-				refreshTable();
-			}
+				else{
+				JOptionPane.showMessageDialog(null,"Wählen Sie eine Person aus!");
+				}
+			} 
 		});
 
 		JButton btnclearSearchDelete = new JButton("Suche aufheben");

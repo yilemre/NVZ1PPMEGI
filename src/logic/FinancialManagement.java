@@ -192,12 +192,12 @@ public class FinancialManagement {
 		return result;
 	  }
 	
-	public static int addRegister(String name, double actualAmount, double debitAmount, int type) throws SQLException {
-		return SQLManager.getInstance().addRegistertoDB(actualAmount, debitAmount, name, type);
+	public static int addRegister(String name, double actualAmount, double debitAmount, int type, String costCentreNumber) throws SQLException {
+		return SQLManager.getInstance().addRegistertoDB(actualAmount, debitAmount, name, type, costCentreNumber);
 	}
 	
-	public static void modifyRegister(int id, double actualAmount, double debitAmount, String name, int type) throws SQLException {
-		SQLManager.getInstance().modifyRegister(id, actualAmount, debitAmount, name, type);
+	public static void modifyRegister(int id, double actualAmount, double debitAmount, String name, int type, String costCentreNumber) throws SQLException {
+		SQLManager.getInstance().modifyRegister(id, actualAmount, debitAmount, name, type, costCentreNumber);
 	}
 	
 	public static void deleteCashRegister(int id) throws SQLException, registerIsReferencedException {

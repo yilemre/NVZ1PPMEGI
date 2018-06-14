@@ -42,6 +42,7 @@ import Exceptions.OrderNotInDBException;
 import Exceptions.PersonStatusNotInDBException;
 import Exceptions.PersonWithSpecifiedIDNotInDBException;
 import Exceptions.PotIsReferencedException;
+import Exceptions.costCentreNumberException;
 import Exceptions.registerIsReferencedException;
 import logic.CashRegister;
 import logic.FinancialManagement;
@@ -364,8 +365,11 @@ public class GUIFinanceManagement {
 		comboBoxrelatedCashRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				comboBoxrelatedJar.removeAllItems();
-				;
+				
 				int selectedRegisterID;
+				if(comboBoxrelatedCashRegister.getSelectedIndex()==-1) {
+					return;
+				}
 				try {
 					selectedRegisterID = FinancialManagement.getRegisterArray()
 							.get(comboBoxrelatedCashRegister.getSelectedIndex()).getId();
@@ -1592,6 +1596,7 @@ public class GUIFinanceManagement {
 		JLabel lblcashRegisterType = new JLabel("Kassen-Typ");
 		lblcashRegisterType.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblcashRegisterType = new GridBagConstraints();
+		gbc_lblcashRegisterType.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblcashRegisterType.insets = new Insets(0, 0, 5, 5);
 		gbc_lblcashRegisterType.gridx = 0;
 		gbc_lblcashRegisterType.gridy = 3;
@@ -1693,6 +1698,7 @@ public class GUIFinanceManagement {
 					
 					double cashRegisterActualStock = 0.0;
 					double cashRegisterEstimatedStock = 0.0;
+					String costCentreNumber = null;
 					
 					try {
 						cashRegisterActualStock = Double.parseDouble(textFieldcashRegisterActualStock.getText());
@@ -1710,11 +1716,42 @@ public class GUIFinanceManagement {
 						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					
+					if(comboBoxCashRegisterType.getSelectedIndex()==2) {
+						try {
+							if(formattedTextFieldcostCenter.getText().length()==6 || formattedTextFieldcostCenter.getText().length()==16) {
+								costCentreNumber = formattedTextFieldcostCenter.getText();
+							}
+							else {
+								throw new costCentreNumberException();
+								}
+						}
+						catch(costCentreNumberException e1) {
+							JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, e1.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+					}
+					else {
+						costCentreNumber = "";
+					}
+										
 					FinancialManagement.addRegister(textFieldcashRegisterName.getText(),
 							cashRegisterActualStock,
 							cashRegisterEstimatedStock,
-							comboBoxCashRegisterType.getSelectedIndex());
+							comboBoxCashRegisterType.getSelectedIndex(),
+							costCentreNumber);
+					
+					comboBoxPotRegisterID.removeAllItems();
+					comboBoxPotRegisterIDModify.removeAllItems();
+					comboBoxrelatedCashRegister.removeAllItems();
+					comboBoxrelatedCashRegisterModify.removeAllItems();
+					try {
+						for (CashRegister r : FinancialManagement.getRegisterArray()) {
+							comboBoxPotRegisterID.addItem(r.toString());
+							comboBoxPotRegisterIDModify.addItem(r.toString());
+							comboBoxrelatedCashRegister.addItem(r.toString());
+							comboBoxrelatedCashRegisterModify.addItem(r.toString());
+						}
+						
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					textFieldcashRegisterActualStock.setBackground(Color.red);
@@ -1723,15 +1760,6 @@ public class GUIFinanceManagement {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
-				// Emre+
-				comboBoxPotRegisterID.removeAllItems();
-				comboBoxPotRegisterIDModify.removeAllItems();
-				try {
-					for (int i = 0; i < FinancialManagement.getRegisterArray().size(); i++) {
-						comboBoxPotRegisterID.addItem(FinancialManagement.getRegisterArray().get(i));
-						comboBoxPotRegisterIDModify.addItem(FinancialManagement.getRegisterArray().get(i));
-					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1782,7 +1810,8 @@ public class GUIFinanceManagement {
 							cashRegisterEstimatedStock,
 							cashRegisterActualStock,
 							textFieldCashRegisterNameModify.getText(),
-							comboBoxCashRegisterTypeModify_1.getSelectedIndex());
+							comboBoxCashRegisterTypeModify_1.getSelectedIndex(),
+							formattedTextFieldcostCenterModify.getText());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					textFieldcashRegisterActualStockModify.setBackground(Color.red);
@@ -1796,7 +1825,7 @@ public class GUIFinanceManagement {
 				textFieldCashRegisterNameModify.setText("");
 				textFieldcashRegisterActualStockModify.setText("");
 				textFieldcashRegisterEstimatedStockModify.setText("");
-				comboBoxCashRegisterTypeModify_1.setSelectedIndex(-1);
+				comboBoxCashRegisterTypeModify_1.setSelectedIndex(0);
 			}
 		});
 		btncashRegisterSaveChanges.setFont(new Font("Segoe UI", Font.PLAIN, 15));
@@ -1871,6 +1900,22 @@ public class GUIFinanceManagement {
 					e1.printStackTrace();
 				} catch (registerIsReferencedException e1) {
 					JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, e1.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+				}
+				comboBoxPotRegisterID.removeAllItems();
+				comboBoxPotRegisterIDModify.removeAllItems();
+				comboBoxrelatedCashRegister.removeAllItems();
+				comboBoxrelatedCashRegisterModify.removeAllItems();
+				
+				try {
+					for (CashRegister r : FinancialManagement.getRegisterArray()) {
+						comboBoxPotRegisterID.addItem(r.toString());
+						comboBoxPotRegisterIDModify.addItem(r.toString());
+						comboBoxrelatedCashRegister.addItem(r.toString());
+						comboBoxrelatedCashRegisterModify.addItem(r.toString());
+						}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 				refreshTableCashRegister();
 				refreshTableJar();
@@ -2543,9 +2588,11 @@ public class GUIFinanceManagement {
 	private void refreshPotComboBoxModify() {
 		comboBoxrelatedJarModify.removeAllItems();
 		int selectedRegisterID;
+		if(comboBoxrelatedCashRegisterModify.getSelectedIndex()==-1) {
+			return;
+		}
 		try {
-			selectedRegisterID = SQLManager.getInstance().getRegisterArray()
-					.get(comboBoxrelatedCashRegisterModify.getSelectedIndex()).getId();
+			selectedRegisterID = SQLManager.getInstance().getRegisterArray().get(comboBoxrelatedCashRegisterModify.getSelectedIndex()).getId();
 			for (Pot p : FinancialManagement.getPotArrayByRegisterID(selectedRegisterID)) {
 				comboBoxrelatedJarModify.addItem(p.toString());
 			}
