@@ -48,6 +48,7 @@ import java.awt.Toolkit;
 import java.awt.Window.Type;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -412,7 +413,7 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(btndeleteallInputs, gbc_btndeleteallInputs);
 		
 		JLabel lbleLabpicture = new JLabel("");
-		lbleLabpicture.setIcon(new ImageIcon("C:\\Users\\Nils\\git\\ProPraElab\\ProPraElab\\pictures\\elab.png"));
+		lbleLabpicture.setIcon(new ImageIcon("./pictures/elab.png"));
 		GridBagConstraints gbc_lbleLabpicture = new GridBagConstraints();
 		gbc_lbleLabpicture.gridwidth = 2;
 		gbc_lbleLabpicture.gridx = 0;
@@ -456,6 +457,19 @@ public class GUIRegisterCustomer {
 		menuBar.add(mnNewMenuhelpWindow);
 		
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+
+				try {
+					Runtime.getRuntime().exec("cmd /c Start ./Anleitungen/Anleitung_zur_Registrierung_als_Kunde_oder_Lehrstuhl_bezogene_Person.pdf");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
+			}
+		});
 		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
 		frmElabVerwaltungsprogramm.setVisible(true);

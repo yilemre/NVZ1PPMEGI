@@ -442,9 +442,9 @@ public class GUIComponentUserInterface {
 		tabbedPane.addTab("Passwort ändern", null, panelChangePassword, null);
 		GridBagLayout gbl_panelChangePassword = new GridBagLayout();
 		gbl_panelChangePassword.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_panelChangePassword.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_panelChangePassword.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gbl_panelChangePassword.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_panelChangePassword.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelChangePassword.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panelChangePassword.setLayout(gbl_panelChangePassword);
 		
 		JLabel lbluserName = new JLabel("Username");
@@ -551,11 +551,21 @@ public class GUIComponentUserInterface {
 		btnsaveChange.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
 		GridBagConstraints gbc_btnsaveChange = new GridBagConstraints();
+		gbc_btnsaveChange.insets = new Insets(0, 0, 5, 0);
 		gbc_btnsaveChange.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnsaveChange.gridwidth = 4;
 		gbc_btnsaveChange.gridx = 1;
 		gbc_btnsaveChange.gridy = 4;
 		panelChangePassword.add(btnsaveChange, gbc_btnsaveChange);
+		
+		JLabel lblelabPicture = new JLabel("");
+		lblelabPicture.setIcon(new ImageIcon("./pictures/elab.png"));
+		GridBagConstraints gbc_lblelabPicture = new GridBagConstraints();
+		gbc_lblelabPicture.gridwidth = 5;
+		gbc_lblelabPicture.insets = new Insets(0, 0, 0, 5);
+		gbc_lblelabPicture.gridx = 0;
+		gbc_lblelabPicture.gridy = 5;
+		panelChangePassword.add(lblelabPicture, gbc_lblelabPicture);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frmElabVerwaltungsprogramm.setJMenuBar(menuBar);
@@ -565,6 +575,7 @@ public class GUIComponentUserInterface {
 		menuBar.add(mnNewMenuOptions);
 		
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
+		mntmNewMenuItemlogOut.setToolTipText("Rückkehr zum Login Fenster");
 		mntmNewMenuItemlogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -575,6 +586,7 @@ public class GUIComponentUserInterface {
 		});
 		
 		JMenuItem mntmNewMenuItemMinimize = new JMenuItem("Minimieren");
+		mntmNewMenuItemMinimize.setToolTipText("Das Fenster wird minimiert");
 		mntmNewMenuItemMinimize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -593,6 +605,7 @@ public class GUIComponentUserInterface {
 		menuBar.add(mnNewMenuhelpWindow);
 		
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.setToolTipText("Die Anleitung als PDF wird geöffnet");
 		mntmNewMenuItemshowManual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		

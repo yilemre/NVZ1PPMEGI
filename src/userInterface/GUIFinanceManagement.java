@@ -75,6 +75,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLData;
 import java.sql.SQLException;
@@ -2272,6 +2273,7 @@ public class GUIFinanceManagement {
 		menuBar.add(mnNewMenuOptions);
 
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmenü");
+		mntmNewMenuItembacktoMain.setToolTipText("Rückkehr zum Hauptmenü");
 		mntmNewMenuItembacktoMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -2282,6 +2284,7 @@ public class GUIFinanceManagement {
 		});
 
 		JMenuItem mntmNewMenuItemMinimize = new JMenuItem("Minimieren");
+		mntmNewMenuItemMinimize.setToolTipText("Das Fenster wird minimiert");
 		mntmNewMenuItemMinimize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -2295,6 +2298,7 @@ public class GUIFinanceManagement {
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
 
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
+		mntmNewMenuItemlogOut.setToolTipText("Rückkehr zum Login Fenster");
 		mntmNewMenuItemlogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -2307,6 +2311,7 @@ public class GUIFinanceManagement {
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
 
 		JMenuItem mntmNewMenuItemcloseapplication = new JMenuItem("Anwendung verlassen");
+		mntmNewMenuItemcloseapplication.setToolTipText("Die Anwendung wird geschlossen");
 		mntmNewMenuItemcloseapplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -2322,8 +2327,20 @@ public class GUIFinanceManagement {
 		menuBar.add(mnNewMenuhelpWindow);
 
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.setToolTipText("Die Anleitung als PDF wird geöffnet");
 		mntmNewMenuItemshowManual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+		
+
+				try {
+					Runtime.getRuntime().exec("cmd /c Start ./Anleitungen/Anleitung_zur_Finanzverwaltung.pdf");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
+			
+			
 			}
 		});
 		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));

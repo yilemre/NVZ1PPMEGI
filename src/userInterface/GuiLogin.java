@@ -16,6 +16,7 @@ import java.awt.BorderLayout;
 import javax.swing.JTextArea;
 import javax.swing.JInternalFrame;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
@@ -169,7 +170,7 @@ public class GuiLogin {
 		frmElabVerwaltungsprogramm.getContentPane().add(btnregister, gbc_btnregister);
 		
 		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Nils\\git\\ProPraElab\\ProPraElab\\pictures\\elab.png"));
+		lblNewLabel.setIcon(new ImageIcon("./pictures/elab.png"));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel.gridx = 1;
@@ -185,6 +186,7 @@ public class GuiLogin {
 		menuBar.add(mnNewMenuMenü);
 		
 		mntmNewMenuItemMinimize = new JMenuItem("Minimieren");
+		mntmNewMenuItemMinimize.setToolTipText("Das Fenster wird minimiert");
 		mntmNewMenuItemMinimize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -196,6 +198,7 @@ public class GuiLogin {
 		mnNewMenuMenü.add(mntmNewMenuItemMinimize);
 		
 		mntmNewMenuItemcloseApplication = new JMenuItem("Anwendung verlassen");
+		mntmNewMenuItemcloseApplication.setToolTipText("Die Anwendung wird geschlossen");
 		mntmNewMenuItemcloseApplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -211,11 +214,16 @@ public class GuiLogin {
 		menuBar.add(mnNewMenu_1);
 		
 		mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.setToolTipText("Die Anleitung als PDF wird geöffnet");
 		mntmNewMenuItemshowManual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-			
-			
+				try {
+					Runtime.getRuntime().exec("cmd /c Start ./Anleitungen/Anleitung_zum_Start_des_Programms.pdf");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
