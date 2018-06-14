@@ -97,7 +97,7 @@ public class GUIRegisterCustomer {
 		frmElabVerwaltungsprogramm.getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblPersonenverwaltung = new JLabel("Neukundenregistierung");
-		lblPersonenverwaltung.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPersonenverwaltung.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		GridBagConstraints gbc_lblPersonenverwaltung = new GridBagConstraints();
 		gbc_lblPersonenverwaltung.insets = new Insets(0, 0, 5, 0);
 		gbc_lblPersonenverwaltung.gridx = 0;
@@ -105,7 +105,7 @@ public class GUIRegisterCustomer {
 		frmElabVerwaltungsprogramm.getContentPane().add(lblPersonenverwaltung, gbc_lblPersonenverwaltung);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tabbedPane.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
 		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
 		gbc_tabbedPane.gridx = 0;
@@ -130,7 +130,7 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(lblNewLabel, gbc_lblNewLabel);
 		
 		JLabel lblname = new JLabel("Vorname");
-		lblname.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblname.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblname = new GridBagConstraints();
 		gbc_lblname.anchor = GridBagConstraints.EAST;
 		gbc_lblname.insets = new Insets(0, 0, 5, 5);
@@ -139,7 +139,7 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(lblname, gbc_lblname);
 		
 		textFieldname = new JTextField();
-		textFieldname.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldname.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldname = new GridBagConstraints();
 		gbc_textFieldname.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldname.fill = GridBagConstraints.HORIZONTAL;
@@ -149,7 +149,7 @@ public class GUIRegisterCustomer {
 		textFieldname.setColumns(10);
 		
 		JLabel lbllastName = new JLabel("Nachname");
-		lbllastName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbllastName.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbllastName = new GridBagConstraints();
 		gbc_lbllastName.anchor = GridBagConstraints.EAST;
 		gbc_lbllastName.insets = new Insets(0, 0, 5, 5);
@@ -158,7 +158,7 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(lbllastName, gbc_lbllastName);
 		
 		textFieldlastName = new JTextField();
-		textFieldlastName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldlastName.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldlastName = new GridBagConstraints();
 		gbc_textFieldlastName.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldlastName.fill = GridBagConstraints.HORIZONTAL;
@@ -168,7 +168,7 @@ public class GUIRegisterCustomer {
 		textFieldlastName.setColumns(10);
 		
 		JLabel lblStreet = new JLabel("Straße");
-		lblStreet.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblStreet.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblStreet = new GridBagConstraints();
 		gbc_lblStreet.anchor = GridBagConstraints.EAST;
 		gbc_lblStreet.insets = new Insets(0, 0, 5, 5);
@@ -177,7 +177,7 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(lblStreet, gbc_lblStreet);
 		
 		textFieldStreet = new JTextField();
-		textFieldStreet.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldStreet.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldStreet = new GridBagConstraints();
 		gbc_textFieldStreet.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldStreet.fill = GridBagConstraints.HORIZONTAL;
@@ -187,7 +187,7 @@ public class GUIRegisterCustomer {
 		textFieldStreet.setColumns(10);
 		
 		JLabel lblhouseNumber = new JLabel("Hausnummer");
-		lblhouseNumber.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblhouseNumber.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblhouseNumber = new GridBagConstraints();
 		gbc_lblhouseNumber.anchor = GridBagConstraints.EAST;
 		gbc_lblhouseNumber.insets = new Insets(0, 0, 5, 5);
@@ -196,7 +196,7 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(lblhouseNumber, gbc_lblhouseNumber);
 		
 		textFieldhouseNumber = new JTextField();
-		textFieldhouseNumber.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldhouseNumber.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldhouseNumber = new GridBagConstraints();
 		gbc_textFieldhouseNumber.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldhouseNumber.fill = GridBagConstraints.HORIZONTAL;
@@ -206,7 +206,7 @@ public class GUIRegisterCustomer {
 		textFieldhouseNumber.setColumns(10);
 		
 		JLabel lblzipCode = new JLabel("PLZ");
-		lblzipCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblzipCode.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblzipCode = new GridBagConstraints();
 		gbc_lblzipCode.anchor = GridBagConstraints.EAST;
 		gbc_lblzipCode.insets = new Insets(0, 0, 5, 5);
@@ -215,7 +215,7 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(lblzipCode, gbc_lblzipCode);
 		
 		textFieldzipCode = new JTextField();
-		textFieldzipCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldzipCode.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldzipCode = new GridBagConstraints();
 		gbc_textFieldzipCode.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldzipCode.fill = GridBagConstraints.HORIZONTAL;
@@ -225,7 +225,7 @@ public class GUIRegisterCustomer {
 		textFieldzipCode.setColumns(10);
 		
 		JLabel lbleMail = new JLabel("E-Mail Adresse");
-		lbleMail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbleMail.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbleMail = new GridBagConstraints();
 		gbc_lbleMail.anchor = GridBagConstraints.EAST;
 		gbc_lbleMail.insets = new Insets(0, 0, 5, 5);
@@ -234,7 +234,7 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(lbleMail, gbc_lbleMail);
 		
 		textFieldeMail = new JTextField();
-		textFieldeMail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldeMail.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldeMail = new GridBagConstraints();
 		gbc_textFieldeMail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldeMail.insets = new Insets(0, 0, 5, 0);
@@ -244,7 +244,7 @@ public class GUIRegisterCustomer {
 		textFieldeMail.setColumns(10);
 		
 		JLabel lblTyp = new JLabel("Personenart");
-		lblTyp.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTyp.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblTyp = new GridBagConstraints();
 		gbc_lblTyp.anchor = GridBagConstraints.EAST;
 		gbc_lblTyp.insets = new Insets(0, 0, 5, 5);
@@ -254,7 +254,7 @@ public class GUIRegisterCustomer {
 		
 		JComboBox comboBoxType = new JComboBox();
 		comboBoxType.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
-		comboBoxType.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxType.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		comboBoxType.setToolTipText("");
 		GridBagConstraints gbc_comboBoxType = new GridBagConstraints();
 		gbc_comboBoxType.insets = new Insets(0, 0, 5, 0);
@@ -281,7 +281,7 @@ public class GUIRegisterCustomer {
 		});
 		
 		JLabel lblprofessorShip = new JLabel("Lehrstuhl");
-		lblprofessorShip.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblprofessorShip.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblprofessorShip = new GridBagConstraints();
 		gbc_lblprofessorShip.anchor = GridBagConstraints.EAST;
 		gbc_lblprofessorShip.insets = new Insets(0, 0, 5, 5);
@@ -290,7 +290,7 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(lblprofessorShip, gbc_lblprofessorShip);
 		
 		textFieldprofessorShip = new JTextField();
-		textFieldprofessorShip.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldprofessorShip.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		textFieldprofessorShip.setEditable(false);
 		GridBagConstraints gbc_textFieldprofessorShip = new GridBagConstraints();
 		gbc_textFieldprofessorShip.insets = new Insets(0, 0, 5, 0);
@@ -301,7 +301,7 @@ public class GUIRegisterCustomer {
 		textFieldprofessorShip.setColumns(10);
 		
 		JLabel lbluserName = new JLabel("Username");
-		lbluserName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbluserName.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbluserName = new GridBagConstraints();
 		gbc_lbluserName.anchor = GridBagConstraints.EAST;
 		gbc_lbluserName.insets = new Insets(0, 0, 5, 5);
@@ -310,7 +310,7 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(lbluserName, gbc_lbluserName);
 		
 		textFielduserName = new JTextField();
-		textFielduserName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFielduserName.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFielduserName = new GridBagConstraints();
 		gbc_textFielduserName.insets = new Insets(0, 0, 5, 0);
 		gbc_textFielduserName.fill = GridBagConstraints.HORIZONTAL;
@@ -320,7 +320,7 @@ public class GUIRegisterCustomer {
 		textFielduserName.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Passwort");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPassword.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.anchor = GridBagConstraints.EAST;
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
@@ -329,7 +329,7 @@ public class GUIRegisterCustomer {
 		paneladdPerson.add(lblPassword, gbc_lblPassword);
 		
 		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.insets = new Insets(0, 0, 5, 0);
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
@@ -377,7 +377,7 @@ public class GUIRegisterCustomer {
 				
 			}
 		});
-		btnaddPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnaddPerson.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnaddPerson = new GridBagConstraints();
 		gbc_btnaddPerson.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnaddPerson.insets = new Insets(0, 0, 5, 0);
@@ -403,7 +403,7 @@ public class GUIRegisterCustomer {
 			
 			}
 		});
-		btndeleteallInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btndeleteallInputs.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		gbc_btndeleteallInputs.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btndeleteallInputs.insets = new Insets(0, 0, 5, 0);
