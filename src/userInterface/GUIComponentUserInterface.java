@@ -534,6 +534,8 @@ public class GUIComponentUserInterface {
 			    if(passwordFieldnewPassword.getText().equals(passwordFieldnewPasswordRepeat.getText())) {
 				try {
 				    PersonManagement.changePassword(textFieldUsername.getText(), passwordFieldnewPassword.getText());
+				    passwordFieldnewPasswordRepeat.setText("");
+				    passwordFieldnewPassword.setText("");
 				} catch (SQLException e1) {
 				    // TODO Auto-generated catch block
 				    e1.printStackTrace();

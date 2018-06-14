@@ -368,7 +368,7 @@ public class GUIComponentmanagement  {
 					}
 					catch(NumberFormatException e1) {
 						textFieldpartPrize.setBackground(Color.RED);
-						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Einzeilpreis!", "Fehler", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					try {
@@ -376,7 +376,7 @@ public class GUIComponentmanagement  {
 					}
 					catch(NumberFormatException e1) {
 						textFieldquantityStoring.setBackground(Color.RED);
-						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Menge (lagernd)!", "Fehler", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					try {
@@ -384,7 +384,7 @@ public class GUIComponentmanagement  {
 					}
 					catch(NumberFormatException e1) {
 						textFieldquantityPlanned.setBackground(Color.RED);
-						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Menge (erwartet)!", "Fehler", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					try {
@@ -392,7 +392,7 @@ public class GUIComponentmanagement  {
 					}
 					catch(NumberFormatException e1) {
 						textFieldquantityOrdered.setBackground(Color.RED);
-						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Menge (bestellt)!", "Fehler", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 
@@ -987,6 +987,7 @@ public class GUIComponentmanagement  {
 		JButton btndeletePart = new JButton("Bauteil löschen");
 		btndeletePart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			    if(ComponentTableDelete.getSelectedRow() > -1) {
 				//Emre begin
 				try {
 					ComponentManagement.deletePart(Integer.parseInt(ComponentTableDelete.getValueAt(ComponentTableDelete.getSelectedRow(), 0).toString()));
@@ -998,6 +999,9 @@ public class GUIComponentmanagement  {
 					e1.printStackTrace();
 				}
 				refreshTable(); 
+			    } else {
+				JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Wählen Sie zunächst ein Bauteil aus!", "Fehler", JOptionPane.ERROR_MESSAGE);
+			    }
 				//Emre end
 			}
 		});
@@ -1269,6 +1273,27 @@ public class GUIComponentmanagement  {
 		panelcategoryManagement.add(btncategorySearch, gbc_btncategorySearch);
 
 		JButton btncategoryDelete = new JButton("Kategorie löschen");
+		btncategoryDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			    if(CategoryTable.getSelectedRow()>-1) {
+				try {
+				    ComponentManagement.deleteCategory(Integer.parseInt(CategoryTable.getValueAt(CategoryTable.getSelectedRow(), 0).toString()));
+				} catch (NumberFormatException e) {
+				    // TODO Auto-generated catch block
+				    e.printStackTrace();
+				} catch (SQLException e) {
+				    // TODO Auto-generated catch block
+				    e.printStackTrace();
+				}
+				refreshCategoryTable(); 
+				refreshCategoryCombobox(); 
+			    } else {
+				JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Wählen Sie zunächst eine Kategorie aus!", "Fehler", JOptionPane.ERROR_MESSAGE);
+			    }
+			   
+			    
+			}
+		});
 		btncategoryDelete.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 
 		GridBagConstraints gbc_btncategoryDelete = new GridBagConstraints();
