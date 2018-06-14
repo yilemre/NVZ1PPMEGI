@@ -543,6 +543,8 @@ public class GUIComponentUserInterface {
 				    throw new WrongRepeatedPassword();
 				} catch (WrongRepeatedPassword e1) {
 				    // TODO Auto-generated catch block 
+					passwordFieldnewPasswordRepeat.setText("");
+					passwordFieldnewPassword.setText("");
 				    JOptionPane.showMessageDialog(null,e1.getMessage());
 				} 
 			    

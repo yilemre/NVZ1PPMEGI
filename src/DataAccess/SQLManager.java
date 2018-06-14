@@ -74,7 +74,7 @@ public class SQLManager {
 		String sql = "SELECT idBill FROM Bills WHERE idCustomer="+idCustomer;
 		ResultSet rs = stmt.executeQuery(sql);
 		while(rs.next()) {
-			result.add(rs.getInt(0));
+			result.add(rs.getInt(1));
 		}
 		return result;
 	}
@@ -85,10 +85,44 @@ public class SQLManager {
 		String sql = "SELECT idOrder FROM Orders WHERE idCustomer="+idCustomer;
 		ResultSet rs = stmt.executeQuery(sql);
 		while(rs.next()) {
-			result.add(rs.getInt(0));
+			result.add(rs.getInt(1));
 		}
 		return result;
 	}
+	
+	public List<Integer> getOrderIDsAdvisorID(int idAdvisor) throws SQLException{
+		List<Integer> result = new ArrayList<Integer>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT idOrder FROM Orders WHERE idAdvisor="+idAdvisor;
+		ResultSet rs = stmt.executeQuery(sql);
+		while(rs.next()) {
+			result.add(rs.getInt(1));
+		}
+		return result;
+	}
+	
+	public List<Integer> getBillIDsByAdvisorID(int idAdvisor) throws SQLException{
+		List<Integer> result = new ArrayList<Integer>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT idBill FROM Bills WHERE idAdvisor="+idAdvisor;
+		ResultSet rs = stmt.executeQuery(sql);
+		while(rs.next()) {
+			result.add(rs.getInt(1));
+		}
+		return result;
+	}
+	
+	public List<Integer> getOrderIDsSecondaryAdvisorID(int idSecondaryAdvisor) throws SQLException{
+		List<Integer> result = new ArrayList<Integer>();
+		Statement stmt = c.createStatement();
+		String sql = "SELECT idOrder FROM Orders WHERE idSecondaryAdvisor="+idSecondaryAdvisor;
+		ResultSet rs = stmt.executeQuery(sql);
+		while(rs.next()) {
+			result.add(rs.getInt(1));
+		}
+		return result;
+	}
+
 
 	//Emre begin 
 	public void modifyPerson(int id, String firstname, String surname, String street, int housenumber,
@@ -328,7 +362,7 @@ public class SQLManager {
 	public List<Component> getComponentsByName(String name) throws SQLException, ComponentNameNotInDBException {
 	    List<Component> result = new ArrayList<Component>(); 
 	    Statement stmt = c.createStatement(); 
-	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts WHERE name LIKE '" + name+ "';"); 
+	    ResultSet rs = stmt.executeQuery("SELECT * FROM Parts WHERE name LIKE '%" + name+ "%';"); 
 	    
 	    while (rs.next()) {
 		Component c = new Component(rs.getInt("idPart"),rs.getString("articlenumber"), rs.getString("name"), rs.getString("productlink"), rs.getDouble("price"), rs.getInt("storing"), rs.getInt("plannedAmount"), rs.getInt("orderedAmount"), rs.getString("storageLocation"),rs.getInt("idCategory"));

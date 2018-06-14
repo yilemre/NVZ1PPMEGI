@@ -35,11 +35,45 @@ public class PersonManagement {
     public static void deletePerson(int ID) throws SQLException, BillIDNotInDBException {
     	for(int i:SQLManager.getInstance().getBillIDsByCustomerID(ID)) {
     		FinancialManagement.deleteBill(i);
+    		//throw new personRelatedToOrderOrBillException();
     	}
     	for(int i:SQLManager.getInstance().getOrderIDsByCustomerID(ID)) {
     		ProductionManagement.deleteOrder(i);
+    		//throw new personRelatedToOrderOrBillException();
+    	}
+    	for(int i:SQLManager.getInstance().getOrderIDsAdvisorID(ID)) {
+    		ProductionManagement.deleteOrder(i);
+    		//throw new personRelatedToOrderOrBillException();
+    	}
+    	for(int i:SQLManager.getInstance().getBillIDsByAdvisorID(ID)) {
+    		FinancialManagement.deleteBill(i);
+    		//throw new personRelatedToOrderOrBillException();
+    	}
+    	for(int i:SQLManager.getInstance().getOrderIDsSecondaryAdvisorID(ID)) {
+    		ProductionManagement.deleteOrder(i);
+    		//throw new personRelatedToOrderOrBillException();
     	}
 	SQLManager.getInstance().deletePersonFromDB(ID); 
+    }
+    
+    public static boolean personIsRelatedToSomething(int ID) throws SQLException {
+    	boolean result = false;
+    	if(!SQLManager.getInstance().getBillIDsByCustomerID(ID).isEmpty()) {
+    		result = true;
+    	}
+		if(!SQLManager.getInstance().getOrderIDsByCustomerID(ID).isEmpty()) {
+			
+		}
+		if(!SQLManager.getInstance().getOrderIDsAdvisorID(ID).isEmpty()) {
+			result = true;
+		}
+		if(!SQLManager.getInstance().getBillIDsByAdvisorID(ID).isEmpty()) {
+			result = true;
+		}
+		if(!SQLManager.getInstance().getOrderIDsSecondaryAdvisorID(ID).isEmpty()) {
+			result = true;
+		}
+    	return result;
     }
 
     public static void modifyPerson(int id, String firstname, String surname, String street, int housenumber, int zipcode,String email, String username, String password, int rights) throws SQLException, UsernameNotAvailableException, PersonWithSpecifiedIDNotInDBException {

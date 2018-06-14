@@ -13,6 +13,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -34,6 +36,7 @@ import Exceptions.BillIDNotInDBException;
 import Exceptions.ELabException;
 import Exceptions.PersonWithSpecifiedIDNotInDBException;
 import Exceptions.UsernameNotAvailableException;
+import Exceptions.personRelatedToOrderOrBillException;
 import logic.PersonManagement;
 
 import javax.swing.JTextField;
@@ -972,21 +975,54 @@ public class GUIPersonalmanagement{
 				btndeletePerson.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						try {
-							PersonManagement.deletePerson(Integer.parseInt(TableDeletePerson.getValueAt(TableDeletePerson.getSelectedRow(), 0).toString()));
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (NumberFormatException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (BillIDNotInDBException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						if(TableDeletePerson.getSelectedRow()>-1) {
+							try {
+								if(PersonManagement.personIsRelatedToSomething(Integer.parseInt(TableDeletePerson.getValueAt(TableDeletePerson.getSelectedRow(), 0).toString()))==true) {
+									
+									int n = JOptionPane.showConfirmDialog(null, "Diese Person steht in Verbindung zu Aufträgen/Rechnungen! Wollen Sie die Person wirklich löschen? Zugehörige Aufträge und Rechnungen werden auch gelöscht!");
+									if(n == JOptionPane.YES_OPTION) {
+										try {
+											PersonManagement.deletePerson(Integer.parseInt(TableDeletePerson.getValueAt(TableDeletePerson.getSelectedRow(), 0).toString()));
+										} catch (SQLException e1) {
+											// TODO Auto-generated catch block
+											e1.printStackTrace();
+										} catch (NumberFormatException e1) {
+											// TODO Auto-generated catch block
+											e1.printStackTrace();
+										} catch (BillIDNotInDBException e1) {
+											// TODO Auto-generated catch block
+											e1.printStackTrace();
+										} 
+										refreshTableDeletePerson();
+										refreshTable();
+										}
+									}
+								else {
+									try {
+										PersonManagement.deletePerson(Integer.parseInt(TableDeletePerson.getValueAt(TableDeletePerson.getSelectedRow(), 0).toString()));
+									} catch (SQLException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									} catch (NumberFormatException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									} catch (BillIDNotInDBException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+									refreshTableDeletePerson();
+									refreshTable();
+									}
+							}
+							 catch (NumberFormatException | HeadlessException | SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} 
 						}
-						refreshTableDeletePerson();
-						refreshTable();
-					}
+						else{
+						JOptionPane.showMessageDialog(null,"Wählen Sie eine Person aus!");
+						}
+					} 
 				});
 				gbc_btndeletePerson.fill = GridBagConstraints.HORIZONTAL;
 				gbc_btndeletePerson.gridx = 1;
