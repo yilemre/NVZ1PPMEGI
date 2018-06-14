@@ -58,6 +58,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.awt.Frame;
 
 public class GUIPersonalmanagement{
@@ -444,7 +445,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(btndeleteallInputs, gbc_btndeleteallInputs);
 
 		JLabel lbleLabpicture = new JLabel("");
-		lbleLabpicture.setIcon(new ImageIcon("C:\\Users\\Nils\\git\\ProPraElab\\ProPraElab\\pictures\\elab.png"));
+		lbleLabpicture.setIcon(new ImageIcon("./pictures/elab.png"));
 		GridBagConstraints gbc_lbleLabpicture = new GridBagConstraints();
 		gbc_lbleLabpicture.gridwidth = 2;
 		gbc_lbleLabpicture.gridx = 0;
@@ -1000,6 +1001,7 @@ public class GUIPersonalmanagement{
 		menuBar.add(mnNewMenuOptions);
 		
 		JMenuItem mntmNewMenuItemMinimize = new JMenuItem("Minimieren");
+		mntmNewMenuItemMinimize.setToolTipText("Das Fenster wird minimiert");
 		mntmNewMenuItemMinimize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -1012,6 +1014,7 @@ public class GUIPersonalmanagement{
 		mnNewMenuOptions.add(mntmNewMenuItemMinimize);
 
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmenü");
+		mntmNewMenuItembacktoMain.setToolTipText("Rückkehr zum Hauptmenü");
 		mntmNewMenuItembacktoMain.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
 		mntmNewMenuItembacktoMain.addActionListener(new ActionListener() {
@@ -1024,6 +1027,7 @@ public class GUIPersonalmanagement{
 		});
 
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
+		mntmNewMenuItemlogOut.setToolTipText("Rückkehr zum Login Fenster");
 		mntmNewMenuItemlogOut.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
 		mntmNewMenuItemlogOut.addActionListener(new ActionListener() {
@@ -1036,6 +1040,7 @@ public class GUIPersonalmanagement{
 		});
 
 		JMenuItem mntmNewMenuItemcloseapplication = new JMenuItem("Anwendung verlassen");
+		mntmNewMenuItemcloseapplication.setToolTipText("Die Anwendung wird geschlossen");
 		mntmNewMenuItemcloseapplication.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuOptions.add(mntmNewMenuItemcloseapplication);
 		mntmNewMenuItemcloseapplication.addActionListener(new ActionListener() {
@@ -1051,12 +1056,22 @@ public class GUIPersonalmanagement{
 		menuBar.add(mnNewMenuhelpWindow);
 
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.setToolTipText("Die Anleitung als PDF wird geöffnet");
 		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mntmNewMenuItemshowManual.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//ToDo
+				
+
+				try {
+					Runtime.getRuntime().exec("cmd /c Start ./Anleitungen/Anleitung_zur_Personenverwaltung.pdf");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				
+				
 			}
 		});
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);

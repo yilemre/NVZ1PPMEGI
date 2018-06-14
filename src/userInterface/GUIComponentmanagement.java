@@ -61,6 +61,7 @@ import javax.swing.JTable;
 //<<<<<<< HEAD
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 //=======
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -460,7 +461,7 @@ public class GUIComponentmanagement  {
 		paneladdPart.add(btndeleteallInputs, gbc_btndeleteallInputs);
 
 		JLabel lbleLabpicture = new JLabel("");
-		lbleLabpicture.setIcon(new ImageIcon("C:\\Users\\Nils\\git\\ProPraElab\\ProPraElab\\pictures\\elab.png"));
+		lbleLabpicture.setIcon(new ImageIcon("./pictures/elab.png"));
 		GridBagConstraints gbc_lbleLabpicture = new GridBagConstraints();
 		gbc_lbleLabpicture.gridwidth = 2;
 		gbc_lbleLabpicture.gridx = 0;
@@ -1285,6 +1286,7 @@ public class GUIComponentmanagement  {
 		menuBar.add(mnNewMenuOptions);
 
 		JMenuItem mntmNewMenuItembacktoMain = new JMenuItem("Hauptmenü");
+		mntmNewMenuItembacktoMain.setToolTipText("Rückkehr zum Hauptmenü");
 		mntmNewMenuItembacktoMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GuiMenue mainMenu = new GuiMenue();
@@ -1294,6 +1296,7 @@ public class GUIComponentmanagement  {
 		});
 		
 		JMenuItem mntmNewMenuItemMinimize = new JMenuItem("Minimieren");
+		mntmNewMenuItemMinimize.setToolTipText("Das Fenster wird minimiert");
 		mntmNewMenuItemMinimize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -1307,6 +1310,7 @@ public class GUIComponentmanagement  {
 		mnNewMenuOptions.add(mntmNewMenuItembacktoMain);
 
 		JMenuItem mntmNewMenuItemlogOut = new JMenuItem("Ausloggen");
+		mntmNewMenuItemlogOut.setToolTipText("Rückkehr zum Login Fenster");
 		mntmNewMenuItemlogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GuiLogin logout = new GuiLogin();
@@ -1317,6 +1321,7 @@ public class GUIComponentmanagement  {
 		mnNewMenuOptions.add(mntmNewMenuItemlogOut);
 
 		JMenuItem mntmNewMenuItemcloseapplication = new JMenuItem("Anwendung verlassen");
+		mntmNewMenuItemcloseapplication.setToolTipText("Die Anwendung wird geschlossen");
 		mntmNewMenuItemcloseapplication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -1329,6 +1334,20 @@ public class GUIComponentmanagement  {
 		menuBar.add(mnNewMenuhelpWindow);
 
 		JMenuItem mntmNewMenuItemshowManual = new JMenuItem("Anleitung anzeigen");
+		mntmNewMenuItemshowManual.setToolTipText("Die Anleitung als PDF wird geöffnet");
+		mntmNewMenuItemshowManual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				try {
+					Runtime.getRuntime().exec("cmd /c Start ./Anleitungen/Anleitung_zur_Bauteileverwaltung.pdf");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
+			
+			}
+		});
 		mntmNewMenuItemshowManual.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		mnNewMenuhelpWindow.add(mntmNewMenuItemshowManual);
 
