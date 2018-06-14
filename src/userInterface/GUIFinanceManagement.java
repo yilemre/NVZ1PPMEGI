@@ -425,6 +425,17 @@ public class GUIFinanceManagement {
 					
 					textFieldestimatedFigure.setBackground(Color.white);
 					
+					double estimatedFigure = 0.0;
+					
+					try {
+						estimatedFigure = Double.parseDouble(textFieldestimatedFigure.getText());
+					}
+					catch(NumberFormatException e1) {
+						textFieldestimatedFigure.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Endbetrag!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					
 					String s = comboBoxrelatedJar.getSelectedItem().toString();
 					String[] split = s.split(" ");
 					String[] split2 = split[1].split(",");
@@ -438,7 +449,7 @@ public class GUIFinanceManagement {
 									Integer.parseInt(textFieldcustomerID.getText()),
 									Integer.parseInt(textresponsiblePerson.getText()), textFieldbillName.getText(),
 									comboBoxpaymentTyp.getSelectedIndex(),
-									Double.parseDouble(textFieldestimatedFigure.getText()))),
+									estimatedFigure)),
 									comboBoxBillStatus.getSelectedIndex());
 
 					ProductionManagement.addOrderStatus(Integer.parseInt(textFieldrelatedOrder.getText()), 7);
@@ -959,6 +970,17 @@ public class GUIFinanceManagement {
 					int relatedJar = Integer.parseInt((split2[0].toString()));	
 					
 					textFieldsumBillModify.setBackground(Color.white);
+					
+					double sumMoney = 0.0;
+					
+					try {
+						sumMoney = Double.parseDouble(textFieldsumBillModify.getText());
+					}
+					catch(NumberFormatException e1) {
+						textFieldsumBillModify.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Endbetrag!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
 				
 					FinancialManagement.modifyBill(
 						Integer.parseInt(textFieldBillIDModify.getText()),
@@ -967,7 +989,7 @@ public class GUIFinanceManagement {
 						FinancialManagement.getRegisterArray().get(comboBoxrelatedCashRegisterModify.getSelectedIndex()).getId(),
 						textFieldbillNameModify.getText(), 
 						comboBoxpaymentTypModify.getSelectedIndex(),
-						Double.parseDouble(textFieldsumBillModify.getText()),
+						sumMoney,
 						comboBoxBillStatusModify.getSelectedIndex());
 					
 					refreshTableJar();
@@ -1651,12 +1673,33 @@ public class GUIFinanceManagement {
 		btnaddcashRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+				
 					textFieldcashRegisterActualStock.setBackground(Color.white);
 					textFieldcashRegisterEstimatedStock.setBackground(Color.white);
 					
+					double cashRegisterActualStock = 0.0;
+					double cashRegisterEstimatedStock = 0.0;
+					
+					try {
+						cashRegisterActualStock = Double.parseDouble(textFieldcashRegisterActualStock.getText());
+					}
+					catch(NumberFormatException e1) {
+						textFieldcashRegisterActualStock.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Ist-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						cashRegisterEstimatedStock = Double.parseDouble(textFieldcashRegisterEstimatedStock.getText());
+					}
+					catch(NumberFormatException e1){
+						textFieldcashRegisterEstimatedStock.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					
 					FinancialManagement.addRegister(textFieldcashRegisterName.getText(),
-							Double.parseDouble(textFieldcashRegisterActualStock.getText()),
-							Double.parseDouble(textFieldcashRegisterEstimatedStock.getText()),
+							cashRegisterActualStock,
+							cashRegisterEstimatedStock,
 							comboBoxCashRegisterType.getSelectedIndex());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
@@ -1700,9 +1743,30 @@ public class GUIFinanceManagement {
 				try {
 					textFieldcashRegisterActualStockModify.setBackground(Color.white);
 					textFieldcashRegisterEstimatedStockModify.setBackground(Color.white);
+					
+					double cashRegisterActualStock = 0.0;
+					double cashRegisterEstimatedStock = 0.0;
+					
+					try {
+						cashRegisterActualStock = Double.parseDouble(textFieldcashRegisterActualStockModify.getText());
+					}
+					catch(NumberFormatException e1) {
+						textFieldcashRegisterActualStockModify.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Ist-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						cashRegisterEstimatedStock = Double.parseDouble(textFieldcashRegisterEstimatedStockModify.getText());
+					}
+					catch(NumberFormatException e1){
+						textFieldcashRegisterEstimatedStockModify.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					
 					FinancialManagement.modifyRegister(Integer.parseInt(textFieldCashRegisterIDModify.getText()),
-							Double.parseDouble(textFieldcashRegisterEstimatedStockModify.getText()),
-							Double.parseDouble(textFieldcashRegisterActualStockModify.getText()),
+							cashRegisterEstimatedStock,
+							cashRegisterActualStock,
 							textFieldCashRegisterNameModify.getText(),
 							comboBoxCashRegisterTypeModify_1.getSelectedIndex());
 				} catch (NumberFormatException e1) {
@@ -2006,9 +2070,30 @@ public class GUIFinanceManagement {
 				try {
 					textFieldjarActualStock.setBackground(Color.white);
 					textFieldjarEstimatedStock.setBackground(Color.white);
+					
+					double jarActualStock = 0.0;
+					double jarEstimatedStock = 0.0;
+					
+					try {
+						jarActualStock = Double.parseDouble(textFieldjarActualStock.getText());
+					}
+					catch(NumberFormatException e1) {
+						textFieldjarActualStock.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Ist-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						jarEstimatedStock = Double.parseDouble(textFieldjarEstimatedStock.getText());
+					}
+					catch(NumberFormatException e1){
+						textFieldjarEstimatedStock.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+	
 					FinancialManagement.addPot(textFieldjarName.getText(),
-							Double.parseDouble(textFieldjarActualStock.getText()),
-							Double.parseDouble(textFieldjarEstimatedStock.getText()), SQLManager.getInstance()
+							jarActualStock,
+							jarEstimatedStock, SQLManager.getInstance()
 									.getRegisterArray().get(comboBoxPotRegisterID.getSelectedIndex()).getId());
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
@@ -2040,9 +2125,30 @@ public class GUIFinanceManagement {
 				try {
 					textFieldjarActualStockModify.setBackground(Color.white);
 					textFieldjarEstimatedStockModify.setBackground(Color.white);
+					
+					double jarActualStock = 0.0;
+					double jarEstimatedStock = 0.0;
+					
+					try {
+						jarActualStock = Double.parseDouble(textFieldjarActualStockModify.getText());
+					}
+					catch(NumberFormatException e1) {
+						textFieldjarActualStockModify.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Ist-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						jarEstimatedStock = Double.parseDouble(textFieldjarEstimatedStockModify.getText());
+					}
+					catch(NumberFormatException e1){
+						textFieldjarEstimatedStockModify.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					
 					FinancialManagement.modifyPot(Integer.parseInt(textFieldPotIDModify.getText()),
-							Double.parseDouble(textFieldjarActualStockModify.getText()),
-							Double.parseDouble(textFieldjarEstimatedStockModify.getText()),
+							jarActualStock,
+							jarEstimatedStock,
 							textFieldjarNameModify.getText(), FinancialManagement.getRegisterArray()
 									.get(comboBoxPotRegisterIDModify.getSelectedIndex()).getId());
 				} catch (NumberFormatException e1) {

@@ -241,16 +241,12 @@ public class SQLManager {
 	public List<Category> getCategories () throws SQLException, CategoryNotInDBException {
 	    List<Category> category = new ArrayList<Category>();
 	    Statement stmt = c.createStatement(); 
-	    ResultSet rs = stmt.executeQuery("SELECT * FROM Categorys;"); 
-	    //stmt.close();
+	    ResultSet rs = stmt.executeQuery("SELECT * FROM Categorys"); 
 	    while(rs.next()) {
 		Category temp = new Category(rs.getInt("idCategory"), rs.getString("name"), rs.getString("note")); 
 		category.add(temp);
 	    }
-	    stmt.close();
-	    if (category.isEmpty()) throw new CategoryNotInDBException();
 	    return category; 
-	    
 	}
 	
 	public Category[] getCategoryArray () throws SQLException {

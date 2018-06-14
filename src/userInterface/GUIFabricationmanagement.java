@@ -439,9 +439,30 @@ public class GUIFabricationmanagement {
 		btnaddOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					textFieldpredictedCosts.setBackground(Color.WHITE);
+					textFieldactualCosts.setBackground(Color.WHITE);
 					// Emre +
 					// add Order
 					// add orderStatus with last inserted orderId
+					
+					double predicted = 0.0;
+					double actual = 0.0;
+					try {
+						predicted = Double.parseDouble(textFieldpredictedCosts.getText());
+					}
+					catch (NumberFormatException e1) {
+						textFieldpredictedCosts.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei prognostizierten Kosten!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						actual = Double.parseDouble(textFieldactualCosts.getText());
+					}
+					catch (NumberFormatException e1) {
+						textFieldactualCosts.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei reellen Kosten!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
 				
 					textFieldpredictedCosts.setBackground(Color.WHITE);
 					textFieldactualCosts.setBackground(Color.WHITE);
@@ -449,17 +470,14 @@ public class GUIFabricationmanagement {
 							.addOrderStatus(
 									(ProductionManagement.addOrder(textFieldorderTitel.getText(),
 											comboBoxorderTyp.getSelectedIndex(),
-											Double.parseDouble(textFieldpredictedCosts.getText()),
-											Double.parseDouble(textFieldactualCosts.getText()),
-											SQLManager.getInstance().getCustomerArray()
-													.get(comboBoxorderCustomer.getSelectedIndex()).getId(),
-											SQLManager.getInstance().getAdvisorArray()
-													.get(comboBoxResponsible.getSelectedIndex()).getId(),
-											SQLManager.getInstance().getAdvisorArray()
-													.get(comboBoxStandinResponsible.getSelectedIndex()).getId(),
+											predicted,
+											actual,
+											SQLManager.getInstance().getCustomerArray().get(comboBoxorderCustomer.getSelectedIndex()).getId(),
+											SQLManager.getInstance().getAdvisorArray().get(comboBoxResponsible.getSelectedIndex()).getId(),
+											SQLManager.getInstance().getAdvisorArray().get(comboBoxStandinResponsible.getSelectedIndex()).getId(),
 											textFieldfileName.getText(), textFieldfilePath.getText(),
 											textFieldnoteOther.getText())),
-									comboBoxorderStatus.getSelectedIndex());
+											comboBoxorderStatus.getSelectedIndex());
 
 					// Emre -
 					refreshTable();
@@ -925,13 +943,34 @@ public class GUIFabricationmanagement {
 					
 					textFieldpredictedCostsModify.setBackground(Color.WHITE);
 					textFieldactualCostsModify.setBackground(Color.WHITE);
+					
+					
+					double predicted = 0.0;
+					double actual = 0.0;
+					try {
+						predicted = Double.parseDouble(textFieldpredictedCostsModify.getText());
+					}
+					catch (NumberFormatException e1) {
+						textFieldpredictedCostsModify.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei prognostizierten Kosten!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						actual = Double.parseDouble(textFieldactualCostsModify.getText());
+					}
+					catch (NumberFormatException e1) {
+						textFieldactualCostsModify.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei reellen Kosten!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
 					ProductionManagement.modifyOrder(Integer.parseInt(textFieldorderIDModify.getText()),
 							textFieldorderTitelModify.getText(), comboBoxTypeModify.getSelectedIndex(),
-							Double.parseDouble(textFieldpredictedCostsModify.getText()),
-							Double.parseDouble(textFieldactualCostsModify.getText()),
-							SQLManager.getInstance().getCustomerArray().get(comboBoxorderCustomerModify.getSelectedIndex()).getId(),
-							SQLManager.getInstance().getAdvisorArray().get(comboBoxResponsiblePersonModify.getSelectedIndex()).getId(),
-							SQLManager.getInstance().getAdvisorArray().get(comboBoxStandinResponsiblePersonModify.getSelectedIndex()).getId(),
+							predicted,
+							actual,
+							ProductionManagement.getCustomerArray().get(comboBoxorderCustomerModify.getSelectedIndex()).getId(),
+							ProductionManagement.getAdvisorArray().get(comboBoxResponsiblePersonModify.getSelectedIndex()).getId(),
+							ProductionManagement.getAdvisorArray().get(comboBoxStandinResponsiblePersonModify.getSelectedIndex()).getId(),
 							textFieldfileNameModify.getText(), textFieldfilePathModify.getText(),
 							textFieldnoteOtherModify.getText());
 					ProductionManagement.addOrderStatus(Integer.parseInt(textFieldorderIDModify.getText()),

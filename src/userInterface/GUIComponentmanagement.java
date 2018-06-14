@@ -357,9 +357,47 @@ public class GUIComponentmanagement  {
 					textFieldquantityPlanned.setBackground(Color.WHITE);
 					textFieldquantityStoring.setBackground(Color.WHITE);
 					
+					double partPrize = 0.0;
+					int quantityStoring = 0;
+					int quantityPlanned = 0;
+					int quantityOrdered = 0;
+					
+					try {
+						partPrize = Double.parseDouble(textFieldpartPrize.getText());
+					}
+					catch(NumberFormatException e1) {
+						textFieldpartPrize.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						quantityStoring = Integer.parseInt(textFieldquantityStoring.getText());
+					}
+					catch(NumberFormatException e1) {
+						textFieldquantityStoring.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						quantityPlanned = Integer.parseInt(textFieldquantityPlanned.getText());
+					}
+					catch(NumberFormatException e1) {
+						textFieldquantityPlanned.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						quantityOrdered = Integer.parseInt(textFieldquantityOrdered.getText());
+					}
+					catch(NumberFormatException e1) {
+						textFieldquantityOrdered.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Soll-Bestand!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
 					ComponentManagement.addPart(tfArticleNo.getText(), textFieldpartLink.getText(), textFieldpartName.getText(),
-							Double.parseDouble(textFieldpartPrize.getText()), Integer.parseInt(textFieldquantityStoring.getText()),
-							Integer.parseInt(textFieldquantityPlanned.getText()), Integer.parseInt(textFieldquantityOrdered.getText()),
+							partPrize, quantityStoring,
+							quantityPlanned, quantityOrdered,
 							textFieldstorageLocation.getText(),getCategoryId(comboBoxcategory.getSelectedIndex()));
 				} catch (NumberFormatException e1) {
 					
@@ -374,6 +412,15 @@ public class GUIComponentmanagement  {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				tfArticleNo.setText("");
+				textFieldpartName.setText("");
+				textFieldpartLink.setText("");
+				textFieldpartPrize.setText("");
+				textFieldquantityStoring.setText("");
+				textFieldquantityPlanned.setText("");
+				textFieldquantityOrdered.setText("");
+				textFieldstorageLocation.setText("");
+				comboBoxcategory.setSelectedIndex(-1);
 				refreshTable(); 
 			}
 
@@ -644,10 +691,49 @@ public class GUIComponentmanagement  {
 					tfStoring.setBackground(Color.WHITE);
 					tfPlannedAmount.setBackground(Color.WHITE);
 					tfOrderedAmount.setBackground(Color.WHITE);
+					
+					double partPrize = 0.0;
+					int quantityStoring = 0;
+					int quantityPlanned = 0;
+					int quantityOrdered = 0;
+					
+					try {
+						partPrize = Double.parseDouble(textFieldpartPrizeModify.getText());
+					}
+					catch(NumberFormatException e1) {
+						textFieldpartPrizeModify.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Einzelpreis!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						quantityStoring = Integer.parseInt(tfStoring.getText());
+					}
+					catch(NumberFormatException e1) {
+						tfStoring.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Menge (lagernd)!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						quantityPlanned = Integer.parseInt(tfPlannedAmount.getText());
+					}
+					catch(NumberFormatException e1) {
+						tfPlannedAmount.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Menge (geplant)!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						quantityOrdered = Integer.parseInt(tfOrderedAmount.getText());
+					}
+					catch(NumberFormatException e1) {
+						tfOrderedAmount.setBackground(Color.RED);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Menge (bestellt)!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					
 					ComponentManagement.modifyPart(Integer.parseInt(tfComponentModifyID.getText()),tfArticleNoModify.getText(), 
 					textFieldpartLinkModify.getText(), textFieldpartNameModify.getText(),
-					Double.parseDouble(textFieldpartPrizeModify.getText()),Integer.parseInt(tfStoring.getText()), 
-					Integer.parseInt(tfPlannedAmount.getText()), Integer.parseInt(tfOrderedAmount.getText()),tfStorageLocationModify.getText(), 
+					partPrize,quantityStoring, 
+					quantityPlanned, quantityOrdered,tfStorageLocationModify.getText(), 
 					ComponentManagement.getCategoryArray()[comboBoxcategoryModify.getSelectedIndex()].getId());
 
 				} catch (NumberFormatException e1) {
@@ -662,6 +748,16 @@ public class GUIComponentmanagement  {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				tfComponentModifyID.setText("");
+				tfArticleNoModify.setText("");
+				textFieldpartLinkModify.setText("");
+				textFieldpartNameModify.setText("");
+				textFieldpartPrizeModify.setText("");
+				tfStoring.setText("");
+				tfPlannedAmount.setText("");
+				tfOrderedAmount.setText("");
+				tfStorageLocationModify.setText("");
+				comboBoxcategoryModify.setSelectedIndex(-1);
 				refreshTable(); 
 				//Emre end    
 			}

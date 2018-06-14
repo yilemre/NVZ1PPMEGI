@@ -353,11 +353,31 @@ public class GUIPersonalmanagement{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					
 					textFieldhouseNumber.setBackground(Color.white);
 					textFieldzipCode.setBackground(Color.white);
 					
-					PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), Integer.parseInt(textFieldhouseNumber.getText()),
-							Integer.parseInt(textFieldzipCode.getText()),textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
+					int houseNumber = 0;
+					int zipcode = 0;
+					try {
+						houseNumber = Integer.parseInt(textFieldhouseNumber.getText());
+					}
+					catch (NumberFormatException e1) {
+						textFieldhouseNumber.setBackground(Color.red);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Hausnummer!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					try {
+						zipcode = Integer.parseInt(textFieldzipCode.getText());
+					}
+					catch (NumberFormatException e1) {
+						textFieldzipCode.setBackground(Color.red);
+						JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Postleitzahl!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+							
+					PersonManagement.addPerson(textFieldname.getText(), textFieldlastName.getText(), textFieldStreet.getText(), houseNumber,
+							zipcode, textFieldeMail.getText(), textFielduserName.getText(), String.valueOf(passwordField.getPassword()), comboBoxType.getSelectedIndex());
 					refreshTable();
 					refreshTableDeletePerson();
 					textFieldname.setText("");
@@ -640,9 +660,30 @@ public class GUIPersonalmanagement{
 				try {
 				    textFieldhouseNumberModify.setBackground(Color.white);
 				    textFieldzipCodeModify.setBackground(Color.white);
+				    
+				    int housenumber = 0;
+				    int zipcode = 0;
+				    
+				    try {
+				    	housenumber = Integer.parseInt(textFieldhouseNumberModify.getText());
+				    }
+				    catch (NumberFormatException e1) {
+				    	textFieldhouseNumberModify.setBackground(Color.red);
+				    	JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Hausnummer!", "Fehler", JOptionPane.ERROR_MESSAGE);
+				    	return;
+				    }
+				    try {
+				    	zipcode = Integer.parseInt(textFieldzipCodeModify.getText());
+				    }
+				    catch (NumberFormatException e1) {
+				    	textFieldzipCodeModify.setBackground(Color.red);
+				    	JOptionPane.showMessageDialog(frmElabVerwaltungsprogramm, "Fehlerhafte Eingabe bei Postleitzahl!", "Fehler", JOptionPane.ERROR_MESSAGE);
+				    	return;
+				    }
+ 
 				    PersonManagement.modifyPerson(Integer.parseInt(textFieldIDModify.getText()), textFieldnameModify.getText(),
 					    textFieldlastNameModify.getText(), textFieldstreetModify.getText(), 
-					    Integer.parseInt(textFieldhouseNumberModify.getText()), Integer.parseInt(textFieldzipCodeModify.getText()), 
+					    housenumber, zipcode, 
 					    textFieldeMailModify.getText(), textFielduserNameModify.getText(), new String(passwordFieldModify.getPassword()), 
 					    comboBoxTypeModify.getSelectedIndex());
 					
