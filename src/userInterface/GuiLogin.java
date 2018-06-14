@@ -83,7 +83,7 @@ public class GuiLogin {
 		frmElabVerwaltungsprogramm.getContentPane().setLayout(gridBagLayout);
 		
 		lblUsername = new JLabel("Username");
-		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblUsername.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
 		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUsername.anchor = GridBagConstraints.WEST;
@@ -92,7 +92,7 @@ public class GuiLogin {
 		frmElabVerwaltungsprogramm.getContentPane().add(lblUsername, gbc_lblUsername);
 		
 		textFielduserName = new JTextField();
-		textFielduserName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFielduserName.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFielduserName = new GridBagConstraints();
 		gbc_textFielduserName.insets = new Insets(0, 0, 5, 0);
 		gbc_textFielduserName.fill = GridBagConstraints.HORIZONTAL;
@@ -102,7 +102,7 @@ public class GuiLogin {
 		textFielduserName.setColumns(10);
 		
 		lblPassword = new JLabel("Passwort");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPassword.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPassword.anchor = GridBagConstraints.WEST;
@@ -111,7 +111,7 @@ public class GuiLogin {
 		frmElabVerwaltungsprogramm.getContentPane().add(lblPassword, gbc_lblPassword);
 		
 		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.insets = new Insets(0, 0, 5, 0);
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
@@ -142,7 +142,7 @@ public class GuiLogin {
 				e1.printStackTrace();
 			}
 		});
-		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnLogin.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
 		gbc_btnLogin.fill = GridBagConstraints.HORIZONTAL;
@@ -158,7 +158,7 @@ public class GuiLogin {
 				frmElabVerwaltungsprogramm.dispose();
 			}
 		});
-		btnregister.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnregister.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
 		btnregister.setToolTipText("Als neuer Kunde hier registrieren");
 		GridBagConstraints gbc_btnregister = new GridBagConstraints();

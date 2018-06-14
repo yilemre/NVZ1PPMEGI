@@ -126,7 +126,7 @@ public class GUIPersonalmanagement{
 		
 		
 		JLabel lblPersonenverwaltung = new JLabel("Personenverwaltung");
-		lblPersonenverwaltung.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPersonenverwaltung.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		GridBagConstraints gbc_lblPersonenverwaltung = new GridBagConstraints();
 		gbc_lblPersonenverwaltung.insets = new Insets(0, 0, 5, 0);
 		gbc_lblPersonenverwaltung.gridx = 0;
@@ -134,7 +134,7 @@ public class GUIPersonalmanagement{
 		frmElabVerwaltungsprogramm.getContentPane().add(lblPersonenverwaltung, gbc_lblPersonenverwaltung);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tabbedPane.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
 		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
 		gbc_tabbedPane.gridx = 0;
@@ -159,7 +159,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(lblNewLabel, gbc_lblNewLabel);
 
 		JLabel lblID = new JLabel("ID");
-		lblID.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblID.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblID = new GridBagConstraints();
 		gbc_lblID.anchor = GridBagConstraints.EAST;
 		gbc_lblID.insets = new Insets(0, 0, 5, 5);
@@ -168,7 +168,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(lblID, gbc_lblID);
 
 		textFieldID = new JTextField();
-		textFieldID.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldID.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		textFieldID.setEditable(false);
 		GridBagConstraints gbc_textFieldID = new GridBagConstraints();
 		gbc_textFieldID.insets = new Insets(0, 0, 5, 0);
@@ -179,7 +179,7 @@ public class GUIPersonalmanagement{
 		textFieldID.setColumns(10);
 
 		JLabel lblname = new JLabel("Vorname");
-		lblname.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblname.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblname = new GridBagConstraints();
 		gbc_lblname.anchor = GridBagConstraints.EAST;
 		gbc_lblname.insets = new Insets(0, 0, 5, 5);
@@ -188,7 +188,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(lblname, gbc_lblname);
 
 		textFieldname = new JTextField();
-		textFieldname.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldname.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldname = new GridBagConstraints();
 		gbc_textFieldname.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldname.fill = GridBagConstraints.HORIZONTAL;
@@ -198,7 +198,7 @@ public class GUIPersonalmanagement{
 		textFieldname.setColumns(10);
 
 		JLabel lbllastName = new JLabel("Nachname");
-		lbllastName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbllastName.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbllastName = new GridBagConstraints();
 		gbc_lbllastName.anchor = GridBagConstraints.EAST;
 		gbc_lbllastName.insets = new Insets(0, 0, 5, 5);
@@ -207,7 +207,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(lbllastName, gbc_lbllastName);
 
 		textFieldlastName = new JTextField();
-		textFieldlastName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldlastName.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldlastName = new GridBagConstraints();
 		gbc_textFieldlastName.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldlastName.fill = GridBagConstraints.HORIZONTAL;
@@ -217,7 +217,7 @@ public class GUIPersonalmanagement{
 		textFieldlastName.setColumns(10);
 
 		JLabel lblStreet = new JLabel("Straße");
-		lblStreet.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblStreet.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblStreet = new GridBagConstraints();
 		gbc_lblStreet.anchor = GridBagConstraints.EAST;
 		gbc_lblStreet.insets = new Insets(0, 0, 5, 5);
@@ -226,7 +226,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(lblStreet, gbc_lblStreet);
 
 		textFieldStreet = new JTextField();
-		textFieldStreet.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldStreet.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldStreet = new GridBagConstraints();
 		gbc_textFieldStreet.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldStreet.fill = GridBagConstraints.HORIZONTAL;
@@ -236,7 +236,7 @@ public class GUIPersonalmanagement{
 		textFieldStreet.setColumns(10);
 
 		JLabel lblhouseNumber = new JLabel("Hausnummer");
-		lblhouseNumber.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblhouseNumber.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblhouseNumber = new GridBagConstraints();
 		gbc_lblhouseNumber.anchor = GridBagConstraints.EAST;
 		gbc_lblhouseNumber.insets = new Insets(0, 0, 5, 5);
@@ -245,7 +245,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(lblhouseNumber, gbc_lblhouseNumber);
 
 		textFieldhouseNumber = new JTextField();
-		textFieldhouseNumber.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldhouseNumber.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldhouseNumber = new GridBagConstraints();
 		gbc_textFieldhouseNumber.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldhouseNumber.fill = GridBagConstraints.HORIZONTAL;
@@ -255,7 +255,7 @@ public class GUIPersonalmanagement{
 		textFieldhouseNumber.setColumns(10);
 
 		JLabel lblzipCode = new JLabel("PLZ");
-		lblzipCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblzipCode.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblzipCode = new GridBagConstraints();
 		gbc_lblzipCode.anchor = GridBagConstraints.EAST;
 		gbc_lblzipCode.insets = new Insets(0, 0, 5, 5);
@@ -264,7 +264,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(lblzipCode, gbc_lblzipCode);
 
 		textFieldzipCode = new JTextField();
-		textFieldzipCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldzipCode.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldzipCode = new GridBagConstraints();
 		gbc_textFieldzipCode.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldzipCode.fill = GridBagConstraints.HORIZONTAL;
@@ -274,7 +274,7 @@ public class GUIPersonalmanagement{
 		textFieldzipCode.setColumns(10);
 
 		JLabel lbleMail = new JLabel("E-Mail Adresse");
-		lbleMail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbleMail.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbleMail = new GridBagConstraints();
 		gbc_lbleMail.anchor = GridBagConstraints.EAST;
 		gbc_lbleMail.insets = new Insets(0, 0, 5, 5);
@@ -283,7 +283,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(lbleMail, gbc_lbleMail);
 
 		textFieldeMail = new JTextField();
-		textFieldeMail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldeMail.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldeMail = new GridBagConstraints();
 		gbc_textFieldeMail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldeMail.insets = new Insets(0, 0, 5, 0);
@@ -293,14 +293,14 @@ public class GUIPersonalmanagement{
 		textFieldeMail.setColumns(10);
 
 		JLabel lblTyp = new JLabel("Personenart");
-		lblTyp.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTyp.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblTyp = new GridBagConstraints();
 		gbc_lblTyp.anchor = GridBagConstraints.EAST;
 		gbc_lblTyp.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTyp.gridx = 0;
 		gbc_lblTyp.gridy = 8;
 		paneladdPerson.add(lblTyp, gbc_lblTyp);
-		comboBoxType.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxType.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 
 		comboBoxType.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
 		GridBagConstraints gbc_comboBoxType = new GridBagConstraints();
@@ -311,7 +311,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(comboBoxType, gbc_comboBoxType);
 
 		JLabel lbluserName = new JLabel("Username");
-		lbluserName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbluserName.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbluserName = new GridBagConstraints();
 		gbc_lbluserName.anchor = GridBagConstraints.EAST;
 		gbc_lbluserName.insets = new Insets(0, 0, 5, 5);
@@ -320,7 +320,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(lbluserName, gbc_lbluserName);
 
 		textFielduserName = new JTextField();
-		textFielduserName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFielduserName.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFielduserName = new GridBagConstraints();
 		gbc_textFielduserName.insets = new Insets(0, 0, 5, 0);
 		gbc_textFielduserName.fill = GridBagConstraints.HORIZONTAL;
@@ -330,7 +330,7 @@ public class GUIPersonalmanagement{
 		textFielduserName.setColumns(10);
 
 		JLabel lblPassword = new JLabel("Passwort");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPassword.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.anchor = GridBagConstraints.EAST;
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
@@ -339,7 +339,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(lblPassword, gbc_lblPassword);
 
 		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.insets = new Insets(0, 0, 5, 0);
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
@@ -348,7 +348,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(passwordField, gbc_passwordField);
 
 		JButton btnaddPerson = new JButton("Person hinzufügen");
-		btnaddPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnaddPerson.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		btnaddPerson.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -421,7 +421,7 @@ public class GUIPersonalmanagement{
 		paneladdPerson.add(btnaddPerson, gbc_btnaddPerson);
 
 		JButton btndeleteallInputs = new JButton("Eingaben löschen");
-		btndeleteallInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btndeleteallInputs.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_btndeleteallInputs = new GridBagConstraints();
 		btndeleteallInputs.addActionListener(new ActionListener() {
 			@Override
@@ -461,7 +461,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.setLayout(gbl_panelmodifyPerson);
 
 		JLabel lblIDModify = new JLabel("ID");
-		lblIDModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblIDModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblIDModify = new GridBagConstraints();
 		gbc_lblIDModify.anchor = GridBagConstraints.EAST;
 		gbc_lblIDModify.insets = new Insets(0, 0, 5, 5);
@@ -470,7 +470,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(lblIDModify, gbc_lblIDModify);
 
 		textFieldIDModify = new JTextField();
-		textFieldIDModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldIDModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		textFieldIDModify.setEditable(false);
 		textFieldIDModify.setText("");
 		GridBagConstraints gbc_textFieldIDModify = new GridBagConstraints();
@@ -482,7 +482,7 @@ public class GUIPersonalmanagement{
 		textFieldIDModify.setColumns(10);
 
 		JLabel lblnameModify = new JLabel("Vorname");
-		lblnameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblnameModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblnameModify = new GridBagConstraints();
 		gbc_lblnameModify.anchor = GridBagConstraints.EAST;
 		gbc_lblnameModify.insets = new Insets(0, 0, 5, 5);
@@ -491,7 +491,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(lblnameModify, gbc_lblnameModify);
 
 		textFieldnameModify = new JTextField();
-		textFieldnameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldnameModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldnameModify = new GridBagConstraints();
 		gbc_textFieldnameModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldnameModify.fill = GridBagConstraints.HORIZONTAL;
@@ -501,7 +501,7 @@ public class GUIPersonalmanagement{
 		textFieldnameModify.setColumns(10);
 
 		JLabel lbllastNameModify = new JLabel("Nachname");
-		lbllastNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbllastNameModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbllastNameModify = new GridBagConstraints();
 		gbc_lbllastNameModify.anchor = GridBagConstraints.EAST;
 		gbc_lbllastNameModify.insets = new Insets(0, 0, 5, 5);
@@ -510,7 +510,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(lbllastNameModify, gbc_lbllastNameModify);
 
 		textFieldlastNameModify = new JTextField();
-		textFieldlastNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldlastNameModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldlastNameModify = new GridBagConstraints();
 		gbc_textFieldlastNameModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldlastNameModify.fill = GridBagConstraints.HORIZONTAL;
@@ -520,7 +520,7 @@ public class GUIPersonalmanagement{
 		textFieldlastNameModify.setColumns(10);
 
 		JLabel lblstreetModify = new JLabel("Straße");
-		lblstreetModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblstreetModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblstreetModify = new GridBagConstraints();
 		gbc_lblstreetModify.anchor = GridBagConstraints.EAST;
 		gbc_lblstreetModify.insets = new Insets(0, 0, 5, 5);
@@ -529,7 +529,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(lblstreetModify, gbc_lblstreetModify);
 
 		textFieldstreetModify = new JTextField();
-		textFieldstreetModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldstreetModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldstreetModify = new GridBagConstraints();
 		gbc_textFieldstreetModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldstreetModify.fill = GridBagConstraints.HORIZONTAL;
@@ -539,7 +539,7 @@ public class GUIPersonalmanagement{
 		textFieldstreetModify.setColumns(10);
 
 		JLabel lblhouseNumberModify = new JLabel("Hausnummer");
-		lblhouseNumberModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblhouseNumberModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblhouseNumberModify = new GridBagConstraints();
 		gbc_lblhouseNumberModify.anchor = GridBagConstraints.EAST;
 		gbc_lblhouseNumberModify.insets = new Insets(0, 0, 5, 5);
@@ -548,7 +548,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(lblhouseNumberModify, gbc_lblhouseNumberModify);
 
 		textFieldhouseNumberModify = new JTextField();
-		textFieldhouseNumberModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldhouseNumberModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldhouseNumberModify = new GridBagConstraints();
 		gbc_textFieldhouseNumberModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldhouseNumberModify.fill = GridBagConstraints.HORIZONTAL;
@@ -558,7 +558,7 @@ public class GUIPersonalmanagement{
 		textFieldhouseNumberModify.setColumns(10);
 
 		JLabel lblzipCodeModify = new JLabel("PLZ");
-		lblzipCodeModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblzipCodeModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblzipCodeModify = new GridBagConstraints();
 		gbc_lblzipCodeModify.anchor = GridBagConstraints.EAST;
 		gbc_lblzipCodeModify.insets = new Insets(0, 0, 5, 5);
@@ -567,7 +567,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(lblzipCodeModify, gbc_lblzipCodeModify);
 
 		textFieldzipCodeModify = new JTextField();
-		textFieldzipCodeModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldzipCodeModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldzipCodeModify = new GridBagConstraints();
 		gbc_textFieldzipCodeModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldzipCodeModify.fill = GridBagConstraints.HORIZONTAL;
@@ -577,7 +577,7 @@ public class GUIPersonalmanagement{
 		textFieldzipCodeModify.setColumns(10);
 
 		JLabel lbleMailModify = new JLabel("E-Mail Adresse");
-		lbleMailModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbleMailModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbleMailModify = new GridBagConstraints();
 		gbc_lbleMailModify.anchor = GridBagConstraints.EAST;
 		gbc_lbleMailModify.insets = new Insets(0, 0, 5, 5);
@@ -586,7 +586,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(lbleMailModify, gbc_lbleMailModify);
 
 		textFieldeMailModify = new JTextField();
-		textFieldeMailModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldeMailModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldeMailModify = new GridBagConstraints();
 		gbc_textFieldeMailModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldeMailModify.fill = GridBagConstraints.HORIZONTAL;
@@ -596,7 +596,7 @@ public class GUIPersonalmanagement{
 		textFieldeMailModify.setColumns(10);
 
 		JLabel lbltypModify = new JLabel("Personenart");
-		lbltypModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbltypModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbltypModify = new GridBagConstraints();
 		gbc_lbltypModify.anchor = GridBagConstraints.EAST;
 		gbc_lbltypModify.insets = new Insets(0, 0, 5, 5);
@@ -605,7 +605,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(lbltypModify, gbc_lbltypModify);
 
 		comboBoxTypeModify = new JComboBox();
-		comboBoxTypeModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxTypeModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		comboBoxTypeModify.setModel(new DefaultComboBoxModel(comboBoxEntries.toArray()));
 		GridBagConstraints gbc_comboBoxTypeModify = new GridBagConstraints();
 		gbc_comboBoxTypeModify.insets = new Insets(0, 0, 5, 0);
@@ -615,7 +615,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(comboBoxTypeModify, gbc_comboBoxTypeModify);
 
 		JLabel lbluserNameModify = new JLabel("Username");
-		lbluserNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbluserNameModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbluserNameModify = new GridBagConstraints();
 		gbc_lbluserNameModify.anchor = GridBagConstraints.EAST;
 		gbc_lbluserNameModify.insets = new Insets(0, 0, 5, 5);
@@ -624,7 +624,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(lbluserNameModify, gbc_lbluserNameModify);
 
 		textFielduserNameModify = new JTextField();
-		textFielduserNameModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFielduserNameModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFielduserNameModify = new GridBagConstraints();
 		gbc_textFielduserNameModify.insets = new Insets(0, 0, 5, 0);
 		gbc_textFielduserNameModify.fill = GridBagConstraints.HORIZONTAL;
@@ -634,7 +634,7 @@ public class GUIPersonalmanagement{
 		textFielduserNameModify.setColumns(10);
 
 		JLabel lblpasswordModify = new JLabel("Passwort");
-		lblpasswordModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblpasswordModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblpasswordModify = new GridBagConstraints();
 		gbc_lblpasswordModify.anchor = GridBagConstraints.EAST;
 		gbc_lblpasswordModify.insets = new Insets(0, 0, 5, 5);
@@ -643,7 +643,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(lblpasswordModify, gbc_lblpasswordModify);
 
 		passwordFieldModify = new JPasswordField();
-		passwordFieldModify.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		passwordFieldModify.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_passwordFieldModify = new GridBagConstraints();
 		gbc_passwordFieldModify.insets = new Insets(0, 0, 5, 0);
 		gbc_passwordFieldModify.fill = GridBagConstraints.HORIZONTAL;
@@ -652,7 +652,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(passwordFieldModify, gbc_passwordFieldModify);
 
 		JButton btnsaveModifiedValues = new JButton("Änderungen speichern");
-		btnsaveModifiedValues.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnsaveModifiedValues.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		btnsaveModifiedValues.addActionListener(new ActionListener() {
 
 			@Override
@@ -729,7 +729,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(scrollPanemodifyPerson, gbc_scrollPanemodifyPerson);
 
 		table = new JTable();
-		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		table.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		try {
 			table.setModel(new PersonTableModel(PersonManagement.getPersons()));
 		} catch (SQLException e) {
@@ -750,7 +750,7 @@ public class GUIPersonalmanagement{
 
 
 		JComboBox comboBoxsearchModifyPerson = new JComboBox();
-		comboBoxsearchModifyPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxsearchModifyPerson.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		comboBoxsearchModifyPerson.setModel(new DefaultComboBoxModel(new String[] {"Vorname", "Nachname", "Mitgliedschaft"}));
 		GridBagConstraints gbc_comboBoxsearchModifyPerson = new GridBagConstraints();
 		gbc_comboBoxsearchModifyPerson.insets = new Insets(0, 0, 5, 5);
@@ -760,7 +760,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(comboBoxsearchModifyPerson, gbc_comboBoxsearchModifyPerson);
 
 		textFieldsearchModifyPerson = new JTextField();
-		textFieldsearchModifyPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldsearchModifyPerson.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldsearchModifyPerson = new GridBagConstraints();
 		gbc_textFieldsearchModifyPerson.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldsearchModifyPerson.fill = GridBagConstraints.HORIZONTAL;
@@ -770,7 +770,7 @@ public class GUIPersonalmanagement{
 		textFieldsearchModifyPerson.setColumns(10);
 
 		JButton btnsearchModifyPerson = new JButton("Suchen");
-		btnsearchModifyPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnsearchModifyPerson.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnsearchModifyPerson = new GridBagConstraints();
 		btnsearchModifyPerson.addActionListener(new ActionListener() {
 			@Override
@@ -817,7 +817,7 @@ public class GUIPersonalmanagement{
 		panelmodifyPerson.add(btnsearchModifyPerson, gbc_btnsearchModifyPerson);
 
 		JButton btnSearchRemove = new JButton("Suche aufheben");
-		btnSearchRemove.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnSearchRemove.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		btnSearchRemove.addActionListener(new ActionListener() {
 
@@ -877,7 +877,7 @@ public class GUIPersonalmanagement{
 		TableDeletePerson.clearSelection();
 
 		JComboBox comboBoxsearchDeletePerson = new JComboBox();
-		comboBoxsearchDeletePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxsearchDeletePerson.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		comboBoxsearchDeletePerson.setModel(new DefaultComboBoxModel(new String[] {"Vorname", "Nachname", "Mitgliedschaft"}));
 		GridBagConstraints gbc_comboBoxsearchDeletePerson = new GridBagConstraints();
 		gbc_comboBoxsearchDeletePerson.insets = new Insets(0, 0, 5, 5);
@@ -887,7 +887,7 @@ public class GUIPersonalmanagement{
 		paneldeletePerson.add(comboBoxsearchDeletePerson, gbc_comboBoxsearchDeletePerson);
 
 		textFieldsearchDeletePerson = new JTextField();
-		textFieldsearchDeletePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldsearchDeletePerson.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldsearchDeletePerson = new GridBagConstraints();
 		gbc_textFieldsearchDeletePerson.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldsearchDeletePerson.fill = GridBagConstraints.HORIZONTAL;
@@ -897,7 +897,7 @@ public class GUIPersonalmanagement{
 		textFieldsearchDeletePerson.setColumns(10);
 
 		JButton btnsearchDeletePerson = new JButton("Person Suchen");
-		btnsearchDeletePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnsearchDeletePerson.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnsearchDeletePerson = new GridBagConstraints();
 		btnsearchDeletePerson.addActionListener(new ActionListener() {
 			@Override
@@ -944,7 +944,7 @@ public class GUIPersonalmanagement{
 		paneldeletePerson.add(btnsearchDeletePerson, gbc_btnsearchDeletePerson);
 		
 		JButton btndeleteSearch = new JButton("Suche aufheben");
-		btndeleteSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btndeleteSearch.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		btndeleteSearch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -965,7 +965,7 @@ public class GUIPersonalmanagement{
 		paneldeletePerson.add(btndeleteSearch, gbc_btndeleteSearch);
 		
 				JButton btndeletePerson = new JButton("Person löschen");
-				btndeletePerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				btndeletePerson.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 				GridBagConstraints gbc_btndeletePerson = new GridBagConstraints();
 				gbc_btndeletePerson.insets = new Insets(0, 0, 5, 0);
 				btndeletePerson.addActionListener(new ActionListener() {

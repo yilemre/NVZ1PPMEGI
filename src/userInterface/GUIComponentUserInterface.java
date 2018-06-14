@@ -109,7 +109,7 @@ public class GUIComponentUserInterface {
 		frmElabVerwaltungsprogramm.getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblcomponentUserinterface = new JLabel("Bauteilshop");
-		lblcomponentUserinterface.setFont(new Font("Tahoma", Font.BOLD, 17));
+		lblcomponentUserinterface.setFont(new Font("Segoe UI", Font.BOLD, 17));
 		GridBagConstraints gbc_lblcomponentUserinterface = new GridBagConstraints();
 		gbc_lblcomponentUserinterface.insets = new Insets(0, 0, 5, 0);
 		gbc_lblcomponentUserinterface.gridx = 1;
@@ -117,7 +117,7 @@ public class GUIComponentUserInterface {
 		frmElabVerwaltungsprogramm.getContentPane().add(lblcomponentUserinterface, gbc_lblcomponentUserinterface);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tabbedPane.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
 		gbc_tabbedPane.gridwidth = 2;
 		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
@@ -146,7 +146,7 @@ public class GUIComponentUserInterface {
 		panelshoppingCart.add(scrollPaneallParts, gbc_scrollPaneallParts);
 		
 		tableAllParts = new JTable();
-		tableAllParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tableAllParts.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		scrollPaneallParts.setViewportView(tableAllParts);
 		
 		//Emre+
@@ -179,7 +179,7 @@ public class GUIComponentUserInterface {
 		panelshoppingCart.add(scrollPaneshoppingCart, gbc_scrollPaneshoppingCart);
 		
 		tableShoppingCard = new JTable();
-		tableShoppingCard.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tableShoppingCard.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		scrollPaneshoppingCart.setViewportView(tableShoppingCard);
 		//Emre+
 		try {
@@ -201,7 +201,7 @@ public class GUIComponentUserInterface {
 		
 		
 		comboBoxcategoryPartSearch = new JComboBox();
-		comboBoxcategoryPartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBoxcategoryPartSearch.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		comboBoxcategoryPartSearch.setToolTipText("Suchkategorie auswählen");
 		comboBoxcategoryPartSearch.setModel(new DefaultComboBoxModel(new String[] {"Name", "Artikelnummer"}));
 		GridBagConstraints gbc_comboBoxcategoryPartSearch = new GridBagConstraints();
@@ -212,7 +212,7 @@ public class GUIComponentUserInterface {
 		panelshoppingCart.add(comboBoxcategoryPartSearch, gbc_comboBoxcategoryPartSearch);
 		
 		textFieldpartSearch = new JTextField();
-		textFieldpartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldpartSearch.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_textFieldpartSearch = new GridBagConstraints();
 		gbc_textFieldpartSearch.gridwidth = 3;
 		gbc_textFieldpartSearch.insets = new Insets(0, 0, 5, 0);
@@ -252,7 +252,7 @@ public class GUIComponentUserInterface {
 			    }//Emre -
 			}
 		});
-		btnpartSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnpartSearch.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
 		GridBagConstraints gbc_btnpartSearch = new GridBagConstraints();
 		gbc_btnpartSearch.gridwidth = 3;
@@ -275,7 +275,7 @@ public class GUIComponentUserInterface {
 			    textFieldpartSearch.setText("");
 			}//Emre -
 		});
-		btnResetSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnResetSearch.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnResetSearch = new GridBagConstraints();
 		gbc_btnResetSearch.gridwidth = 3;
 		gbc_btnResetSearch.fill = GridBagConstraints.HORIZONTAL;
@@ -285,7 +285,7 @@ public class GUIComponentUserInterface {
 		panelshoppingCart.add(btnResetSearch, gbc_btnResetSearch);
 		
 		JLabel lblpartQuantity = new JLabel("Anzahl");
-		lblpartQuantity.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblpartQuantity.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblpartQuantity = new GridBagConstraints();
 		gbc_lblpartQuantity.insets = new Insets(0, 0, 5, 5);
 		gbc_lblpartQuantity.anchor = GridBagConstraints.EAST;
@@ -294,7 +294,7 @@ public class GUIComponentUserInterface {
 		panelshoppingCart.add(lblpartQuantity, gbc_lblpartQuantity);
 		
 		JTextField spinnerdekrementParts = new JTextField();
-		spinnerdekrementParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		spinnerdekrementParts.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		//spinnerdekrementParts.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		GridBagConstraints gbc_spinnerdekrementParts = new GridBagConstraints();
 		gbc_spinnerdekrementParts.fill = GridBagConstraints.HORIZONTAL;
@@ -304,7 +304,7 @@ public class GUIComponentUserInterface {
 		panelshoppingCart.add(spinnerdekrementParts, gbc_spinnerdekrementParts);
 		
 		JTextField spinnerincrementParts = new JTextField();
-		spinnerincrementParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		spinnerincrementParts.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		//spinnerincrementParts.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		GridBagConstraints gbc_spinnerincrementParts = new GridBagConstraints();
 		gbc_spinnerincrementParts.fill = GridBagConstraints.HORIZONTAL;
@@ -357,7 +357,7 @@ public class GUIComponentUserInterface {
 			    
 			}	
 		});
-		btndekrementParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btndekrementParts.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
 		//btndekrementParts.setToolTipText("Das entnommene Bauteil wird ihrer Rechnung hinzugefügt");
 		GridBagConstraints gbc_btndekrementParts = new GridBagConstraints();
@@ -401,7 +401,7 @@ public class GUIComponentUserInterface {
 			    
 			}
 		});
-		btnincrementParts.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnincrementParts.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 	
 		btnincrementParts.setToolTipText("Das Bauteil wird in der angegebenen Menge \r\naus ihrem Warenkorb entfernt.");
 		GridBagConstraints gbc_btnincrementParts = new GridBagConstraints();
@@ -429,7 +429,7 @@ public class GUIComponentUserInterface {
 				
 			}
 		});
-		btnpayShoppingCart.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnpayShoppingCart.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_btnpayShoppingCart = new GridBagConstraints();
 		gbc_btnpayShoppingCart.gridwidth = 3;
 		gbc_btnpayShoppingCart.fill = GridBagConstraints.HORIZONTAL;
@@ -448,7 +448,7 @@ public class GUIComponentUserInterface {
 		panelChangePassword.setLayout(gbl_panelChangePassword);
 		
 		JLabel lbluserName = new JLabel("Username");
-		lbluserName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbluserName.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lbluserName = new GridBagConstraints();
 		gbc_lbluserName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lbluserName.insets = new Insets(0, 0, 5, 5);
@@ -458,7 +458,7 @@ public class GUIComponentUserInterface {
 		
 		textFieldUsername = new JTextField();
 		textFieldUsername.setText(username);
-		textFieldUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textFieldUsername.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		textFieldUsername.setEditable(false);
 		GridBagConstraints gbc_textFieldUsername = new GridBagConstraints();
 		gbc_textFieldUsername.gridwidth = 4;
@@ -470,7 +470,7 @@ public class GUIComponentUserInterface {
 		textFieldUsername.setColumns(10);
 		
 		JLabel lblnewPassword = new JLabel("Neues Passwort");
-		lblnewPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblnewPassword.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblnewPassword = new GridBagConstraints();
 		gbc_lblnewPassword.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblnewPassword.insets = new Insets(0, 0, 5, 5);
@@ -479,7 +479,7 @@ public class GUIComponentUserInterface {
 		panelChangePassword.add(lblnewPassword, gbc_lblnewPassword);
 		
 		passwordFieldnewPassword = new JPasswordField();
-		passwordFieldnewPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		passwordFieldnewPassword.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_passwordFieldnewPassword = new GridBagConstraints();
 		gbc_passwordFieldnewPassword.gridwidth = 4;
 		gbc_passwordFieldnewPassword.insets = new Insets(0, 0, 5, 0);
@@ -489,7 +489,7 @@ public class GUIComponentUserInterface {
 		panelChangePassword.add(passwordFieldnewPassword, gbc_passwordFieldnewPassword);
 		
 		JLabel lblnewPasswordRepeat = new JLabel("Neues Passwort wiederholen");
-		lblnewPasswordRepeat.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblnewPasswordRepeat.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblnewPasswordRepeat = new GridBagConstraints();
 		gbc_lblnewPasswordRepeat.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblnewPasswordRepeat.insets = new Insets(0, 0, 5, 5);
@@ -498,7 +498,7 @@ public class GUIComponentUserInterface {
 		panelChangePassword.add(lblnewPasswordRepeat, gbc_lblnewPasswordRepeat);
 		
 		passwordFieldnewPasswordRepeat = new JPasswordField();
-		passwordFieldnewPasswordRepeat.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		passwordFieldnewPasswordRepeat.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		GridBagConstraints gbc_passwordFieldnewPasswordRepeat = new GridBagConstraints();
 		gbc_passwordFieldnewPasswordRepeat.gridwidth = 4;
 		gbc_passwordFieldnewPasswordRepeat.insets = new Insets(0, 0, 5, 0);
@@ -517,7 +517,7 @@ public class GUIComponentUserInterface {
 			
 			}
 		});
-		btnclearAllInputs.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnclearAllInputs.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
 		GridBagConstraints gbc_btnclearAllInputs = new GridBagConstraints();
 		gbc_btnclearAllInputs.fill = GridBagConstraints.HORIZONTAL;
@@ -548,7 +548,7 @@ public class GUIComponentUserInterface {
 			    
 			}//Emre- 
 		});
-		btnsaveChange.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnsaveChange.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
 		GridBagConstraints gbc_btnsaveChange = new GridBagConstraints();
 		gbc_btnsaveChange.fill = GridBagConstraints.HORIZONTAL;

@@ -79,7 +79,7 @@ public class GuiMenue implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().setLayout(gridBagLayout);
 
 		lblguiMenue = new JLabel("Men\u00FC");
-		lblguiMenue.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblguiMenue.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		GridBagConstraints gbc_lblguiMenue = new GridBagConstraints();
 		gbc_lblguiMenue.insets = new Insets(0, 0, 5, 0);
 		gbc_lblguiMenue.gridx = 0;
@@ -87,7 +87,7 @@ public class GuiMenue implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(lblguiMenue, gbc_lblguiMenue);
 
 		btnpersonalManagement = new JButton("Personenverwaltung");
-		btnpersonalManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnpersonalManagement.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		btnpersonalManagement.addActionListener(this);
 
 		GridBagConstraints gbc_btnpersonalManagement = new GridBagConstraints();
@@ -98,11 +98,11 @@ public class GuiMenue implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(btnpersonalManagement, gbc_btnpersonalManagement);
 
 		btnfinanceManagement = new JButton("Finanzverwaltung");
-		btnfinanceManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnfinanceManagement.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		btnfinanceManagement.addActionListener(this);
 		
 				btnorderManagement = new JButton("Auftragsverwaltung");
-				btnorderManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				btnorderManagement.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 				btnorderManagement.addActionListener(this);
 				GridBagConstraints gbc_btnorderManagement = new GridBagConstraints();
 				gbc_btnorderManagement.fill = GridBagConstraints.HORIZONTAL;
@@ -119,7 +119,7 @@ public class GuiMenue implements ActionListener {
 		frmElabVerwaltungsprogramm.getContentPane().add(btnfinanceManagement, gbc_btnfinanceManagement);
 
 		btncomponentManagement = new JButton("Bauteileverwaltung");
-		btncomponentManagement.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btncomponentManagement.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		btncomponentManagement.addActionListener(this);
 		GridBagConstraints gbc_btncomponentManagement = new GridBagConstraints();
 		gbc_btncomponentManagement.fill = GridBagConstraints.HORIZONTAL;
