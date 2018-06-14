@@ -72,6 +72,19 @@ public class CashRegister {
 	public void setType(int type) {
 		this.type = type;
 	}
+	
+	public String getReadableType(int type) {
+		switch(type) {
+		case 0:
+			return "Barkasse";
+		case 1:
+			return "Konto";
+		case 2:
+			return "Kostenstelle";
+		default:
+			return null;
+		}
+	}
 
     public String toString() {
     	return "ID: " + id + ", Name: " +name; 

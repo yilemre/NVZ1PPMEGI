@@ -9,7 +9,7 @@ import logic.*;
 public class CashRegisterTableModel extends AbstractTableModel{
 	
 	private List<CashRegister> list = new ArrayList<CashRegister>();
-	private String[] columns = {"ID", "Name", "Soll", "Ist" , "Typ"};
+	private String[] columns = {"ID", "Name", "Soll", "Ist" , "Typ", "Kostenstellennummer"};
 
 	public CashRegisterTableModel(List<CashRegister> list) {
 		this.list=list;
@@ -23,7 +23,7 @@ public class CashRegisterTableModel extends AbstractTableModel{
 
 	@Override
 	public int getColumnCount() {
-		return 5;
+		return 6;
 	}
 
 	@Override
@@ -44,6 +44,8 @@ public class CashRegisterTableModel extends AbstractTableModel{
 				return Double.class;
 			case 4:
 				return Integer.class;
+			case 5:
+				return String.class;
 			default:
 				return null; //should not happen
 		}
@@ -61,7 +63,9 @@ public class CashRegisterTableModel extends AbstractTableModel{
 		case 3:
 			return list.get(rowIndex).getActualAmount();
 		case 4:
-			return list.get(rowIndex).getType();
+			return list.get(rowIndex).getReadableType(list.get(rowIndex).getType());
+		case 5:
+			return list.get(rowIndex).getCostCentreNumber();
 		default: 
 			return null; //can not happen
 		}

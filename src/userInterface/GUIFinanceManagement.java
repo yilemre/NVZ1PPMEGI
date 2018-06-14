@@ -141,9 +141,11 @@ public class GUIFinanceManagement {
 	private JComboBox comboBoxsearchBillModify;
 	private JComboBox comboBoxOrderSearch;
 	private JComboBox comboBoxBillStatus;
+	private JComboBox comboBoxCashRegisterTypeModify_1;
 
 	private List<String> comboBoxEntries;
 	private List<String> comboBoxStatusEntries;
+	private List<String> comboBoxRegisterTypeEntries;
 	private JTextField textField;
 
 	/**
@@ -166,6 +168,11 @@ public class GUIFinanceManagement {
 		comboBoxStatusEntries = new ArrayList<String>();
 		comboBoxStatusEntries.add("Nicht bezahlt");
 		comboBoxStatusEntries.add("Bezahlt");
+		
+		comboBoxRegisterTypeEntries = new ArrayList<String>();
+		comboBoxRegisterTypeEntries.add("Barkasse");
+		comboBoxRegisterTypeEntries.add("Konto");
+		comboBoxRegisterTypeEntries.add("Kostenstelle");
 
 		frmElabVerwaltungsprogramm = new JFrame();
 		frmElabVerwaltungsprogramm.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -1668,7 +1675,7 @@ public class GUIFinanceManagement {
 		gbc_lblcashRegisterTypeModify.gridy = 5;
 		panelcashRegisterManagement.add(lblcashRegisterTypeModify, gbc_lblcashRegisterTypeModify);
 
-		JComboBox comboBoxCashRegisterTypeModify_1 = new JComboBox();
+		comboBoxCashRegisterTypeModify_1 = new JComboBox();
 		comboBoxCashRegisterTypeModify_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (comboBoxCashRegisterTypeModify_1.getSelectedIndex()==2) {
@@ -1680,7 +1687,7 @@ public class GUIFinanceManagement {
 			}
 		});
 		comboBoxCashRegisterTypeModify_1.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		comboBoxCashRegisterTypeModify_1.setModel(new DefaultComboBoxModel(new String[] { "Barkasse", "Konto", "Kostenstelle" }));
+		comboBoxCashRegisterTypeModify_1.setModel(new DefaultComboBoxModel(comboBoxRegisterTypeEntries.toArray()));
 		GridBagConstraints gbc_comboBoxCashRegisterTypeModify_1 = new GridBagConstraints();
 		gbc_comboBoxCashRegisterTypeModify_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxCashRegisterTypeModify_1.insets = new Insets(0, 0, 5, 0);
@@ -2415,24 +2422,21 @@ public class GUIFinanceManagement {
 			comboBoxrelatedCashRegisterModify.setSelectedIndex(getCorrectCashRegisterIndex(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 5).toString()));
 			refreshPotComboBoxModify();
 			comboBoxBillStatusModify.setSelectedIndex(comboBoxStatusEntries.indexOf(tableBillModify.getValueAt(tableBillModify.getSelectedRow(), 9)));
-			// comboBoxrelatedJarModify.setSelectedIndex(getCorrectPotIndex(tableBillModify.getValueAt(tableBillModify.getSelectedRow(),
-			// 2).toString()));
+			comboBoxrelatedJarModify.setSelectedIndex(getCorrectPotIndex(tableBillModify.getValueAt(tableBillModify.getSelectedRow(),2).toString()));
 		}
 		if (tableJar.getSelectedRow() > -1) {
 			textFieldPotIDModify.setText((String) tableJar.getValueAt(tableJar.getSelectedRow(), 0).toString());
 			textFieldjarNameModify.setText((String) tableJar.getValueAt(tableJar.getSelectedRow(), 1).toString());
 			textFieldjarActualStockModify.setText((String) tableJar.getValueAt(tableJar.getSelectedRow(), 2).toString());
 			textFieldjarEstimatedStockModify.setText((String) tableJar.getValueAt(tableJar.getSelectedRow(), 3).toString());
-			// comboBoxPotRegisterIDModify.setSelectedIndex(getCorrectCashRegisterIndex(tableJar.getValueAt(tableJar.getSelectedRow(),
-			// 4).toString()));
+			comboBoxPotRegisterIDModify.setSelectedIndex(getCorrectCashRegisterIndex(tableJar.getValueAt(tableJar.getSelectedRow(),4).toString()));
 		}
 		if (tableCashRegister.getSelectedRow() > -1) {
 			textFieldCashRegisterIDModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 0).toString());
 			textFieldCashRegisterNameModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 1).toString());
 			textFieldcashRegisterActualStockModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 2).toString());
 			textFieldcashRegisterEstimatedStockModify.setText((String) tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(), 3).toString());
-			// comboBoxCashRegisterTypeModify.setSelectedIndex(Integer.parseInt(tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(),
-			// 4).toString()));
+			comboBoxCashRegisterTypeModify_1.setSelectedIndex(comboBoxRegisterTypeEntries.indexOf(tableCashRegister.getValueAt(tableCashRegister.getSelectedRow(),4)));
 		}
 	}
 
