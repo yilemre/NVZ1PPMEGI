@@ -38,6 +38,11 @@ public class FinancialManagement {
 		
 	}
 	
+	/**
+	 * @param idBill
+	 * @param status
+	 * @throws SQLException
+	 */
 	public static void addBillStatus(int idBill, int status) throws SQLException {
 		String dateTimeString = null;
 		DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -47,6 +52,11 @@ public class FinancialManagement {
 		SQLManager.getInstance().addBillStatustoDB(idBill, status, dateTimeString);
 	}
 	
+	/**
+	 * @param id
+	 * @throws SQLException
+	 * @throws BillIDNotInDBException
+	 */
 	public static void deleteBill(int id) throws SQLException, BillIDNotInDBException {
 		Bill temp = SQLManager.getInstance().getBillByID(id);
 		SQLManager.getInstance().deleteBillFromDB(id);
@@ -54,6 +64,21 @@ public class FinancialManagement {
 		SQLManager.getInstance().setSIBRegisterViaPots(temp.getIdRegister());
 	}
 	
+	/**
+	 * 
+	 * This method organizes all possibilities when modifying a bill and sets the right actual and expected amount
+	 * 
+	 * @param id
+	 * @param idOrder
+	 * @param idPot
+	 * @param idRegister
+	 * @param name
+	 * @param payKind
+	 * @param amount
+	 * @param status
+	 * @throws SQLException
+	 * @throws BillIDNotInDBException
+	 */
 	public static void modifyBill(int id, int idOrder, int idPot, int idRegister, String name, int payKind, double amount, int status) throws SQLException, BillIDNotInDBException {
 		Bill temp = SQLManager.getInstance().getBillByID(id);
 		SQLManager.getInstance().modifyBill(id, idOrder, idPot, idRegister, name, payKind, amount);
@@ -121,6 +146,12 @@ public class FinancialManagement {
 		}
 	}
 	
+	/**
+	 * @param id
+	 * @param status
+	 * @throws SQLException
+	 * @throws BillIDNotInDBException
+	 */
 	public static void changeBillStatus(int id, int status) throws SQLException, BillIDNotInDBException{
 		Bill temp = SQLManager.getInstance().getBillByID(id);
 		if (temp.getStatus() == 0 && status == 1) {
@@ -140,11 +171,23 @@ public class FinancialManagement {
 		return SQLManager.getInstance().getBills(); 
 	}
 	
+	/**
+	 * @param searchValue
+	 * @return
+	 * @throws SQLException
+	 * @throws ELabException
+	 */
 	public static List<Bill> getBillByName(String searchValue) throws SQLException, ELabException {
 		List<Bill> result = SQLManager.getInstance().getBillByName(searchValue);
 		return result;
 	}
 	
+	/**
+	 * @param searchValues
+	 * @return
+	 * @throws SQLException
+	 * @throws ELabException
+	 */
 	public static List<Bill> getBillsByStatus(String searchValues) throws SQLException, ELabException {
 		switch(searchValues.toLowerCase()){
 		case "nicht bezahlt":
@@ -156,6 +199,12 @@ public class FinancialManagement {
 		}
 	}
 	
+	/**
+	 * @param searchValues
+	 * @return
+	 * @throws SQLException
+	 * @throws ELabException
+	 */
 	public static List<Bill> getBillsByDate(String searchValues) throws SQLException, ELabException {
 		List<Bill> result = SQLManager.getInstance().getBillsByDate(searchValues);
 		return result;
@@ -166,10 +215,26 @@ public class FinancialManagement {
 	}
 	
 	
+	/**
+	 * @param name
+	 * @param actualAmount
+	 * @param debitAmount
+	 * @param idRegister
+	 * @return
+	 * @throws SQLException
+	 */
 	public static int addPot(String name, double actualAmount, double debitAmount, int idRegister) throws SQLException {
 		return SQLManager.getInstance().addPottoDB(actualAmount, debitAmount, name, idRegister);	
 	}
 	
+	/**
+	 * @param id
+	 * @param actualAmount
+	 * @param debitAmount
+	 * @param name
+	 * @param idRegister
+	 * @throws SQLException
+	 */
 	public static void modifyPot(int id, double actualAmount, double debitAmount, String name, int idRegister) throws SQLException {
 		SQLManager.getInstance().modifyPot(id, actualAmount, debitAmount, name, idRegister);
 	}
